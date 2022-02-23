@@ -1,4 +1,4 @@
-﻿namespace PatternManager.Editor.Intefraces
+﻿namespace DafEditor.Editor.Intefraces
 {
     public interface IDrawer
     {

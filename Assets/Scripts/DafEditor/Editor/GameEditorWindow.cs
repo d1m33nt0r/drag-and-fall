@@ -1,11 +1,12 @@
-﻿using PatternManager.Editor.Common;
+﻿using DafEditor.Editor.Common;
+using DafEditor.Editor.Layout;
 using UnityEditor;
 
-namespace PatternManager.Editor
+namespace DafEditor.Editor
 {
     public class GameEditorWindow : EditorWindowSingleton<GameEditorWindow>
     {
-        protected override string customTitle => "Game editor";
+        protected override string customTitle => "DAF Editor";
 
         public SplitLine m_splitLine;
         public LeftSidebar m_leftSidebar;
@@ -13,7 +14,7 @@ namespace PatternManager.Editor
         public TopBar m_topBar;
         public TopBarSplitLine m_topBarSplitLine;
         
-        [MenuItem("Tools/Editor")]
+        [MenuItem("Tools/DAF Editor")]
         private static void ShowWindow()
         {
             var window = instance;

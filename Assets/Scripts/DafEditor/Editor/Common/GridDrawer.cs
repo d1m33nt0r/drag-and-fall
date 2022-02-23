@@ -1,8 +1,8 @@
-﻿using PatternManager.Editor.Intefraces;
+﻿using DafEditor.Editor.Intefraces;
 using UnityEditor;
 using UnityEngine;
 
-namespace PatternManager.Editor.Common
+namespace DafEditor.Editor.Common
 {
     public class GridDrawer : IDrawer
     {

@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace PatternManager.Editor
+namespace DafEditor.Editor
 {
     public abstract class EditorWindowSingleton<TSelfType> : EditorWindow
         where TSelfType : EditorWindowSingleton<TSelfType>

@@ -1,4 +1,4 @@
-﻿namespace PatternManager
+﻿namespace Data.Core.Segments
 {
     public enum SegmentType
     {

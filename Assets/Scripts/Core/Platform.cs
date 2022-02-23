@@ -1,4 +1,4 @@
-﻿using PatternManager;
+﻿using Data.Core;
 using UnityEngine;
 
 namespace Core

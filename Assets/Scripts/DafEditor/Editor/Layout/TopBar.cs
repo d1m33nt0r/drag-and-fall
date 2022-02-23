@@ -1,8 +1,8 @@
-﻿using PatternManager.Editor.Intefraces;
+﻿using DafEditor.Editor.Intefraces;
 using UnityEngine;
-using EditorStyles = PatternManager.Editor.Common.EditorStyles;
+using EditorStyles = DafEditor.Editor.Common.EditorStyles;
 
-namespace PatternManager.Editor
+namespace DafEditor.Editor.Layout
 {
     public class TopBar : IDrawer
     {

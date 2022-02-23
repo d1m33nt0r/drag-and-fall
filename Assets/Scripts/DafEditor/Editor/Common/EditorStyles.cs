@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PatternManager.Editor.Common
+namespace DafEditor.Editor.Common
 {
     public static class EditorStyles
     {

@@ -1,9 +1,8 @@
-﻿using PatternManager.Editor.Intefraces;
-using UnityEditor;
+﻿using DafEditor.Editor.Intefraces;
 using UnityEngine;
-using EditorStyles = PatternManager.Editor.Common.EditorStyles;
+using EditorStyles = DafEditor.Editor.Common.EditorStyles;
 
-namespace PatternManager.Editor
+namespace DafEditor.Editor.Layout
 {
     public class LeftSidebar : IDrawer
     {
@@ -15,7 +14,7 @@ namespace PatternManager.Editor
                 new Vector2(GameEditorWindow.instance.m_splitLine.xSplitCoordinate - 
                             GameEditorWindow.instance.m_splitLine.lineWidth,GameEditorWindow.instance.position.height)), EditorStyles.LeftSidebarStyle());
 
-            GUILayout.Label("Preset type", EditorStyles.HeaderOfBlockInLeftSideBar());
+            GUILayout.Label("Main", EditorStyles.HeaderOfBlockInLeftSideBar());
 
             GUILayout.Space(5f);
             GUILayout.Toolbar(0, new[] {"Infinity presets", "Level presets"});

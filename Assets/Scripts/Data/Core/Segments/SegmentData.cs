@@ -1,11 +1,12 @@
 ﻿using System;
+using Data.Core.Segments.Content;
 
-namespace PatternManager
+namespace Data.Core.Segments
 {
     [Serializable]
     public class SegmentData
     {
         public SegmentType segmentType;
-        public BonusType bonusType;
+        public SegmentContent segmentContent;
     }
 }
