@@ -1,29 +1,26 @@
-﻿using UnityEngine;
+﻿using PatternManager;
+using UnityEngine;
 
 namespace Core
 {
     public class Platform : MonoBehaviour
     {
-        [SerializeField] private int m_segmentsCount;
-        [SerializeField] private PlatformSegment m_segment;
+        [SerializeField] private Segment segmentPrefab;
         
-        private PlatformSegment[] m_segments;
-        private float m_angle;
+        private Segment[] segments;
+        private float angle;
         
-        
-        private void Start()
+        public void Initialize(int _segmentsCount, PatternData patternData, Tube _tube)
         {
-            m_angle = 360 / m_segmentsCount;
-            Construct();
-        }
-
-        private void Construct()
-        {
-            m_segments = new PlatformSegment[m_segmentsCount];
+            angle = 360 / _segmentsCount;
+            segments = new Segment[_segmentsCount];
             var position = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
 
-            for (int i = 1; i <= m_segmentsCount; i++)
-                m_segments[i - 1] = Instantiate(m_segment, position, Quaternion.AngleAxis(m_angle * i, Vector3.up), transform);
+            for (int i = 1; i <= patternData.segmentsData.Length; i++)
+            {
+                segments[i - 1] = Instantiate(segmentPrefab, position, Quaternion.AngleAxis(angle * i, Vector3.up), transform);
+                segments[i - 1].Initialize(patternData.segmentsData[i - 1], _tube);
+            }
         }
     }
 }

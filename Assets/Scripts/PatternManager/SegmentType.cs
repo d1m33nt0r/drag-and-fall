@@ -2,8 +2,8 @@
 {
     public enum SegmentType
     {
-        Hole,
+        Ground,
         Let,
-        Ground
+        Hole
     }
 }

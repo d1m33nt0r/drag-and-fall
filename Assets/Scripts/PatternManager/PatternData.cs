@@ -3,20 +3,20 @@
 namespace PatternManager
 {
     [Serializable]
-    public class Pattern
+    public class PatternData
     {
-        public Segment[] segments;
+        public SegmentData[] segmentsData;
 
         public int index;
         
-        public Pattern(int _segmentsAmount, int _index)
+        public PatternData(int _segmentsAmount, int _index)
         {
-            segments = new Segment[_segmentsAmount];
+            segmentsData = new SegmentData[_segmentsAmount];
             index = _index;
             
             for (int i = 0; i < _segmentsAmount; i++)
             {
-                segments[i] = new Segment
+                segmentsData[i] = new SegmentData
                 {
                     bonusType = BonusType.None,
                     segmentType = SegmentType.Ground

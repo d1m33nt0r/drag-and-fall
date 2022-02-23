@@ -3,7 +3,7 @@
 namespace PatternManager
 {
     [Serializable]
-    public class Segment
+    public class SegmentData
     {
         public SegmentType segmentType;
         public BonusType bonusType;

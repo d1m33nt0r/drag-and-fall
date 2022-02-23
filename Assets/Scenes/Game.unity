@@ -311,6 +311,7 @@ GameObject:
   - component: {fileID: 1755819902}
   - component: {fileID: 1755819901}
   - component: {fileID: 1755819904}
+  - component: {fileID: 1755819905}
   m_Layer: 0
   m_Name: Tube
   m_TagString: Untagged
@@ -395,5 +396,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformPrefab: {fileID: 3363953325017065178, guid: 7b9114990f3a6d146af1b3cfeb2c25ca,
     type: 3}
-  countPlatforms: 6
+  countPlatforms: 8
   distanceBetweenPlatforms: 1
+  platformMovementSpeed: 2
+  visualController: {fileID: 1755819905}
+--- !u!114 &1755819905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755819900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b14b35379714900a84dbab2958cc779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  segmentsMaterials:
+  - {fileID: 2100000, guid: 0f6154dc129845c48a1b83d95185933a, type: 2}
+  - {fileID: 2100000, guid: e2060d36a9813df4eb743adffb93967b, type: 2}
+  tubeMaterial: {fileID: 2100000, guid: a055995b7cdb5f94f8c4d5be78faa9dd, type: 2}

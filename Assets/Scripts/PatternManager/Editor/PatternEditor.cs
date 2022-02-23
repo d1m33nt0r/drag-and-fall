@@ -38,7 +38,7 @@ namespace PatternManager.Editor
 
                     if (GUILayout.Button("Add new set"))
                     {
-                        m_storage.infinitySets.Add(new Set(patternsAmount));
+                        m_storage.infinitySets.Add(new SetData(patternsAmount));
                         infinityFoldedSets = new bool[m_storage.infinitySets.Count];
                     }
                         
@@ -55,18 +55,18 @@ namespace PatternManager.Editor
             }
         }
 
-        private void DrawSet(Set _set, int _index)
+        private void DrawSet(SetData setData, int _index)
         {
             if (GUILayout.Button("Set " + _index, EditorStyles.SetButtonStyle()))
                 infinityFoldedSets[_index] = !infinityFoldedSets[_index];
             
             if (infinityFoldedSets[_index])
             {
-                foreach (var pattern in _set.patterns)
+                foreach (var pattern in setData.patterns)
                 {
                     GUILayout.BeginHorizontal("box");
                     
-                    foreach (var segment in pattern.segments)
+                    foreach (var segment in pattern.segmentsData)
                     {
                         var style = new PlatformButton(segment, new GUIStyle());
                         if (GUILayout.Button(style.value, style.style))
@@ -80,21 +80,21 @@ namespace PatternManager.Editor
                         menu.AddItem(new GUIContent("Move up"), false, () =>
                         {
                             if (pattern.index == 0) return;
-                            var prevPattern = _set.patterns[pattern.index - 1];
-                            _set.patterns[pattern.index - 1] = pattern;
+                            var prevPattern = setData.patterns[pattern.index - 1];
+                            setData.patterns[pattern.index - 1] = pattern;
                             pattern.index -= 1;
                             prevPattern.index += 1;
-                            _set.patterns[prevPattern.index] = prevPattern;
+                            setData.patterns[prevPattern.index] = prevPattern;
                         });
                         
                         menu.AddItem(new GUIContent("Move down"), false, () =>
                         {
-                            if (pattern.index + 1 == _set.patterns.Length) return;
-                            var nextPattern = _set.patterns[pattern.index + 1];
-                            _set.patterns[pattern.index + 1] = pattern;
+                            if (pattern.index + 1 == setData.patterns.Length) return;
+                            var nextPattern = setData.patterns[pattern.index + 1];
+                            setData.patterns[pattern.index + 1] = pattern;
                             pattern.index += 1;
                             nextPattern.index -= 1;
-                            _set.patterns[nextPattern.index] = nextPattern;
+                            setData.patterns[nextPattern.index] = nextPattern;
                         });
                         
                         menu.AddItem(new GUIContent("Remove"), false, () =>
@@ -115,18 +115,18 @@ namespace PatternManager.Editor
             }
         }
 
-        private static void SwitchSegmentType(Segment segment)
+        private static void SwitchSegmentType(SegmentData segmentData)
         {
-            switch (segment.segmentType)
+            switch (segmentData.segmentType)
             {
                 case SegmentType.Ground:
-                    segment.segmentType = SegmentType.Hole;
+                    segmentData.segmentType = SegmentType.Hole;
                     break;
                 case SegmentType.Hole:
-                    segment.segmentType = SegmentType.Let;
+                    segmentData.segmentType = SegmentType.Let;
                     break;
                 case SegmentType.Let:
-                    segment.segmentType = SegmentType.Ground;
+                    segmentData.segmentType = SegmentType.Ground;
                     break;
             }
         }
@@ -137,9 +137,9 @@ namespace PatternManager.Editor
         public string value;
         public GUIStyle style;
 
-        public PlatformButton(Segment segment, GUIStyle m_style)
+        public PlatformButton(SegmentData segmentData, GUIStyle m_style)
         {
-            switch (segment.segmentType)
+            switch (segmentData.segmentType)
             {
                 case SegmentType.Ground:
                     value = "G";
