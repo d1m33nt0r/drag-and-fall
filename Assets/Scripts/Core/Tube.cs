@@ -9,7 +9,7 @@ public class Tube : MonoBehaviour
     
     private Platform[] platforms;
     private Vector3[] localPositionsOfPlatforms;
-    
+
     private void Start()
     {
         InitializePlatformPoints();
@@ -22,7 +22,7 @@ public class Tube : MonoBehaviour
         
         for (var i = 0; i < countPlatforms; i++)
         {
-            localPositionsOfPlatforms[i] = new Vector3(transform.position.x, transform.position.y - distanceBetweenPlatforms * i, transform.position.z);
+            localPositionsOfPlatforms[i] = new Vector3(transform.position.x, transform.localPosition.y - distanceBetweenPlatforms * i, transform.position.z);
         }
     }
     
@@ -32,16 +32,18 @@ public class Tube : MonoBehaviour
         
         for (var i = 0; i < countPlatforms; i++)
         {
-            var platformInstance = Instantiate(platformPrefab);
-            platformInstance.transform.position = transform.TransformPoint(localPositionsOfPlatforms[i]);
+            var platformInstance = Instantiate(platformPrefab, localPositionsOfPlatforms[i], Quaternion.identity, transform);
             platforms[i] = platformInstance.GetComponent<Platform>();
         }
     }
-
     
-
     public void MovePlatforms()
     {
+        Destroy(platforms[0]);
         
+        for (var i = 1; i < countPlatforms; i++)
+        {
+            
+        }
     }
 }
