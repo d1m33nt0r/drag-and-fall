@@ -9,8 +9,8 @@ namespace Data.Shop.TubeSkins
         public float price;
         public Skybox skybox;
         public Material tubeMaterial;
-        public Material letMaterial;
-        public Material groundMaterial;
+        public Material letSegmentMaterial;
+        public Material groundSegmentMaterial;
         public Mesh segment;
     }
 }

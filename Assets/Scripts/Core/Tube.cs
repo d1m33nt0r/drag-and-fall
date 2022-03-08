@@ -9,19 +9,21 @@ namespace Core
 {
     public class Tube : MonoBehaviour
     {
+        [SerializeField] private Player player;
         [SerializeField] private GameObject platformPrefab;
         [SerializeField] private int countPlatforms;
         [SerializeField] private float distanceBetweenPlatforms;
         [SerializeField] private float platformMovementSpeed;
-    
+        [SerializeField] private DragController dragController;
         [SerializeField] public VisualController visualController;
     
         private PatternData currentPatternData;
         private Platform[] platforms;
         private Vector3[] localPositionsOfPlatforms;
 
-        private void Start()
+        private void Awake()
         {
+            dragController.SwipeEvent += RotateTube;
             Initialize();
         }
 
@@ -34,7 +36,21 @@ namespace Core
         
             StartCoroutine(SimulatePlatformsMoving());
         }
-    
+
+        private void RotateTube(DragController.SwipeType type, float delta)
+        {
+            var eulerAngles = transform.rotation.eulerAngles;
+            switch (type)
+            {
+                case DragController.SwipeType.LEFT:
+                    transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y  - delta, eulerAngles.z), 0.1f);
+                    break;
+                case DragController.SwipeType.RIGHT:
+                    transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y  + delta, eulerAngles.z), 0.1f);
+                    break;
+            }
+        }
+        
         public void MovePlatforms()
         {
             Destroy(platforms[0].gameObject);
@@ -52,7 +68,7 @@ namespace Core
         {
             while (true)
             {
-                MovePlatforms();
+                //MovePlatforms();
             
                 yield return new WaitForSeconds(1);
             }
@@ -89,10 +105,10 @@ namespace Core
                     new SegmentData { segmentType = SegmentType.Let },
                     new SegmentData { segmentType = SegmentType.Ground },
                     new SegmentData { segmentType = SegmentType.Ground },
-                    new SegmentData { segmentType = SegmentType.Let },
                     new SegmentData { segmentType = SegmentType.Ground },
                     new SegmentData { segmentType = SegmentType.Ground },
-                    new SegmentData { segmentType = SegmentType.Ground },
+                    new SegmentData { segmentType = SegmentType.Hole },
+                    new SegmentData { segmentType = SegmentType.Hole },
                     new SegmentData { segmentType = SegmentType.Ground },
                     new SegmentData { segmentType = SegmentType.Let },
                     new SegmentData { segmentType = SegmentType.Ground }
@@ -100,7 +116,7 @@ namespace Core
                 }
             };
         
-            platformInstance.GetComponent<Platform>().Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this);
+            platformInstance.GetComponent<Platform>().Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, player);
         
             platforms[_platformIndex] = platformInstance.GetComponent<Platform>();
         }

@@ -7,10 +7,32 @@ namespace Core
     {
         public SegmentData segmentData;
 
-        public void Initialize(SegmentData _segmentData, Tube _tube)
+        private Platform platform;
+        
+        public void Initialize(SegmentData _segmentData, Tube _tube, Platform _platform)
         {
+            platform = _platform;
             segmentData = _segmentData;
-            transform.GetComponent<MeshRenderer>().material = _tube.visualController.GetSegmentMaterial(_segmentData.segmentType);
+            
+            if (_segmentData.segmentType == SegmentType.Hole)
+            {
+                transform.GetComponent<MeshRenderer>().enabled = false;
+            }
+            else
+            {
+                transform.GetComponent<MeshRenderer>().material = _tube.visualController.GetSegmentMaterial(_segmentData.segmentType);
+            }
+            
+        }
+
+        public void IncreasePlatformTouchCounter()
+        {
+            platform.IncreaseTouchCounter();
+        }
+
+        public void DestroyPlatform()
+        {
+            platform.DestroyPlatform();
         }
     }
 }
