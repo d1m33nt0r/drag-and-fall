@@ -16,7 +16,10 @@ namespace Core
         [SerializeField] private float platformMovementSpeed;
         [SerializeField] private DragController dragController;
         [SerializeField] public VisualController visualController;
-    
+        
+        private float startTime;
+        private float journeyLength;
+        
         private PatternData currentPatternData;
         private Platform[] platforms;
         private Vector3[] localPositionsOfPlatforms;
@@ -25,6 +28,7 @@ namespace Core
         {
             dragController.SwipeEvent += RotateTube;
             Initialize();
+            journeyLength = Vector3.Distance(platforms[0].transform.position, platforms[1].transform.position);
         }
 
         private void Initialize()
@@ -33,8 +37,6 @@ namespace Core
         
             InitializePlatformPoints();
             InitializePlatforms();
-        
-            StartCoroutine(SimulatePlatformsMoving());
         }
 
         private void RotateTube(DragController.SwipeType type, float delta)
@@ -53,27 +55,30 @@ namespace Core
         
         public void MovePlatforms()
         {
-            Destroy(platforms[0].gameObject);
-        
-            for (var i = 1; i < countPlatforms; i++)
-            {
-                platforms[i - 1] = platforms[i];
-                platforms[i - 1].transform.DOLocalMoveY(localPositionsOfPlatforms[i - 1].y, platformMovementSpeed);
-            }
-        
-            CreateNewPlatform(countPlatforms - 1);
+            startTime = Time.time;
+            StartCoroutine(Moving());
         }
-    
-        private IEnumerator SimulatePlatformsMoving()
+
+        private IEnumerator Moving()
         {
-            while (true)
-            {
-                //MovePlatforms();
+            for (var i = 1; i < countPlatforms; i++)
+                platforms[i - 1] = platforms[i];
             
-                yield return new WaitForSeconds(1);
+            CreateNewPlatform(countPlatforms - 1);
+            
+            while (platforms[0].transform.position != localPositionsOfPlatforms[0])
+            {
+                for (var i = 1; i < countPlatforms; i++)
+                {
+                    float distCovered = (Time.time - startTime) * platformMovementSpeed;
+                    float fractionOfJourney = distCovered / journeyLength;
+                    platforms[i - 1].transform.position = Vector3.Lerp(localPositionsOfPlatforms[i], localPositionsOfPlatforms[i - 1], fractionOfJourney);
+                }
+
+                yield return null;
             }
         }
-    
+
         private void InitializePlatformPoints()
         {
             localPositionsOfPlatforms = new Vector3[countPlatforms];
@@ -112,7 +117,6 @@ namespace Core
                     new SegmentData { segmentType = SegmentType.Ground },
                     new SegmentData { segmentType = SegmentType.Let },
                     new SegmentData { segmentType = SegmentType.Ground }
-                
                 }
             };
         

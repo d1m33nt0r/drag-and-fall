@@ -8,7 +8,9 @@ namespace Core
         [SerializeField] private Animator animator;
         [SerializeField] private GameObject fallingTrail;
         [SerializeField] private GameObject trail;
-        
+
+        private bool triggerStay;
+
         public void PlayIdleAnim()
         {
             animator.Play("Idle");
@@ -23,12 +25,12 @@ namespace Core
         {
             trail.SetActive(trail);
         }
-        
+
         public void PlayBounceAnim()
         {
             animator.Play("Bounce");
         }
-        
+
         public void EnableFallingTrail()
         {
             fallingTrail.SetActive(true);
@@ -39,22 +41,45 @@ namespace Core
             fallingTrail.SetActive(false);
         }
 
-        public void OnCollisionEnter(Collision other)
+        public void SetTriggerStay(bool _value)
         {
-            var segment = other.collider.GetComponent<Segment>();
+            triggerStay = _value;
+        }
 
-            switch (segment.segmentData.segmentType)
+        private void Update()
+        {
+            if (triggerStay) return;
+            
+            var position = transform.position;
+            var centerRay = new Ray(position, Vector3.down);
+            
+            if (Physics.Raycast(centerRay, out var centerHit, 0.101f))
             {
-                case SegmentType.Ground:
-                    segment.IncreasePlatformTouchCounter();
-                    break;
-                case SegmentType.Hole:
-                    segment.DestroyPlatform();
-                    break;
-                case SegmentType.Let:
-                    
-                    break;
+                var segment = centerHit.collider.GetComponent<Segment>();
+
+                switch (segment.segmentData.segmentType)
+                {
+                    case SegmentType.Ground:
+                        triggerStay = true;
+                        PlayBounceAnim();
+                        EnableTrail();
+                        DisableFallingTrail();
+                        segment.IncreasePlatformTouchCounter();
+                        break;
+                    case SegmentType.Hole:
+                        segment.DestroyPlatform();
+                        break;
+                    case SegmentType.Let:
+
+                        break;
+                }
             }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("BounceTrigger")) triggerStay = false;
         }
     }
 }
+
