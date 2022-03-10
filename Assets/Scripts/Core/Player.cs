@@ -55,7 +55,7 @@ namespace Core
             var position = transform.position;
             var centerRay = new Ray(position, Vector3.down);
             
-            if (Physics.Raycast(centerRay, out var centerHit, 0.101f))
+            if (Physics.Raycast(centerRay, out var centerHit, 0.102f))
             {
                 var segment = centerHit.collider.GetComponent<Segment>();
 
@@ -81,6 +81,20 @@ namespace Core
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("BounceTrigger")) triggerStay = false;
+        }
+
+        public void SetShopFallingTrailState()
+        {
+            PlayIdleAnim();
+            EnableFallingTrail();
+            DisableTrail();
+        }
+
+        public void SetDefaultState()
+        {
+            PlayBounceAnim();
+            EnableTrail();
+            DisableFallingTrail();
         }
     }
 }

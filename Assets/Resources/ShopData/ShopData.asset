@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0ad8e684bfe405a9844e814688e5dde, type: 3}
+  m_Name: ShopData
+  m_EditorClassIdentifier: 
+  EnvironmentSkinData:
+  - price: 0
+    skybox: {fileID: 0}
+    tubeMaterial: {fileID: 2100000, guid: a055995b7cdb5f94f8c4d5be78faa9dd, type: 2}
+    letSegmentMaterial: {fileID: 2100000, guid: e2060d36a9813df4eb743adffb93967b, type: 2}
+    groundSegmentMaterial: {fileID: 2100000, guid: 0f6154dc129845c48a1b83d95185933a, type: 2}
+    segment: {fileID: 6871569608433183494, guid: 0110f3aecfa193240957a29499f44225, type: 3}
+  - price: 0
+    skybox: {fileID: 0}
+    tubeMaterial: {fileID: 2100000, guid: e3dad7234d39bf348ab2702865544d1d, type: 2}
+    letSegmentMaterial: {fileID: 2100000, guid: 75e4ac386d5f6bb4b9b43e5076405669, type: 2}
+    groundSegmentMaterial: {fileID: 2100000, guid: a46e7ac6201b9bb4ca243d7c6a278452, type: 2}
+    segment: {fileID: 6871569608433183494, guid: 0110f3aecfa193240957a29499f44225, type: 3}
+  PlayerSkinData:
+  - skinId: 0
+    price: 0
+    skin: {fileID: 5401420629027428936, guid: 9106f7f715d88eb45be6f36775707df1, type: 3}
+  - skinId: 0
+    price: 0
+    skin: {fileID: 5401420629027428936, guid: 77daa6b593c318b4480b219bc18783a1, type: 3}
+  TrailSkinData:
+  - skinId: 0
+    price: 0
+    skin: {fileID: 0}
+  - skinId: 0
+    price: 0
+    skin: {fileID: 0}
+  FallingTrailSkinData:
+  - skinId: 0
+    price: 0
+    skin: {fileID: 0}
+  - skinId: 0
+    price: 0
+    skin: {fileID: 0}

@@ -37,12 +37,17 @@ namespace Core
 
         private void Initialize()
         {
-            transform.GetComponent<MeshRenderer>().material = visualController.GetTubeMaterial();
-        
+            ChangeMaterial();
+            
             InitializePlatformPoints();
             InitializePlatforms();
         }
 
+        public void ChangeMaterial()
+        {
+            transform.GetComponent<MeshRenderer>().material = visualController.GetTubeMaterial();
+        }
+        
         private void RotateTube(DragController.SwipeType type, float delta)
         {
             var eulerAngles = transform.rotation.eulerAngles;
@@ -139,6 +144,32 @@ namespace Core
                 platformInstance.transform.localRotation = Quaternion.Euler(startEulerAngles.x, 0 - 
                     Mathf.Abs(startEulerAngles.y - transform.rotation.eulerAngles.y), startEulerAngles.z);
             }
+        }
+
+        public void SetDefaultState()
+        {
+            player.SetDefaultState();
+            
+            for (var i = 0; i < platforms.Length; i++)
+                platforms[i].gameObject.SetActive(true);
+        }
+        
+        public void SetShopFallingTrail()
+        {
+            player.SetShopFallingTrailState();
+            
+            for (var i = 0; i < platforms.Length; i++)
+                platforms[i].gameObject.SetActive(false);
+        }
+
+        public void SetShopState()
+        {
+            player.SetDefaultState();
+            
+            platforms[0].gameObject.SetActive(true);
+            
+            for (var i = 1; i < platforms.Length; i++)
+                platforms[i].gameObject.SetActive(false);
         }
     }
 }
