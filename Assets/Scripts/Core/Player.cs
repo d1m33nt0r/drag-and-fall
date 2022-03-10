@@ -8,7 +8,8 @@ namespace Core
         [SerializeField] private Animator animator;
         [SerializeField] private GameObject fallingTrail;
         [SerializeField] private GameObject trail;
-
+        [SerializeField] private GameManager gameManager;
+        
         private bool triggerStay;
 
         public void PlayIdleAnim()
@@ -48,6 +49,7 @@ namespace Core
 
         private void Update()
         {
+            if (!gameManager.gameStarted) return;
             if (triggerStay) return;
             
             var position = transform.position;

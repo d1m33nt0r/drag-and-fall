@@ -6,8 +6,11 @@ namespace Core
 {
     public class Platform : MonoBehaviour
     {
+        public event Action resetConcentraion;
+        public event Action increaseConcentraion;
+        
         [SerializeField] private Segment segmentPrefab;
-
+        
         public Action platformDestroyed;
         public int countTouches = 0;
 
@@ -39,6 +42,7 @@ namespace Core
         public void IncreaseTouchCounter()
         {
             countTouches++;
+            if (countTouches == 2) resetConcentraion?.Invoke();
             if (countTouches == 3) DestroyPlatform();
         }
         
@@ -47,6 +51,7 @@ namespace Core
             platformDestroyed?.Invoke();
             player.SetTriggerStay(false);
             tube.MovePlatforms();
+            increaseConcentraion?.Invoke();
             Destroy(gameObject);
         }
     }

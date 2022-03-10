@@ -16,7 +16,10 @@ namespace Core
         [SerializeField] private float platformMovementSpeed;
         [SerializeField] private DragController dragController;
         [SerializeField] public VisualController visualController;
+        [SerializeField] private GameManager gameManager;
+        [SerializeField] private Concentration concentration;
         
+        private Vector3 startEulerAngles;
         private float startTime;
         private float journeyLength;
         
@@ -28,6 +31,7 @@ namespace Core
         {
             dragController.SwipeEvent += RotateTube;
             Initialize();
+            startEulerAngles = transform.rotation.eulerAngles;
             journeyLength = Vector3.Distance(platforms[0].transform.position, platforms[1].transform.position);
         }
 
@@ -45,10 +49,10 @@ namespace Core
             switch (type)
             {
                 case DragController.SwipeType.LEFT:
-                    transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y  - delta, eulerAngles.z), 0.1f);
+                    transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y - delta, eulerAngles.z), 0.1f);
                     break;
                 case DragController.SwipeType.RIGHT:
-                    transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y  + delta, eulerAngles.z), 0.1f);
+                    transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y + delta, eulerAngles.z), 0.1f);
                     break;
             }
         }
@@ -70,8 +74,8 @@ namespace Core
             {
                 for (var i = 1; i < countPlatforms; i++)
                 {
-                    float distCovered = (Time.time - startTime) * platformMovementSpeed;
-                    float fractionOfJourney = distCovered / journeyLength;
+                    var distCovered = (Time.time - startTime) * platformMovementSpeed;
+                    var fractionOfJourney = distCovered / journeyLength;
                     platforms[i - 1].transform.position = Vector3.Lerp(localPositionsOfPlatforms[i], localPositionsOfPlatforms[i - 1], fractionOfJourney);
                 }
 
@@ -100,29 +104,41 @@ namespace Core
         private void CreateNewPlatform(int _platformIndex)
         {
             var platformInstance = Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.identity, transform);
+            
+            AlignRotation(platformInstance);
+            
+            var patternData = gameManager.gameMode.infinityMode.GetPatternData();
+            
+            var platform = platformInstance.GetComponent<Platform>();
+            platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, player);
+            platform.increaseConcentraion += IncreaseConcentration;
+            platform.resetConcentraion += ResetConcentration;
+            
+            platforms[_platformIndex] = platform;
+        }
+
+        private void IncreaseConcentration()
+        {
+            concentration.IncreaseConcentration();   
+        }
+
+        private void ResetConcentration()
+        {
+            concentration.Reset();
+        }
         
-            var patternData = new PatternData(Constants.Platform.COUNT_SEGMENTS, 0)
+        private void AlignRotation(GameObject platformInstance)
+        {
+            if (transform.rotation.eulerAngles.y > 0)
             {
-                segmentsData = new SegmentData[]
-                {
-                    new SegmentData { segmentType = SegmentType.Ground },
-                    new SegmentData { segmentType = SegmentType.Ground },
-                    new SegmentData { segmentType = SegmentType.Let },
-                    new SegmentData { segmentType = SegmentType.Ground },
-                    new SegmentData { segmentType = SegmentType.Ground },
-                    new SegmentData { segmentType = SegmentType.Ground },
-                    new SegmentData { segmentType = SegmentType.Ground },
-                    new SegmentData { segmentType = SegmentType.Hole },
-                    new SegmentData { segmentType = SegmentType.Hole },
-                    new SegmentData { segmentType = SegmentType.Ground },
-                    new SegmentData { segmentType = SegmentType.Let },
-                    new SegmentData { segmentType = SegmentType.Ground }
-                }
-            };
-        
-            platformInstance.GetComponent<Platform>().Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, player);
-        
-            platforms[_platformIndex] = platformInstance.GetComponent<Platform>();
+                platformInstance.transform.localRotation = Quaternion.Euler(startEulerAngles.x, 0 + 
+                    Mathf.Abs(startEulerAngles.y - transform.rotation.eulerAngles.y), startEulerAngles.z);
+            }
+            else
+            {
+                platformInstance.transform.localRotation = Quaternion.Euler(startEulerAngles.x, 0 - 
+                    Mathf.Abs(startEulerAngles.y - transform.rotation.eulerAngles.y), startEulerAngles.z);
+            }
         }
     }
 }
