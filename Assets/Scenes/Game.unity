@@ -4816,6 +4816,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1776688606}
   tube: {fileID: 1755819904}
+  buttonText: {fileID: 2078493289}
+  price: {fileID: 1661230248}
   gameManager: {fileID: 1157630038}
   shopStateText: {fileID: 1243938430}
   shopData: {fileID: 11400000, guid: 721eeccf73432cc469b6e77393ffc035, type: 2}

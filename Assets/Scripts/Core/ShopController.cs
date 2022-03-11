@@ -9,7 +9,9 @@ namespace Core
     {
         [SerializeField] private Player player;
         [SerializeField] private Tube tube;
-        
+
+        [SerializeField] private Text buttonText;
+        [SerializeField] private Text price;
         [SerializeField] private GameManager gameManager;
         [SerializeField] private Text shopStateText;
         [SerializeField] private ShopData shopData;
@@ -36,23 +38,45 @@ namespace Core
             {
                 case ShopState.EnvironmentSkin:
                     shopState = ShopState.PlayerSkin;
+                    SetText(shopData.PlayerSkinData[currentPlayerSkinIndex].isBought, 
+                        shopData.PlayerSkinData[currentPlayerSkinIndex].price);
                     shopStateText.text = "Player skins";
                     break;
                 case ShopState.PlayerSkin:
                     shopState = ShopState.TrailSkin;
+                    SetText(shopData.TrailSkinData[currentTrailSkinIndex].isBought, 
+                        shopData.TrailSkinData[currentTrailSkinIndex].price);
                     shopStateText.text = "Trail skins";
                     break;
                 case ShopState.TrailSkin:
                     shopState = ShopState.FallingTrailSkin;
+                    SetText(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].isBought, 
+                        shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].price);
                     shopStateText.text = "Falling trail skins";
                     break;
                 case ShopState.FallingTrailSkin:
                     shopState = ShopState.EnvironmentSkin;
+                    SetText(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].isBought, 
+                        shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].price);
                     shopStateText.text = "Environment skins";
                     break;
             }
             
             gameManager.ChangeShopState(shopState);
+        }
+
+        private void SetText(bool _isBought, float _price)
+        {
+            if (!_isBought)
+            {
+                price.text = _price.ToString();
+                buttonText.text = "Buy";
+            }
+            else
+            {
+                price.text = "Bought";
+                buttonText.text = "Select";
+            }
         }
 
         public void MoveRightState()
@@ -61,18 +85,26 @@ namespace Core
             {
                 case ShopState.EnvironmentSkin:
                     shopState = ShopState.FallingTrailSkin;
+                    SetText(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].isBought, 
+                        shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].price);
                     shopStateText.text = "Falling trail skins";
                     break;
                 case ShopState.PlayerSkin:
                     shopState = ShopState.EnvironmentSkin;
+                    SetText(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].isBought, 
+                        shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].price);
                     shopStateText.text = "Environment skins";
                     break;
                 case ShopState.TrailSkin:
                     shopState = ShopState.PlayerSkin;
+                    SetText(shopData.PlayerSkinData[currentPlayerSkinIndex].isBought, 
+                        shopData.PlayerSkinData[currentPlayerSkinIndex].price);
                     shopStateText.text = "Player skins";
                     break;
                 case ShopState.FallingTrailSkin:
                     shopState = ShopState.TrailSkin;
+                    SetText(shopData.TrailSkinData[currentTrailSkinIndex].isBought, 
+                        shopData.TrailSkinData[currentTrailSkinIndex].price);
                     shopStateText.text = "Trail skins";
                     break;
             }
@@ -89,7 +121,9 @@ namespace Core
                         currentEnvironmentSkinIndex = 0;
                     else
                         currentEnvironmentSkinIndex++;
-
+                    
+                    SetText(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].isBought, 
+                        shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].price);
                     tube.TryOnSkin(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex]);
                     break;
                 case ShopState.PlayerSkin:
@@ -98,6 +132,8 @@ namespace Core
                     else
                         currentPlayerSkinIndex++;
                     
+                    SetText(shopData.PlayerSkinData[currentPlayerSkinIndex].isBought, 
+                        shopData.PlayerSkinData[currentPlayerSkinIndex].price);
                     player.TryOnPlayerSkin(shopData.PlayerSkinData[currentPlayerSkinIndex].mesh, shopData.PlayerSkinData[currentPlayerSkinIndex].material);
                     break;
                 case ShopState.TrailSkin:
@@ -106,6 +142,8 @@ namespace Core
                     else
                         currentTrailSkinIndex++;
                     
+                    SetText(shopData.TrailSkinData[currentTrailSkinIndex].isBought, 
+                        shopData.TrailSkinData[currentTrailSkinIndex].price);
                     player.TryOnTrailSkin(shopData.TrailSkinData[currentTrailSkinIndex].skin);
                     break;
                 case ShopState.FallingTrailSkin:
@@ -113,7 +151,9 @@ namespace Core
                         currentFallingTrailSkinIndex = 0;
                     else
                         currentFallingTrailSkinIndex++;
-                    
+
+                    SetText(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].isBought, 
+                        shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].price);
                     player.TryOnFallingTrailSkin(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].skin);
                     break;
             }
@@ -129,7 +169,9 @@ namespace Core
                     else
                         currentEnvironmentSkinIndex--;
                     
-                    
+                    SetText(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].isBought, 
+                        shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].price);
+                    tube.TryOnSkin(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex]);
                     break;
                 case ShopState.PlayerSkin:
                     if (currentPlayerSkinIndex == 0)
@@ -137,6 +179,8 @@ namespace Core
                     else
                         currentPlayerSkinIndex--;
                     
+                    SetText(shopData.PlayerSkinData[currentPlayerSkinIndex].isBought, 
+                        shopData.PlayerSkinData[currentPlayerSkinIndex].price);
                     player.TryOnPlayerSkin(shopData.PlayerSkinData[currentPlayerSkinIndex].mesh, shopData.PlayerSkinData[currentPlayerSkinIndex].material);
                     break;
                 case ShopState.TrailSkin:
@@ -145,6 +189,8 @@ namespace Core
                     else
                         currentTrailSkinIndex--;
                     
+                    SetText(shopData.TrailSkinData[currentTrailSkinIndex].isBought, 
+                        shopData.TrailSkinData[currentTrailSkinIndex].price);
                     player.TryOnTrailSkin(shopData.TrailSkinData[currentTrailSkinIndex].skin);
                     break;
                 case ShopState.FallingTrailSkin:
@@ -153,6 +199,8 @@ namespace Core
                     else
                         currentFallingTrailSkinIndex--;
                     
+                    SetText(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].isBought, 
+                        shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].price);
                     player.TryOnFallingTrailSkin(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].skin);
                     break;
             }
