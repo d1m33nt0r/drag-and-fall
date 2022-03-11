@@ -6,7 +6,7 @@ namespace Data.Shop.Trails
     [Serializable]
     public class TrailSkinData
     {
-        public int skinId;
+        public bool isBought;
         public float price;
         public GameObject skin;
     }

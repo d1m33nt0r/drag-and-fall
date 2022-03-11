@@ -2,6 +2,7 @@ using System.Collections;
 using Common;
 using Data.Core;
 using Data.Core.Segments;
+using Data.Shop.TubeSkins;
 using DG.Tweening;
 using UnityEngine;
 
@@ -24,11 +25,15 @@ namespace Core
         private float journeyLength;
         
         private PatternData currentPatternData;
-        private Platform[] platforms;
+        public Platform[] platforms;
         private Vector3[] localPositionsOfPlatforms;
-
+        private MeshRenderer meshRenderer;
+        private MeshFilter meshFilter;
+        
         private void Awake()
         {
+            meshFilter = transform.GetComponent<MeshFilter>();
+            meshRenderer = transform.GetComponent<MeshRenderer>();
             dragController.SwipeEvent += RotateTube;
             Initialize();
             startEulerAngles = transform.rotation.eulerAngles;
@@ -37,15 +42,34 @@ namespace Core
 
         private void Initialize()
         {
-            ChangeMaterial();
+            ChangeTheme();
             
             InitializePlatformPoints();
             InitializePlatforms();
         }
 
-        public void ChangeMaterial()
+        public void TryOnSkin(EnvironmentSkinData _environmentSkinData)
         {
-            transform.GetComponent<MeshRenderer>().material = visualController.GetTubeMaterial();
+            meshRenderer.material = _environmentSkinData.tubeMaterial;
+            meshFilter.mesh = _environmentSkinData.tube;
+            
+            foreach (var platform in platforms)
+            {
+                for (var i = 0; i < Constants.Platform.COUNT_SEGMENTS; i++)
+                    platform.transform.GetChild(i).GetComponent<Segment>().TryOnTheme(_environmentSkinData);
+            }
+        }
+        
+        public void ChangeTheme()
+        {
+            meshRenderer.material = visualController.GetTubeMaterial();
+            meshFilter.mesh = visualController.GetTubeMesh();
+            
+            foreach (var platform in platforms)
+            {
+                for (var i = 0; i < Constants.Platform.COUNT_SEGMENTS; i++)
+                    platform.transform.GetChild(i).GetComponent<Segment>().ChangeTheme();
+            }
         }
         
         private void RotateTube(DragController.SwipeType type, float delta)

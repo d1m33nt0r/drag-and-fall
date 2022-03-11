@@ -6,8 +6,9 @@ namespace Data.Shop.Players
     [Serializable]
     public class PlayerSkinData
     {
-        public int skinId;
+        public bool isBought;
         public float price;
-        public GameObject skin;
+        public Mesh mesh;
+        public Material material;
     }
 }

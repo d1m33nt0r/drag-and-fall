@@ -1,4 +1,5 @@
-﻿using Data.Core.Segments;
+﻿using System;
+using Data.Core.Segments;
 using UnityEngine;
 
 namespace Core
@@ -9,9 +10,51 @@ namespace Core
         [SerializeField] private GameObject fallingTrail;
         [SerializeField] private GameObject trail;
         [SerializeField] private GameManager gameManager;
+        [SerializeField] private VisualController visualController;
         
         private bool triggerStay;
 
+        private MeshFilter meshFilter;
+        private MeshRenderer meshRenderer;
+
+        private void Awake()
+        {
+            meshFilter = GetComponent<MeshFilter>();
+            meshRenderer = GetComponent<MeshRenderer>();
+        }
+
+        public void ChangeTheme()
+        {
+            meshFilter.mesh = visualController.GetPlayerMesh();
+            meshRenderer.material = visualController.GetPlayerMaterial();
+            
+            Destroy(trail);
+            Destroy(fallingTrail);
+            
+            trail = Instantiate(visualController.GetTrail(), transform.position, Quaternion.identity, transform);
+            fallingTrail = Instantiate(visualController.GetFallingTrail(), transform.position, Quaternion.identity,
+                transform);
+        }
+
+        public void TryOnPlayerSkin(Mesh _mesh, Material _material)
+        {
+            meshFilter.mesh = _mesh;
+            meshRenderer.material = _material;
+        }
+
+        public void TryOnTrailSkin(GameObject _trail)
+        {
+            Destroy(trail);
+            trail = Instantiate(_trail, transform.position, Quaternion.identity, transform);
+        }
+
+        public void TryOnFallingTrailSkin(GameObject _fallingTrail)
+        {
+            Destroy(fallingTrail);
+            fallingTrail = Instantiate(_fallingTrail, transform.position, Quaternion.identity,
+                transform);
+        }
+        
         public void PlayIdleAnim()
         {
             animator.Play("Idle");

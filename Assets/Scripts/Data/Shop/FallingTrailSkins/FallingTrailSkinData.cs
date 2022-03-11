@@ -6,7 +6,7 @@ namespace Data.Shop.FallingTrails
     [Serializable]
     public class FallingTrailSkinData
     {
-        public int skinId;
+        public bool isBought;
         public float price;
         public GameObject skin;
     }

@@ -1,4 +1,5 @@
 ﻿using Data.Core.Segments;
+using Data.Shop.TubeSkins;
 using UnityEngine;
 
 namespace Core
@@ -16,15 +17,33 @@ namespace Core
             segmentData = _segmentData;
             tube = _tube;
             
-            ChangeMaterial();
+            ChangeTheme();
         }
 
-        public void ChangeMaterial()
+        public void ChangeTheme()
         {
             if (segmentData.segmentType == SegmentType.Hole)
                 transform.GetComponent<MeshRenderer>().enabled = false;
             else
+            {
                 transform.GetComponent<MeshRenderer>().material = tube.visualController.GetSegmentMaterial(segmentData.segmentType);
+                transform.GetComponent<MeshFilter>().mesh = tube.visualController.GetSegmentMesh();
+            }
+        }
+
+        public void TryOnTheme(EnvironmentSkinData _environmentSkinData)
+        {
+            if (segmentData.segmentType == SegmentType.Hole)
+                transform.GetComponent<MeshRenderer>().enabled = false;
+            else
+            {
+                if (segmentData.segmentType == SegmentType.Ground)
+                    transform.GetComponent<MeshRenderer>().material = _environmentSkinData.groundSegmentMaterial;
+                else
+                    transform.GetComponent<MeshRenderer>().material = _environmentSkinData.letSegmentMaterial;
+                
+                transform.GetComponent<MeshFilter>().mesh = tube.visualController.GetSegmentMesh();
+            }
         }
 
         public void IncreasePlatformTouchCounter()
