@@ -1,5 +1,4 @@
-﻿using System;
-using Data.Core.Segments;
+﻿using Data.Core.Segments;
 using UnityEngine;
 
 namespace Core
@@ -11,6 +10,9 @@ namespace Core
         [SerializeField] private GameObject trail;
         [SerializeField] private GameManager gameManager;
         [SerializeField] private VisualController visualController;
+
+        [SerializeField] private CoinPanel coinPanel;
+        [SerializeField] private CrystalPanel crystalPanel;
         
         private bool triggerStay;
 
@@ -138,6 +140,16 @@ namespace Core
             PlayBounceAnim();
             EnableTrail();
             DisableFallingTrail();
+        }
+
+        public void CollectCrystal(int count)
+        {
+            crystalPanel.AddCrystals(count);
+        }
+        
+        public void CollectCoin(int count)
+        {
+            coinPanel.AddCoins(count);
         }
     }
 }

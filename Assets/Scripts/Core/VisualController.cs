@@ -9,7 +9,7 @@ namespace Core
     public class VisualController : MonoBehaviour
     {
         [SerializeField] private ShopData shopData;
-        [SerializeField] private CurrentProgressState currentProgressState;
+        [SerializeField] private ProgressController progressController;
         
         [SerializeField] private Tube tube;
         [SerializeField] private Player player;
@@ -36,10 +36,10 @@ namespace Core
             switch (_segmentType)
             {
                 case SegmentType.Ground:
-                    return shopData.EnvironmentSkinData[currentProgressState.environmentSkin.index]
+                    return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index]
                         .groundSegmentMaterial;
                 case SegmentType.Let:
-                    return shopData.EnvironmentSkinData[currentProgressState.environmentSkin.index].letSegmentMaterial;
+                    return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].letSegmentMaterial;
                 default:
                     return null;
             }
@@ -47,37 +47,37 @@ namespace Core
 
         public Material GetPlayerMaterial()
         {
-            return shopData.PlayerSkinData[currentProgressState.playerSkin.index].material;
+            return shopData.PlayerSkinData[progressController.currentState.playerSkin.index].material;
         }
 
         public Mesh GetPlayerMesh()
         {
-            return shopData.PlayerSkinData[currentProgressState.playerSkin.index].mesh;
+            return shopData.PlayerSkinData[progressController.currentState.playerSkin.index].mesh;
         }
         
         public Material GetTubeMaterial()
         {
-            return shopData.EnvironmentSkinData[currentProgressState.environmentSkin.index].tubeMaterial;
+            return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].tubeMaterial;
         }
 
         public Mesh GetTubeMesh()
         {
-            return shopData.EnvironmentSkinData[currentProgressState.environmentSkin.index].tube;
+            return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].tube;
         }
         
         public Mesh GetSegmentMesh()
         {
-            return shopData.EnvironmentSkinData[currentProgressState.environmentSkin.index].segment;
+            return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].segment;
         }
         
         public GameObject GetTrail()
         {
-            return shopData.TrailSkinData[currentProgressState.trailSkin.index].skin;
+            return shopData.TrailSkinData[progressController.currentState.trailSkin.index].skin;
         }
 
         public GameObject GetFallingTrail()
         {
-            return shopData.FallingTrailSkinData[currentProgressState.fallingTrailSkin.index].skin;
+            return shopData.FallingTrailSkinData[progressController.currentState.fallingTrailSkin.index].skin;
         }
     }
 }
