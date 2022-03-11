@@ -4576,7 +4576,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1000
+  m_Text: Bought
 --- !u!222 &1661230249
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5568,11 +5568,7 @@ MonoBehaviour:
   gameManager: {fileID: 1157630038}
   shopStateText: {fileID: 1243938430}
   shopData: {fileID: 11400000, guid: 721eeccf73432cc469b6e77393ffc035, type: 2}
-  shopProgress:
-    environmentSkins: []
-    playerSkins: []
-    trailSkins: []
-    fallingTrailSkins: []
+  progressController: {fileID: 0}
   shopState: 0
 --- !u!1 &2078493287
 GameObject:
@@ -5644,7 +5640,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Buy
+  m_Text: Select
 --- !u!222 &2078493290
 CanvasRenderer:
   m_ObjectHideFlags: 0

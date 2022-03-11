@@ -15,7 +15,7 @@ namespace Core
         [SerializeField] private GameManager gameManager;
         [SerializeField] private Text shopStateText;
         [SerializeField] private ShopData shopData;
-        [SerializeField] private ShopProgress shopProgress;
+        [SerializeField] private ProgressController progressController;
 
         private int currentPlayerSkinIndex;
         private int currentEnvironmentSkinIndex;
@@ -201,6 +201,25 @@ namespace Core
                     
                     SetText(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].isBought, 
                         shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].price);
+                    player.TryOnFallingTrailSkin(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].skin);
+                    break;
+            }
+        }
+
+        public void BuyOrSelectSkin()
+        {
+            switch (shopState)
+            {
+                case ShopState.EnvironmentSkin:
+                    tube.TryOnSkin(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex]);
+                    break;
+                case ShopState.PlayerSkin:
+                    player.TryOnPlayerSkin(shopData.PlayerSkinData[currentPlayerSkinIndex].mesh, shopData.PlayerSkinData[currentPlayerSkinIndex].material);
+                    break;
+                case ShopState.TrailSkin:
+                    player.TryOnTrailSkin(shopData.TrailSkinData[currentTrailSkinIndex].skin);
+                    break;
+                case ShopState.FallingTrailSkin:
                     player.TryOnFallingTrailSkin(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].skin);
                     break;
             }

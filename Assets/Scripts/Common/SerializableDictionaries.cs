@@ -8,7 +8,7 @@ using Data.Shop.TubeSkins;
 namespace Common
 {
     [Serializable]
-    public class SerializableLevelData : SerializableDictionary<int, LevelData>
+    public class SerializableLevelData : SerializableDictionary<int, LevelsData>
     {
     }
     

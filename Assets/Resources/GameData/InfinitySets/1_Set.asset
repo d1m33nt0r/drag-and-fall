@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f09d77c3811e4596942c73ed357f4c40, type: 3}
-  m_Name: 1Set
+  m_Name: 1_Set
   m_EditorClassIdentifier: 
   patterns:
   - segmentsData:
