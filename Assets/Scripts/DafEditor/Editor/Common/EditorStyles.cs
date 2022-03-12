@@ -17,6 +17,46 @@ namespace DafEditor.Editor.Common
 
             return style;
         }
+        
+        public static GUIStyle PatternStyle()
+        {
+            var style = new GUIStyle();
+            
+            var texture = new Texture2D(1,1);
+            texture.SetPixel(1,1, new Color(0.0f,0.0f,0.2f,0.7f));
+            texture.Apply();
+            
+            style.alignment = TextAnchor.MiddleCenter;
+            style.normal.background = texture;
+
+            return style;
+        }
+        
+        public static GUIStyle PatternSegmentContentStyle()
+        {
+            var style = new GUIStyle();
+            
+            var texture = new Texture2D(1,1);
+            texture.SetPixel(1,1, new Color(0.2f,0.2f,0.0f,0.7f));
+            texture.Apply();
+            
+            style.normal.background = texture;
+
+            return style;
+        }
+        
+        public static GUIStyle PatternSegmentStyle()
+        {
+            var style = new GUIStyle();
+            
+            var texture = new Texture2D(1,1);
+            texture.SetPixel(1,1, new Color(0.0f,0.2f,0.2f,0.7f));
+            texture.Apply();
+            
+            style.normal.background = texture;
+
+            return style;
+        }
 
         public static GUIStyle DarkButtonStyle(int _height)
         {

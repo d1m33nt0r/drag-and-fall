@@ -9,23 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79c83418f5ef48b3823be37e80531ff0, type: 3}
-  m_Name: Level_1
+  m_Script: {fileID: 11500000, guid: f09d77c3811e4596942c73ed357f4c40, type: 3}
+  m_Name: 2_Set
   m_EditorClassIdentifier: 
   patterns:
   - segmentsData:
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
     - segmentType: 0
       segmentContent: 0
     - segmentType: 0
@@ -36,5 +24,17 @@ MonoBehaviour:
       segmentContent: 0
     - segmentType: 0
       segmentContent: 0
+    - segmentType: 1
+      segmentContent: 0
     - segmentType: 0
+      segmentContent: 0
+    - segmentType: 2
+      segmentContent: 0
+    - segmentType: 1
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 2
       segmentContent: 0

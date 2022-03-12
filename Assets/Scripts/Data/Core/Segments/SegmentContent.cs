@@ -8,6 +8,7 @@
         Shield,
         Magnet,
         Crystal,
+        Coin,
         Other
     }
 }

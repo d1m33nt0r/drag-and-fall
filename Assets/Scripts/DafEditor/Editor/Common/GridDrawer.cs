@@ -28,13 +28,13 @@ namespace DafEditor.Editor.Common
  
             for (var i = 0; i < widthDivs; i++)
             {
-                Handles.DrawLine(new Vector2(_gridSpacing * i + GameEditorWindow.instance.m_splitLine.xSplitCoordinate, -_gridSpacing) + newOffset, 
-                    new Vector2(_gridSpacing * i + GameEditorWindow.instance.m_splitLine.xSplitCoordinate, GameEditorWindow.instance.position.height) + newOffset);
+                Handles.DrawLine(new Vector2(_gridSpacing * i, -_gridSpacing) + newOffset, 
+                    new Vector2(_gridSpacing * i, GameEditorWindow.instance.position.height) + newOffset);
             }
  
             for (var j = 0; j < heightDivs; j++)
             {
-                Handles.DrawLine(new Vector2(GameEditorWindow.instance.m_splitLine.xSplitCoordinate, _gridSpacing * j) + newOffset, 
+                Handles.DrawLine(new Vector2(0, _gridSpacing * j) + newOffset, 
                     new Vector2(GameEditorWindow.instance.position.width, _gridSpacing * j) + newOffset);
             }
  

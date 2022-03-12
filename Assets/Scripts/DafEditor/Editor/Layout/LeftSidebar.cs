@@ -1,4 +1,5 @@
-﻿using DafEditor.Editor.Intefraces;
+﻿using System.Collections.Generic;
+using DafEditor.Editor.Intefraces;
 using Data.Core;
 using UnityEditor;
 using UnityEngine;
@@ -8,11 +9,11 @@ namespace DafEditor.Editor.Layout
 {
     public class LeftSidebar : IDrawer
     {
-        public const string INFINITY_DATA_ASSET_PATH = "Assets/Resources/GameData/InfinityData.asset";
-        public const string LEVELS_DATA_ASSET_PATH = "Assets/Resources/GameData/LevelsData.asset";
+        public string INFINITY_DATA_ASSET_PATH = "Assets/Resources/GameData/InfinityData.asset";
+        public string LEVELS_DATA_ASSET_PATH = "Assets/Resources/GameData/LevelsData.asset";
 
-        public const string LEVELS_DATA_PATH = "Assets/Resources/GameData/Levels/";
-        public const string INFINITY_DATA_PATH = "Assets/Resources/GameData/InfinitySets/";
+        public string LEVELS_DATA_PATH = "Assets/Resources/GameData/Levels/";
+        public string INFINITY_DATA_PATH = "Assets/Resources/GameData/InfinitySets/";
         
         private const float MARGIN_TOP = 0;
         private int currentToolbarOption = 0;
@@ -24,7 +25,7 @@ namespace DafEditor.Editor.Layout
                 new Vector2(GameEditorWindow.instance.m_splitLine.xSplitCoordinate - 
                             GameEditorWindow.instance.m_splitLine.lineWidth,GameEditorWindow.instance.position.height)), EditorStyles.LeftSidebarStyle());
 
-            GUILayout.Label("Main", EditorStyles.HeaderOfBlockInLeftSideBar());
+            GUILayout.Label("Manage patterns", EditorStyles.HeaderOfBlockInLeftSideBar());
 
             GUILayout.Space(5f);
             currentToolbarOption = GUILayout.Toolbar(currentToolbarOption, toolbarOptions);
@@ -45,6 +46,7 @@ namespace DafEditor.Editor.Layout
             if (GUILayout.Button("Create new level", EditorStyles.DarkButtonStyle(22)))
             {
                 var levelData = ScriptableObject.CreateInstance<LevelData>();
+                levelData.patterns = new List<PatternData>();
                 var count = levelsData.leves.Count + 1;
                 AssetDatabase.CreateAsset(levelData, LEVELS_DATA_PATH + "Level_" +  count + ".asset");
                 levelsData.leves.Add(levelData);
@@ -55,7 +57,11 @@ namespace DafEditor.Editor.Layout
             for (var i = 0; i < levelsData.leves.Count; i++)
             {
                 GUILayout.BeginHorizontal();
-                GUILayout.Button(levelsData.leves[i].name, EditorStyles.DarkButtonStyle(22));
+                if (GUILayout.Button(levelsData.leves[i].name, EditorStyles.DarkButtonStyle(22)))
+                {
+                    GameEditorWindow.instance.currentPatternData = levelsData.leves[i].patterns;
+                    GameEditorWindow.instance.m_content.SetPatterns(GameEditorWindow.instance.currentPatternData, levelsData.leves[i].name);
+                }
                 GUILayout.Button("X", EditorStyles.RedButtonStyle(22), GUILayout.Width(25));
                 GUILayout.EndHorizontal();
             }
@@ -63,13 +69,14 @@ namespace DafEditor.Editor.Layout
             GUILayout.EndVertical();
         }
         
-        private static void DrawInfinityMode()
+        private void DrawInfinityMode()
         {
             var infinityData = AssetDatabase.LoadAssetAtPath<InfinityData>(INFINITY_DATA_ASSET_PATH);
             
             if (GUILayout.Button("Create new set", EditorStyles.DarkButtonStyle(22)))
             {
                 var setData = ScriptableObject.CreateInstance<SetData>();
+                setData.patterns = new List<PatternData>();
                 var count = infinityData.patternSets.Count + 1;
                 AssetDatabase.CreateAsset(setData, INFINITY_DATA_PATH + count + "_Set.asset");
                 infinityData.patternSets.Add(setData);
@@ -80,7 +87,11 @@ namespace DafEditor.Editor.Layout
             for (var i = 0; i < infinityData.patternSets.Count; i++)
             {
                 GUILayout.BeginHorizontal();
-                GUILayout.Button(infinityData.patternSets[i].name, EditorStyles.DarkButtonStyle(22));
+                if (GUILayout.Button(infinityData.patternSets[i].name, EditorStyles.DarkButtonStyle(22)))
+                {
+                    GameEditorWindow.instance.currentPatternData = infinityData.patternSets[i].patterns;
+                    GameEditorWindow.instance.m_content.SetPatterns(GameEditorWindow.instance.currentPatternData, infinityData.patternSets[i].name);
+                }
                 GUILayout.Button("X", EditorStyles.RedButtonStyle(22), GUILayout.Width(25));
                 GUILayout.EndHorizontal();
             }

@@ -18,7 +18,17 @@ MonoBehaviour:
       segmentContent: 0
     - segmentType: 0
       segmentContent: 0
+    - segmentType: 1
+      segmentContent: 0
     - segmentType: 0
+      segmentContent: 0
+    - segmentType: 2
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 2
       segmentContent: 0
     - segmentType: 0
       segmentContent: 0
@@ -26,15 +36,5 @@ MonoBehaviour:
       segmentContent: 0
     - segmentType: 0
       segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
+    - segmentType: 1
       segmentContent: 0
