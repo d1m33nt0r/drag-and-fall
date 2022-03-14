@@ -6,6 +6,6 @@ namespace Data.Core
     [CreateAssetMenu(fileName = "LevelsData", menuName = "Gamer Stash/Levels Data", order = 0)]
     public class LevelsData : ScriptableObject
     {
-        public List<LevelData> leves;
+        public List<LevelData> leves = new List<LevelData>();
     }
 }

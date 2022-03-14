@@ -16,9 +16,9 @@ MonoBehaviour:
   - isBought: 1
     price: 0
     skybox: {fileID: 0}
-    tubeMaterial: {fileID: 2100000, guid: a055995b7cdb5f94f8c4d5be78faa9dd, type: 2}
+    tubeMaterial: {fileID: 2100000, guid: 0c8248b0e4151f646803628d4c2563e3, type: 2}
     letSegmentMaterial: {fileID: 2100000, guid: e2060d36a9813df4eb743adffb93967b, type: 2}
-    groundSegmentMaterial: {fileID: 2100000, guid: 0f6154dc129845c48a1b83d95185933a, type: 2}
+    groundSegmentMaterial: {fileID: 2100000, guid: 2968799f499957441ab6327f8895fb03, type: 2}
     segment: {fileID: 6871569608433183494, guid: 0110f3aecfa193240957a29499f44225, type: 3}
     tube: {fileID: -309684176625119091, guid: 0110f3aecfa193240957a29499f44225, type: 3}
   - isBought: 0
@@ -33,10 +33,10 @@ MonoBehaviour:
   - isBought: 1
     price: 0
     mesh: {fileID: 4711208715938537054, guid: 0110f3aecfa193240957a29499f44225, type: 3}
-    material: {fileID: -6478536213147159724, guid: b8d883923cdca5349a7c14fd0aab1481, type: 3}
+    material: {fileID: 2100000, guid: 97593259f1f8f004484fe595f4e472f9, type: 2}
   - isBought: 0
     price: 300
-    mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    mesh: {fileID: 4711208715938537054, guid: 0110f3aecfa193240957a29499f44225, type: 3}
     material: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
   TrailSkinData:
   - isBought: 1

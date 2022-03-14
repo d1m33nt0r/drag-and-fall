@@ -8,8 +8,6 @@ namespace Data
     public class GameData : ScriptableObject
     {
         public InfinityData infinityData;
-        public SerializableLevelData levelDatas;
-        public SerializableInfinityData infinityDatas;
-        public SerializableDictionary<int, SetData> setDatas;
+        public LevelsData levelsData;
     }
 }

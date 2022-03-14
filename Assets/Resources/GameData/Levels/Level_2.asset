@@ -12,8 +12,244 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c83418f5ef48b3823be37e80531ff0, type: 3}
   m_Name: Level_2
   m_EditorClassIdentifier: 
+  levelIndex: 1
   patterns:
-  - segmentsData:
+  - isLast: 0
+    segmentsData:
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+  - isLast: 0
+    segmentsData:
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+  - isLast: 0
+    segmentsData:
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 1
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+  - isLast: 0
+    segmentsData:
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 1
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+  - isLast: 0
+    segmentsData:
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 1
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+  - isLast: 0
+    segmentsData:
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 1
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+  - isLast: 0
+    segmentsData:
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+  - isLast: 0
+    segmentsData:
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+  - isLast: 0
+    segmentsData:
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+  - isLast: 1
+    segmentsData:
     - segmentType: 0
       segmentContent: 0
     - segmentType: 0

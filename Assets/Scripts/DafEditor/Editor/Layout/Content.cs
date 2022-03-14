@@ -37,6 +37,8 @@ namespace DafEditor.Editor.Layout
             if (GUILayout.Button("Add new pattern"))
             {
                 PatternDatas.Add(new PatternData(12));
+                if (PatternDatas.Count > 1) PatternDatas[PatternDatas.Count - 2].isLast = false;
+                PatternDatas[PatternDatas.Count - 1].isLast = true;
                 SetPatterns(PatternDatas, name);
             }
 

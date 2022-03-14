@@ -31,7 +31,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0.98539305, z: 0, w: 0.17029554}
   m_LocalPosition: {x: 0, y: 5.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1940045216188776384}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 160.39, z: 0}
@@ -99,6 +100,9 @@ MonoBehaviour:
   segmentData:
     segmentType: 0
     segmentContent: 0
+  spawnPoint: {fileID: 1940045216188776384}
+  coinPrefab: {fileID: 5579393256393416401, guid: 460786632f765b54d976e2eb5fb43986, type: 3}
+  crystalPrefab: {fileID: 3443404969930331942, guid: 3814d1a5f0f63ab449aad6b3c7fcffc3, type: 3}
 --- !u!64 &3680690525903027535
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -129,3 +133,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &5897458313006940978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1940045216188776384}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1940045216188776384
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5897458313006940978}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.193, y: 0.228, z: 0.698}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2040650364041574129}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

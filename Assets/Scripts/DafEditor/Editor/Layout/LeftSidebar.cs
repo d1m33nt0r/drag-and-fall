@@ -46,6 +46,7 @@ namespace DafEditor.Editor.Layout
             if (GUILayout.Button("Create new level", EditorStyles.DarkButtonStyle(22)))
             {
                 var levelData = ScriptableObject.CreateInstance<LevelData>();
+                levelData.levelIndex = levelsData.leves.Count;
                 levelData.patterns = new List<PatternData>();
                 var count = levelsData.leves.Count + 1;
                 AssetDatabase.CreateAsset(levelData, LEVELS_DATA_PATH + "Level_" +  count + ".asset");

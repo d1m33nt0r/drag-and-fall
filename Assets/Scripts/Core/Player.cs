@@ -1,10 +1,15 @@
-﻿using Data.Core.Segments;
+﻿using System;
+using Data.Core.Segments;
 using UnityEngine;
 
 namespace Core
 {
     public class Player : MonoBehaviour
     {
+        public event Action failed;
+        public Concentration concentration;
+        public ScorePanel scorePanel;
+        
         [SerializeField] private Animator animator;
         [SerializeField] private GameObject fallingTrail;
         [SerializeField] private GameObject trail;
@@ -102,6 +107,8 @@ namespace Core
             
             if (Physics.Raycast(centerRay, out var centerHit, 0.102f))
             {
+                if (centerHit.collider.CompareTag("SegmentContent")) return;
+                
                 var segment = centerHit.collider.GetComponent<Segment>();
 
                 switch (segment.segmentData.segmentType)
@@ -111,13 +118,13 @@ namespace Core
                         PlayBounceAnim();
                         EnableTrail();
                         DisableFallingTrail();
-                        segment.IncreasePlatformTouchCounter();
+                        segment.IncreasePlatformTouchCounter(scorePanel);
                         break;
                     case SegmentType.Hole:
-                        segment.DestroyPlatform();
+                        segment.DestroyPlatform(scorePanel);
                         break;
                     case SegmentType.Let:
-
+                        failed?.Invoke();
                         break;
                 }
             }

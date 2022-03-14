@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - BounceTrigger
+  - SegmentContent
   layers:
   - Default
   - TransparentFX

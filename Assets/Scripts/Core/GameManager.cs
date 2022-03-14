@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Data.Core;
+using Progress;
+using UnityEngine;
 
 namespace Core
 {
@@ -9,6 +11,7 @@ namespace Core
         [SerializeField] public UIManager uiManager;
         [SerializeField] public GameMode gameMode;
         [SerializeField] public ShopController shopController;
+        [SerializeField] private ProgressController progressController;
         
         public bool gameStarted { get; private set; }
 
@@ -16,19 +19,28 @@ namespace Core
         {
             tube.SetDefaultState();
             uiManager.SetActiveMainMenu(true);
+            uiManager.SetActiveFinishLevel(false);
+            uiManager.SetActiveFailedInfinityPanel(false);
+            uiManager.SetActiveFailedLevelPanel(false);
+            uiManager.SetActiveLevelUI(false);
             uiManager.SetActiveShopMenu(false);
             uiManager.SetActiveGameMenu(false);
+            uiManager.SetActiveLevelsMenu(false);
         }
 
         public void StartGame()
         {
             gameStarted = true;
             tube.SetDefaultState();
-            gameMode.ActiveInfinityMode();
+            //gameMode.ActiveInfinityMode();
+            uiManager.SetActiveLevelUI(false);
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveShopMenu(false);
             uiManager.SetActiveGameMenu(true);
-            
+            uiManager.SetActiveFinishLevel(false);
+            uiManager.SetActiveFailedInfinityPanel(false);
+            uiManager.SetActiveFailedLevelPanel(false);
+            uiManager.SetActiveLevelsMenu(false);
         }
 
         public void OpenShop()
@@ -36,8 +48,13 @@ namespace Core
             cameraAnimator.Play("OpenShop");
             tube.SetShopState();
             uiManager.SetActiveMainMenu(false);
+            uiManager.SetActiveLevelUI(false);
             uiManager.SetActiveShopMenu(true);
             uiManager.SetActiveGameMenu(false);
+            uiManager.SetActiveFinishLevel(false);
+            uiManager.SetActiveFailedInfinityPanel(false);
+            uiManager.SetActiveFailedLevelPanel(false);
+            uiManager.SetActiveLevelsMenu(false);
         }
         
         public void CloseShop()
@@ -45,8 +62,13 @@ namespace Core
             cameraAnimator.Play("CloseShop");
             tube.SetDefaultState();
             uiManager.SetActiveMainMenu(true);
+            uiManager.SetActiveLevelUI(false);
             uiManager.SetActiveShopMenu(false);
             uiManager.SetActiveGameMenu(false);
+            uiManager.SetActiveFinishLevel(false);
+            uiManager.SetActiveFailedInfinityPanel(false);
+            uiManager.SetActiveFailedLevelPanel(false);
+            uiManager.SetActiveLevelsMenu(false);
         }
 
         public void ChangeShopState(ShopState _shopState)
@@ -67,16 +89,104 @@ namespace Core
                     break;
             }
         }
-        
-        public void FinishGame()
+
+        public void ShowLevels()
         {
-            gameStarted = false;
+            tube.SetLevelMode(false);
             tube.SetDefaultState();
             uiManager.SetActiveMainMenu(true);
             uiManager.SetActiveShopMenu(false);
+            uiManager.SetActiveLevelUI(false);
             uiManager.SetActiveGameMenu(false);
+            uiManager.SetActiveFinishLevel(false);
+            uiManager.SetActiveFailedInfinityPanel(false);
+            uiManager.SetActiveFailedLevelPanel(false);
+            uiManager.SetActiveLevelsMenu(true);
+        }
+        
+        public void FinishLevel(LevelData levelsData)
+        {
+            gameStarted = false;
+            uiManager.SetActiveLevelsMenu(false);
+            progressController.levelsProgress.levelsProgresses[levelsData.levelIndex].isCompleted = true;
+            progressController.levelsProgress.levelsProgresses[levelsData.levelIndex + 1].isUnlocked = true;
+            progressController.SaveLevelsProgress(progressController.levelsProgress);
+            uiManager.UpdateLevelsStatus();
+            uiManager.SetActiveMainMenu(false);
+            uiManager.SetActiveShopMenu(false);
+            uiManager.SetActiveLevelUI(false);
+            uiManager.SetActiveGameMenu(false);
+            uiManager.SetActiveFinishLevel(true);
+            uiManager.SetActiveFailedInfinityPanel(false);
+            uiManager.SetActiveFailedLevelPanel(false);
         }
 
+        public void StartNextLevel()
+        {
+            gameStarted = true;
+            tube.SetDefaultState();
+            tube.gameManager.gameMode.levelMode.SetLevelData(tube.levelsData.leves[tube.gameManager.gameMode.levelMode.level.levelIndex + 1]);
+            tube.ReinitPlatforms();
+            
+            uiManager.SetActiveMainMenu(false);
+            uiManager.SetActiveShopMenu(false);
+            uiManager.SetActiveLevelUI(true);
+            uiManager.SetActiveGameMenu(false);
+            uiManager.SetActiveFinishLevel(false);
+            uiManager.SetActiveFailedInfinityPanel(false);
+            uiManager.SetActiveFailedLevelPanel(false);
+            uiManager.SetActiveLevelsMenu(false);
+        }
+        
+        public void FailedGame()
+        {
+            gameStarted = false;
+            tube.SetDefaultState();
+            uiManager.SetActiveMainMenu(false);
+            uiManager.SetActiveShopMenu(false);
+            uiManager.SetActiveLevelUI(false);
+            uiManager.SetActiveGameMenu(false);
+            uiManager.SetActiveFinishLevel(false);
+            uiManager.SetActiveFailedInfinityPanel(true);
+            uiManager.SetActiveFailedLevelPanel(false);
+            uiManager.SetActiveLevelsMenu(false);
+        }
+
+        public void FailedLevel()
+        {
+            gameStarted = false;
+            tube.SetDefaultState();
+            uiManager.SetActiveMainMenu(false);
+            uiManager.SetActiveShopMenu(false);
+            uiManager.SetActiveLevelUI(false);
+            uiManager.SetActiveGameMenu(false);
+            uiManager.SetActiveFinishLevel(false);
+            uiManager.SetActiveFailedInfinityPanel(false);
+            uiManager.SetActiveFailedLevelPanel(true);
+            uiManager.SetActiveLevelsMenu(false);
+        }
+        
+        public void StartedLevel(bool hz = false)
+        {
+            uiManager.SetActiveScorePanel(true);
+            uiManager.scorePanel.GetComponent<ScorePanel>().ResetCounter();
+            gameStarted = true;
+            tube.SetDefaultState();
+            if (hz)
+            {
+                tube.gameManager.gameMode.levelMode.ResetPointer();
+                tube.ReinitPlatforms();
+            }
+            uiManager.SetActiveMainMenu(false);
+            uiManager.SetActiveShopMenu(false);
+            uiManager.SetActiveLevelUI(true);
+            uiManager.SetActiveGameMenu(false);
+            uiManager.SetActiveFinishLevel(false);
+            uiManager.SetActiveFailedInfinityPanel(false);
+            uiManager.SetActiveFailedLevelPanel(false);
+            uiManager.SetActiveLevelsMenu(false);
+        }
+        
         public void PauseGame()
         {
             

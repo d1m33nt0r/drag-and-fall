@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Core
 {
@@ -7,12 +8,28 @@ namespace Core
         [SerializeField] private Canvas mainMenu;
         [SerializeField] private Canvas game;
         [SerializeField] private Canvas shop;
-        [SerializeField] private Concentration concentration;
+        [SerializeField] private Canvas levelUI;
+        [SerializeField] private GameObject failedLevelPanel;
+        [SerializeField] private GameObject failedInfinityPanel;
+        [SerializeField] private GameObject finishLevelPanel;
+        [SerializeField] private GameObject levelsMenu;
+        [SerializeField] private LevelUIController levelUIController;
+        public ScorePanel scorePanel;
 
-        public Concentration Concentration => concentration;
-        
+        private void Start()
+        {
+            SetActiveScorePanel(false);
+        }
+
+        public void SetActiveScorePanel(bool value) => scorePanel.SetActiveCounterPanel(value);
+        public void UpdateLevelsStatus() => levelUIController.InitializeLevels();
         public void SetActiveMainMenu(bool _value) => mainMenu.enabled = _value;
         public void SetActiveGameMenu(bool _value) => game.enabled = _value;
         public void SetActiveShopMenu(bool _value) => shop.enabled = _value;
+        public void SetActiveLevelUI(bool value) => levelUI.enabled = value;
+        public void SetActiveFinishLevel(bool value) => finishLevelPanel.SetActive(value);
+        public void SetActiveFailedInfinityPanel(bool value) => failedInfinityPanel.SetActive(value);
+        public void SetActiveFailedLevelPanel(bool value) => failedLevelPanel.SetActive(value);
+        public void SetActiveLevelsMenu(bool value) => levelsMenu.SetActive(value);
     }
 }

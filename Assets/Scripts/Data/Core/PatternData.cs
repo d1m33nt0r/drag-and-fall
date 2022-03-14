@@ -7,6 +7,7 @@ namespace Data.Core
     [Serializable]
     public class PatternData
     {
+        public bool isLast;
         public SegmentData[] segmentsData;
         
         public PatternData(int _segmentsAmount)

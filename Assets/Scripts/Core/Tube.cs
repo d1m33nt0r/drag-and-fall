@@ -1,7 +1,6 @@
 using System.Collections;
 using Common;
 using Data.Core;
-using Data.Core.Segments;
 using Data.Shop.TubeSkins;
 using DG.Tweening;
 using UnityEngine;
@@ -17,9 +16,11 @@ namespace Core
         [SerializeField] private float platformMovementSpeed;
         [SerializeField] private DragController dragController;
         [SerializeField] public VisualController visualController;
-        [SerializeField] private GameManager gameManager;
+        public GameManager gameManager;
         [SerializeField] private Concentration concentration;
+        public LevelsData levelsData;
         
+        public bool isLevelMode;
         private Vector3 startEulerAngles;
         private float startTime;
         private float journeyLength;
@@ -32,6 +33,7 @@ namespace Core
         
         private void Awake()
         {
+            player.failed += Failed;
             meshFilter = transform.GetComponent<MeshFilter>();
             meshRenderer = transform.GetComponent<MeshRenderer>();
             dragController.SwipeEvent += RotateTube;
@@ -40,6 +42,19 @@ namespace Core
             journeyLength = Vector3.Distance(platforms[0].transform.position, platforms[1].transform.position);
         }
 
+        public void FinishLevel(LevelData _levelData)
+        {
+            gameManager.FinishLevel(_levelData);
+        }
+        
+        private void Failed()
+        {
+            if (isLevelMode)
+                gameManager.FailedLevel();
+            else
+                gameManager.FailedGame();
+        }
+        
         private void Initialize()
         {
             ChangeTheme();
@@ -71,7 +86,19 @@ namespace Core
                     platform.transform.GetChild(i).GetComponent<Segment>().ChangeTheme();
             }
         }
-        
+
+        public void EnableLevelMode(LevelData _levelData)
+        {
+            gameManager.gameMode.levelMode.SetLevelData(_levelData);
+            ReinitPlatforms();
+        }
+
+        public void SetLevelMode(bool value)
+        {
+            isLevelMode = value;
+            ReinitPlatforms();
+        }
+
         private void RotateTube(DragController.SwipeType type, float delta)
         {
             var eulerAngles = transform.rotation.eulerAngles;
@@ -97,7 +124,18 @@ namespace Core
             for (var i = 1; i < countPlatforms; i++)
                 platforms[i - 1] = platforms[i];
             
-            CreateNewPlatform(countPlatforms - 1);
+    
+            if (!isLevelMode)
+                currentPatternData = gameManager.gameMode.infinityMode.GetPatternData();
+            else
+                currentPatternData = gameManager.gameMode.levelMode.GetPatternData();
+            
+            if (isLevelMode && currentPatternData != null)
+                CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
+            else if(isLevelMode && currentPatternData == null)
+                CreateNewPlatform(countPlatforms - 1, new PatternData(12), true);
+            else
+                CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
             
             while (platforms[0].transform.position != localPositionsOfPlatforms[0])
             {
@@ -121,29 +159,49 @@ namespace Core
                 localPositionsOfPlatforms[i] = new Vector3(transform.position.x, transform.localPosition.y - distanceBetweenPlatforms * i, transform.position.z);
             }
         }
-    
-        private void InitializePlatforms()
+
+        public void ReinitPlatforms()
+        {
+            for (var i = 0; i < platforms.Length; i++)
+            {
+                if (!isLevelMode)
+                    currentPatternData = gameManager.gameMode.infinityMode.GetPatternData();
+                else
+                    currentPatternData = gameManager.gameMode.levelMode.GetPatternData();
+                
+                platforms[i].ReInitialize(currentPatternData, this);
+            }
+        }
+        
+        public void InitializePlatforms()
         {
             platforms = new Platform[countPlatforms];
-        
+
             for (var i = 0; i < countPlatforms; i++)
-                CreateNewPlatform(i);
+            {
+                if (!isLevelMode)
+                    currentPatternData = gameManager.gameMode.infinityMode.GetPatternData();
+                else
+                    currentPatternData = gameManager.gameMode.levelMode.GetPatternData();
+                
+                CreateNewPlatform(i, currentPatternData, false);
+            }
         }
 
-        private void CreateNewPlatform(int _platformIndex)
+        private void CreateNewPlatform(int _platformIndex, PatternData patternData, bool hide)
         {
             var platformInstance = Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.identity, transform);
             
             AlignRotation(platformInstance);
-            
-            var patternData = gameManager.gameMode.infinityMode.GetPatternData();
-            
+
             var platform = platformInstance.GetComponent<Platform>();
             platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, player);
             platform.increaseConcentraion += IncreaseConcentration;
             platform.resetConcentraion += ResetConcentration;
             
             platforms[_platformIndex] = platform;
+            
+            if (hide) platforms[_platformIndex].gameObject.SetActive(false);
         }
 
         private void IncreaseConcentration()
