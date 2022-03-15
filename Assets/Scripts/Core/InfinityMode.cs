@@ -9,6 +9,12 @@ namespace Core
 
         private int setPointer;
         private int patternPointer;
+
+        public void ResetPointers()
+        {
+            setPointer = 0;
+            patternPointer = 0;
+        }
         
         public PatternData GetPatternData()
         {

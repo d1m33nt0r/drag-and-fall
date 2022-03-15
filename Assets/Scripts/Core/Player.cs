@@ -97,7 +97,7 @@ namespace Core
             triggerStay = _value;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (!gameManager.gameStarted) return;
             if (triggerStay) return;
@@ -105,9 +105,9 @@ namespace Core
             var position = transform.position;
             var centerRay = new Ray(position, Vector3.down);
             
-            if (Physics.Raycast(centerRay, out var centerHit, 0.102f))
+            if (Physics.Raycast(centerRay, out var centerHit, 0.105f))
             {
-                if (centerHit.collider.CompareTag("SegmentContent")) return;
+                if (!centerHit.collider.CompareTag("Segment")) return;
                 
                 var segment = centerHit.collider.GetComponent<Segment>();
 

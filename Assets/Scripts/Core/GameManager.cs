@@ -106,6 +106,7 @@ namespace Core
         
         public void FinishLevel(LevelData levelsData)
         {
+            
             gameStarted = false;
             uiManager.SetActiveLevelsMenu(false);
             progressController.levelsProgress.levelsProgresses[levelsData.levelIndex].isCompleted = true;
@@ -126,7 +127,7 @@ namespace Core
             gameStarted = true;
             tube.SetDefaultState();
             tube.gameManager.gameMode.levelMode.SetLevelData(tube.levelsData.leves[tube.gameManager.gameMode.levelMode.level.levelIndex + 1]);
-            tube.ReinitPlatforms();
+            tube.InitializePlatforms();
             
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveShopMenu(false);
@@ -166,17 +167,17 @@ namespace Core
             uiManager.SetActiveLevelsMenu(false);
         }
         
-        public void StartedLevel(bool hz = false)
+        public void StartedLevel()
         {
             uiManager.SetActiveScorePanel(true);
             uiManager.scorePanel.GetComponent<ScorePanel>().ResetCounter();
             gameStarted = true;
             tube.SetDefaultState();
-            if (hz)
-            {
+       
+       
                 tube.gameManager.gameMode.levelMode.ResetPointer();
-                tube.ReinitPlatforms();
-            }
+                tube.InitializePlatforms();
+            
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveShopMenu(false);
             uiManager.SetActiveLevelUI(true);

@@ -19,7 +19,8 @@ namespace Core
         public GameManager gameManager;
         [SerializeField] private Concentration concentration;
         public LevelsData levelsData;
-        
+
+        public bool isInitialized;
         public bool isLevelMode;
         private Vector3 startEulerAngles;
         private float startTime;
@@ -90,13 +91,13 @@ namespace Core
         public void EnableLevelMode(LevelData _levelData)
         {
             gameManager.gameMode.levelMode.SetLevelData(_levelData);
-            ReinitPlatforms();
+            InitializePlatforms();
         }
 
         public void SetLevelMode(bool value)
         {
             isLevelMode = value;
-            ReinitPlatforms();
+            InitializePlatforms();
         }
 
         private void RotateTube(DragController.SwipeType type, float delta)
@@ -160,21 +161,19 @@ namespace Core
             }
         }
 
-        public void ReinitPlatforms()
-        {
-            for (var i = 0; i < platforms.Length; i++)
-            {
-                if (!isLevelMode)
-                    currentPatternData = gameManager.gameMode.infinityMode.GetPatternData();
-                else
-                    currentPatternData = gameManager.gameMode.levelMode.GetPatternData();
-                
-                platforms[i].ReInitialize(currentPatternData, this);
-            }
-        }
+        
         
         public void InitializePlatforms()
         {
+            if (isInitialized)
+            {
+                gameManager.gameMode.infinityMode.ResetPointers();
+                for (var i = 0; i < countPlatforms; i++)
+                {
+                    Destroy(platforms[i].gameObject);
+                }
+            }
+            
             platforms = new Platform[countPlatforms];
 
             for (var i = 0; i < countPlatforms; i++)
@@ -186,13 +185,15 @@ namespace Core
                 
                 CreateNewPlatform(i, currentPatternData, false);
             }
+
+            isInitialized = true;
         }
 
         private void CreateNewPlatform(int _platformIndex, PatternData patternData, bool hide)
         {
             var platformInstance = Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.identity, transform);
             
-            AlignRotation(platformInstance);
+            //AlignRotation(platformInstance);
 
             var platform = platformInstance.GetComponent<Platform>();
             platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, player);
