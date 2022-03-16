@@ -83,9 +83,9 @@ Material:
     - _RampThresholdOtherLights: 1
     - _RimMax: 2
     - _RimMin: 0
-    - _Shadow_HSV_H: 180
-    - _Shadow_HSV_S: 1
-    - _Shadow_HSV_V: 1
+    - _Shadow_HSV_H: 129
+    - _Shadow_HSV_S: 0.6
+    - _Shadow_HSV_V: -0.43
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SpecularSmoothness: 0.2
@@ -102,14 +102,14 @@ Material:
     - __EndGroup: 0
     - __dummy__: 0
     m_Colors:
-    - _Color: {r: 0.7222879, g: 0.48584908, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DiffuseTint: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
-    - _Emission: {r: 0.02554574, g: 0.2, b: 0, a: 1}
+    - _Emission: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
-    - _RimColor: {r: 0.2688679, g: 0.7204395, b: 1, a: 0.5}
+    - _HColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimColor: {r: 0.11690104, g: 0.26043817, b: 0.3490566, a: 0.5}
     - _RimDir: {r: 0.09, g: -0.12, b: 1, a: 1}
-    - _SColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _TCP2_AMBIENT_BACK: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_BOTTOM: {r: 0, g: 0, b: 0, a: 1}

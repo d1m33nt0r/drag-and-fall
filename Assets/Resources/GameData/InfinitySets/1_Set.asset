@@ -45,8 +45,8 @@ MonoBehaviour:
       segmentContent: 0
     - segmentType: 0
       segmentContent: 0
-    - segmentType: 1
-      segmentContent: 0
+    - segmentType: 2
+      segmentContent: 3
     - segmentType: 0
       segmentContent: 0
     - segmentType: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
     - segmentType: 0
       segmentContent: 0
     - segmentType: 2
-      segmentContent: 0
+      segmentContent: 2
     - segmentType: 0
       segmentContent: 0
     - segmentType: 0
@@ -160,7 +160,7 @@ MonoBehaviour:
     - segmentType: 0
       segmentContent: 0
     - segmentType: 0
-      segmentContent: 0
+      segmentContent: 1
     - segmentType: 0
       segmentContent: 0
     - segmentType: 0

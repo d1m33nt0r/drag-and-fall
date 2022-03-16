@@ -1,4 +1,5 @@
-﻿using Data.Core.Segments;
+﻿using Core.Bonuses;
+using Data.Core.Segments;
 using Data.Core.Segments.Content;
 using Data.Shop.TubeSkins;
 using UnityEngine;
@@ -11,14 +12,19 @@ namespace Core
         [SerializeField] private Transform spawnPoint;
         private Tube tube;
         private Platform platform;
+        private BonusController bonusController;
         [SerializeField] private GameObject coinPrefab;
         [SerializeField] private GameObject crystalPrefab;
+        [SerializeField] private GameObject x2;
+        [SerializeField] private GameObject shield;
+        [SerializeField] private GameObject nitro;
         
-        public void Initialize(SegmentData _segmentData, Tube _tube, Platform _platform)
+        public void Initialize(SegmentData _segmentData, Tube _tube, Platform _platform, BonusController _bonusController)
         {
             platform = _platform;
             segmentData = _segmentData;
             tube = _tube;
+            bonusController = _bonusController;
             SpawnContent();
             ChangeTheme();
         }
@@ -49,7 +55,7 @@ namespace Core
                 else
                     transform.GetComponent<MeshRenderer>().material = _environmentSkinData.letSegmentMaterial;
                 
-                transform.GetComponent<MeshFilter>().mesh = tube.visualController.GetSegmentMesh();
+                transform.GetComponent<MeshFilter>().mesh = _environmentSkinData.segment;
             }
         }
 
@@ -63,17 +69,28 @@ namespace Core
                 case SegmentContent.Crystal:
                     Instantiate(crystalPrefab, spawnPoint.position, Quaternion.identity, spawnPoint);
                     break;
+                case SegmentContent.Acceleration:
+                    var accelerationInstance = Instantiate(nitro, spawnPoint.position, Quaternion.identity, spawnPoint);
+                    accelerationInstance.GetComponent<Acceleration>().Construct(bonusController);
+                    break;
+                case SegmentContent.Multiplier:
+                    Instantiate(x2, spawnPoint.position, Quaternion.identity, spawnPoint);
+                    break;
+                case SegmentContent.Shield:
+                    var shieldInstance = Instantiate(shield, spawnPoint.position, Quaternion.identity, spawnPoint);
+                    shieldInstance.GetComponent<Shield>().Construct(bonusController);
+                    break;
             }
         }
         
-        public void IncreasePlatformTouchCounter(ScorePanel scorePanel)
+        public void IncreasePlatformTouchCounter()
         {
-            platform.IncreaseTouchCounter(scorePanel);
+            platform.IncreaseTouchCounter();
         }
 
-        public void DestroyPlatform(ScorePanel scorePanel)
+        public void DestroyPlatform()
         {
-            platform.DestroyPlatform(scorePanel);
+            platform.DestroyPlatform();
         }
     }
 }

@@ -4,6 +4,7 @@ namespace Core
 {
     public class DragController : MonoBehaviour
     {
+        [SerializeField] private GameManager gameManager;
         private bool isDragging, isMobilePlatform;
         private Vector2 tapPoint, swipeDelta, prevSwipeDelta;
         private Vector2 curMousePosition, prevMousePosition = Vector2.zero;
@@ -19,20 +20,19 @@ namespace Core
             RIGHT
         }
         
-        private void EnableSwipeController()
+        public void EnableSwipeController()
         {
             enabledSwipeController = true;
         }
 
-        private void DisableSwipeController()
+        public void DisableSwipeController()
         {
             enabledSwipeController = false;
         }
 
         private void Update()
         {
-            if (!enabledSwipeController)
-                return;
+            if (!enabledSwipeController) return;
 
             if (Input.GetMouseButtonDown(0))
             {

@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040650364041574130}
-  m_Mesh: {fileID: 6871569608433183494, guid: 0110f3aecfa193240957a29499f44225, type: 3}
+  m_Mesh: {fileID: 5937585607563464161, guid: 0110f3aecfa193240957a29499f44225, type: 3}
 --- !u!23 &2040650364041574131
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -103,6 +103,9 @@ MonoBehaviour:
   spawnPoint: {fileID: 1940045216188776384}
   coinPrefab: {fileID: 5579393256393416401, guid: 460786632f765b54d976e2eb5fb43986, type: 3}
   crystalPrefab: {fileID: 3443404969930331942, guid: 3814d1a5f0f63ab449aad6b3c7fcffc3, type: 3}
+  x2: {fileID: 5103380047498560460, guid: 38a01e921ac497a4da0bd7b52e1e448a, type: 3}
+  shield: {fileID: 3732463269924414412, guid: 9be56990cb2253a438ee9ebbf9520319, type: 3}
+  nitro: {fileID: 8494222614144849981, guid: 64d2a6b3b876abb4ab0ade2cdfc55f04, type: 3}
 --- !u!64 &3680690525903027535
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -116,7 +119,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 6871569608433183494, guid: 0110f3aecfa193240957a29499f44225, type: 3}
+  m_Mesh: {fileID: 5937585607563464161, guid: 0110f3aecfa193240957a29499f44225, type: 3}
 --- !u!54 &1855398524630844663
 Rigidbody:
   m_ObjectHideFlags: 0

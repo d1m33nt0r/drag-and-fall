@@ -1,5 +1,6 @@
 using System.Collections;
 using Common;
+using Core.Bonuses;
 using Data.Core;
 using Data.Shop.TubeSkins;
 using DG.Tweening;
@@ -19,7 +20,8 @@ namespace Core
         public GameManager gameManager;
         [SerializeField] private Concentration concentration;
         public LevelsData levelsData;
-
+        [SerializeField] private BonusController bonusController;
+        
         public bool isInitialized;
         public bool isLevelMode;
         private Vector3 startEulerAngles;
@@ -43,6 +45,11 @@ namespace Core
             journeyLength = Vector3.Distance(platforms[0].transform.position, platforms[1].transform.position);
         }
 
+        public void SetMovementSpeed(float speed)
+        {
+            platformMovementSpeed = speed;
+        }
+        
         public void FinishLevel(LevelData _levelData)
         {
             gameManager.FinishLevel(_levelData);
@@ -160,14 +167,13 @@ namespace Core
                 localPositionsOfPlatforms[i] = new Vector3(transform.position.x, transform.localPosition.y - distanceBetweenPlatforms * i, transform.position.z);
             }
         }
-
-        
         
         public void InitializePlatforms()
         {
             if (isInitialized)
             {
                 gameManager.gameMode.infinityMode.ResetPointers();
+                gameManager.gameMode.levelMode.ResetPointer();
                 for (var i = 0; i < countPlatforms; i++)
                 {
                     Destroy(platforms[i].gameObject);
@@ -196,7 +202,7 @@ namespace Core
             //AlignRotation(platformInstance);
 
             var platform = platformInstance.GetComponent<Platform>();
-            platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, player);
+            platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, player, bonusController);
             platform.increaseConcentraion += IncreaseConcentration;
             platform.resetConcentraion += ResetConcentration;
             
@@ -239,7 +245,7 @@ namespace Core
         
         public void SetShopFallingTrail()
         {
-            player.SetShopFallingTrailState();
+            player.SetFallingTrailState();
             
             for (var i = 0; i < platforms.Length; i++)
                 platforms[i].gameObject.SetActive(false);

@@ -1,4 +1,5 @@
 ﻿using System;
+using Core.Bonuses;
 using Data.Core.Segments;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace Core
         [SerializeField] private GameObject trail;
         [SerializeField] private GameManager gameManager;
         [SerializeField] private VisualController visualController;
-
+        [SerializeField] private BonusController bonusController;
         [SerializeField] private CoinPanel coinPanel;
         [SerializeField] private CrystalPanel crystalPanel;
         
@@ -97,7 +98,7 @@ namespace Core
             triggerStay = _value;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (!gameManager.gameStarted) return;
             if (triggerStay) return;
@@ -105,26 +106,59 @@ namespace Core
             var position = transform.position;
             var centerRay = new Ray(position, Vector3.down);
             
-            if (Physics.Raycast(centerRay, out var centerHit, 0.105f))
+            if (Physics.Raycast(centerRay, out var centerHit, 0.102f))
             {
-                if (!centerHit.collider.CompareTag("Segment")) return;
+                if (!centerHit.transform.CompareTag("Segment")) return;
                 
                 var segment = centerHit.collider.GetComponent<Segment>();
 
                 switch (segment.segmentData.segmentType)
                 {
                     case SegmentType.Ground:
-                        triggerStay = true;
-                        PlayBounceAnim();
-                        EnableTrail();
-                        DisableFallingTrail();
-                        segment.IncreasePlatformTouchCounter(scorePanel);
+                        if (bonusController.accelerationIsActive)
+                        {
+                            SetTriggerStay(true);
+                            segment.DestroyPlatform();
+                            bonusController.StepAcceleration();
+                        }
+                        else
+                        {
+                            SetTriggerStay(true);
+                            SetDefaultState();
+                            segment.IncreasePlatformTouchCounter();
+                        }
                         break;
                     case SegmentType.Hole:
-                        segment.DestroyPlatform(scorePanel);
+                        if (bonusController.accelerationIsActive)
+                        {
+                            SetTriggerStay(true);
+                            segment.DestroyPlatform();
+                            bonusController.StepAcceleration();
+                        }
+                        else
+                        {
+                            SetTriggerStay(true);
+                            segment.DestroyPlatform();
+                        }
                         break;
                     case SegmentType.Let:
+                        if (bonusController.accelerationIsActive)
+                        {
+                            SetTriggerStay(true);
+                            segment.DestroyPlatform();
+                            bonusController.StepAcceleration();
+                            return;
+                        }
+                        if (bonusController.shieldIsActive)
+                        {
+                            bonusController.DeactivateBonus(BonusType.Shield);
+                            SetTriggerStay(true);
+                            SetDefaultState();
+                            return;
+                        }
+                        SetTriggerStay(true);
                         failed?.Invoke();
+                        SetFailedState();
                         break;
                 }
             }
@@ -132,10 +166,17 @@ namespace Core
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("BounceTrigger")) triggerStay = false;
+            if (other.CompareTag("BounceTrigger")) SetTriggerStay(false);
         }
 
-        public void SetShopFallingTrailState()
+        public void SetFailedState()
+        {
+            PlayIdleAnim();
+            DisableFallingTrail();
+            DisableTrail();
+        }
+
+        public void SetFallingTrailState()
         {
             PlayIdleAnim();
             EnableFallingTrail();

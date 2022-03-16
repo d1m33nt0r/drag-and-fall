@@ -1,4 +1,5 @@
 ﻿using System;
+using Core.Bonuses;
 using Data.Core;
 using Data.Core.Segments;
 using UnityEngine;
@@ -21,7 +22,7 @@ namespace Core
         private Segment[] segments;
         private float angle;
         
-        public void Initialize(int _segmentsCount, PatternData patternData, Tube _tube, Player _player)
+        public void Initialize(int _segmentsCount, PatternData patternData, Tube _tube, Player _player, BonusController _bonusController)
         {
             angle = 360 / _segmentsCount;
             segments = new Segment[_segmentsCount];
@@ -33,24 +34,14 @@ namespace Core
             for (var i = 1; i <= patternData.segmentsData.Length; i++)
             {
                 segments[i - 1] = Instantiate(segmentPrefab, position, Quaternion.AngleAxis(angle * i, Vector3.up), transform);
-                segments[i - 1].Initialize(patternData.segmentsData[i - 1], _tube, this);
+                segments[i - 1].Initialize(patternData.segmentsData[i - 1], _tube, this, _bonusController);
             }
 
-            platformDestroyed += _player.PlayIdleAnim;
-            platformDestroyed += _player.EnableFallingTrail;
-            platformDestroyed += _player.DisableTrail;
+            platformDestroyed += _player.SetFallingTrailState;
             player = _player;
         }
-        
-        public void ReInitialize(PatternData patternData, Tube _tube)
-        {
-            for (var i = 1; i <= patternData.segmentsData.Length; i++)
-            {
-                segments[i - 1].Initialize(patternData.segmentsData[i - 1], _tube, this);
-            }
-        }
 
-        public void IncreaseTouchCounter(ScorePanel scorePanel)
+        public void IncreaseTouchCounter()
         {
             countTouches++;
             
@@ -77,16 +68,15 @@ namespace Core
             }
             
             if (countTouches == 2) resetConcentraion?.Invoke();
-            if (countTouches == 3) DestroyPlatform(scorePanel);
+            if (countTouches == 3) DestroyPlatform();
         }
         
-        public void DestroyPlatform(ScorePanel scorePanel)
+        public void DestroyPlatform()
         {
             if (tube.isLevelMode && patternData.isLast) tube.FinishLevel(tube.gameManager.gameMode.levelMode.level);
             platformDestroyed?.Invoke();
             player.SetTriggerStay(false);
             tube.MovePlatforms();
-            scorePanel.AddPoints(1);
             increaseConcentraion?.Invoke();
             Destroy(gameObject);
         }

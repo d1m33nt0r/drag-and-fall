@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3443404969930331942
+--- !u!1 &5103380047498560460
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3443404969930331936}
-  - component: {fileID: 3443404969930331939}
-  - component: {fileID: 3443404969930331938}
-  - component: {fileID: 3443404969930331941}
-  - component: {fileID: 3443404969930331943}
-  - component: {fileID: 3443404969930331940}
+  - component: {fileID: 5103380047498560463}
+  - component: {fileID: 5103380047498560462}
+  - component: {fileID: 5103380047498560461}
+  - component: {fileID: 8427490619883796936}
   m_Layer: 0
-  m_Name: Crystal
-  m_TagString: SegmentContent
+  m_Name: X2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3443404969930331936
+--- !u!4 &5103380047498560463
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3443404969930331942}
+  m_GameObject: {fileID: 5103380047498560460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.003, y: 0.709, z: -0.699}
+  m_LocalPosition: {x: -0.611, y: -0.32, z: -0.726}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3443404969930331939
+--- !u!33 &5103380047498560462
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3443404969930331942}
-  m_Mesh: {fileID: -462981019419857548, guid: 0110f3aecfa193240957a29499f44225, type: 3}
---- !u!23 &3443404969930331938
+  m_GameObject: {fileID: 5103380047498560460}
+  m_Mesh: {fileID: -8092994532875485148, guid: 0110f3aecfa193240957a29499f44225, type: 3}
+--- !u!23 &5103380047498560461
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3443404969930331942}
+  m_GameObject: {fileID: 5103380047498560460}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -62,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: abe1435c7af848a4988a974c3aee04cd, type: 2}
+  - {fileID: 2100000, guid: f99d075ac6b50a44f819d46498486550, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,43 +82,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3443404969930331941
+--- !u!114 &8427490619883796936
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3443404969930331942}
+  m_GameObject: {fileID: 5103380047498560460}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ed57cd7ba6e43d9906dbe8b7f3f7cc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 1
-  speed: 0.5
+  direction: -1
+  speed: 0.25
   axis: 1
---- !u!65 &3443404969930331943
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3443404969930331942}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.09350589, y: 0.16409096, z: 0.09759468}
-  m_Center: {x: 0.0011183172, y: -0.002986595, z: -0.00079479814}
---- !u!114 &3443404969930331940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3443404969930331942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2c00609c7c74076847dc240b8741c76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

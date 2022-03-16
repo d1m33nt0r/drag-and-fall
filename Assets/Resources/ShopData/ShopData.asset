@@ -19,7 +19,7 @@ MonoBehaviour:
     tubeMaterial: {fileID: 2100000, guid: 0c8248b0e4151f646803628d4c2563e3, type: 2}
     letSegmentMaterial: {fileID: 2100000, guid: e2060d36a9813df4eb743adffb93967b, type: 2}
     groundSegmentMaterial: {fileID: 2100000, guid: 2968799f499957441ab6327f8895fb03, type: 2}
-    segment: {fileID: 6871569608433183494, guid: 0110f3aecfa193240957a29499f44225, type: 3}
+    segment: {fileID: 5937585607563464161, guid: 0110f3aecfa193240957a29499f44225, type: 3}
     tube: {fileID: -309684176625119091, guid: 0110f3aecfa193240957a29499f44225, type: 3}
   - isBought: 0
     price: 600
@@ -27,7 +27,7 @@ MonoBehaviour:
     tubeMaterial: {fileID: 2100000, guid: e3dad7234d39bf348ab2702865544d1d, type: 2}
     letSegmentMaterial: {fileID: 2100000, guid: 75e4ac386d5f6bb4b9b43e5076405669, type: 2}
     groundSegmentMaterial: {fileID: 2100000, guid: a46e7ac6201b9bb4ca243d7c6a278452, type: 2}
-    segment: {fileID: 6871569608433183494, guid: 0110f3aecfa193240957a29499f44225, type: 3}
+    segment: {fileID: 1756636075752431679, guid: 0110f3aecfa193240957a29499f44225, type: 3}
     tube: {fileID: -309684176625119091, guid: 0110f3aecfa193240957a29499f44225, type: 3}
   PlayerSkinData:
   - isBought: 1

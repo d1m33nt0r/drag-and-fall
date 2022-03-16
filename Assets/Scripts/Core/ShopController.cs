@@ -10,7 +10,8 @@ namespace Core
         [SerializeField] private Player player;
         [SerializeField] private Tube tube;
 
-        [SerializeField] private Text buttonText;
+        [SerializeField] private Button unlockButton;
+        [SerializeField] private Button selectButton;
         [SerializeField] private Text price;
         [SerializeField] private GameManager gameManager;
         [SerializeField] private Text shopStateText;
@@ -70,15 +71,103 @@ namespace Core
             if (!_isBought)
             {
                 price.text = _price.ToString();
-                buttonText.text = "Buy";
+                unlockButton.gameObject.SetActive(true);
+                selectButton.gameObject.SetActive(false);
             }
             else
             {
-                price.text = "Bought";
-                buttonText.text = "Select";
+                price.text = "Unlocked!";
+                unlockButton.gameObject.SetActive(false);
+                selectButton.gameObject.SetActive(true);
             }
         }
 
+        public void BuyItem()
+        {
+            switch (shopState)
+            {
+                case ShopState.EnvironmentSkin:
+                    progressController.shopProgress.environmentSkins[currentEnvironmentSkinIndex].isBought = true;
+                    progressController.currentState.environmentSkin = new ShopItem
+                    {
+                        index = currentEnvironmentSkinIndex, 
+                        isBought = true
+                    };
+                    progressController.SaveShopData(progressController.shopProgress);
+                    progressController.SaveCurrentState(progressController.currentState);
+                    break;
+                case ShopState.PlayerSkin:
+                    progressController.shopProgress.playerSkins[currentPlayerSkinIndex].isBought = true;
+                    progressController.currentState.playerSkin = new ShopItem
+                    {
+                        index = currentPlayerSkinIndex, 
+                        isBought = true
+                    };
+                    progressController.SaveShopData(progressController.shopProgress);
+                    progressController.SaveCurrentState(progressController.currentState);
+                    break;
+                case ShopState.TrailSkin:
+                    progressController.shopProgress.trailSkins[currentTrailSkinIndex].isBought = true;
+                    progressController.currentState.trailSkin = new ShopItem
+                    {
+                        index = currentTrailSkinIndex, 
+                        isBought = true
+                    };
+                    progressController.SaveShopData(progressController.shopProgress);
+                    progressController.SaveCurrentState(progressController.currentState);
+                    break;
+                case ShopState.FallingTrailSkin:
+                    progressController.shopProgress.fallingTrailSkins[currentFallingTrailSkinIndex].isBought = true;
+                    progressController.currentState.fallingTrailSkin = new ShopItem
+                    {
+                        index = currentFallingTrailSkinIndex, 
+                        isBought = true
+                    };
+                    progressController.SaveShopData(progressController.shopProgress);
+                    progressController.SaveCurrentState(progressController.currentState);
+                    break;
+            }
+        }
+
+        public void SelectItem()
+        {
+            switch (shopState)
+            {
+                case ShopState.EnvironmentSkin:
+                    progressController.currentState.environmentSkin = new ShopItem
+                    {
+                        index = currentEnvironmentSkinIndex, 
+                        isBought = true
+                    };
+                    progressController.SaveCurrentState(progressController.currentState);
+                    break;
+                case ShopState.PlayerSkin:
+                    progressController.currentState.playerSkin = new ShopItem
+                    {
+                        index = currentPlayerSkinIndex, 
+                        isBought = true
+                    };
+                    progressController.SaveCurrentState(progressController.currentState);
+                    break;
+                case ShopState.TrailSkin:
+                    progressController.currentState.trailSkin = new ShopItem
+                    {
+                        index = currentTrailSkinIndex, 
+                        isBought = true
+                    };
+                    progressController.SaveCurrentState(progressController.currentState);
+                    break;
+                case ShopState.FallingTrailSkin:
+                    progressController.currentState.fallingTrailSkin = new ShopItem
+                    {
+                        index = currentFallingTrailSkinIndex, 
+                        isBought = true
+                    };
+                    progressController.SaveCurrentState(progressController.currentState);
+                    break;
+            }
+        }
+        
         public void MoveRightState()
         {
             switch (shopState)
