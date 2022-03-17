@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Core;
 using Core.Bonuses;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ namespace UI.Bonuses
 {
     public class BonusView : MonoBehaviour
     {
+        public Player player;
         public BonusController bonusController;
         public Slider timer;
         public bool isActive { get; private set; }
@@ -52,6 +54,7 @@ namespace UI.Bonuses
             if (coroutine != null) StopCoroutine(coroutine);
             transform.GetChild(0).GetComponent<Image>().sprite = null;
             timer.value = defaultTimerValue;
+            if (bonusType == BonusType.Magnet) player.SetActiveMagnet(false);
             SetActive(false);
         }
         

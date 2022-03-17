@@ -5,6 +5,7 @@
         None,
         Multiplier,
         Acceleration,
-        Shield
+        Shield,
+        Magnet
     }
 }

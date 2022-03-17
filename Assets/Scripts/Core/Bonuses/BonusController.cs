@@ -19,7 +19,8 @@ namespace Core.Bonuses
         public bool shieldIsActive { get; private set; }
         public bool accelerationIsActive { get; private set; }
         public bool multiplierIsActive { get; private set; }
-
+        public bool magnetIsActive { get; private set; }
+        
         public TimerBonus[] bonusParams;
         public BonusView[] bonusViews;
 
@@ -63,6 +64,7 @@ namespace Core.Bonuses
             shieldIsActive = false;
             accelerationIsActive = false;
             multiplierIsActive = false;
+            magnetIsActive = false;
         }
 
         public void ActivateBonus(BonusType bonusType)
@@ -104,6 +106,22 @@ namespace Core.Bonuses
                     }
 
                     shieldIsActive = true;
+                    break;
+                case BonusType.Magnet:
+
+                    if (TryGetActivatedBonus(bonusType, out var bonusView3))
+                    {
+                        bonusView3.ResetTimer();
+                    }
+                    else
+                    {
+                        if (FindEmptyBonusSlot(bonusType, out var emptyView))
+                        {
+                            emptyView.Construct(bonusType);
+                        }
+                    }
+
+                    magnetIsActive = true;
                     break;
             }
         }
@@ -153,6 +171,9 @@ namespace Core.Bonuses
                     break;
                 case BonusType.Shield:
                     shieldIsActive = false;
+                    break;
+                case BonusType.Magnet:
+                    magnetIsActive = false;
                     break;
             }
         }

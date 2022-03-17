@@ -10,7 +10,8 @@ namespace Core
         public event Action failed;
         public Concentration concentration;
         public ScorePanel scorePanel;
-        
+
+        [SerializeField] private MagnetPlayer magnetPlayer;
         [SerializeField] private Animator animator;
         [SerializeField] private GameObject fallingTrail;
         [SerializeField] private GameObject trail;
@@ -29,6 +30,11 @@ namespace Core
         {
             meshFilter = GetComponent<MeshFilter>();
             meshRenderer = GetComponent<MeshRenderer>();
+        }
+
+        public void SetActiveMagnet(bool value)
+        {
+            magnetPlayer.gameObject.SetActive(value);
         }
 
         public void ChangeTheme()
