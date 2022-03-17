@@ -13,7 +13,7 @@ namespace UI.Bonuses
         public int index;
         public BonusType bonusType { get; private set; }
         public Coroutine coroutine;
-
+        private float defaultTimerValue;
         public void SetIndex(int index)
         {
             this.index = index;
@@ -24,20 +24,23 @@ namespace UI.Bonuses
             this.bonusType = bonusType;
             isActive = true;
             transform.GetChild(0).GetComponent<Image>().sprite = bonusController.GetTimerBonus(bonusType).sprite;
-            timer.maxValue = bonusController.GetTimerBonus(bonusType).timer;
-            timer.value = bonusController.GetTimerBonus(bonusType).timer;
+            defaultTimerValue = bonusController.GetTimerBonus(bonusType).timer;
+            timer.maxValue = defaultTimerValue;
+            timer.value = defaultTimerValue;
             SetActive(true);
             coroutine = StartCoroutine(Timer(0.1f));
         }
 
-        public void ResetTimer() => timer.value = bonusController.GetTimerBonus(bonusType).timer;
-        
+        public void ResetTimer()
+        { 
+            timer.value = defaultTimerValue;
+        }
+
         private IEnumerator Timer(float interval)
         {
-            while (bonusController.GetTimerBonus(bonusType).timer > 0)
+            while (timer.value > 0)
             {
-                bonusController.GetTimerBonus(bonusType).timer -= interval;
-                SetTimerValue(bonusController.GetTimerBonus(bonusType).timer);
+                SetTimerValue(timer.value -= interval); ;
                 yield return new WaitForSeconds(interval);
             }
             
@@ -47,20 +50,17 @@ namespace UI.Bonuses
         public void Deactivate()
         {
             if (coroutine != null) StopCoroutine(coroutine);
-            isActive = default;
-            bonusType = BonusType.None;
-            transform.GetChild(0).GetComponent<Image>().sprite = default;
-            timer.value = default;
-            timer.maxValue = default;
-            SetActive(default);
+            transform.GetChild(0).GetComponent<Image>().sprite = null;
+            timer.value = defaultTimerValue;
+            SetActive(false);
         }
         
         public void SetActive(bool value)
         {
             isActive = value;
             gameObject.SetActive(value);
+            if (!value) bonusType = BonusType.None;
         }
-
         private void SetTimerValue(float time)
         {
             timer.value = time;

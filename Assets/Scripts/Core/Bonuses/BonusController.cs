@@ -10,6 +10,7 @@ namespace Core.Bonuses
         public BonusType bonusType;
         public Sprite sprite;
         public float timer;
+        public float resetTimerValue;
     }
 
     public class BonusController : MonoBehaviour
@@ -80,8 +81,10 @@ namespace Core.Bonuses
                     }
                     else
                     {
-                        if (FindEmptyBonusSlot(out var emptyView))
+                        if (FindEmptyBonusSlot(bonusType, out var emptyView))
+                        {
                             emptyView.Construct(bonusType);
+                        }
                     }
 
                     multiplierIsActive = true;
@@ -94,8 +97,10 @@ namespace Core.Bonuses
                     }
                     else
                     {
-                        if (FindEmptyBonusSlot(out var emptyView))
+                        if (FindEmptyBonusSlot(bonusType, out var emptyView))
+                        {
                             emptyView.Construct(bonusType);
+                        }
                     }
 
                     shieldIsActive = true;
@@ -118,7 +123,7 @@ namespace Core.Bonuses
             return false;
         }
 
-        private bool FindEmptyBonusSlot(out BonusView bonusView)
+        private bool FindEmptyBonusSlot(BonusType bonusType, out BonusView bonusView)
         {
             for (var i = 0; i < bonusViews.Length; i++)
             {

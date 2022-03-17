@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5103380047498560462}
   - component: {fileID: 5103380047498560461}
   - component: {fileID: 8427490619883796936}
+  - component: {fileID: -4450570918129795151}
+  - component: {fileID: -8984513179328962535}
   m_Layer: 0
   m_Name: X2
   m_TagString: Untagged
@@ -97,3 +99,28 @@ MonoBehaviour:
   direction: -1
   speed: 0.25
   axis: 1
+--- !u!65 &-4450570918129795151
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5103380047498560460}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.41026545, y: 0.25458947, z: 0.09353945}
+  m_Center: {x: -0.09107149, y: -0.024902213, z: 0.0000000018626451}
+--- !u!114 &-8984513179328962535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5103380047498560460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02d771a664814e8894a02c14e66562a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

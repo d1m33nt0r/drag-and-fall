@@ -74,7 +74,8 @@ namespace Core
                     accelerationInstance.GetComponent<Acceleration>().Construct(bonusController);
                     break;
                 case SegmentContent.Multiplier:
-                    Instantiate(x2, spawnPoint.position, Quaternion.identity, spawnPoint);
+                    var multiplierInstance = Instantiate(x2, spawnPoint.position, Quaternion.identity, spawnPoint);
+                    multiplierInstance.GetComponent<Multiplier>().Construct(bonusController);
                     break;
                 case SegmentContent.Shield:
                     var shieldInstance = Instantiate(shield, spawnPoint.position, Quaternion.identity, spawnPoint);
