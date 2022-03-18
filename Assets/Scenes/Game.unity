@@ -1004,6 +1004,7 @@ GameObject:
   - component: {fileID: 42914547}
   - component: {fileID: 42914549}
   - component: {fileID: 42914548}
+  - component: {fileID: 42914550}
   m_Layer: 0
   m_Name: MultiplierPanel
   m_TagString: Untagged
@@ -1071,6 +1072,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 42914546}
   m_CullTransparentMesh: 1
+--- !u!114 &42914550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42914546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e9b554506cc45f09f8b31de7b1c3298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressController: {fileID: 386115021}
+  bonusType: 1
+  levels:
+  - {fileID: 1678138503}
+  - {fileID: 172072122}
+  - {fileID: 1863736235}
+  - {fileID: 1654513133}
+  - {fileID: 505328822}
+  - {fileID: 668518714}
+  - {fileID: 2001300074}
+  - {fileID: 1353787268}
+  - {fileID: 1209283318}
+  - {fileID: 984937994}
 --- !u!1 &43036908
 GameObject:
   m_ObjectHideFlags: 0
@@ -5153,6 +5179,7 @@ RectTransform:
   - {fileID: 56227676}
   - {fileID: 1111169223}
   - {fileID: 507011435}
+  - {fileID: 1405330968}
   m_Father: {fileID: 2010596742}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9326,21 +9353,22 @@ MonoBehaviour:
   - bonusType: 3
     sprite: {fileID: 21300000, guid: 36a48fcfdd074d44aa62fcfa8519fb3f, type: 3}
     timer: 12
-    resetTimerValue: 12
   - bonusType: 1
     sprite: {fileID: 21300000, guid: d5315eb1abe5a574ebd0826f6cb3262b, type: 3}
     timer: 12
-    resetTimerValue: 12
   - bonusType: 4
     sprite: {fileID: 21300000, guid: 0907a0965d9bf49439ddea9a30ba0f28, type: 3}
     timer: 12
-    resetTimerValue: 12
   bonusViews:
   - {fileID: 1282194932}
   - {fileID: 1093621766}
   - {fileID: 1062717207}
-  defaultCountPlatforms: 0
+  multiplier: 0
+  workMultiplierTimer: 0
+  workShieldTimer: 0
+  workMagnetTimer: 0
   workCountPlatformsAcceleration: 0
+  concentration: 0
 --- !u!222 &507011438
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21111,7 +21139,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1059651314}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1891665547}
+        m_TargetAssemblyTypeName: UI.Upgrades.UpgradePanel, Assembly-CSharp
+        m_MethodName: UpgradeBonus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1059651314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22750,7 +22790,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1149081278}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1932466987}
+        m_TargetAssemblyTypeName: UI.Upgrades.UpgradePanel, Assembly-CSharp
+        m_MethodName: UpgradeBonus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1149081278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22825,6 +22877,7 @@ MonoBehaviour:
   shopController: {fileID: 2037892755}
   progressController: {fileID: 386115021}
   dragController: {fileID: 1864669949}
+  bonusController: {fileID: 507011436}
 --- !u!4 &1157630039
 Transform:
   m_ObjectHideFlags: 0
@@ -28690,6 +28743,100 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1396236643}
   m_CullTransparentMesh: 1
+--- !u!1 &1405330967
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1405330968}
+  - component: {fileID: 1405330970}
+  - component: {fileID: 1405330969}
+  - component: {fileID: 1405330971}
+  m_Layer: 0
+  m_Name: GainScore
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1405330968
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405330967}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 268358375}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.4117778, y: 0.93791944}
+  m_AnchorMax: {x: 0.58159417, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1405330969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405330967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 80
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 81
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: +1
+--- !u!222 &1405330970
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405330967}
+  m_CullTransparentMesh: 1
+--- !u!114 &1405330971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405330967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed08bac566154ef3a8342020065bbdbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonusController: {fileID: 507011436}
+  concentration: {fileID: 6048968299860380404}
 --- !u!1 &1405928374
 GameObject:
   m_ObjectHideFlags: 0
@@ -35320,6 +35467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24dbc39ba66317b489980409cd07c2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gainScore: {fileID: 1405330971}
   player: {fileID: 1776688606}
   platformPrefab: {fileID: 3363953325017065178, guid: 7b9114990f3a6d146af1b3cfeb2c25ca, type: 3}
   countPlatforms: 8
@@ -38077,6 +38225,7 @@ GameObject:
   - component: {fileID: 1891665544}
   - component: {fileID: 1891665546}
   - component: {fileID: 1891665545}
+  - component: {fileID: 1891665547}
   m_Layer: 0
   m_Name: MagnetPanel
   m_TagString: Untagged
@@ -38144,6 +38293,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1891665543}
   m_CullTransparentMesh: 1
+--- !u!114 &1891665547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891665543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e9b554506cc45f09f8b31de7b1c3298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressController: {fileID: 386115021}
+  bonusType: 4
+  levels:
+  - {fileID: 821927115}
+  - {fileID: 728816861}
+  - {fileID: 1829264095}
+  - {fileID: 1421647843}
+  - {fileID: 2123110496}
+  - {fileID: 1742537598}
+  - {fileID: 4068598}
+  - {fileID: 1108037810}
+  - {fileID: 1670726881}
+  - {fileID: 1452369268}
 --- !u!1 &1891765950
 GameObject:
   m_ObjectHideFlags: 0
@@ -38995,6 +39169,7 @@ GameObject:
   - component: {fileID: 1932466984}
   - component: {fileID: 1932466986}
   - component: {fileID: 1932466985}
+  - component: {fileID: 1932466987}
   m_Layer: 0
   m_Name: AccelerationPanel
   m_TagString: Untagged
@@ -39062,6 +39237,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1932466983}
   m_CullTransparentMesh: 1
+--- !u!114 &1932466987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932466983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e9b554506cc45f09f8b31de7b1c3298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressController: {fileID: 386115021}
+  bonusType: 2
+  levels:
+  - {fileID: 1833648860}
+  - {fileID: 1919777702}
+  - {fileID: 741190823}
+  - {fileID: 1791540968}
+  - {fileID: 1871613633}
+  - {fileID: 1705429653}
+  - {fileID: 621353526}
+  - {fileID: 151854095}
+  - {fileID: 1475902451}
+  - {fileID: 558814588}
 --- !u!1 &1933777416
 GameObject:
   m_ObjectHideFlags: 0
@@ -39279,6 +39479,7 @@ GameObject:
   - component: {fileID: 1949180224}
   - component: {fileID: 1949180226}
   - component: {fileID: 1949180225}
+  - component: {fileID: 1949180227}
   m_Layer: 0
   m_Name: ShieldPanel
   m_TagString: Untagged
@@ -39346,6 +39547,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1949180223}
   m_CullTransparentMesh: 1
+--- !u!114 &1949180227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949180223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e9b554506cc45f09f8b31de7b1c3298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressController: {fileID: 386115021}
+  bonusType: 3
+  levels:
+  - {fileID: 807732653}
+  - {fileID: 1219731544}
+  - {fileID: 636839703}
+  - {fileID: 1195862517}
+  - {fileID: 2144680158}
+  - {fileID: 821042037}
+  - {fileID: 1932001249}
+  - {fileID: 352941410}
+  - {fileID: 1956753369}
+  - {fileID: 1372454799}
 --- !u!1 &1953970363
 GameObject:
   m_ObjectHideFlags: 0
@@ -40940,7 +41166,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2031995283}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 42914550}
+        m_TargetAssemblyTypeName: UI.Upgrades.UpgradePanel, Assembly-CSharp
+        m_MethodName: UpgradeBonus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2031995283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42020,7 +42258,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2093473814}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1949180227}
+        m_TargetAssemblyTypeName: UI.Upgrades.UpgradePanel, Assembly-CSharp
+        m_MethodName: UpgradeBonus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2093473814
 MonoBehaviour:
   m_ObjectHideFlags: 0

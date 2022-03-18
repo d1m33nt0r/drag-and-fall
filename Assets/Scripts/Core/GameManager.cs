@@ -1,4 +1,5 @@
-﻿using Data.Core;
+﻿using Core.Bonuses;
+using Data.Core;
 using Progress;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace Core
         [SerializeField] public ShopController shopController;
         [SerializeField] private ProgressController progressController;
         [SerializeField] private DragController dragController;
+        [SerializeField] private BonusController bonusController;
         
         public bool gameStarted { get; private set; }
 
@@ -130,6 +132,7 @@ namespace Core
 
         public void ShowMainMenu()
         {
+            bonusController.DeactivateAllBonuses();
             tube.SetLevelMode(false);
             gameStarted = false;
             uiManager.SetActiveUpgradeMenu(false);
@@ -162,6 +165,7 @@ namespace Core
         
         public void StartNextLevel()
         {
+            bonusController.DeactivateAllBonuses();
             gameStarted = true;
             tube.SetDefaultState();
             tube.gameManager.gameMode.levelMode.SetLevelData(

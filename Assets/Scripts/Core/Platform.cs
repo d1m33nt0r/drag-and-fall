@@ -2,6 +2,7 @@
 using Core.Bonuses;
 using Data.Core;
 using Data.Core.Segments;
+using UI;
 using UnityEngine;
 
 namespace Core
@@ -21,13 +22,15 @@ namespace Core
         private Tube tube;
         private Segment[] segments;
         private float angle;
+        private GainScore gainScore;
         
-        public void Initialize(int _segmentsCount, PatternData patternData, Tube _tube, Player _player, BonusController _bonusController)
+        public void Initialize(int _segmentsCount, PatternData patternData, Tube _tube, Player _player, BonusController _bonusController, GainScore gainScore)
         {
             angle = 360 / _segmentsCount;
             segments = new Segment[_segmentsCount];
             tube = _tube;
 
+            this.gainScore = gainScore;
             this.patternData = patternData;
             var position = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
 
@@ -73,6 +76,8 @@ namespace Core
         
         public void DestroyPlatform()
         {
+            gainScore.SetText(1);
+            gainScore.Animate();
             if (tube.isLevelMode && patternData.isLast) tube.FinishLevel(tube.gameManager.gameMode.levelMode.level);
             platformDestroyed?.Invoke();
             player.SetTriggerStay(false);

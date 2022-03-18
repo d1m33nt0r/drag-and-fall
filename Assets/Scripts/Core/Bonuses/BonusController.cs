@@ -31,6 +31,8 @@ namespace Core.Bonuses
         public TimerBonus[] bonusParams;
         public BonusView[] bonusViews;
 
+        public int multiplier = 0;
+        
         public float multiplierTimer => 10 + currentMultiplierLevel;
         public float workMultiplierTimer;
         public float shieldTimer => 10 + currentShieldLevel;
@@ -40,6 +42,8 @@ namespace Core.Bonuses
         public int countPlatformsForAcceleration => 10 + currentAccelerationLevel;
         public int workCountPlatformsAcceleration;
 
+        public int concentration;
+        
         public TimerBonus GetTimerBonus(BonusType _bonusType)
         {
             for (var i = 0; i < bonusParams.Length; i++)
@@ -189,7 +193,7 @@ namespace Core.Bonuses
                             emptyView.Construct(bonusType);
                         }
                     }
-
+                    multiplier++;
                     multiplierIsActive = true;
                     break;
                 case BonusType.Shield:

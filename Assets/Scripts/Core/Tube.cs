@@ -4,12 +4,14 @@ using Core.Bonuses;
 using Data.Core;
 using Data.Shop.TubeSkins;
 using DG.Tweening;
+using UI;
 using UnityEngine;
 
 namespace Core
 {
     public class Tube : MonoBehaviour
     {
+        [SerializeField] private GainScore gainScore;
         [SerializeField] private Player player;
         [SerializeField] private GameObject platformPrefab;
         [SerializeField] private int countPlatforms;
@@ -202,7 +204,7 @@ namespace Core
             //AlignRotation(platformInstance);
 
             var platform = platformInstance.GetComponent<Platform>();
-            platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, player, bonusController);
+            platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, player, bonusController, gainScore);
             platform.increaseConcentraion += IncreaseConcentration;
             platform.resetConcentraion += ResetConcentration;
             
