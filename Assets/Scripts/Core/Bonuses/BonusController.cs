@@ -1,4 +1,5 @@
 ﻿using System;
+using Progress;
 using UI.Bonuses;
 using UnityEngine;
 
@@ -10,12 +11,18 @@ namespace Core.Bonuses
         public BonusType bonusType;
         public Sprite sprite;
         public float timer;
-        public float resetTimerValue;
     }
 
     public class BonusController : MonoBehaviour
     {
+        [SerializeField] private ProgressController progressController;
         [SerializeField] private Tube tube;
+
+        public int currentShieldLevel;
+        public int currentMultiplierLevel;
+        public int currentMagnetLevel;
+        public int currentAccelerationLevel;
+        
         public bool shieldIsActive { get; private set; }
         public bool accelerationIsActive { get; private set; }
         public bool multiplierIsActive { get; private set; }
@@ -24,8 +31,15 @@ namespace Core.Bonuses
         public TimerBonus[] bonusParams;
         public BonusView[] bonusViews;
 
-        public int countPlatformsForAcceleration = 12;
-        
+        public float multiplierTimer => 10 + currentMultiplierLevel;
+        public float workMultiplierTimer;
+        public float shieldTimer => 10 + currentShieldLevel;
+        public float workShieldTimer;
+        public float magnetTimer => 10 + currentShieldLevel;
+        public float workMagnetTimer;
+        public int countPlatformsForAcceleration => 10 + currentAccelerationLevel;
+        public int workCountPlatformsAcceleration;
+
         public TimerBonus GetTimerBonus(BonusType _bonusType)
         {
             for (var i = 0; i < bonusParams.Length; i++)
@@ -35,25 +49,111 @@ namespace Core.Bonuses
 
             return null;
         }
+        
+        public float GetUpgradedTimer(BonusType bonusType)
+        {
+            int currentLevel = 0;
+                
+            switch (bonusType)
+            {
+                case BonusType.Acceleration:
+                    currentLevel = currentAccelerationLevel;
+                    break;
+                case BonusType.Multiplier:
+                    currentLevel = currentMultiplierLevel;
+                    break;
+                case BonusType.Shield:
+                    currentLevel = currentShieldLevel;
+                    break;
+                case BonusType.Magnet:
+                    currentLevel = currentMagnetLevel;
+                    break;
+            }
+            
+            for (var i = 0; i < bonusParams.Length; i++)
+            {
+                if (bonusParams[i].bonusType == bonusType) 
+                    return bonusParams[i].timer + Convert.ToSingle(currentLevel);
+            }
+
+            return default;
+        }
 
         public void StepAcceleration()
         {
-            countPlatformsForAcceleration -= 1;
-            if (countPlatformsForAcceleration == 0)
+            workCountPlatformsAcceleration -= 1;
+            if (workCountPlatformsAcceleration == 0)
             {
                 accelerationIsActive = false;
-                countPlatformsForAcceleration = 12;
                 tube.SetMovementSpeed(2.25f);
             }
         }
         
         private void Start()
         {
+            UpdateBonusLevels();
+            
             bonusViews = GetComponentsInChildren<BonusView>();
             for (var i = 0; i < bonusViews.Length; i++)
                 bonusViews[i].SetIndex(i);
 
             DeactivateAllBonuses();
+        }
+
+        public void UpdateBonusLevels()
+        {
+            UpdateAccelerationLevel();
+            UpdateShieldLevel();
+            UpdateMagnetLevel();
+            UpdateMultiplierLevel();
+        }
+
+        private void UpdateAccelerationLevel()
+        {
+            for (var i = 0; i < progressController.upgradeProgress.progressAcceleration.Length; i++)
+            {
+                if (!progressController.upgradeProgress.progressAcceleration[i])
+                {
+                    currentAccelerationLevel = i;
+                    return;
+                }
+            }
+        }
+        
+        private void UpdateShieldLevel()
+        {
+            for (var i = 0; i < progressController.upgradeProgress.progressShield.Length; i++)
+            {
+                if (!progressController.upgradeProgress.progressShield[i])
+                {
+                    currentShieldLevel = i;
+                    return;
+                }
+            }
+        }
+        
+        private void UpdateMagnetLevel()
+        {
+            for (var i = 0; i < progressController.upgradeProgress.progressMagnet.Length; i++)
+            {
+                if (!progressController.upgradeProgress.progressMagnet[i])
+                {
+                    currentMagnetLevel = i;
+                    return;
+                }
+            }
+        }
+        
+        private void UpdateMultiplierLevel()
+        {
+            for (var i = 0; i < progressController.upgradeProgress.progressMultiplier.Length; i++)
+            {
+                if (!progressController.upgradeProgress.progressMultiplier[i])
+                {
+                    currentMultiplierLevel = i;
+                    return;
+                }
+            }
         }
 
         public void DeactivateAllBonuses()
@@ -73,7 +173,8 @@ namespace Core.Bonuses
             {
                 case BonusType.Acceleration:
                     tube.SetMovementSpeed(5);
-
+                    workCountPlatformsAcceleration = countPlatformsForAcceleration;
+                    
                     accelerationIsActive = true;
                     break;
                 case BonusType.Multiplier:
@@ -83,7 +184,7 @@ namespace Core.Bonuses
                     }
                     else
                     {
-                        if (FindEmptyBonusSlot(bonusType, out var emptyView))
+                        if (FindEmptyBonusSlot(out var emptyView))
                         {
                             emptyView.Construct(bonusType);
                         }
@@ -92,14 +193,13 @@ namespace Core.Bonuses
                     multiplierIsActive = true;
                     break;
                 case BonusType.Shield:
-
                     if (TryGetActivatedBonus(bonusType, out var bonusView))
                     {
                         bonusView.ResetTimer();
                     }
                     else
                     {
-                        if (FindEmptyBonusSlot(bonusType, out var emptyView))
+                        if (FindEmptyBonusSlot(out var emptyView))
                         {
                             emptyView.Construct(bonusType);
                         }
@@ -108,14 +208,13 @@ namespace Core.Bonuses
                     shieldIsActive = true;
                     break;
                 case BonusType.Magnet:
-
                     if (TryGetActivatedBonus(bonusType, out var bonusView3))
                     {
                         bonusView3.ResetTimer();
                     }
                     else
                     {
-                        if (FindEmptyBonusSlot(bonusType, out var emptyView))
+                        if (FindEmptyBonusSlot(out var emptyView))
                         {
                             emptyView.Construct(bonusType);
                         }
@@ -141,7 +240,7 @@ namespace Core.Bonuses
             return false;
         }
 
-        private bool FindEmptyBonusSlot(BonusType bonusType, out BonusView bonusView)
+        private bool FindEmptyBonusSlot(out BonusView bonusView)
         {
             for (var i = 0; i < bonusViews.Length; i++)
             {
@@ -166,6 +265,9 @@ namespace Core.Bonuses
 
             switch (bonusType)
             {
+                case BonusType.Acceleration:
+                    accelerationIsActive = false;
+                    break;
                 case BonusType.Multiplier:
                     multiplierIsActive = false;
                     break;

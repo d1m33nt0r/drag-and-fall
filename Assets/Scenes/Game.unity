@@ -7119,6 +7119,11 @@ MonoBehaviour:
       crystals: 0
   levelsProgress:
     levelsProgresses: []
+  upgradeProgress:
+    progressMagnet: 01000000000000000000
+    progressShield: 01000000000000000000
+    progressAcceleration: 01000000000000000000
+    progressMultiplier: 01000000000000000000
 --- !u!4 &386115022
 Transform:
   m_ObjectHideFlags: 0
@@ -9311,7 +9316,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae18eae4ace446138f29c4a031c87b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  progressController: {fileID: 386115021}
   tube: {fileID: 1755819904}
+  currentShieldLevel: 0
+  currentMultiplierLevel: 0
+  currentMagnetLevel: 0
+  currentAccelerationLevel: 0
   bonusParams:
   - bonusType: 3
     sprite: {fileID: 21300000, guid: 36a48fcfdd074d44aa62fcfa8519fb3f, type: 3}
@@ -9329,7 +9339,8 @@ MonoBehaviour:
   - {fileID: 1282194932}
   - {fileID: 1093621766}
   - {fileID: 1062717207}
-  countPlatformsForAcceleration: 12
+  defaultCountPlatforms: 0
+  workCountPlatformsAcceleration: 0
 --- !u!222 &507011438
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -16,27 +16,24 @@ namespace UI.Bonuses
         public BonusType bonusType { get; private set; }
         public Coroutine coroutine;
         private float defaultTimerValue;
-        public void SetIndex(int index)
-        {
+        
+        public void SetIndex(int index) =>
             this.index = index;
-        }
-
+        
         public void Construct(BonusType bonusType)
         {
             this.bonusType = bonusType;
             isActive = true;
             transform.GetChild(0).GetComponent<Image>().sprite = bonusController.GetTimerBonus(bonusType).sprite;
-            defaultTimerValue = bonusController.GetTimerBonus(bonusType).timer;
+            defaultTimerValue = bonusController.GetUpgradedTimer(bonusType);
             timer.maxValue = defaultTimerValue;
             timer.value = defaultTimerValue;
             SetActive(true);
             coroutine = StartCoroutine(Timer(0.1f));
         }
 
-        public void ResetTimer()
-        { 
+        public void ResetTimer() =>
             timer.value = defaultTimerValue;
-        }
 
         private IEnumerator Timer(float interval)
         {
@@ -64,9 +61,8 @@ namespace UI.Bonuses
             gameObject.SetActive(value);
             if (!value) bonusType = BonusType.None;
         }
-        private void SetTimerValue(float time)
-        {
+        
+        private void SetTimerValue(float time) =>
             timer.value = time;
-        }
     }
 }

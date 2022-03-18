@@ -12,17 +12,20 @@ namespace Progress
         public ShopProgress shopProgress;
         public CurrentState currentState;
         public LevelsProgress levelsProgress;
+        public UpgradeProgress upgradeProgress;
         
         private string path;
         private string path2;
         private string path3;
-        
+        private string path4;
+
         private void Awake()
         {
             path = Path.Combine(Application.dataPath, "shopProgress.json");
             path2 = Path.Combine(Application.dataPath, "currentState.json");
             path3 = Path.Combine(Application.dataPath, "levelsProgress.json");
-
+            path4 = Path.Combine(Application.dataPath, "upgradeProgress.json");
+            
             for (var i = 0; i < levelsData.leves.Count; i++)
             {
                 if (i == 0)
@@ -50,7 +53,8 @@ namespace Progress
             var json = JsonUtility.ToJson(shopProgress);
             var json2 = JsonUtility.ToJson(currentState);
             var json3 = JsonUtility.ToJson(levelsProgress);
-
+            var json4 = JsonUtility.ToJson(upgradeProgress);
+            
             if (!File.Exists(path))
             {
                 File.WriteAllText(path, json);
@@ -66,9 +70,15 @@ namespace Progress
                 File.WriteAllText(path3, json3);
             }
             
+            if (!File.Exists(path4))
+            {
+                File.WriteAllText(path4, json4);
+            }
+            
             shopProgress = JsonUtility.FromJson<ShopProgress>(File.ReadAllText(path));
             currentState = JsonUtility.FromJson<CurrentState>(File.ReadAllText(path2));
             levelsProgress = JsonUtility.FromJson<LevelsProgress>(File.ReadAllText(path3));
+            upgradeProgress = JsonUtility.FromJson<UpgradeProgress>(File.ReadAllText(path4));
         }
 
         public void SaveShopData(ShopProgress _shopProgress)
@@ -90,6 +100,13 @@ namespace Progress
             levelsProgress = _levelsProgress;
             var json = JsonUtility.ToJson(levelsProgress);
             File.WriteAllText(path3, json);
+        }
+
+        public void SaveUpgradeProgress(UpgradeProgress upgradeProgress)
+        {
+            this.upgradeProgress = upgradeProgress;
+            var json = JsonUtility.ToJson(this.upgradeProgress);
+            File.WriteAllText(path4, json);
         }
     }
 }
