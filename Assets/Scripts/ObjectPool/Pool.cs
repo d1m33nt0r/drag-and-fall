@@ -16,7 +16,7 @@ namespace ObjectPool
             objects = new List<GameObject>();
             target = _target;
             
-            for (int i = 0; i < _countObjects; i++)
+            for (var i = 0; i < _countObjects; i++)
             {
                 var instance = Instantiate(target, transform, true);
                 instance.SetActive(false);
@@ -34,7 +34,7 @@ namespace ObjectPool
 
         private void ExpandPool(int _count)
         {
-            for (int i = 0; i < _count; i++)
+            for (var i = 0; i < _count; i++)
             {
                 var instance = Instantiate(target, transform, true);
                 instance.SetActive(false);
