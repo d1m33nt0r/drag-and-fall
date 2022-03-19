@@ -19,7 +19,7 @@ namespace Core
 
         public void Start()
         {
-            crystals.text = progressController.currentState.currenciesProgress.coins.ToString();
+            crystals.text = progressController.currentState.currenciesProgress.crystals.ToString();
         }
 
         public void SaveProgress()

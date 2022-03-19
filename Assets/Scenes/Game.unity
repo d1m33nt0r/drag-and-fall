@@ -1273,7 +1273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &56227676
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10095,7 +10095,6 @@ GameObject:
   - component: {fileID: 532594481}
   - component: {fileID: 532594484}
   - component: {fileID: 532594483}
-  - component: {fileID: 532594482}
   m_Layer: 0
   m_Name: UpgradeLevel
   m_TagString: Untagged
@@ -10132,32 +10131,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0.00006866455}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &532594482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532594480}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 3
-  m_Spacing: 13.6
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!114 &532594483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22878,6 +22851,8 @@ MonoBehaviour:
   progressController: {fileID: 386115021}
   dragController: {fileID: 1864669949}
   bonusController: {fileID: 507011436}
+  coinPanel: {fileID: 1652832895}
+  crystalPanel: {fileID: 56227679}
 --- !u!4 &1157630039
 Transform:
   m_ObjectHideFlags: 0

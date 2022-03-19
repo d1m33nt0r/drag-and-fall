@@ -15,6 +15,8 @@ namespace Core
         [SerializeField] private ProgressController progressController;
         [SerializeField] private DragController dragController;
         [SerializeField] private BonusController bonusController;
+        [SerializeField] private CoinPanel coinPanel;
+        [SerializeField] private CrystalPanel crystalPanel;
         
         public bool gameStarted { get; private set; }
 
@@ -120,6 +122,8 @@ namespace Core
             if (levelsData.levelIndex + 1 < progressController.levelsProgress.levelsProgresses.Count)
                 progressController.levelsProgress.levelsProgresses[levelsData.levelIndex + 1].isUnlocked = true;
             progressController.SaveLevelsProgress(progressController.levelsProgress);
+            coinPanel.SaveProgress();
+            crystalPanel.SaveProgress();
             uiManager.UpdateLevelsStatus();
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveShopMenu(false);
@@ -194,6 +198,8 @@ namespace Core
             uiManager.SetActiveGameMenu(false);
             uiManager.SetActiveFinishLevel(false);
             uiManager.SetActiveFailedInfinityPanel(true);
+            coinPanel.SaveProgress();
+            crystalPanel.SaveProgress();
             uiManager.SetActiveFailedLevelPanel(false);
             uiManager.SetActiveLevelsMenu(false);
         }

@@ -199,15 +199,12 @@ namespace Core
 
         private void CreateNewPlatform(int _platformIndex, PatternData patternData, bool hide)
         {
-            var platformInstance = Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.identity, transform);
-            
-            //AlignRotation(platformInstance);
-
+            var platformInstance = Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.Euler(transform.rotation.eulerAngles), transform);
             var platform = platformInstance.GetComponent<Platform>();
             platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, player, bonusController, gainScore);
             platform.increaseConcentraion += IncreaseConcentration;
             platform.resetConcentraion += ResetConcentration;
-            
+            AlignRotation(platformInstance);
             platforms[_platformIndex] = platform;
             
             if (hide) platforms[_platformIndex].gameObject.SetActive(false);

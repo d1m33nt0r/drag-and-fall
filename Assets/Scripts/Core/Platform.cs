@@ -4,6 +4,7 @@ using Data.Core;
 using Data.Core.Segments;
 using UI;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Core
 {
@@ -78,12 +79,27 @@ namespace Core
         {
             gainScore.SetText(1);
             gainScore.Animate();
+            
             if (tube.isLevelMode && patternData.isLast) tube.FinishLevel(tube.gameManager.gameMode.levelMode.level);
             platformDestroyed?.Invoke();
             player.SetTriggerStay(false);
             tube.MovePlatforms();
             increaseConcentraion?.Invoke();
             Destroy(gameObject);
+        }
+        
+        public void BreakDownPlatform()
+        {
+            Rigidbody[] rb = new Rigidbody[segments.Length];
+
+            for(var i = 0; i < segments.Length; i++)
+            {
+                segments[i].gameObject.GetComponent<MeshCollider>().enabled = false;
+                rb[i] = segments[i].gameObject.AddComponent(typeof(Rigidbody)) as Rigidbody;
+            }
+
+            for(var i = 0; i < segments.Length; i++)
+                rb[i].AddForce(Random.Range(-10, 10), Random.Range(0, 10), Random.Range(2, 5), ForceMode.Impulse);
         }
     }
 }

@@ -41,6 +41,8 @@ namespace UI.Upgrades
 
         public void UpgradeBonus()
         {
+            if (progressController.currentState.currenciesProgress.coins < 1000) return;
+            
             switch (bonusType)
             {
                 case BonusType.Acceleration:
