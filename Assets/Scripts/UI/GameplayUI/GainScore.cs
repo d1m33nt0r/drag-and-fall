@@ -22,7 +22,8 @@ namespace UI
 
         public void SetText(int countPoints)
         {
-            var upgradedPoint = countPoints + bonusController.multiplier;
+            var concentrationMultiplier = concentration.isActive ? concentration.currentConcentrationMultiplier : 1;
+            var upgradedPoint = (countPoints + bonusController.multiplier) * concentrationMultiplier;
             text.text = "+" + Convert.ToString(upgradedPoint);
             scorePanel.AddPoints(upgradedPoint);
         }

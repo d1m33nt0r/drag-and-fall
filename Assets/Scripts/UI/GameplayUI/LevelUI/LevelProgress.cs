@@ -9,13 +9,20 @@ namespace UI
     {
         [SerializeField] private Slider slider;
         [SerializeField] private Tube tube;
+        [SerializeField] private Text level;
         
         public void Initialize(LevelData levelData)
         {
+            level.text = (levelData.levelIndex + 1).ToString();
             slider.value = 0;
             slider.maxValue = levelData.patterns.Count;
         }
 
+        public void ResetProgressValue()
+        {
+            slider.value = 0;
+        }
+        
         public void Step()
         {
             if (!tube.isLevelMode) return;

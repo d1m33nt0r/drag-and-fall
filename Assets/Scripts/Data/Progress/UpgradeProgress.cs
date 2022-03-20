@@ -9,5 +9,6 @@ namespace Data.Progress
         public bool[] progressShield;
         public bool[] progressAcceleration;
         public bool[] progressMultiplier;
+        public bool[] progressConcentration;
     }
 }

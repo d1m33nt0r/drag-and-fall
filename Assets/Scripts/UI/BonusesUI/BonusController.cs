@@ -176,7 +176,7 @@ namespace Core.Bonuses
             switch (bonusType)
             {
                 case BonusType.Acceleration:
-                    tube.SetMovementSpeed(5);
+                    tube.SetMovementSpeed(3.5f);
                     workCountPlatformsAcceleration = countPlatformsForAcceleration;
                     
                     accelerationIsActive = true;

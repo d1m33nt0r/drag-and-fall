@@ -2,6 +2,7 @@
 using Data;
 using Data.Core;
 using Progress;
+using UI;
 using UI.InfinityUI;
 using UnityEngine;
 
@@ -9,6 +10,9 @@ namespace Core
 {
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] private LevelProgress levelProgress;
+        [SerializeField] private ScorePanel scorePanel;
+        [SerializeField] private FinishLevelUI finishLevelUI;
         [SerializeField] private Player player;
         [SerializeField] public Animator cameraAnimator;
         [SerializeField] public Tube tube;
@@ -125,6 +129,7 @@ namespace Core
 
         public void FinishLevel(LevelData levelsData)
         {
+            finishLevelUI.SetText(scorePanel.GetPoints(), levelsData.levelIndex + 1);
             gameStarted = false;
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveLevelsMenu(false);
@@ -180,6 +185,7 @@ namespace Core
             tube.SetDefaultState();
             tube.gameManager.gameMode.levelMode.SetLevelData(
                 tube.levelsData.leves[tube.gameManager.gameMode.levelMode.level.levelIndex + 1]);
+            levelProgress.Initialize(tube.gameManager.gameMode.levelMode.level);
             tube.InitializePlatforms();
             
             uiManager.SetActiveUpgradeMenu(false);

@@ -35,6 +35,9 @@ namespace UI.Upgrades
                     case BonusType.Shield:
                         levels[i].enabled = progressController.upgradeProgress.progressShield[i];
                         break;
+                    case BonusType.None:
+                        levels[i].enabled = progressController.upgradeProgress.progressConcentration[i];
+                        break;
                 }
             }
         }
@@ -87,6 +90,18 @@ namespace UI.Upgrades
                         if (!progressController.upgradeProgress.progressShield[i])
                         {
                             progressController.upgradeProgress.progressShield[i] = true;
+                            progressController.SaveUpgradeProgress(progressController.upgradeProgress);
+                            Initialize();
+                            return;
+                        }
+                    }
+                    break;
+                case BonusType.None:
+                    for (var i = 0; i < progressController.upgradeProgress.progressConcentration.Length; i++)
+                    {
+                        if (!progressController.upgradeProgress.progressConcentration[i])
+                        {
+                            progressController.upgradeProgress.progressConcentration[i] = true;
                             progressController.SaveUpgradeProgress(progressController.upgradeProgress);
                             Initialize();
                             return;
