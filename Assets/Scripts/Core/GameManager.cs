@@ -1,12 +1,14 @@
 ﻿using Core.Bonuses;
 using Data.Core;
 using Progress;
+using UI.InfinityUI;
 using UnityEngine;
 
 namespace Core
 {
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] private Player player;
         [SerializeField] public Animator cameraAnimator;
         [SerializeField] public Tube tube;
         [SerializeField] public UIManager uiManager;
@@ -17,6 +19,8 @@ namespace Core
         [SerializeField] private BonusController bonusController;
         [SerializeField] private CoinPanel coinPanel;
         [SerializeField] private CrystalPanel crystalPanel;
+        [SerializeField] private KeyPanel keyPanel;
+        [SerializeField] private FailedInfinityUI failedInfinityUI;
         
         public bool gameStarted { get; private set; }
 
@@ -154,8 +158,10 @@ namespace Core
 
         public void ContinueGame()
         {
+            
             gameStarted = true;
             tube.platforms[0].DestroyPlatform();
+            tube.SetDefaultState();
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveLevelUI(false);
             uiManager.SetActiveMainMenu(false);
@@ -190,7 +196,6 @@ namespace Core
         public void FailedGame()
         {
             gameStarted = false;
-            tube.SetDefaultState();
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveShopMenu(false);
@@ -200,6 +205,8 @@ namespace Core
             uiManager.SetActiveFailedInfinityPanel(true);
             coinPanel.SaveProgress();
             crystalPanel.SaveProgress();
+            keyPanel.SaveProgress();
+         
             uiManager.SetActiveFailedLevelPanel(false);
             uiManager.SetActiveLevelsMenu(false);
         }

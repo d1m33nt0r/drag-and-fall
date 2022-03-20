@@ -107,6 +107,7 @@ MonoBehaviour:
   shield: {fileID: 3732463269924414412, guid: 9be56990cb2253a438ee9ebbf9520319, type: 3}
   nitro: {fileID: 8494222614144849981, guid: 64d2a6b3b876abb4ab0ade2cdfc55f04, type: 3}
   magnet: {fileID: 705712189710851890, guid: 5170fb0dee6405e48937f3553da3771d, type: 3}
+  key: {fileID: 4469818098743479962, guid: cb03a77d9ab8e1d468c6815be230e34c, type: 3}
 --- !u!64 &3680690525903027535
 MeshCollider:
   m_ObjectHideFlags: 0

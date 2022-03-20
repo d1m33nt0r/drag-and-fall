@@ -6,6 +6,7 @@
         Multiplier,
         Acceleration,
         Shield,
-        Magnet
+        Magnet,
+        Key
     }
 }

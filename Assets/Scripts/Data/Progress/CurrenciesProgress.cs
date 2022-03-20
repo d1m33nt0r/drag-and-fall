@@ -7,5 +7,6 @@ namespace Progress
     {
         public int coins;
         public int crystals;
+        public int keys;
     }
 }

@@ -132,6 +132,9 @@ namespace DafEditor.Editor.Layout
                     case SegmentContent.Shield:
                         DrawSegmentContentButton(i, "SH");
                         break;
+                    case SegmentContent.Key:
+                        DrawSegmentContentButton(i, "KE");
+                        break;
                 }
             }
 
@@ -154,6 +157,7 @@ namespace DafEditor.Editor.Layout
                 AddMenuItemForColor(menu, "Bonus/Multiplier", SegmentContent.Multiplier);
                 AddMenuItemForColor(menu, "Bonus/Shield", SegmentContent.Shield);
                 AddMenuItemForColor(menu, "Bonus/Magnet", SegmentContent.Magnet);
+                AddMenuItemForColor(menu, "Bonus/Key", SegmentContent.Key);
                 
                 menu.AddSeparator("");
 

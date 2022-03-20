@@ -9,6 +9,7 @@
         Magnet,
         Crystal,
         Coin,
+        Key,
         Other
     }
 }

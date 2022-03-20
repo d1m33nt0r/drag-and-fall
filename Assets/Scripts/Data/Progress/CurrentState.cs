@@ -10,5 +10,6 @@ namespace Progress
         public ShopItem trailSkin;
         public ShopItem fallingTrailSkin;
         public CurrenciesProgress currenciesProgress;
+        public int bestScore;
     }
 }

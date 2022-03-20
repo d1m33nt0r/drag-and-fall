@@ -19,6 +19,7 @@ namespace Core
         [SerializeField] private GameObject shield;
         [SerializeField] private GameObject nitro;
         [SerializeField] private GameObject magnet;
+        [SerializeField] private GameObject key;
         
         public void Initialize(SegmentData _segmentData, Tube _tube, Platform _platform, BonusController _bonusController)
         {
@@ -85,6 +86,10 @@ namespace Core
                 case SegmentContent.Magnet:
                     var magnetInstance = Instantiate(magnet, spawnPoint.position, Quaternion.identity, spawnPoint);
                     magnetInstance.GetComponent<Magnet>().Construct(bonusController);
+                    break;
+                case SegmentContent.Key:
+                    var keyInstance = Instantiate(key, spawnPoint.position, Quaternion.identity, spawnPoint);
+                    keyInstance.GetComponent<Key>().Construct(bonusController);
                     break;
             }
         }

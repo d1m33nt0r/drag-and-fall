@@ -28,7 +28,8 @@ namespace Core
                 currenciesProgress = new CurrenciesProgress
                 {
                     coins = Convert.ToInt32(coins.text),
-                    crystals = progressController.currentState.currenciesProgress.crystals
+                    crystals = progressController.currentState.currenciesProgress.crystals,
+                    keys = progressController.currentState.currenciesProgress.keys
                 },
                 environmentSkin = progressController.currentState.environmentSkin,
                 fallingTrailSkin = progressController.currentState.fallingTrailSkin,

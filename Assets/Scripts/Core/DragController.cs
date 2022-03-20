@@ -32,7 +32,7 @@ namespace Core
 
         private void Update()
         {
-            if (!enabledSwipeController) return;
+            if (!gameManager.gameStarted) return;
 
             if (Input.GetMouseButtonDown(0))
             {

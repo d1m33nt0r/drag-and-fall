@@ -1,6 +1,7 @@
 ﻿using System;
 using Core.Bonuses;
 using Data.Core.Segments;
+using UI.InfinityUI;
 using UnityEngine;
 
 namespace Core
@@ -8,9 +9,8 @@ namespace Core
     public class Player : MonoBehaviour
     {
         public event Action failed;
-        public Concentration concentration;
-        public ScorePanel scorePanel;
 
+        [SerializeField] private Tube tube;
         [SerializeField] private MagnetPlayer magnetPlayer;
         [SerializeField] private Animator animator;
         [SerializeField] private GameObject fallingTrail;
@@ -20,6 +20,8 @@ namespace Core
         [SerializeField] private BonusController bonusController;
         [SerializeField] private CoinPanel coinPanel;
         [SerializeField] private CrystalPanel crystalPanel;
+        [SerializeField] private KeyPanel keyPanel;
+        [SerializeField] private FailedInfinityUI failedInfinityUI;
         
         private bool triggerStay;
 
@@ -112,7 +114,7 @@ namespace Core
             var position = transform.position;
             var centerRay = new Ray(position, Vector3.down);
             
-            if (Physics.Raycast(centerRay, out var centerHit, 0.102f))
+            if (Physics.Raycast(centerRay, out var centerHit, 0.105f))
             {
                 if (!centerHit.transform.CompareTag("Segment")) return;
                 
@@ -162,8 +164,9 @@ namespace Core
                             SetDefaultState();
                             return;
                         }
+
+                        tube.Failed();
                         SetTriggerStay(true);
-                        failed?.Invoke();
                         SetFailedState();
                         break;
                 }
@@ -204,6 +207,11 @@ namespace Core
         public void CollectCoin(int count)
         {
             coinPanel.AddCoins(count);
+        }
+        
+        public void CollectKey(int count)
+        {
+            keyPanel.AddCoins(count);
         }
     }
 }

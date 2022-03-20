@@ -23,6 +23,7 @@ namespace Core
         [SerializeField] private Concentration concentration;
         public LevelsData levelsData;
         [SerializeField] private BonusController bonusController;
+        [SerializeField] private LevelProgress levelProgress;
         
         public bool isInitialized;
         public bool isLevelMode;
@@ -38,7 +39,6 @@ namespace Core
         
         private void Awake()
         {
-            player.failed += Failed;
             meshFilter = transform.GetComponent<MeshFilter>();
             meshRenderer = transform.GetComponent<MeshRenderer>();
             dragController.SwipeEvent += RotateTube;
@@ -57,12 +57,10 @@ namespace Core
             gameManager.FinishLevel(_levelData);
         }
         
-        private void Failed()
+        public void Failed()
         {
-            if (isLevelMode)
-                gameManager.FailedLevel();
-            else
-                gameManager.FailedGame();
+            if (isLevelMode) gameManager.FailedLevel();
+            else gameManager.FailedGame();
         }
         
         private void Initialize()
@@ -100,6 +98,7 @@ namespace Core
         public void EnableLevelMode(LevelData _levelData)
         {
             gameManager.gameMode.levelMode.SetLevelData(_levelData);
+            levelProgress.Initialize(_levelData);
             InitializePlatforms();
         }
 
@@ -204,12 +203,19 @@ namespace Core
             platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, player, bonusController, gainScore);
             platform.increaseConcentraion += IncreaseConcentration;
             platform.resetConcentraion += ResetConcentration;
+            platform.increaseConcentraion += LevelStep;
+            
             AlignRotation(platformInstance);
             platforms[_platformIndex] = platform;
             
             if (hide) platforms[_platformIndex].gameObject.SetActive(false);
         }
 
+        private void LevelStep()
+        {
+            levelProgress.Step();
+        }
+        
         private void IncreaseConcentration()
         {
             concentration.IncreaseConcentration();   

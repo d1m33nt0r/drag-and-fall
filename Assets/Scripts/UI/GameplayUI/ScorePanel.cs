@@ -14,6 +14,11 @@ namespace Core
             ResetCounter();
         }
 
+        public int GetPoints()
+        {
+            return Convert.ToInt32(counter.text);
+        }
+        
         public void AddPoints(int points)
         {
             var converted = Convert.ToInt32(counter.text);
