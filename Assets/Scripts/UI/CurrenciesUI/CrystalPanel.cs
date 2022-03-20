@@ -34,7 +34,8 @@ namespace Core
                 environmentSkin = progressController.currentState.environmentSkin,
                 fallingTrailSkin = progressController.currentState.fallingTrailSkin,
                 trailSkin = progressController.currentState.trailSkin,
-                playerSkin = progressController.currentState.playerSkin
+                playerSkin = progressController.currentState.playerSkin,
+                bestScore = progressController.currentState.bestScore
             });
         }
     }

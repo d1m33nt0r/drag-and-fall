@@ -6,7 +6,7 @@ namespace Core
 {
     public class Concentration : MonoBehaviour
     {
-        public bool isActive => platformCounter >= Constants.Concentration.CONCENTRATION_THRESHOLD;
+        public bool isActive => platformCounter > Constants.Concentration.CONCENTRATION_THRESHOLD;
         public Slider slider;
         public int platformCounter { get; private set; }
 

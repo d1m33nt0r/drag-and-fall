@@ -56,7 +56,7 @@ namespace Core.Bonuses
         
         public float GetUpgradedTimer(BonusType bonusType)
         {
-            int currentLevel = 0;
+            var currentLevel = 0;
                 
             switch (bonusType)
             {

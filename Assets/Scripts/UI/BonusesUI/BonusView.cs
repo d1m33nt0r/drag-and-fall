@@ -24,7 +24,7 @@ namespace UI.Bonuses
         {
             this.bonusType = bonusType;
             isActive = true;
-            transform.GetChild(0).GetComponent<Image>().sprite = bonusController.GetTimerBonus(bonusType).sprite;
+ 
             defaultTimerValue = bonusController.GetUpgradedTimer(bonusType);
             timer.maxValue = defaultTimerValue;
             timer.value = defaultTimerValue;
