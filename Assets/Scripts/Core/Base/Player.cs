@@ -1,5 +1,6 @@
 ﻿using System;
 using Core.Bonuses;
+using Data;
 using Data.Core.Segments;
 using UI.InfinityUI;
 using UnityEngine;
@@ -22,6 +23,7 @@ namespace Core
         [SerializeField] private CrystalPanel crystalPanel;
         [SerializeField] private KeyPanel keyPanel;
         [SerializeField] private FailedInfinityUI failedInfinityUI;
+        [SerializeField] private SessionData sessionData;
         
         private bool triggerStay;
 
@@ -106,6 +108,11 @@ namespace Core
             triggerStay = _value;
         }
 
+        public void ContinueGame()
+        {
+            SetFallingTrailState();
+        }
+        
         private void Update()
         {
             if (!gameManager.gameStarted) return;
@@ -202,16 +209,19 @@ namespace Core
         public void CollectCrystal(int count)
         {
             crystalPanel.AddCrystals(count);
+            sessionData.AddCrystals(count);
         }
         
         public void CollectCoin(int count)
         {
             coinPanel.AddCoins(count);
+            sessionData.AddCoins(count);
         }
         
         public void CollectKey(int count)
         {
-            keyPanel.AddCoins(count);
+            keyPanel.AddKeys(count);
+            sessionData.AddKeys(count);
         }
     }
 }

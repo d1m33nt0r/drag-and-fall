@@ -10,7 +10,7 @@ namespace Core
         public Text keys;
         public ProgressController progressController;
         
-        public void AddCoins(int count)
+        public void AddKeys(int count)
         {
             var convertedText = Convert.ToInt32(keys.text);
             convertedText += count;

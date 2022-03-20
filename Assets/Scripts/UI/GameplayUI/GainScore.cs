@@ -12,6 +12,7 @@ namespace UI
         private RectTransform rectTransform;
         public BonusController bonusController;
         public Concentration concentration;
+        [SerializeField] private ScorePanel scorePanel;
         
         private void Start()
         {
@@ -23,6 +24,7 @@ namespace UI
         {
             var upgradedPoint = countPoints + bonusController.multiplier;
             text.text = "+" + Convert.ToString(upgradedPoint);
+            scorePanel.AddPoints(upgradedPoint);
         }
         
         public void Animate()

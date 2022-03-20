@@ -62,7 +62,7 @@ namespace Core
             if (isLevelMode) gameManager.FailedLevel();
             else gameManager.FailedGame();
         }
-        
+
         private void Initialize()
         {
             ChangeTheme();
@@ -133,7 +133,6 @@ namespace Core
             for (var i = 1; i < countPlatforms; i++)
                 platforms[i - 1] = platforms[i];
             
-    
             if (!isLevelMode)
                 currentPatternData = gameManager.gameMode.infinityMode.GetPatternData();
             else

@@ -1,4 +1,5 @@
 ﻿using Core.Bonuses;
+using Data;
 using Data.Core;
 using Progress;
 using UI.InfinityUI;
@@ -21,6 +22,7 @@ namespace Core
         [SerializeField] private CrystalPanel crystalPanel;
         [SerializeField] private KeyPanel keyPanel;
         [SerializeField] private FailedInfinityUI failedInfinityUI;
+        [SerializeField] private SessionData sessionData;
         
         public bool gameStarted { get; private set; }
 
@@ -40,6 +42,9 @@ namespace Core
 
         public void StartGame()
         {
+            uiManager.SetActiveScorePanel(true);
+            uiManager.scorePanel.ResetCounter();
+            sessionData.ResetData();
             gameStarted = true;
             tube.SetDefaultState();
             uiManager.SetActiveUpgradeMenu(false);
@@ -104,6 +109,7 @@ namespace Core
 
         public void ShowLevels()
         {
+            uiManager.SetActiveScorePanel(false);
             tube.SetLevelMode(false);
             tube.SetDefaultState();
             uiManager.SetActiveUpgradeMenu(false);
@@ -140,6 +146,7 @@ namespace Core
 
         public void ShowMainMenu()
         {
+            uiManager.SetActiveScorePanel(false);
             bonusController.DeactivateAllBonuses();
             tube.SetLevelMode(false);
             gameStarted = false;
@@ -158,23 +165,16 @@ namespace Core
 
         public void ContinueGame()
         {
-            
-            gameStarted = true;
             tube.platforms[0].DestroyPlatform();
-            tube.SetDefaultState();
-            uiManager.SetActiveUpgradeMenu(false);
-            uiManager.SetActiveLevelUI(false);
-            uiManager.SetActiveMainMenu(false);
-            uiManager.SetActiveShopMenu(false);
+            player.ContinueGame();
+            gameStarted = true;
             uiManager.SetActiveGameMenu(true);
-            uiManager.SetActiveFinishLevel(false);
             uiManager.SetActiveFailedInfinityPanel(false);
-            uiManager.SetActiveFailedLevelPanel(false);
-            uiManager.SetActiveLevelsMenu(false);
         }
         
         public void StartNextLevel()
         {
+            uiManager.scorePanel.ResetCounter();
             bonusController.DeactivateAllBonuses();
             gameStarted = true;
             tube.SetDefaultState();
@@ -203,10 +203,11 @@ namespace Core
             uiManager.SetActiveGameMenu(false);
             uiManager.SetActiveFinishLevel(false);
             uiManager.SetActiveFailedInfinityPanel(true);
+            uiManager.failedInfinityPanel.GetComponent<FailedInfinityUI>().ShowContinueUI();
             coinPanel.SaveProgress();
             crystalPanel.SaveProgress();
             keyPanel.SaveProgress();
-         
+            
             uiManager.SetActiveFailedLevelPanel(false);
             uiManager.SetActiveLevelsMenu(false);
         }
@@ -228,6 +229,7 @@ namespace Core
 
         public void StartedLevel()
         {
+            sessionData.ResetData();
             uiManager.SetActiveScorePanel(true);
             uiManager.scorePanel.GetComponent<ScorePanel>().ResetCounter();
             gameStarted = true;

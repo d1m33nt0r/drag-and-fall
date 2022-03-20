@@ -10,7 +10,7 @@ namespace Core
         [SerializeField] private Canvas shop;
         [SerializeField] private Canvas levelUI;
         [SerializeField] private GameObject failedLevelPanel;
-        [SerializeField] private GameObject failedInfinityPanel;
+        public GameObject failedInfinityPanel;
         [SerializeField] private GameObject finishLevelPanel;
         [SerializeField] private GameObject levelsMenu;
         [SerializeField] private LevelUIController levelUIController;

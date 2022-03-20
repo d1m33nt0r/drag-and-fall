@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Core;
 using Progress;
 using UI.InfinityUI;
@@ -15,17 +16,20 @@ namespace UI
         [SerializeField] private FailedInfinityUI failedInfinityUI;
         [SerializeField] private ScorePanel scorePanel;
         [SerializeField] private ProgressController progressController;
-        
-        public void OnEnable()
+        private int currentBestScore;
+        public void StartTimer()
         {
+            currentBestScore = progressController.currentState.bestScore;
             timer.fillAmount = 1;
-            //StartCoroutine(Timer());
-            //StartCoroutine(NumberTimer());
+            timerValue = 5;
+            timerText.text = timerValue.ToString();
+            StartCoroutine(Timer());
+            StartCoroutine(NumberTimer());
         }
-
+        
         public void ShowNextUI()
         {
-            if (scorePanel.GetPoints() > progressController.currentState.bestScore)
+            if (scorePanel.GetPoints() > currentBestScore)
                 failedInfinityUI.ShowNewBestScoreUI();
             else
                 failedInfinityUI.ShowStatisticsUI();
