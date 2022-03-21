@@ -1,1 +1,24 @@
-{"environmentSkin":{"index":0,"isBought":false},"playerSkin":{"index":0,"isBought":false},"trailSkin":{"index":0,"isBought":false},"fallingTrailSkin":{"index":0,"isBought":false},"currenciesProgress":{"coins":37,"crystals":1,"keys":1},"bestScore":98}
+{
+  "environmentSkin": {
+    "index": 0,
+    "isBought": false
+  },
+  "playerSkin": {
+    "index": 0,
+    "isBought": false
+  },
+  "trailSkin": {
+    "index": 0,
+    "isBought": false
+  },
+  "fallingTrailSkin": {
+    "index": 0,
+    "isBought": false
+  },
+  "currenciesProgress": {
+    "coins": 50000,
+    "crystals": 0,
+    "keys": 0
+  },
+  "bestScore": 0
+}

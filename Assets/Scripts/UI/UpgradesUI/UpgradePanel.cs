@@ -1,4 +1,5 @@
-﻿using Core.Bonuses;
+﻿using Core;
+using Core.Bonuses;
 using Progress;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,9 @@ namespace UI.Upgrades
     {
         [SerializeField] private ProgressController progressController;
         [SerializeField] private BonusType bonusType;
-        
+        [SerializeField] private Concentration concentration;
+        [SerializeField] private Text firstLevelText;
+
         public Image[] levels;
 
         public void Start()
@@ -37,6 +40,9 @@ namespace UI.Upgrades
                         break;
                     case BonusType.None:
                         levels[i].enabled = progressController.upgradeProgress.progressConcentration[i];
+                        if (!progressController.upgradeProgress.progressConcentration[i]) break;
+                        if (concentration.currentConcentrationLevel % 2 != 0) firstLevelText.text = "-1 платформа к активации концентрации";
+                        else firstLevelText.text = "+1 к множителю концентрации";
                         break;
                 }
             }
@@ -104,6 +110,9 @@ namespace UI.Upgrades
                             progressController.upgradeProgress.progressConcentration[i] = true;
                             progressController.SaveUpgradeProgress(progressController.upgradeProgress);
                             Initialize();
+                            concentration.UpdateLevel();
+                            if (concentration.currentConcentrationLevel % 2 != 0) firstLevelText.text = "-1 платформа к активации концентрации";
+                            else firstLevelText.text = "+1 к множителю концентрации";
                             return;
                         }
                     }

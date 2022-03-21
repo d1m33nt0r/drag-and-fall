@@ -9,7 +9,7 @@ namespace Core
     {
         [SerializeField] private ProgressController progressController;
         
-        public int currentConcentrationLevel;
+        public int currentConcentrationLevel = 1;
         public int currentConcentrationMultiplier
         {
             get
@@ -47,6 +47,11 @@ namespace Core
         }
 
         private void Start()
+        {
+            UpdateLevel();
+        }
+
+        public void UpdateLevel()
         {
             for (var i = 0; i < progressController.upgradeProgress.progressConcentration.Length; i++)
             {
