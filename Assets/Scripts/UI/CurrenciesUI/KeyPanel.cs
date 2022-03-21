@@ -9,7 +9,7 @@ namespace Core
     {
         public Text keys;
         public ProgressController progressController;
-        
+
         public void AddKeys(int count)
         {
             var convertedText = Convert.ToInt32(keys.text);
@@ -22,6 +22,12 @@ namespace Core
             keys.text = progressController.currentState.currenciesProgress.keys.ToString();
         }
 
+        public void MinusKeys(int keys)
+        {
+            this.keys.text = (Convert.ToInt32(this.keys.text) - keys).ToString();
+            SaveProgress();
+        }
+        
         public void SaveProgress()
         {
             progressController.SaveCurrentState(new CurrentState{
