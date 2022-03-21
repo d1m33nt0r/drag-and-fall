@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using System;
+using Data;
 using Progress;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,8 @@ namespace Core
     {
         [SerializeField] private Player player;
         [SerializeField] private Tube tube;
-
+        [SerializeField] private CoinPanel coinPanel;
+        [SerializeField] private CrystalPanel crystalPanel;
         [SerializeField] private Button unlockButton;
         [SerializeField] private Button selectButton;
         [SerializeField] private Text price;
@@ -39,25 +41,25 @@ namespace Core
             {
                 case ShopState.EnvironmentSkin:
                     shopState = ShopState.PlayerSkin;
-                    SetText(shopData.PlayerSkinData[currentPlayerSkinIndex].isBought, 
+                    SetText(progressController.shopProgress.playerSkins[currentPlayerSkinIndex].isBought, 
                         shopData.PlayerSkinData[currentPlayerSkinIndex].price);
                     shopStateText.text = "Player skins";
                     break;
                 case ShopState.PlayerSkin:
                     shopState = ShopState.TrailSkin;
-                    SetText(shopData.TrailSkinData[currentTrailSkinIndex].isBought, 
+                    SetText(progressController.shopProgress.trailSkins[currentTrailSkinIndex].isBought, 
                         shopData.TrailSkinData[currentTrailSkinIndex].price);
                     shopStateText.text = "Trail skins";
                     break;
                 case ShopState.TrailSkin:
                     shopState = ShopState.FallingTrailSkin;
-                    SetText(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].isBought, 
+                    SetText(progressController.shopProgress.fallingTrailSkins[currentFallingTrailSkinIndex].isBought, 
                         shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].price);
                     shopStateText.text = "Falling trail skins";
                     break;
                 case ShopState.FallingTrailSkin:
                     shopState = ShopState.EnvironmentSkin;
-                    SetText(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].isBought, 
+                    SetText(progressController.shopProgress.environmentSkins[currentEnvironmentSkinIndex].isBought, 
                         shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].price);
                     shopStateText.text = "Environment skins";
                     break;
@@ -87,6 +89,11 @@ namespace Core
             switch (shopState)
             {
                 case ShopState.EnvironmentSkin:
+                    if (shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].price > progressController.currentState.currenciesProgress.coins) return;
+
+                    progressController.currentState.currenciesProgress.coins -=
+                        Convert.ToInt16(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].price);
+                    
                     progressController.shopProgress.environmentSkins[currentEnvironmentSkinIndex].isBought = true;
                     progressController.currentState.environmentSkin = new ShopItem
                     {
@@ -95,8 +102,16 @@ namespace Core
                     };
                     progressController.SaveShopData(progressController.shopProgress);
                     progressController.SaveCurrentState(progressController.currentState);
+                    shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].isBought = true;
+                    SetText(true, shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].price);
+                    coinPanel.MinusCoins(Convert.ToInt32(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].price));
                     break;
                 case ShopState.PlayerSkin:
+                    if (shopData.PlayerSkinData[currentPlayerSkinIndex].price > progressController.currentState.currenciesProgress.coins) return;
+
+                    progressController.currentState.currenciesProgress.coins -=
+                        Convert.ToInt16(shopData.PlayerSkinData[currentPlayerSkinIndex].price);
+                    
                     progressController.shopProgress.playerSkins[currentPlayerSkinIndex].isBought = true;
                     progressController.currentState.playerSkin = new ShopItem
                     {
@@ -105,8 +120,16 @@ namespace Core
                     };
                     progressController.SaveShopData(progressController.shopProgress);
                     progressController.SaveCurrentState(progressController.currentState);
+                    shopData.PlayerSkinData[currentPlayerSkinIndex].isBought = true;
+                    SetText(true, shopData.PlayerSkinData[currentPlayerSkinIndex].price);
+                    coinPanel.MinusCoins(Convert.ToInt32(shopData.PlayerSkinData[currentPlayerSkinIndex].price));
                     break;
                 case ShopState.TrailSkin:
+                    if (shopData.TrailSkinData[currentTrailSkinIndex].price > progressController.currentState.currenciesProgress.coins) return;
+
+                    progressController.currentState.currenciesProgress.coins -=
+                        Convert.ToInt16(shopData.TrailSkinData[currentTrailSkinIndex].price);
+                    
                     progressController.shopProgress.trailSkins[currentTrailSkinIndex].isBought = true;
                     progressController.currentState.trailSkin = new ShopItem
                     {
@@ -115,8 +138,16 @@ namespace Core
                     };
                     progressController.SaveShopData(progressController.shopProgress);
                     progressController.SaveCurrentState(progressController.currentState);
+                    shopData.TrailSkinData[currentTrailSkinIndex].isBought = true;
+                    SetText(true, shopData.TrailSkinData[currentTrailSkinIndex].price);
+                    coinPanel.MinusCoins(Convert.ToInt32(shopData.TrailSkinData[currentTrailSkinIndex].price));
                     break;
                 case ShopState.FallingTrailSkin:
+                    if (shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].price > progressController.currentState.currenciesProgress.coins) return;
+
+                    progressController.currentState.currenciesProgress.coins -=
+                        Convert.ToInt16(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].price);
+                    
                     progressController.shopProgress.fallingTrailSkins[currentFallingTrailSkinIndex].isBought = true;
                     progressController.currentState.fallingTrailSkin = new ShopItem
                     {
@@ -125,6 +156,9 @@ namespace Core
                     };
                     progressController.SaveShopData(progressController.shopProgress);
                     progressController.SaveCurrentState(progressController.currentState);
+                    shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].isBought = true;
+                    SetText(true, shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].price);
+                    coinPanel.MinusCoins(Convert.ToInt32(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].price));
                     break;
             }
         }
@@ -174,25 +208,25 @@ namespace Core
             {
                 case ShopState.EnvironmentSkin:
                     shopState = ShopState.FallingTrailSkin;
-                    SetText(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].isBought, 
+                    SetText(progressController.shopProgress.fallingTrailSkins[currentFallingTrailSkinIndex].isBought, 
                         shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].price);
                     shopStateText.text = "Falling trail skins";
                     break;
                 case ShopState.PlayerSkin:
                     shopState = ShopState.EnvironmentSkin;
-                    SetText(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].isBought, 
+                    SetText(progressController.shopProgress.environmentSkins[currentEnvironmentSkinIndex].isBought, 
                         shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].price);
                     shopStateText.text = "Environment skins";
                     break;
                 case ShopState.TrailSkin:
                     shopState = ShopState.PlayerSkin;
-                    SetText(shopData.PlayerSkinData[currentPlayerSkinIndex].isBought, 
+                    SetText(progressController.shopProgress.playerSkins[currentPlayerSkinIndex].isBought, 
                         shopData.PlayerSkinData[currentPlayerSkinIndex].price);
                     shopStateText.text = "Player skins";
                     break;
                 case ShopState.FallingTrailSkin:
                     shopState = ShopState.TrailSkin;
-                    SetText(shopData.TrailSkinData[currentTrailSkinIndex].isBought, 
+                    SetText(progressController.shopProgress.trailSkins[currentTrailSkinIndex].isBought, 
                         shopData.TrailSkinData[currentTrailSkinIndex].price);
                     shopStateText.text = "Trail skins";
                     break;
@@ -211,7 +245,7 @@ namespace Core
                     else
                         currentEnvironmentSkinIndex++;
                     
-                    SetText(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].isBought, 
+                    SetText(progressController.shopProgress.environmentSkins[currentEnvironmentSkinIndex].isBought, 
                         shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].price);
                     tube.TryOnSkin(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex]);
                     break;
@@ -221,7 +255,7 @@ namespace Core
                     else
                         currentPlayerSkinIndex++;
                     
-                    SetText(shopData.PlayerSkinData[currentPlayerSkinIndex].isBought, 
+                    SetText(progressController.shopProgress.playerSkins[currentPlayerSkinIndex].isBought, 
                         shopData.PlayerSkinData[currentPlayerSkinIndex].price);
                     player.TryOnPlayerSkin(shopData.PlayerSkinData[currentPlayerSkinIndex].mesh, shopData.PlayerSkinData[currentPlayerSkinIndex].material);
                     break;
@@ -231,7 +265,7 @@ namespace Core
                     else
                         currentTrailSkinIndex++;
                     
-                    SetText(shopData.TrailSkinData[currentTrailSkinIndex].isBought, 
+                    SetText(progressController.shopProgress.trailSkins[currentTrailSkinIndex].isBought, 
                         shopData.TrailSkinData[currentTrailSkinIndex].price);
                     player.TryOnTrailSkin(shopData.TrailSkinData[currentTrailSkinIndex].skin);
                     break;
@@ -241,7 +275,7 @@ namespace Core
                     else
                         currentFallingTrailSkinIndex++;
 
-                    SetText(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].isBought, 
+                    SetText(progressController.shopProgress.fallingTrailSkins[currentFallingTrailSkinIndex].isBought, 
                         shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].price);
                     player.TryOnFallingTrailSkin(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].skin);
                     break;
@@ -258,7 +292,7 @@ namespace Core
                     else
                         currentEnvironmentSkinIndex--;
                     
-                    SetText(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].isBought, 
+                    SetText(progressController.shopProgress.environmentSkins[currentEnvironmentSkinIndex].isBought, 
                         shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].price);
                     tube.TryOnSkin(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex]);
                     break;
@@ -268,7 +302,7 @@ namespace Core
                     else
                         currentPlayerSkinIndex--;
                     
-                    SetText(shopData.PlayerSkinData[currentPlayerSkinIndex].isBought, 
+                    SetText(progressController.shopProgress.playerSkins[currentPlayerSkinIndex].isBought, 
                         shopData.PlayerSkinData[currentPlayerSkinIndex].price);
                     player.TryOnPlayerSkin(shopData.PlayerSkinData[currentPlayerSkinIndex].mesh, shopData.PlayerSkinData[currentPlayerSkinIndex].material);
                     break;
@@ -278,7 +312,7 @@ namespace Core
                     else
                         currentTrailSkinIndex--;
                     
-                    SetText(shopData.TrailSkinData[currentTrailSkinIndex].isBought, 
+                    SetText(progressController.shopProgress.trailSkins[currentTrailSkinIndex].isBought, 
                         shopData.TrailSkinData[currentTrailSkinIndex].price);
                     player.TryOnTrailSkin(shopData.TrailSkinData[currentTrailSkinIndex].skin);
                     break;
@@ -288,7 +322,7 @@ namespace Core
                     else
                         currentFallingTrailSkinIndex--;
                     
-                    SetText(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].isBought, 
+                    SetText(progressController.shopProgress.fallingTrailSkins[currentFallingTrailSkinIndex].isBought, 
                         shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].price);
                     player.TryOnFallingTrailSkin(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].skin);
                     break;

@@ -12,7 +12,8 @@ namespace UI.Upgrades
         [SerializeField] private BonusType bonusType;
         [SerializeField] private Concentration concentration;
         [SerializeField] private Text firstLevelText;
-
+        [SerializeField] private CoinPanel coinPanel;
+        [SerializeField] private CrystalPanel crystalPanel;
         public Image[] levels;
 
         public void Start()
@@ -50,7 +51,11 @@ namespace UI.Upgrades
 
         public void UpgradeBonus()
         {
-            if (progressController.currentState.currenciesProgress.coins < 1000) return;
+            if (progressController.currentState.currenciesProgress.coins < 1000 
+                || progressController.currentState.currenciesProgress.crystals < 15) return;
+
+            coinPanel.MinusCoins(1000);
+            crystalPanel.MinusCrystals(15);
             
             switch (bonusType)
             {

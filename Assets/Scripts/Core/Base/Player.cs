@@ -24,6 +24,7 @@ namespace Core
         [SerializeField] private KeyPanel keyPanel;
         [SerializeField] private FailedInfinityUI failedInfinityUI;
         [SerializeField] private SessionData sessionData;
+        [SerializeField] private FreeSpeedIncrease freeSpeedIncrease;
         
         private bool triggerStay;
 
@@ -141,6 +142,7 @@ namespace Core
                             SetTriggerStay(true);
                             SetDefaultState();
                             segment.IncreasePlatformTouchCounter();
+                            freeSpeedIncrease.ResetSpeed();
                         }
                         break;
                     case SegmentType.Hole:
@@ -152,6 +154,7 @@ namespace Core
                         }
                         else
                         {
+                            freeSpeedIncrease.IncreaseSpeed();
                             SetTriggerStay(true);
                             segment.DestroyPlatform();
                         }
@@ -168,10 +171,11 @@ namespace Core
                         {
                             bonusController.DeactivateBonus(BonusType.Shield);
                             SetTriggerStay(true);
+                            freeSpeedIncrease.ResetSpeed();
                             SetDefaultState();
                             return;
                         }
-
+                        freeSpeedIncrease.ResetSpeed();
                         tube.Failed();
                         SetTriggerStay(true);
                         SetFailedState();

@@ -21,6 +21,12 @@ namespace Core
         {
             crystals.text = progressController.currentState.currenciesProgress.crystals.ToString();
         }
+        
+        public void MinusCrystals(int crystals)
+        {
+            this.crystals.text = (Convert.ToInt32(this.crystals.text) - crystals).ToString();
+            SaveProgress();
+        }
 
         public void SaveProgress()
         {

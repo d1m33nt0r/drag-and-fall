@@ -6433,6 +6433,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 297806817}
   m_CullTransparentMesh: 1
+--- !u!1 &299243784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 299243786}
+  - component: {fileID: 299243785}
+  m_Layer: 0
+  m_Name: FreeSpeedIncrease
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &299243785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299243784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 428d7324bd8946bc8dea0fbfb5628587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tube: {fileID: 1755819904}
+--- !u!4 &299243786
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299243784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 764.25195, y: 1107.9376, z: -319.7137}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &299562331
 GameObject:
   m_ObjectHideFlags: 0
@@ -12017,6 +12061,8 @@ MonoBehaviour:
   bonusType: 1
   concentration: {fileID: 0}
   firstLevelText: {fileID: 0}
+  coinPanel: {fileID: 1652832895}
+  crystalPanel: {fileID: 56227679}
   levels:
   - {fileID: 1098480845}
   - {fileID: 175657088}
@@ -12753,6 +12799,8 @@ MonoBehaviour:
   bonusType: 2
   concentration: {fileID: 0}
   firstLevelText: {fileID: 0}
+  coinPanel: {fileID: 1652832895}
+  crystalPanel: {fileID: 56227679}
   levels:
   - {fileID: 1217542136}
   - {fileID: 1209242985}
@@ -19195,6 +19243,8 @@ MonoBehaviour:
   bonusType: 0
   concentration: {fileID: 6048968299860380404}
   firstLevelText: {fileID: 602326167}
+  coinPanel: {fileID: 1652832895}
+  crystalPanel: {fileID: 56227679}
   levels:
   - {fileID: 474887270}
   - {fileID: 368759177}
@@ -27775,6 +27825,8 @@ MonoBehaviour:
   bonusType: 4
   concentration: {fileID: 0}
   firstLevelText: {fileID: 0}
+  coinPanel: {fileID: 1652832895}
+  crystalPanel: {fileID: 56227679}
   levels:
   - {fileID: 1429011262}
   - {fileID: 1220192686}
@@ -45512,6 +45564,7 @@ MonoBehaviour:
   keyPanel: {fileID: 145964359}
   failedInfinityUI: {fileID: 1390963861}
   sessionData: {fileID: 1357667550}
+  freeSpeedIncrease: {fileID: 299243785}
 --- !u!95 &1776688607
 Animator:
   serializedVersion: 3
@@ -49615,6 +49668,8 @@ MonoBehaviour:
   bonusType: 3
   concentration: {fileID: 0}
   firstLevelText: {fileID: 0}
+  coinPanel: {fileID: 1652832895}
+  crystalPanel: {fileID: 56227679}
   levels:
   - {fileID: 807732653}
   - {fileID: 1219731544}
@@ -52252,6 +52307,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1776688606}
   tube: {fileID: 1755819904}
+  coinPanel: {fileID: 1652832895}
+  crystalPanel: {fileID: 56227679}
   unlockButton: {fileID: 766297515}
   selectButton: {fileID: 756431894}
   price: {fileID: 1661230248}

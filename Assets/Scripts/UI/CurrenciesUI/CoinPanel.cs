@@ -22,6 +22,12 @@ namespace Core
             coins.text = progressController.currentState.currenciesProgress.coins.ToString();
         }
 
+        public void MinusCoins(int coins)
+        {
+            this.coins.text = (Convert.ToInt32(this.coins.text) - coins).ToString();
+            SaveProgress();
+        }
+        
         public void SaveProgress()
         {
             progressController.SaveCurrentState(new CurrentState{

@@ -16,7 +16,7 @@ namespace Core
         [SerializeField] private GameObject platformPrefab;
         [SerializeField] private int countPlatforms;
         [SerializeField] private float distanceBetweenPlatforms;
-        [SerializeField] private float platformMovementSpeed;
+        [SerializeField] public float platformMovementSpeed;
         [SerializeField] private DragController dragController;
         [SerializeField] public VisualController visualController;
         public GameManager gameManager;
@@ -63,6 +63,16 @@ namespace Core
             else gameManager.FailedGame();
         }
 
+        public void IncreaseSpeed(float value)
+        {
+            platformMovementSpeed += value;
+        }
+
+        public void ResetDefaultSpeed()
+        {
+            platformMovementSpeed = 2.25f;
+        }
+        
         private void Initialize()
         {
             ChangeTheme();
