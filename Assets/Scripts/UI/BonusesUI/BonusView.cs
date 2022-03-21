@@ -12,19 +12,13 @@ namespace UI.Bonuses
         public BonusController bonusController;
         public Slider timer;
         public bool isActive { get; private set; }
-        public int index;
-        public BonusType bonusType { get; private set; }
+        public BonusType bonusType;
         public Coroutine coroutine;
         private float defaultTimerValue;
-        
-        public void SetIndex(int index) =>
-            this.index = index;
-        
-        public void Construct(BonusType bonusType)
+
+        public void Construct()
         {
-            this.bonusType = bonusType;
             isActive = true;
- 
             defaultTimerValue = bonusController.GetUpgradedTimer(bonusType);
             timer.maxValue = defaultTimerValue;
             timer.value = defaultTimerValue;
@@ -53,6 +47,7 @@ namespace UI.Bonuses
             if (bonusType == BonusType.Multiplier) bonusController.multiplier = 0;
             timer.value = defaultTimerValue;
             if (bonusType == BonusType.Magnet) player.SetActiveMagnet(false);
+            transform.parent.GetComponent<BonusSlot>().SetDown(this);
             SetActive(false);
         }
         
@@ -60,7 +55,6 @@ namespace UI.Bonuses
         {
             isActive = value;
             gameObject.SetActive(value);
-            if (!value) bonusType = BonusType.None;
         }
         
         private void SetTimerValue(float time) =>

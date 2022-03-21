@@ -30,7 +30,8 @@ namespace Core.Bonuses
         
         public TimerBonus[] bonusParams;
         public BonusView[] bonusViews;
-
+        public BonusSlot[] bonusSlots;
+        
         public int multiplier = 0;
         
         public float multiplierTimer => 10 + currentMultiplierLevel;
@@ -53,7 +54,7 @@ namespace Core.Bonuses
 
             return null;
         }
-        
+
         public float GetUpgradedTimer(BonusType bonusType)
         {
             var currentLevel = 0;
@@ -96,11 +97,7 @@ namespace Core.Bonuses
         private void Start()
         {
             UpdateBonusLevels();
-            
             bonusViews = GetComponentsInChildren<BonusView>();
-            for (var i = 0; i < bonusViews.Length; i++)
-                bonusViews[i].SetIndex(i);
-
             DeactivateAllBonuses();
         }
 
@@ -178,7 +175,6 @@ namespace Core.Bonuses
                 case BonusType.Acceleration:
                     tube.SetMovementSpeed(3.5f);
                     workCountPlatformsAcceleration = countPlatformsForAcceleration;
-                    
                     accelerationIsActive = true;
                     break;
                 case BonusType.Multiplier:
@@ -190,7 +186,7 @@ namespace Core.Bonuses
                     {
                         if (FindEmptyBonusSlot(out var emptyView))
                         {
-                            emptyView.Construct(bonusType);
+                            emptyView.SetUp(GetBonusViewByType(BonusType.Multiplier));
                         }
                     }
                     multiplier++;
@@ -205,7 +201,7 @@ namespace Core.Bonuses
                     {
                         if (FindEmptyBonusSlot(out var emptyView))
                         {
-                            emptyView.Construct(bonusType);
+                            emptyView.SetUp(GetBonusViewByType(BonusType.Shield));
                         }
                     }
 
@@ -220,7 +216,7 @@ namespace Core.Bonuses
                     {
                         if (FindEmptyBonusSlot(out var emptyView))
                         {
-                            emptyView.Construct(bonusType);
+                            emptyView.SetUp(GetBonusViewByType(BonusType.Magnet));
                         }
                     }
 
@@ -229,6 +225,20 @@ namespace Core.Bonuses
             }
         }
 
+        private BonusView GetBonusViewByType(BonusType bonusType)
+        {
+            for (var i = 0; i < bonusViews.Length; i++)
+            {
+                if (bonusViews[i].bonusType == bonusType)
+                {
+                    bonusViews[i].Construct();
+                    return bonusViews[i]; 
+                }
+            }
+
+            return null;
+        }
+        
         private bool TryGetActivatedBonus(BonusType bonusType, out BonusView bonusView)
         {
             for (var i = 0; i < bonusViews.Length; i++)
@@ -244,18 +254,18 @@ namespace Core.Bonuses
             return false;
         }
 
-        private bool FindEmptyBonusSlot(out BonusView bonusView)
+        private bool FindEmptyBonusSlot(out BonusSlot bonusSlot)
         {
-            for (var i = 0; i < bonusViews.Length; i++)
+            for (var i = 0; i < bonusSlots.Length; i++)
             {
-                if (!bonusViews[i].isActive)
+                if (!bonusSlots[i].contained)
                 {
-                    bonusView = bonusViews[i];
+                    bonusSlot = bonusSlots[i];
                     return true;
                 }
             }
 
-            bonusView = default;
+            bonusSlot = default;
             return false;
         }
 
