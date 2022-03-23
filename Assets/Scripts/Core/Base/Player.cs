@@ -11,7 +11,7 @@ namespace Core
     {
         public event Action failed;
 
-        [SerializeField] private Tube tube;
+        [SerializeField] private PlatformMover platformMover;
         [SerializeField] private MagnetPlayer magnetPlayer;
         [SerializeField] private Animator animator;
         [SerializeField] private GameObject fallingTrail;
@@ -176,7 +176,7 @@ namespace Core
                             return;
                         }
                         freeSpeedIncrease.ResetSpeed();
-                        tube.Failed();
+                        platformMover.Failed();
                         SetTriggerStay(true);
                         SetFailedState();
                         break;

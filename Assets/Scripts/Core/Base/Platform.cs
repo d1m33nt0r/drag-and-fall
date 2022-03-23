@@ -20,16 +20,16 @@ namespace Core
 
         public PatternData patternData;
         private Player player;
-        private Tube tube;
+        private PlatformMover platformMover;
         private Segment[] segments;
         private float angle;
         private GainScore gainScore;
         
-        public void Initialize(int _segmentsCount, PatternData patternData, Tube _tube, Player _player, BonusController _bonusController, GainScore gainScore)
+        public void Initialize(int _segmentsCount, PatternData patternData, PlatformMover platformMover, Player _player, BonusController _bonusController, GainScore gainScore)
         {
             angle = 360 / _segmentsCount;
             segments = new Segment[_segmentsCount];
-            tube = _tube;
+            this.platformMover = platformMover;
 
             this.gainScore = gainScore;
             this.patternData = patternData;
@@ -38,7 +38,7 @@ namespace Core
             for (var i = 1; i <= patternData.segmentsData.Length; i++)
             {
                 segments[i - 1] = Instantiate(segmentPrefab, position, Quaternion.AngleAxis(angle * i, Vector3.up), transform);
-                segments[i - 1].Initialize(patternData.segmentsData[i - 1], _tube, this, _bonusController);
+                segments[i - 1].Initialize(patternData.segmentsData[i - 1], platformMover, this, _bonusController);
             }
 
             platformDestroyed += _player.SetFallingTrailState;
@@ -80,10 +80,10 @@ namespace Core
             gainScore.SetText(1);
             gainScore.Animate();
             
-            if (tube.isLevelMode && patternData.isLast) tube.FinishLevel(tube.gameManager.gameMode.levelMode.level);
+            if (platformMover.isLevelMode && patternData.isLast) platformMover.FinishLevel(platformMover.gameManager.gameMode.levelMode.level);
             platformDestroyed?.Invoke();
             player.SetTriggerStay(false);
-            tube.MovePlatforms();
+            platformMover.MovePlatforms();
             increaseConcentraion?.Invoke();
             Destroy(gameObject);
         }

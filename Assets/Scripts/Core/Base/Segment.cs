@@ -10,7 +10,7 @@ namespace Core
     {
         public SegmentData segmentData;
         [SerializeField] private Transform spawnPoint;
-        private Tube tube;
+        private PlatformMover platformMover;
         private Platform platform;
         private BonusController bonusController;
         [SerializeField] private GameObject coinPrefab;
@@ -21,11 +21,11 @@ namespace Core
         [SerializeField] private GameObject magnet;
         [SerializeField] private GameObject key;
         
-        public void Initialize(SegmentData _segmentData, Tube _tube, Platform _platform, BonusController _bonusController)
+        public void Initialize(SegmentData _segmentData, PlatformMover platformMover, Platform _platform, BonusController _bonusController)
         {
             platform = _platform;
             segmentData = _segmentData;
-            tube = _tube;
+            this.platformMover = platformMover;
             bonusController = _bonusController;
             SpawnContent();
             ChangeTheme();
@@ -41,8 +41,8 @@ namespace Core
             }
             else
             {
-                transform.GetComponent<MeshRenderer>().material = tube.visualController.GetSegmentMaterial(segmentData.segmentType);
-                transform.GetComponent<MeshFilter>().mesh = tube.visualController.GetSegmentMesh();
+                transform.GetComponent<MeshRenderer>().material = platformMover.visualController.GetSegmentMaterial(segmentData.segmentType);
+                transform.GetComponent<MeshFilter>().mesh = platformMover.visualController.GetSegmentMesh();
             }
         }
 

@@ -16,10 +16,12 @@ namespace UI
         [SerializeField] private ScorePanel scorePanel;
         [SerializeField] private ProgressController progressController;
         [SerializeField] private KeySpender keySpender;
+        [SerializeField] private Text buttonKeysText;
         
         private int currentBestScore;
         public void StartTimer()
         {
+            buttonKeysText.text = keySpender.currentUsageStep.ToString();
             currentBestScore = progressController.currentState.bestScore;
             timer.fillAmount = 1;
             timerValue = 5;

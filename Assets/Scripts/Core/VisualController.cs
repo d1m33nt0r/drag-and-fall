@@ -11,7 +11,7 @@ namespace Core
         [SerializeField] private ShopData shopData;
         [SerializeField] private ProgressController progressController;
         
-        [SerializeField] private Tube tube;
+        [SerializeField] private PlatformMover platformMover;
         [SerializeField] private Player player;
 
         private void Start()
@@ -21,10 +21,10 @@ namespace Core
 
         public void SetNeededThemes()
         {
-            tube.ChangeTheme();
+            platformMover.ChangeTheme();
             player.ChangeTheme();
             
-            foreach (var platform in tube.platforms)
+            foreach (var platform in platformMover.platforms)
             {
                 for (var i = 0; i < Constants.Platform.COUNT_SEGMENTS; i++)
                     platform.transform.GetChild(i).GetComponent<Segment>().ChangeTheme();

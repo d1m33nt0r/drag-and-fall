@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 1
-  speed: 0.5
+  speed: 1
   axis: 1
 --- !u!114 &5579393256393416431
 MonoBehaviour:

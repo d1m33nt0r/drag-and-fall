@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Tube 1
   m_Shader: {fileID: 4800000, guid: 27814869e043c2243b0d6606a7afce5f, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: TCP2_REFLECTIONS
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -66,11 +66,11 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _FresnelMax: 1.5
-    - _FresnelMin: 0
+    - _FresnelMin: 0.5
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LightWrapFactor: 0.5
+    - _LightWrapFactor: 0.96
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -87,18 +87,18 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _UseAmbient: 0
-    - _UseReflections: 0
+    - _UseReflections: 1
     - _UseSpecular: 0
     - _ZWrite: 1
     - __BeginGroup_ShadowHSV: 0
     - __EndGroup: 0
     - __dummy__: 0
     m_Colors:
-    - _Color: {r: 0.30588233, g: 1, b: 0.91290563, a: 1}
+    - _Color: {r: 0.15859737, g: 0.41509432, b: 0.38321334, a: 1}
     - _DiffuseTint: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HColor: {r: 0.75, g: 0.75, b: 0.75, a: 1}
-    - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ReflectionColor: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
     - _SColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _TCP2_AMBIENT_BACK: {r: 0, g: 0, b: 0, a: 1}

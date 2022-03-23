@@ -9,6 +9,7 @@ TagManager:
   - ship
   - asteroid
   - Segment
+  - TubeTrigger
   layers:
   - Default
   - TransparentFX

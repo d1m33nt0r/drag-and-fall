@@ -8,7 +8,7 @@ namespace UI
     public class LevelProgress : MonoBehaviour
     {
         [SerializeField] private Slider slider;
-        [SerializeField] private Tube tube;
+        [SerializeField] private PlatformMover platformMover;
         [SerializeField] private Text level;
         
         public void Initialize(LevelData levelData)
@@ -25,7 +25,7 @@ namespace UI
         
         public void Step()
         {
-            if (!tube.isLevelMode) return;
+            if (!platformMover.isLevelMode) return;
             slider.value += 1;
         }
     }

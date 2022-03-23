@@ -15,7 +15,7 @@ namespace Core
         [SerializeField] private FinishLevelUI finishLevelUI;
         [SerializeField] private Player player;
         [SerializeField] public Animator cameraAnimator;
-        [SerializeField] public Tube tube;
+        [SerializeField] public PlatformMover platformMover;
         [SerializeField] public UIManager uiManager;
         [SerializeField] public GameMode gameMode;
         [SerializeField] public ShopController shopController;
@@ -32,7 +32,7 @@ namespace Core
 
         private void Start()
         {
-            tube.SetDefaultState();
+            platformMover.SetDefaultState();
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveMainMenu(true);
             uiManager.SetActiveFinishLevel(false);
@@ -50,7 +50,7 @@ namespace Core
             uiManager.scorePanel.ResetCounter();
             sessionData.ResetData();
             gameStarted = true;
-            tube.SetDefaultState();
+            platformMover.SetDefaultState();
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveLevelUI(false);
             uiManager.SetActiveMainMenu(false);
@@ -65,7 +65,7 @@ namespace Core
         public void OpenShop()
         {
             cameraAnimator.Play("OpenShop");
-            tube.SetShopState();
+            platformMover.SetShopState();
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveLevelUI(false);
@@ -80,7 +80,7 @@ namespace Core
         public void CloseShop()
         {
             cameraAnimator.Play("CloseShop");
-            tube.SetDefaultState();
+            platformMover.SetDefaultState();
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveMainMenu(true);
             uiManager.SetActiveLevelUI(false);
@@ -97,16 +97,16 @@ namespace Core
             switch (_shopState)
             {
                 case ShopState.EnvironmentSkin:
-                    tube.SetShopState();
+                    platformMover.SetShopState();
                     break;
                 case ShopState.PlayerSkin:
-                    tube.SetShopState();
+                    platformMover.SetShopState();
                     break;
                 case ShopState.TrailSkin:
-                    tube.SetShopState();
+                    platformMover.SetShopState();
                     break;
                 case ShopState.FallingTrailSkin:
-                    tube.SetShopFallingTrail();
+                    platformMover.SetShopFallingTrail();
                     break;
             }
         }
@@ -114,8 +114,8 @@ namespace Core
         public void ShowLevels()
         {
             uiManager.SetActiveScorePanel(false);
-            tube.SetLevelMode(false);
-            tube.SetDefaultState();
+            platformMover.SetLevelMode(false);
+            platformMover.SetDefaultState();
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveMainMenu(true);
             uiManager.SetActiveShopMenu(false);
@@ -152,12 +152,12 @@ namespace Core
         public void ShowMainMenu()
         {
             uiManager.SetActiveScorePanel(false);
-            bonusController.DeactivateAllBonuses();
-            tube.SetLevelMode(false);
+            //bonusController.DeactivateAllBonuses();
+            platformMover.SetLevelMode(false);
             gameStarted = false;
             uiManager.SetActiveUpgradeMenu(false);
-            tube.SetDefaultState();
-            tube.InitializePlatforms();
+            platformMover.SetDefaultState();
+            platformMover.InitializePlatforms();
             uiManager.SetActiveMainMenu(true);
             uiManager.SetActiveLevelUI(false);
             uiManager.SetActiveShopMenu(false);
@@ -170,7 +170,7 @@ namespace Core
 
         public void ContinueGame()
         {
-            tube.platforms[0].DestroyPlatform();
+            platformMover.platforms[0].DestroyPlatform();
             player.ContinueGame();
             gameStarted = true;
             uiManager.SetActiveGameMenu(true);
@@ -182,11 +182,11 @@ namespace Core
             uiManager.scorePanel.ResetCounter();
             bonusController.DeactivateAllBonuses();
             gameStarted = true;
-            tube.SetDefaultState();
-            tube.gameManager.gameMode.levelMode.SetLevelData(
-                tube.levelsData.leves[tube.gameManager.gameMode.levelMode.level.levelIndex + 1]);
-            levelProgress.Initialize(tube.gameManager.gameMode.levelMode.level);
-            tube.InitializePlatforms();
+            platformMover.SetDefaultState();
+            platformMover.gameManager.gameMode.levelMode.SetLevelData(
+                platformMover.levelsData.leves[platformMover.gameManager.gameMode.levelMode.level.levelIndex + 1]);
+            levelProgress.Initialize(platformMover.gameManager.gameMode.levelMode.level);
+            platformMover.InitializePlatforms();
             
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveMainMenu(false);
@@ -221,7 +221,7 @@ namespace Core
         public void FailedLevel()
         {
             gameStarted = false;
-            tube.SetDefaultState();
+            platformMover.SetDefaultState();
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveShopMenu(false);
@@ -239,11 +239,11 @@ namespace Core
             uiManager.SetActiveScorePanel(true);
             uiManager.scorePanel.GetComponent<ScorePanel>().ResetCounter();
             gameStarted = true;
-            tube.SetDefaultState();
+            platformMover.SetDefaultState();
 
             uiManager.SetActiveUpgradeMenu(false);
-            tube.gameManager.gameMode.levelMode.ResetPointer();
-            tube.InitializePlatforms();
+            platformMover.gameManager.gameMode.levelMode.ResetPointer();
+            platformMover.InitializePlatforms();
 
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveShopMenu(false);
@@ -257,11 +257,11 @@ namespace Core
 
         public void ShowUpgradeMenu()
         {
-            tube.SetLevelMode(false);
+            platformMover.SetLevelMode(false);
             gameStarted = false;
             uiManager.SetActiveUpgradeMenu(true);
-            tube.SetDefaultState();
-            tube.InitializePlatforms();
+            platformMover.SetDefaultState();
+            platformMover.InitializePlatforms();
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveLevelUI(false);
             uiManager.SetActiveShopMenu(false);

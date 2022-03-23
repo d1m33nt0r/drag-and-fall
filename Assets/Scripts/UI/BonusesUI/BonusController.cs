@@ -16,7 +16,7 @@ namespace Core.Bonuses
     public class BonusController : MonoBehaviour
     {
         [SerializeField] private ProgressController progressController;
-        [SerializeField] private Tube tube;
+        [SerializeField] private PlatformMover platformMover;
 
         public int currentShieldLevel;
         public int currentMultiplierLevel;
@@ -90,7 +90,7 @@ namespace Core.Bonuses
             if (workCountPlatformsAcceleration == 0)
             {
                 accelerationIsActive = false;
-                tube.SetMovementSpeed(2.25f);
+                platformMover.SetMovementSpeed(2.25f);
             }
         }
         
@@ -173,7 +173,7 @@ namespace Core.Bonuses
             switch (bonusType)
             {
                 case BonusType.Acceleration:
-                    tube.SetMovementSpeed(3.5f);
+                    platformMover.SetMovementSpeed(3.5f);
                     workCountPlatformsAcceleration = countPlatformsForAcceleration;
                     accelerationIsActive = true;
                     break;

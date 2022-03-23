@@ -21,11 +21,17 @@ namespace Progress
 
         private void Awake()
         {
+#if UNITY_EDITOR
             path = Path.Combine(Application.dataPath, "shopProgress.json");
             path2 = Path.Combine(Application.dataPath, "currentState.json");
             path3 = Path.Combine(Application.dataPath, "levelsProgress.json");
             path4 = Path.Combine(Application.dataPath, "upgradeProgress.json");
-            
+#elif UNITY_ANDROID
+            path = Path.Combine(Application.persistentDataPath, "shopProgress.json");
+            path2 = Path.Combine(Application.persistentDataPath, "currentState.json");
+            path3 = Path.Combine(Application.persistentDataPath, "levelsProgress.json");
+            path4 = Path.Combine(Application.persistentDataPath, "upgradeProgress.json");
+#endif
             for (var i = 0; i < levelsData.leves.Count; i++)
             {
                 if (i == 0)

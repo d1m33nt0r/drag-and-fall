@@ -6,7 +6,7 @@ namespace Core
 {
     public class LevelButton : Button
     {
-        private Tube tube;
+        private PlatformMover platformMover;
         
         [SerializeField] private Text levelText;
         [SerializeField] private Text levelText2;
@@ -24,14 +24,14 @@ namespace Core
 
         public override void OnPointerDown(PointerEventData pointerEventData)
         {
-            tube.EnableLevelMode(transform.parent.parent.GetComponent<LevelUIController>().levelsData.leves[levelIndex]);
-            tube.SetLevelMode(true);
-            tube.gameManager.StartedLevel();
+            platformMover.EnableLevelMode(transform.parent.parent.GetComponent<LevelUIController>().levelsData.leves[levelIndex]);
+            platformMover.SetLevelMode(true);
+            platformMover.gameManager.StartedLevel();
         }
         
         private void Awake()
         {
-            tube = transform.parent.parent.GetComponent<LevelUIController>().tube;
+            platformMover = transform.parent.parent.GetComponent<LevelUIController>().platformMover;
         }
 
         public void SetLevelIndex(int levelIndex)

@@ -9,7 +9,7 @@ namespace Core
     public class ShopController : MonoBehaviour
     {
         [SerializeField] private Player player;
-        [SerializeField] private Tube tube;
+        [SerializeField] private PlatformMover platformMover;
         [SerializeField] private CoinPanel coinPanel;
         [SerializeField] private CrystalPanel crystalPanel;
         [SerializeField] private Button unlockButton;
@@ -247,7 +247,7 @@ namespace Core
                     
                     SetText(progressController.shopProgress.environmentSkins[currentEnvironmentSkinIndex].isBought, 
                         shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].price);
-                    tube.TryOnSkin(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex]);
+                    platformMover.TryOnSkin(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex]);
                     break;
                 case ShopState.PlayerSkin:
                     if (currentPlayerSkinIndex == shopData.PlayerSkinData.Count - 1)
@@ -294,7 +294,7 @@ namespace Core
                     
                     SetText(progressController.shopProgress.environmentSkins[currentEnvironmentSkinIndex].isBought, 
                         shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].price);
-                    tube.TryOnSkin(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex]);
+                    platformMover.TryOnSkin(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex]);
                     break;
                 case ShopState.PlayerSkin:
                     if (currentPlayerSkinIndex == 0)
@@ -334,7 +334,7 @@ namespace Core
             switch (shopState)
             {
                 case ShopState.EnvironmentSkin:
-                    tube.TryOnSkin(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex]);
+                    platformMover.TryOnSkin(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex]);
                     break;
                 case ShopState.PlayerSkin:
                     player.TryOnPlayerSkin(shopData.PlayerSkinData[currentPlayerSkinIndex].mesh, shopData.PlayerSkinData[currentPlayerSkinIndex].material);

@@ -4,18 +4,18 @@ namespace Core
 {
     public class FreeSpeedIncrease : MonoBehaviour
     {
-        [SerializeField] private Tube tube;
+        [SerializeField] private PlatformMover platformMover;
         private float threshold = 3.5f;
         
         public void IncreaseSpeed()
         {
-            if (tube.platformMovementSpeed >= threshold) return;
-            tube.IncreaseSpeed(0.1f);
+            if (platformMover.platformMovementSpeed >= threshold) return;
+            platformMover.IncreaseSpeed(0.1f);
         }
 
         public void ResetSpeed()
         {
-            tube.ResetDefaultSpeed();
+            platformMover.ResetDefaultSpeed();
         }
     }
 }

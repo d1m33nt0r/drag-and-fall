@@ -14,7 +14,7 @@ Shader "DragAndFall/CustomShader"
 		_Shadow_HSV_S ("Saturation", Range(-1,1)) = 0
 		_Shadow_HSV_V ("Value", Range(-1,1)) = 0
 		[HideInInspector] __EndGroup ("Shadow HSV", Float) = 0
-		_MainTex ("Albedo", 2D) = "white" {}
+		[NoScaleOffset] _Albedo ("Albedo", 2D) = "white" {}
 		[TCP2Separator]
 
 		[TCP2Header(Ramp Shading)]
@@ -87,11 +87,10 @@ Shader "DragAndFall/CustomShader"
 		#include "UnityLightingCommon.cginc"	// needed for LightColor
 
 		// Shader Properties
-		sampler2D _MainTex;
+		sampler2D _Albedo;
 		sampler2D _StylizedThreshold;
 		
 		// Shader Properties
-		float4 _MainTex_ST;
 		fixed4 _Color;
 		half4 _Emission;
 		float4 _StylizedThreshold_ST;
@@ -228,7 +227,7 @@ Shader "DragAndFall/CustomShader"
 			UNITY_INITIALIZE_OUTPUT(Input, output);
 
 			// Texture Coordinates
-			output.texcoord0.xy = v.texcoord0.xy * _MainTex_ST.xy + _MainTex_ST.zw;
+			output.texcoord0 = v.texcoord0.xy;
 
 			float4 clipPos = UnityObjectToClipPos(v.vertex);
 
@@ -297,7 +296,7 @@ Shader "DragAndFall/CustomShader"
 		void surf(Input input, inout SurfaceOutputCustom output)
 		{
 			// Shader Properties Sampling
-			float4 __albedo = ( tex2D(_MainTex, input.texcoord0.xy).rgba );
+			float4 __albedo = ( tex2D(_Albedo, input.texcoord0.xy).rgba );
 			float4 __mainColor = ( _Color.rgba );
 			float __alpha = ( __albedo.a * __mainColor.a );
 			float3 __emission = ( _Emission.rgb );
@@ -487,5 +486,5 @@ Shader "DragAndFall/CustomShader"
 	CustomEditor "ToonyColorsPro.ShaderGenerator.MaterialInspector_SG2"
 }
 
-/* TCP_DATA u config(unity:"2020.3.12f1";ver:"2.7.4";tmplt:"SG2_Template_Default";features:list["UNITY_5_4","UNITY_5_5","UNITY_5_6","UNITY_2017_1","UNITY_2018_1","UNITY_2018_2","UNITY_2018_3","UNITY_2019_1","UNITY_2019_2","UNITY_2019_3","UNITY_2020_1","RAMP_MAIN_OTHER","RAMP_SEPARATED","WRAPPED_LIGHTING_CUSTOM","SHADOW_HSV","SPECULAR_ANISOTROPIC","SPECULAR","SPECULAR_TOON","SPECULAR_SHADER_FEATURE","EMISSION","RIM","RIM_DIR","RIM_SHADER_FEATURE","RIM_DIR_PERSP_CORRECTION","AMBIENT_SHADER_FEATURE","DIRAMBIENT","TEXTURED_THRESHOLD","TT_SHADER_FEATURE","DIFFUSE_TINT","RAMP_BANDS"];flags:list[];flags_extra:dict[];keywords:dict[RENDER_TYPE="Opaque",RampTextureDrawer="[TCP2Gradient]",RampTextureLabel="Ramp Texture",SHADER_TARGET="3.0",RIM_LABEL="Rim Lighting"];shaderProperties:list[];customTextures:list[];codeInjection:codeInjection(injectedFiles:list[];mark:False);matLayers:list[]) */
-/* TCP_HASH 6b3e56ef8a04a77952220fc7fc15547f */
+/* TCP_DATA u config(unity:"2020.3.12f1";ver:"2.7.4";tmplt:"SG2_Template_Default";features:list["UNITY_5_4","UNITY_5_5","UNITY_5_6","UNITY_2017_1","UNITY_2018_1","UNITY_2018_2","UNITY_2018_3","UNITY_2019_1","UNITY_2019_2","UNITY_2019_3","UNITY_2020_1","RAMP_MAIN_OTHER","RAMP_SEPARATED","WRAPPED_LIGHTING_CUSTOM","SHADOW_HSV","SPECULAR_ANISOTROPIC","SPECULAR","SPECULAR_TOON","SPECULAR_SHADER_FEATURE","EMISSION","RIM","RIM_DIR","RIM_SHADER_FEATURE","RIM_DIR_PERSP_CORRECTION","AMBIENT_SHADER_FEATURE","DIRAMBIENT","TEXTURED_THRESHOLD","TT_SHADER_FEATURE","DIFFUSE_TINT","RAMP_BANDS"];flags:list[];flags_extra:dict[];keywords:dict[RENDER_TYPE="Opaque",RampTextureDrawer="[TCP2Gradient]",RampTextureLabel="Ramp Texture",SHADER_TARGET="3.0",RIM_LABEL="Rim Lighting"];shaderProperties:list[sp(name:"Albedo";imps:list[imp_mp_texture(uto:False;tov:"";tov_lbl:"";gto:False;sbt:False;scr:False;scv:"";scv_lbl:"";gsc:False;roff:False;goff:False;sin_anm:False;sin_anmv:"";sin_anmv_lbl:"";gsin:False;notile:False;triplanar_local:False;def:"white";locked_uv:False;uv:0;cc:4;chan:"RGBA";mip:-1;mipprop:False;ssuv_vert:False;ssuv_obj:False;uv_type:Texcoord;uv_chan:"XZ";uv_shaderproperty:__NULL__;prop:"_Albedo";md:"";gbv:False;custom:False;refs:"";guid:"971ced18-2182-4590-93fa-3248b5624a62";op:Multiply;lbl:"Albedo";gpu_inst:False;locked:False;impl_index:-1)];layers:list[];unlocked:list[];clones:dict[];isClone:False)];customTextures:list[ct(cimp:imp_mp_texture(uto:True;tov:"";tov_lbl:"";gto:False;sbt:True;scr:True;scv:"";scv_lbl:"";gsc:False;roff:False;goff:False;sin_anm:False;sin_anmv:"";sin_anmv_lbl:"";gsin:False;notile:False;triplanar_local:False;def:"white";locked_uv:False;uv:4;cc:4;chan:"RGBA";mip:0;mipprop:False;ssuv_vert:False;ssuv_obj:False;uv_type:ScreenSpace;uv_chan:"XZ";uv_shaderproperty:__NULL__;prop:"_ScrollingTexture";md:"";gbv:False;custom:True;refs:"";guid:"2a3fe211-db0a-46c2-8561-9b10c7d01d4d";op:Multiply;lbl:"Scrolling Texture";gpu_inst:False;locked:False;impl_index:-1);exp:True;uv_exp:False;imp_lbl:"Texture")];codeInjection:codeInjection(injectedFiles:list[];mark:False);matLayers:list[ml(uid:"5bafc8";name:"Material Layer";src:sp(name:"layer_5bafc8";imps:list[imp_mp_texture(uto:False;tov:"";tov_lbl:"";gto:False;sbt:False;scr:False;scv:"";scv_lbl:"";gsc:False;roff:False;goff:False;sin_anm:False;sin_anmv:"";sin_anmv_lbl:"";gsin:False;notile:False;triplanar_local:False;def:"white";locked_uv:False;uv:0;cc:1;chan:"R";mip:-1;mipprop:False;ssuv_vert:False;ssuv_obj:False;uv_type:Texcoord;uv_chan:"XZ";uv_shaderproperty:__NULL__;prop:"_layer_5bafc8";md:"";gbv:False;custom:False;refs:"";guid:"87db4f0f-d6a5-447d-918a-7ef8457e88e4";op:Multiply;lbl:"Source Texture";gpu_inst:False;locked:False;impl_index:-1)];layers:list[];unlocked:list[];clones:dict[];isClone:False);use_contrast:False;ctrst:__NULL__;use_noise:False;noise:__NULL__)]) */
+/* TCP_HASH 0d8c15d1d7e3b94ba8c421ec442228db */

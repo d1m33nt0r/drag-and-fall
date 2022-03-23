@@ -1,14 +1,18 @@
 {
     "AutoNames": true,
     "SubFolders": true,
-    "OverwriteConfig": false,
+    "OverwriteConfig": true,
     "LoadAllShaders": false,
     "CustomOutputPath": "Shaders/DragAndFall",
     "LastImplementationExportImportPath": "C:/Users/fallentorch/Desktop/drag-and-fall/Assets",
     "OpenedFoldouts": [
-        "LIGHTING",
         "SPECIAL EFFECTS",
-        "STYLIZATION"
+        "STYLIZATION",
+        "OPTIONS",
+        "SHADER STATES",
+        "TRANSPARENCY/BLENDING",
+        "SURFACE",
+        "LIGHTING"
     ],
     "UseCustomFont": true,
     "CustomFont": {

@@ -47,7 +47,8 @@ namespace UI.Bonuses
             if (bonusType == BonusType.Multiplier) bonusController.multiplier = 0;
             timer.value = defaultTimerValue;
             if (bonusType == BonusType.Magnet) player.SetActiveMagnet(false);
-            transform.parent.GetComponent<BonusSlot>().SetDown(this);
+            if (transform.parent.GetComponent<BonusSlot>())
+                transform.parent.GetComponent<BonusSlot>().SetDown(this);
             SetActive(false);
         }
         

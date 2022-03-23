@@ -7,7 +7,7 @@ namespace Core
 {
     public class LevelUIController : MonoBehaviour
     {
-        public Tube tube; 
+        public PlatformMover platformMover; 
         public ProgressController progressController;
         public LevelsData levelsData;
         [SerializeField] private List<LevelButton> levelButtons;

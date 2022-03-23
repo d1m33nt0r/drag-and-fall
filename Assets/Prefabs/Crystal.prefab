@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 1
-  speed: 0.5
+  speed: 1
   axis: 1
 --- !u!65 &3443404969930331943
 BoxCollider:
