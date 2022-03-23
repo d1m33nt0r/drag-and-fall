@@ -67,6 +67,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TriGround:
+        m_Texture: {fileID: 2800000, guid: 79b692d695db14347b4715a5188ac2cc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TriSide:
+        m_Texture: {fileID: 2800000, guid: 79b692d695db14347b4715a5188ac2cc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _scrollTex:
         m_Texture: {fileID: 2800000, guid: 79b692d695db14347b4715a5188ac2cc, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -113,6 +121,7 @@ Material:
     - __BeginGroup_ShadowHSV: 1
     - __EndGroup: 0
     - __dummy__: 0
+    - _scrollTex_Mip: 5.36
     m_Colors:
     - _Color: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
     - _DiffuseTint: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
@@ -130,6 +139,7 @@ Material:
     - _TCP2_AMBIENT_LEFT: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_RIGHT: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_TOP: {r: 0, g: 0, b: 0, a: 1}
+    - _TriplanarBlendStrength: {r: 2, g: 8, b: 2, a: 0.5}
     - _TriplanarSamplingStrength: {r: 8, g: 8, b: 8, a: 0.5}
-    - _scrollTex_SC: {r: 0, g: 0.21, b: 0, a: 0}
+    - _scrollTex_SC: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
