@@ -126,25 +126,32 @@ namespace Core
             switch (segmentData.segmentContent)
             {
                 case SegmentContent.Coin:
-                    segmentContentPool.ReturnObjectToPool(SegmentContent.Coin, transform.GetChild(0).GetChild(0).gameObject);
+                    if (transform.GetChild(0).childCount > 0)
+                        segmentContentPool.ReturnObjectToPool(SegmentContent.Coin, transform.GetChild(0).GetChild(0).gameObject);
                     break;
                 case SegmentContent.Crystal:
-                    segmentContentPool.ReturnObjectToPool(SegmentContent.Crystal, transform.GetChild(0).GetChild(0).gameObject);
+                    if (transform.GetChild(0).childCount > 0)
+                        segmentContentPool.ReturnObjectToPool(SegmentContent.Crystal, transform.GetChild(0).GetChild(0).gameObject);
                     break;
                 case SegmentContent.Acceleration:
-                    segmentContentPool.ReturnObjectToPool(SegmentContent.Acceleration, transform.GetChild(0).GetChild(0).gameObject);
+                    if (transform.GetChild(0).childCount > 0)
+                        segmentContentPool.ReturnObjectToPool(SegmentContent.Acceleration, transform.GetChild(0).GetChild(0).gameObject);
                     break;
                 case SegmentContent.Multiplier:
-                    segmentContentPool.ReturnObjectToPool(SegmentContent.Multiplier, transform.GetChild(0).GetChild(0).gameObject);
+                    if (transform.GetChild(0).childCount > 0)
+                        segmentContentPool.ReturnObjectToPool(SegmentContent.Multiplier, transform.GetChild(0).GetChild(0).gameObject);
                     break;
                 case SegmentContent.Shield:
-                    segmentContentPool.ReturnObjectToPool(SegmentContent.Shield, transform.GetChild(0).GetChild(0).gameObject);
+                    if (transform.GetChild(0).childCount > 0)
+                        segmentContentPool.ReturnObjectToPool(SegmentContent.Shield, transform.GetChild(0).GetChild(0).gameObject);
                     break;
                 case SegmentContent.Magnet:
-                    segmentContentPool.ReturnObjectToPool(SegmentContent.Magnet, transform.GetChild(0).GetChild(0).gameObject);
+                    if (transform.GetChild(0).childCount > 0)
+                        segmentContentPool.ReturnObjectToPool(SegmentContent.Magnet, transform.GetChild(0).GetChild(0).gameObject);
                     break;
                 case SegmentContent.Key:
-                    segmentContentPool.ReturnObjectToPool(SegmentContent.Key, transform.GetChild(0).GetChild(0).gameObject);
+                    if (transform.GetChild(0).childCount > 0)
+                        segmentContentPool.ReturnObjectToPool(SegmentContent.Key, transform.GetChild(0).GetChild(0).gameObject);
                     break;
             }
         }

@@ -2,7 +2,6 @@
 using Core.Bonuses;
 using Data.Core;
 using Data.Core.Segments;
-using Data.Core.Segments.Content;
 using ObjectPool;
 using UI;
 using UnityEngine;
@@ -16,7 +15,9 @@ namespace Core
         public event Action increaseConcentraion;
         
         [SerializeField] private Segment segmentPrefab;
-
+        
+        private MainPool mainPool;
+        
         private bool destroy;
         public Action platformDestroyed;
         public int countTouches = 0;
@@ -30,20 +31,24 @@ namespace Core
         private SegmentContentPool segmentContentPool;
         
         public void Initialize(int _segmentsCount, PatternData patternData, PlatformMover platformMover, 
-            Player _player, BonusController _bonusController, GainScore gainScore, SegmentContentPool segmentContentPool)
+            Player _player, BonusController _bonusController, GainScore gainScore, SegmentContentPool segmentContentPool, MainPool mainPool)
         {
             this.segmentContentPool = segmentContentPool;
             angle = 360 / _segmentsCount;
             segments = new Segment[_segmentsCount];
             this.platformMover = platformMover;
-
+            this.mainPool = mainPool;
             this.gainScore = gainScore;
             this.patternData = patternData;
             var position = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
 
             for (var i = 1; i <= patternData.segmentsData.Length; i++)
             {
-                segments[i - 1] = Instantiate(segmentPrefab, position, Quaternion.AngleAxis(angle * i, Vector3.up), transform);
+                segments[i - 1] = mainPool.GetCleanSegmentInstance().GetComponent<Segment>();
+                //Instantiate(segmentPrefab, position, Quaternion.AngleAxis(angle * i, Vector3.up), transform);
+                segments[i - 1].transform.SetParent(transform);
+                segments[i - 1].transform.position = position;
+                segments[i - 1].transform.rotation = Quaternion.AngleAxis(angle * i, Vector3.up);
                 segments[i - 1].Initialize(patternData.segmentsData[i - 1], platformMover, this, _bonusController, segmentContentPool);
             }
 
@@ -86,32 +91,43 @@ namespace Core
             gainScore.SetText(1);
             gainScore.Animate();
             
-            if (platformMover.isLevelMode && patternData.isLast) platformMover.FinishLevel(platformMover.gameManager.gameMode.levelMode.level);
-            platformDestroyed?.Invoke();
+            if (platformMover.isLevelMode && patternData.isLast)
+                platformMover.FinishLevel(platformMover.gameManager.gameMode.levelMode.level);
             
+            platformDestroyed?.Invoke();
             platformMover.MovePlatforms();
             increaseConcentraion?.Invoke();
-            for (var i = 0; i < segments.Length; i++)
-            {
-                segments[i].ReturnSegmentContentToPool();
-            }
-            Destroy(gameObject);
+            
+            increaseConcentraion = null;
+            resetConcentraion = null;
+            increaseConcentraion = null;
+            platformDestroyed = null;
+            
+            ReturnSegmentContentToPool();
+            ReturnSegmentsToPool();
+            
+            mainPool.ReturnPlatformToPool(gameObject);
+            player.SetTriggerStay(false);
         }
 
-        private void OnDestroy()
+        private void ReturnSegmentsToPool()
         {
-            player.SetTriggerStay(false);
+            for (var i = 0; i < segments.Length; i++)
+                mainPool.ReturnSegmentToPool(segments[i].gameObject);
+        }
+        
+        private void ReturnSegmentContentToPool()
+        {
+            for (var i = 0; i < segments.Length; i++)
+                segments[i].ReturnSegmentContentToPool();
         }
 
         public void BreakDownPlatform()
         {
-            Rigidbody[] rb = new Rigidbody[segments.Length];
+            var rb = new Rigidbody[segments.Length];
 
             for(var i = 0; i < segments.Length; i++)
-            {
-                segments[i].gameObject.GetComponent<MeshCollider>().enabled = false;
                 rb[i] = segments[i].gameObject.AddComponent(typeof(Rigidbody)) as Rigidbody;
-            }
 
             for(var i = 0; i < segments.Length; i++)
                 rb[i].AddForce(Random.Range(-10, 10), Random.Range(0, 10), Random.Range(2, 5), ForceMode.Impulse);

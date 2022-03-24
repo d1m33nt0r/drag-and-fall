@@ -29,7 +29,8 @@ namespace Core
         public LevelsData levelsData;
         [SerializeField] private BonusController bonusController;
         [SerializeField] private LevelProgress levelProgress;
-
+        [SerializeField] private MainPool mainPool;
+        
         public bool tubeIsInitialized;
         public bool platformsIsInitialized;
         public bool isLevelMode;
@@ -298,9 +299,13 @@ namespace Core
 
         private void CreateNewPlatform(int _platformIndex, PatternData patternData, bool hide)
         {
-            var platformInstance = Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.Euler(transform.rotation.eulerAngles), transform);
+            var platformInstance = mainPool.GetCleanPlatformInstance();
+            //Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.Euler(transform.rotation.eulerAngles), transform);
+            platformInstance.transform.SetParent(transform);
+            platformInstance.transform.position = localPositionsOfPlatforms[_platformIndex];
+            platformInstance.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles);
             var platform = platformInstance.GetComponent<Platform>();
-            platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, player, bonusController, gainScore, segmentContentPool);
+            platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, player, bonusController, gainScore, segmentContentPool, mainPool);
             platform.increaseConcentraion += IncreaseConcentration;
             platform.resetConcentraion += ResetConcentration;
             platform.increaseConcentraion += LevelStep;
