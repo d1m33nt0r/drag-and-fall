@@ -20,8 +20,6 @@ MonoBehaviour:
     - segmentType: 0
       segmentContent: 0
     - segmentType: 0
-      segmentContent: 4
-    - segmentType: 0
       segmentContent: 0
     - segmentType: 0
       segmentContent: 0
@@ -29,108 +27,6 @@ MonoBehaviour:
       segmentContent: 0
     - segmentType: 0
       segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-  - isLast: 0
-    segmentsData:
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 2
-      segmentContent: 3
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 2
-      segmentContent: 0
-    - segmentType: 1
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-  - isLast: 0
-    segmentsData:
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 1
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 2
-      segmentContent: 2
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 1
-      segmentContent: 0
-    - segmentType: 1
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-  - isLast: 0
-    segmentsData:
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 2
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 7
-    - segmentType: 2
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 1
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 2
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-  - isLast: 0
-    segmentsData:
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 6
     - segmentType: 2
       segmentContent: 0
     - segmentType: 0
@@ -149,8 +45,6 @@ MonoBehaviour:
       segmentContent: 0
     - segmentType: 0
       segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
     - segmentType: 2
       segmentContent: 0
     - segmentType: 0
@@ -159,33 +53,9 @@ MonoBehaviour:
       segmentContent: 0
     - segmentType: 0
       segmentContent: 0
-    - segmentType: 0
-      segmentContent: 1
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-  - isLast: 0
-    segmentsData:
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 1
-      segmentContent: 0
     - segmentType: 2
       segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 4
     - segmentType: 1
-      segmentContent: 0
-    - segmentType: 0
       segmentContent: 0
     - segmentType: 0
       segmentContent: 0
@@ -205,11 +75,141 @@ MonoBehaviour:
       segmentContent: 0
     - segmentType: 0
       segmentContent: 0
+    - segmentType: 2
+      segmentContent: 0
     - segmentType: 0
-      segmentContent: 6
+      segmentContent: 0
+    - segmentType: 2
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 1
+      segmentContent: 0
+    - segmentType: 1
+      segmentContent: 0
     - segmentType: 0
       segmentContent: 0
     - segmentType: 0
+      segmentContent: 0
+  - isLast: 0
+    segmentsData:
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 2
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 2
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 2
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 2
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+  - isLast: 0
+    segmentsData:
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 2
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+  - isLast: 0
+    segmentsData:
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 2
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 2
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+  - isLast: 0
+    segmentsData:
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 1
+      segmentContent: 0
+    - segmentType: 2
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 2
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+  - isLast: 0
+    segmentsData:
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 1
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 0
+      segmentContent: 0
+    - segmentType: 2
       segmentContent: 0
     - segmentType: 0
       segmentContent: 0
@@ -261,7 +261,7 @@ MonoBehaviour:
       segmentContent: 0
     - segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - segmentType: 2
       segmentContent: 0
     - segmentType: 0
       segmentContent: 0
@@ -313,7 +313,7 @@ MonoBehaviour:
       segmentContent: 0
     - segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - segmentType: 2
       segmentContent: 0
     - segmentType: 0
       segmentContent: 0

@@ -90,7 +90,7 @@ namespace Core.Bonuses
             if (workCountPlatformsAcceleration == 0)
             {
                 accelerationIsActive = false;
-                platformMover.SetMovementSpeed(2.25f);
+                //platformMover.SetMovementSpeed(2.25f);
             }
         }
         
@@ -173,7 +173,7 @@ namespace Core.Bonuses
             switch (bonusType)
             {
                 case BonusType.Acceleration:
-                    platformMover.SetMovementSpeed(3.5f);
+                    platformMover.SetMovementSpeed(5f);
                     workCountPlatformsAcceleration = countPlatformsForAcceleration;
                     accelerationIsActive = true;
                     break;
