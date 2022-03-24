@@ -355,6 +355,11 @@ namespace Core
                 platforms[i].gameObject.SetActive(false);
         }
 
+        public void DestroyPlatform()
+        {
+            platforms[0].DestroyPlatform();
+        }
+
         public void SetShopState()
         {
             player.SetDefaultState();

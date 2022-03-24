@@ -19,14 +19,15 @@ namespace Core
                 keyPanel.MinusKeys(currentUsageStep);
                 gameManager.ContinueGame();
                 start = false;
+                currentUsageStep *= 2;
                 return;
             }
-
-            currentUsageStep *= 2;
+            
             if (progressController.currentState.currenciesProgress.keys >= currentUsageStep)
             {
                 keyPanel.MinusKeys(currentUsageStep);
                 gameManager.ContinueGame();
+                currentUsageStep *= 2;
             }
         }
 

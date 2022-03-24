@@ -134,7 +134,7 @@ namespace Core
                         if (bonusController.accelerationIsActive)
                         {
                             SetTriggerStay(true);
-                            segment.DestroyPlatform();
+                            platformMover.DestroyPlatform();
                             bonusController.StepAcceleration();
                         }
                         else
@@ -149,21 +149,21 @@ namespace Core
                         if (bonusController.accelerationIsActive)
                         {
                             SetTriggerStay(true);
-                            segment.DestroyPlatform();
+                            platformMover.DestroyPlatform();
                             bonusController.StepAcceleration();
                         }
                         else
                         {
                             freeSpeedIncrease.IncreaseSpeed();
                             SetTriggerStay(true);
-                            segment.DestroyPlatform();
+                            platformMover.DestroyPlatform();
                         }
                         break;
                     case SegmentType.Let:
                         if (bonusController.accelerationIsActive)
                         {
                             SetTriggerStay(true);
-                            segment.DestroyPlatform();
+                            platformMover.DestroyPlatform();
                             bonusController.StepAcceleration();
                             return;
                         }

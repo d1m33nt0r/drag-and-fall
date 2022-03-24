@@ -170,11 +170,11 @@ namespace Core
 
         public void ContinueGame()
         {
-            platformMover.platforms[0].DestroyPlatform();
-            player.ContinueGame();
-            gameStarted = true;
             uiManager.SetActiveGameMenu(true);
             uiManager.SetActiveFailedInfinityPanel(false);
+            platformMover.DestroyPlatform();
+            player.ContinueGame();
+            gameStarted = true;
         }
         
         public void StartNextLevel()

@@ -98,10 +98,5 @@ namespace Core
         {
             platform.IncreaseTouchCounter();
         }
-
-        public void DestroyPlatform()
-        {
-            platform.DestroyPlatform();
-        }
     }
 }

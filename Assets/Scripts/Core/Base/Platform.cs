@@ -14,7 +14,8 @@ namespace Core
         public event Action increaseConcentraion;
         
         [SerializeField] private Segment segmentPrefab;
-        
+
+        private bool destroy;
         public Action platformDestroyed;
         public int countTouches = 0;
 
@@ -25,7 +26,8 @@ namespace Core
         private float angle;
         private GainScore gainScore;
         
-        public void Initialize(int _segmentsCount, PatternData patternData, PlatformMover platformMover, Player _player, BonusController _bonusController, GainScore gainScore)
+        public void Initialize(int _segmentsCount, PatternData patternData, PlatformMover platformMover, 
+            Player _player, BonusController _bonusController, GainScore gainScore)
         {
             angle = 360 / _segmentsCount;
             segments = new Segment[_segmentsCount];
@@ -82,12 +84,17 @@ namespace Core
             
             if (platformMover.isLevelMode && patternData.isLast) platformMover.FinishLevel(platformMover.gameManager.gameMode.levelMode.level);
             platformDestroyed?.Invoke();
-            player.SetTriggerStay(false);
+            
             platformMover.MovePlatforms();
             increaseConcentraion?.Invoke();
             Destroy(gameObject);
         }
-        
+
+        private void OnDestroy()
+        {
+            player.SetTriggerStay(false);
+        }
+
         public void BreakDownPlatform()
         {
             Rigidbody[] rb = new Rigidbody[segments.Length];
