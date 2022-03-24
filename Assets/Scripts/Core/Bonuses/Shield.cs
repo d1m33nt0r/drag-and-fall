@@ -1,13 +1,18 @@
-﻿using UnityEngine;
+﻿using System;
+using Data.Core.Segments.Content;
+using ObjectPool;
+using UnityEngine;
 
 namespace Core.Bonuses
 {
     public class Shield : MonoBehaviour
     {
         private BonusController bonusController;
-
-        public void Construct(BonusController _bonusController)
+        private SegmentContentPool segmentContentPool;
+        
+        public void Construct(BonusController _bonusController, SegmentContentPool segmentContentPool)
         {
+            this.segmentContentPool = segmentContentPool;
             bonusController = _bonusController;
         }
 
@@ -17,7 +22,7 @@ namespace Core.Bonuses
             
             bonusController.ActivateBonus(BonusType.Shield);
             
-            Destroy(gameObject);
+            segmentContentPool.ReturnObjectToPool(SegmentContent.Shield, gameObject);
         }
     }
 }

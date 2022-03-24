@@ -1,14 +1,18 @@
-﻿using UnityEngine;
+﻿using Data.Core.Segments.Content;
+using ObjectPool;
+using UnityEngine;
 
 namespace Core.Bonuses
 {
     public class Magnet : MonoBehaviour
     {
         private BonusController bonusController;
-
-        public void Construct(BonusController _bonusController)
+        private SegmentContentPool segmentContentPool;
+        
+        public void Construct(BonusController _bonusController, SegmentContentPool segmentContentPool)
         {
             bonusController = _bonusController;
+            this.segmentContentPool = segmentContentPool;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -17,8 +21,8 @@ namespace Core.Bonuses
             
             other.GetComponent<Player>().SetActiveMagnet(true);
             bonusController.ActivateBonus(BonusType.Magnet);
-            
-            Destroy(gameObject);
+
+            segmentContentPool.ReturnObjectToPool(SegmentContent.Magnet, gameObject);
         }
     }
 }

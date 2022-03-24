@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using Data.Core.Segments.Content;
+using ObjectPool;
 using UnityEngine;
 
 namespace Core
@@ -14,13 +16,19 @@ namespace Core
         private float startTime;
         private float journeyLength;
         private bool ismove = true;
+        private SegmentContentPool segmentContentPool;
+        
+        public void Construct(SegmentContentPool segmentContentPool)
+        {
+            this.segmentContentPool = segmentContentPool;
+        }
         
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
                 other.GetComponent<Player>().CollectCoin(count);
-                Destroy(gameObject);
+                segmentContentPool.ReturnObjectToPool(SegmentContent.Coin, gameObject);
             }
         }
         

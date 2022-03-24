@@ -14095,6 +14095,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575042751}
   m_CullTransparentMesh: 1
+--- !u!1 &578498415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 578498417}
+  - component: {fileID: 578498416}
+  m_Layer: 0
+  m_Name: SegmentContentPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &578498416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578498415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ad7510f9f94d5a9cb91166d64cdb85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 5579393256393416401, guid: 460786632f765b54d976e2eb5fb43986, type: 3}
+  crystalPrefab: {fileID: 3443404969930331942, guid: 3814d1a5f0f63ab449aad6b3c7fcffc3, type: 3}
+  multiplier: {fileID: 5103380047498560460, guid: 38a01e921ac497a4da0bd7b52e1e448a, type: 3}
+  shield: {fileID: 3732463269924414412, guid: 9be56990cb2253a438ee9ebbf9520319, type: 3}
+  acceleration: {fileID: 8494222614144849981, guid: 64d2a6b3b876abb4ab0ade2cdfc55f04, type: 3}
+  magnet: {fileID: 705712189710851890, guid: 5170fb0dee6405e48937f3553da3771d, type: 3}
+  key: {fileID: 4469818098743479962, guid: cb03a77d9ab8e1d468c6815be230e34c, type: 3}
+  coinPoolSize: 30
+  crystalPoolSize: 10
+  multiplierPoolSize: 3
+  shieldPoolSize: 3
+  accelerationPoolSize: 3
+  magnetPoolSize: 3
+  keyPoolSize: 3
+--- !u!4 &578498417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578498415}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.1831713, y: -0.036496203, z: -0.5481428}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &580247881
 GameObject:
   m_ObjectHideFlags: 0
@@ -49826,6 +49883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24dbc39ba66317b489980409cd07c2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  segmentContentPool: {fileID: 578498416}
   gainScore: {fileID: 1405330971}
   player: {fileID: 1776688606}
   platformPrefab: {fileID: 3363953325017065178, guid: 7b9114990f3a6d146af1b3cfeb2c25ca, type: 3}

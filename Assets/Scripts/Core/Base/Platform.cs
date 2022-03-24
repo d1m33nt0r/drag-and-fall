@@ -2,6 +2,8 @@
 using Core.Bonuses;
 using Data.Core;
 using Data.Core.Segments;
+using Data.Core.Segments.Content;
+using ObjectPool;
 using UI;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -25,10 +27,12 @@ namespace Core
         private Segment[] segments;
         private float angle;
         private GainScore gainScore;
+        private SegmentContentPool segmentContentPool;
         
         public void Initialize(int _segmentsCount, PatternData patternData, PlatformMover platformMover, 
-            Player _player, BonusController _bonusController, GainScore gainScore)
+            Player _player, BonusController _bonusController, GainScore gainScore, SegmentContentPool segmentContentPool)
         {
+            this.segmentContentPool = segmentContentPool;
             angle = 360 / _segmentsCount;
             segments = new Segment[_segmentsCount];
             this.platformMover = platformMover;
@@ -40,7 +44,7 @@ namespace Core
             for (var i = 1; i <= patternData.segmentsData.Length; i++)
             {
                 segments[i - 1] = Instantiate(segmentPrefab, position, Quaternion.AngleAxis(angle * i, Vector3.up), transform);
-                segments[i - 1].Initialize(patternData.segmentsData[i - 1], platformMover, this, _bonusController);
+                segments[i - 1].Initialize(patternData.segmentsData[i - 1], platformMover, this, _bonusController, segmentContentPool);
             }
 
             platformDestroyed += _player.SetFallingTrailState;
@@ -87,6 +91,10 @@ namespace Core
             
             platformMover.MovePlatforms();
             increaseConcentraion?.Invoke();
+            for (var i = 0; i < segments.Length; i++)
+            {
+                segments[i].ReturnSegmentContentToPool();
+            }
             Destroy(gameObject);
         }
 

@@ -1,13 +1,17 @@
-﻿using UnityEngine;
+﻿using Data.Core.Segments.Content;
+using ObjectPool;
+using UnityEngine;
 
 namespace Core.Bonuses
 {
     public class Acceleration : MonoBehaviour
     {
         private BonusController bonusController;
-
-        public void Construct(BonusController _bonusController)
+        private SegmentContentPool segmentContentPool;
+        
+        public void Construct(BonusController _bonusController, SegmentContentPool segmentContentPool)
         {
+            this.segmentContentPool = segmentContentPool;
             bonusController = _bonusController;
         }
 
@@ -17,7 +21,7 @@ namespace Core.Bonuses
             
             bonusController.ActivateBonus(BonusType.Acceleration);
             
-            Destroy(gameObject);
+            segmentContentPool.ReturnObjectToPool(SegmentContent.Acceleration, gameObject);
         }
     }
 }

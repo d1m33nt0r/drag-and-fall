@@ -1,10 +1,10 @@
-using System;
 using System.Collections;
 using Common;
 using Core.Bonuses;
 using Data.Core;
 using Data.Shop.TubeSkins;
 using DG.Tweening;
+using ObjectPool;
 using UI;
 using UnityEngine;
 
@@ -12,6 +12,7 @@ namespace Core
 {
     public class PlatformMover : MonoBehaviour
     {
+        [SerializeField] private SegmentContentPool segmentContentPool;
         [SerializeField] private GainScore gainScore;
         [SerializeField] private Player player;
         [SerializeField] private GameObject platformPrefab;
@@ -299,7 +300,7 @@ namespace Core
         {
             var platformInstance = Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.Euler(transform.rotation.eulerAngles), transform);
             var platform = platformInstance.GetComponent<Platform>();
-            platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, player, bonusController, gainScore);
+            platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, player, bonusController, gainScore, segmentContentPool);
             platform.increaseConcentraion += IncreaseConcentration;
             platform.resetConcentraion += ResetConcentration;
             platform.increaseConcentraion += LevelStep;

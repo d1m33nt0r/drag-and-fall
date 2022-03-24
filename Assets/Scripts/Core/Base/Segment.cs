@@ -2,6 +2,7 @@
 using Data.Core.Segments;
 using Data.Core.Segments.Content;
 using Data.Shop.TubeSkins;
+using ObjectPool;
 using UnityEngine;
 
 namespace Core
@@ -13,16 +14,19 @@ namespace Core
         private PlatformMover platformMover;
         private Platform platform;
         private BonusController bonusController;
+        private SegmentContentPool segmentContentPool;
         [SerializeField] private GameObject coinPrefab;
         [SerializeField] private GameObject crystalPrefab;
-        [SerializeField] private GameObject x2;
+        [SerializeField] private GameObject multiplier;
         [SerializeField] private GameObject shield;
-        [SerializeField] private GameObject nitro;
+        [SerializeField] private GameObject acceleration;
         [SerializeField] private GameObject magnet;
         [SerializeField] private GameObject key;
         
-        public void Initialize(SegmentData _segmentData, PlatformMover platformMover, Platform _platform, BonusController _bonusController)
+        public void Initialize(SegmentData _segmentData, PlatformMover platformMover, Platform _platform, 
+            BonusController _bonusController, SegmentContentPool segmentContentPool)
         {
+            this.segmentContentPool = segmentContentPool;
             platform = _platform;
             segmentData = _segmentData;
             this.platformMover = platformMover;
@@ -66,30 +70,81 @@ namespace Core
             switch (segmentData.segmentContent)
             {
                 case SegmentContent.Coin:
-                    Instantiate(coinPrefab, spawnPoint.position, Quaternion.identity, spawnPoint);
+                    var coinInstance = segmentContentPool.GetObject(SegmentContent.Coin);
+                    coinInstance.transform.position = spawnPoint.position;
+                    coinInstance.transform.rotation = Quaternion.identity;
+                    coinInstance.transform.SetParent(spawnPoint);
+                    coinInstance.GetComponent<Coin>().Construct(segmentContentPool);
                     break;
                 case SegmentContent.Crystal:
-                    Instantiate(crystalPrefab, spawnPoint.position, Quaternion.identity, spawnPoint);
+                    var crystalInstance = segmentContentPool.GetObject(SegmentContent.Crystal);
+                    crystalInstance.transform.position = spawnPoint.position;
+                    crystalInstance.transform.rotation = Quaternion.identity;
+                    crystalInstance.transform.SetParent(spawnPoint);
+                    crystalInstance.GetComponent<Crystal>().Construct(segmentContentPool);
                     break;
                 case SegmentContent.Acceleration:
-                    var accelerationInstance = Instantiate(nitro, spawnPoint.position, Quaternion.identity, spawnPoint);
-                    accelerationInstance.GetComponent<Acceleration>().Construct(bonusController);
+                    var accelerationInstance = segmentContentPool.GetObject(SegmentContent.Acceleration);
+                    accelerationInstance.transform.position = spawnPoint.position;
+                    accelerationInstance.transform.rotation = Quaternion.identity;
+                    accelerationInstance.transform.SetParent(spawnPoint);
+                    accelerationInstance.GetComponent<Acceleration>().Construct(bonusController, segmentContentPool);
                     break;
                 case SegmentContent.Multiplier:
-                    var multiplierInstance = Instantiate(x2, spawnPoint.position, Quaternion.identity, spawnPoint);
-                    multiplierInstance.GetComponent<Multiplier>().Construct(bonusController);
+                    var multiplierInstance = segmentContentPool.GetObject(SegmentContent.Multiplier);
+                    multiplierInstance.transform.position = spawnPoint.position;
+                    multiplierInstance.transform.rotation = Quaternion.identity;
+                    multiplierInstance.transform.SetParent(spawnPoint);
+                    multiplierInstance.GetComponent<Multiplier>().Construct(bonusController, segmentContentPool);
                     break;
                 case SegmentContent.Shield:
-                    var shieldInstance = Instantiate(shield, spawnPoint.position, Quaternion.identity, spawnPoint);
-                    shieldInstance.GetComponent<Shield>().Construct(bonusController);
+                    var shieldInstance = segmentContentPool.GetObject(SegmentContent.Shield);
+                    shieldInstance.transform.position = spawnPoint.position;
+                    shieldInstance.transform.rotation = Quaternion.identity;
+                    shieldInstance.transform.SetParent(spawnPoint);
+                    shieldInstance.GetComponent<Shield>().Construct(bonusController, segmentContentPool);
                     break;
                 case SegmentContent.Magnet:
-                    var magnetInstance = Instantiate(magnet, spawnPoint.position, Quaternion.identity, spawnPoint);
-                    magnetInstance.GetComponent<Magnet>().Construct(bonusController);
+                    var magnetInstance = segmentContentPool.GetObject(SegmentContent.Magnet);
+                    magnetInstance.transform.position = spawnPoint.position;
+                    magnetInstance.transform.rotation = Quaternion.identity;
+                    magnetInstance.transform.SetParent(spawnPoint);
+                    magnetInstance.GetComponent<Magnet>().Construct(bonusController, segmentContentPool);
                     break;
                 case SegmentContent.Key:
-                    var keyInstance = Instantiate(key, spawnPoint.position, Quaternion.identity, spawnPoint);
-                    keyInstance.GetComponent<Key>().Construct(bonusController);
+                    var keyInstance = segmentContentPool.GetObject(SegmentContent.Key);
+                    keyInstance.transform.position = spawnPoint.position;
+                    keyInstance.transform.rotation = Quaternion.identity;
+                    keyInstance.transform.SetParent(spawnPoint);
+                    keyInstance.GetComponent<Key>().Construct(bonusController, segmentContentPool);
+                    break;
+            }
+        }
+
+        public void ReturnSegmentContentToPool()
+        {
+            switch (segmentData.segmentContent)
+            {
+                case SegmentContent.Coin:
+                    segmentContentPool.ReturnObjectToPool(SegmentContent.Coin, transform.GetChild(0).GetChild(0).gameObject);
+                    break;
+                case SegmentContent.Crystal:
+                    segmentContentPool.ReturnObjectToPool(SegmentContent.Crystal, transform.GetChild(0).GetChild(0).gameObject);
+                    break;
+                case SegmentContent.Acceleration:
+                    segmentContentPool.ReturnObjectToPool(SegmentContent.Acceleration, transform.GetChild(0).GetChild(0).gameObject);
+                    break;
+                case SegmentContent.Multiplier:
+                    segmentContentPool.ReturnObjectToPool(SegmentContent.Multiplier, transform.GetChild(0).GetChild(0).gameObject);
+                    break;
+                case SegmentContent.Shield:
+                    segmentContentPool.ReturnObjectToPool(SegmentContent.Shield, transform.GetChild(0).GetChild(0).gameObject);
+                    break;
+                case SegmentContent.Magnet:
+                    segmentContentPool.ReturnObjectToPool(SegmentContent.Magnet, transform.GetChild(0).GetChild(0).gameObject);
+                    break;
+                case SegmentContent.Key:
+                    segmentContentPool.ReturnObjectToPool(SegmentContent.Key, transform.GetChild(0).GetChild(0).gameObject);
                     break;
             }
         }
