@@ -2661,12 +2661,12 @@ GameObject:
   - component: {fileID: 106817237}
   - component: {fileID: 106817236}
   m_Layer: 0
-  m_Name: Particle System (1)
+  m_Name: FireEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &106817235
 Transform:
   m_ObjectHideFlags: 0
@@ -2883,7 +2883,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -3
+      scalar: -2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -2936,7 +2936,7 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 1, b: 1, a: 0.6313726}
+      minColor: {r: 1, g: 1, b: 1, a: 0.5176471}
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
@@ -2999,7 +2999,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.1
+      scalar: 0.15
       minScalar: 0.05
       maxCurve:
         serializedVersion: 2
@@ -11267,6 +11267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platformMover: {fileID: 1755819904}
+  currentPlatforms: 0
 --- !u!4 &299243786
 Transform:
   m_ObjectHideFlags: 0
@@ -16805,6 +16806,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressController: {fileID: 386115021}
   platformMover: {fileID: 1755819904}
+  player: {fileID: 1776688606}
+  freeSpeedIncrease: {fileID: 0}
   currentShieldLevel: 0
   currentMultiplierLevel: 0
   currentMagnetLevel: 0
@@ -50043,7 +50046,7 @@ MonoBehaviour:
   countTubeParts: 8
   distanceBetweenTubeParts: 2
   distanceBetweenPlatforms: 1.5
-  platformMovementSpeed: 3
+  platformMovementSpeed: 2
   dragController: {fileID: 1864669949}
   visualController: {fileID: 876524754}
   gameManager: {fileID: 1157630038}
@@ -50983,6 +50986,7 @@ MonoBehaviour:
   failedInfinityUI: {fileID: 1390963861}
   sessionData: {fileID: 1357667550}
   freeSpeedIncrease: {fileID: 299243785}
+  fireEffect: {fileID: 106817234}
 --- !u!95 &1776688607
 Animator:
   serializedVersion: 3

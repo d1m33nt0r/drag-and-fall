@@ -18,7 +18,7 @@ namespace Core.Bonuses
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("Player")) return;
-            
+
             bonusController.ActivateBonus(BonusType.Acceleration);
             
             segmentContentPool.ReturnObjectToPool(SegmentContent.Acceleration, gameObject);

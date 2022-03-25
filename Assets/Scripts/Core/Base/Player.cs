@@ -25,11 +25,42 @@ namespace Core
         [SerializeField] private FailedInfinityUI failedInfinityUI;
         [SerializeField] private SessionData sessionData;
         [SerializeField] private FreeSpeedIncrease freeSpeedIncrease;
+        [SerializeField] private GameObject fireEffect;
         
         private bool triggerStay;
 
         private MeshFilter meshFilter;
         private MeshRenderer meshRenderer;
+
+        public void SetActiveFireEffect(bool value)
+        {
+            fireEffect.SetActive(value);
+        }
+
+        public void IncreaseFireEffect6()
+        {
+            var fireParticle = fireEffect.GetComponent<ParticleSystem>();
+            var main = fireParticle.main;
+            main.startColor = new ParticleSystem.MinMaxGradient(new Color(1, 1, 1, 1f), new Color(1, 1, 1, 0.5f));
+            main.startSpeed = -3;
+
+        }
+
+        public void IncreaseFireEffect5()
+        {
+            var fireParticle = fireEffect.GetComponent<ParticleSystem>();
+            var main = fireParticle.main;
+            main.startColor = new ParticleSystem.MinMaxGradient(new Color(1, 1, 1, 0.25f), new Color(1, 1, 1, 0.2f));
+            main.startSpeed = -2.5f;
+        }
+        
+        public void IncreaseFireEffect4()
+        {
+            var fireParticle = fireEffect.GetComponent<ParticleSystem>();
+            var main = fireParticle.main;
+            main.startColor = new ParticleSystem.MinMaxGradient(new Color(1, 1, 1, 0), new Color(1, 1, 1, 0.2f));
+            main.startSpeed = -2f;
+        }
 
         private void Awake()
         {

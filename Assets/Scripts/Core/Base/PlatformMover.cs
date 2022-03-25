@@ -71,11 +71,28 @@ namespace Core
         public void IncreaseSpeed(float value)
         {
             platformMovementSpeed += value;
+            
+            if (platformMovementSpeed == 6)
+            {
+                player.SetActiveFireEffect(true);
+                player.IncreaseFireEffect6();
+            }
+            else if (platformMovementSpeed == 5)
+            {
+                player.SetActiveFireEffect(true);
+                player.IncreaseFireEffect5();
+            }
+            else if (platformMovementSpeed == 4)
+            {
+                player.SetActiveFireEffect(true);
+                player.IncreaseFireEffect4();
+            }
         }
 
         public void ResetDefaultSpeed()
         {
-            platformMovementSpeed = 2.25f;
+            platformMovementSpeed = 2f;
+            player.SetActiveFireEffect(false);
         }
         
         private void Initialize()
@@ -175,8 +192,8 @@ namespace Core
                 targetPositions[i] = currentPositions[i] + Vector3.up;
             }
 
-            float distCovered = (Time.time - startTime) * platformMovementSpeed;
-            float fractionOfJourney = distCovered / journeyLength;
+            var distCovered = (Time.time - startTime) * platformMovementSpeed;
+            var fractionOfJourney = distCovered / journeyLength;
             
             while (distCovered / journeyLength != 1)
             {
