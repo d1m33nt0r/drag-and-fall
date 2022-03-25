@@ -50037,7 +50037,7 @@ MonoBehaviour:
   segmentContentPool: {fileID: 578498416}
   gainScore: {fileID: 1405330971}
   player: {fileID: 1776688606}
-  platformPrefab: {fileID: 3363953325017065178, guid: 7b9114990f3a6d146af1b3cfeb2c25ca, type: 3}
+  platformPrefab: {fileID: 519894861839142882, guid: 1aa3279ae3c1a884b8bbe2b0b130ecb4, type: 3}
   tubePrefab: {fileID: 6258718019660764072, guid: 74d06b32c97d0044897d396e3131e7df, type: 3}
   countPlatforms: 8
   countTubeParts: 8

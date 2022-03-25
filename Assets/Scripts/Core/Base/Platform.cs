@@ -13,8 +13,6 @@ namespace Core
         public event Action resetConcentraion;
         public event Action increaseConcentraion;
         
-        [SerializeField] private Segment segmentPrefab;
-
         private bool destroy;
         public Action platformDestroyed;
         public int countTouches = 0;
@@ -22,8 +20,7 @@ namespace Core
         public PatternData patternData;
         private Player player;
         private PlatformMover platformMover;
-        private Segment[] segments;
-        private float angle;
+        [SerializeField] private Segment[] segments;
         private GainScore gainScore;
         private SegmentContentPool segmentContentPool;
         
@@ -31,17 +28,12 @@ namespace Core
             Player _player, BonusController _bonusController, GainScore gainScore, SegmentContentPool segmentContentPool)
         {
             this.segmentContentPool = segmentContentPool;
-            angle = 360 / _segmentsCount;
-            segments = new Segment[_segmentsCount];
             this.platformMover = platformMover;
-
             this.gainScore = gainScore;
             this.patternData = patternData;
-            var position = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
 
             for (var i = 1; i <= patternData.segmentsData.Length; i++)
             {
-                segments[i - 1] = Instantiate(segmentPrefab, position, Quaternion.AngleAxis(angle * i, Vector3.up), transform);
                 segments[i - 1].Initialize(patternData.segmentsData[i - 1], platformMover, this, _bonusController, segmentContentPool);
             }
 
@@ -58,10 +50,6 @@ namespace Core
                 for (var i = 0; i < 12; i++)
                 {
                     segments[i].GetComponent<Segment>().ChangeColor(1);
-                    /*if (segments[i].segmentData.segmentType == SegmentType.Ground)
-                    {
-                        segments[i].GetComponent<MeshRenderer>().material.color = Color.blue;
-                    }*/
                 }
             }
 
@@ -70,10 +58,6 @@ namespace Core
                 for (var i = 0; i < 12; i++)
                 {
                     segments[i].GetComponent<Segment>().ChangeColor(2);
-                    /*if (segments[i].segmentData.segmentType == SegmentType.Ground)
-                    {
-                        segments[i].GetComponent<MeshRenderer>().material.color = Color.magenta;
-                    }*/
                 }
             }
             
@@ -86,10 +70,6 @@ namespace Core
             for (var i = 0; i < 12; i++)
             {
                 segments[i].GetComponent<Segment>().ChangeColor(3);
-                /*if (segments[i].segmentData.segmentType == SegmentType.Ground)
-                {
-                    segments[i].GetComponent<MeshRenderer>().material.color = Color.magenta;
-                }*/
             }
             
             gainScore.SetText(1);
@@ -105,25 +85,27 @@ namespace Core
                 segments[i].ReturnSegmentContentToPool();
             }
             BreakDownPlatform();
+            player.SetTriggerStay(false);
             //Destroy(gameObject);
         }
-        
-        private void OnDestroy()
+
+        public void DestroyAfterBreakAnimation()
         {
-            player.SetTriggerStay(false);
+            Destroy(gameObject);
         }
 
-        public void BreakDownPlatform()
+        private void BreakDownPlatform()
         {
+            GetComponent<Animator>().Play("Break");
             for(var i = 0; i < segments.Length; i++)
             {
                 segments[i].gameObject.GetComponent<MeshCollider>().enabled = false;
-                var rb = segments[i].gameObject.GetComponent<Rigidbody>();
+                /*var rb = segments[i].gameObject.GetComponent<Rigidbody>();
                 rb.useGravity = true;
                 rb.isKinematic = false;
-                rb.AddForce(Random.Range(-3, 3), Random.Range(0, 10), Random.Range(2, 5), ForceMode.Impulse);
+                rb.AddForce(Random.Range(-3, 3), Random.Range(0, 10), Random.Range(2, 5), ForceMode.Impulse);*/
             }
-            player.SetTriggerStay(false);
+            
         }
     }
 }

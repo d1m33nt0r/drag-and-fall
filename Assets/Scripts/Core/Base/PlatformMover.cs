@@ -305,7 +305,7 @@ namespace Core
             platform.resetConcentraion += ResetConcentration;
             platform.increaseConcentraion += LevelStep;
             
-            AlignRotation(platformInstance);
+            //AlignRotation(platformInstance);
             platforms[_platformIndex] = platform;
             
             if (hide) platforms[_platformIndex].gameObject.SetActive(false);
