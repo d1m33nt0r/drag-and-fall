@@ -15,14 +15,10 @@ namespace Ads
             var request = new AdRequest.Builder().Build();
             bannerView.LoadAd(request);
             
-            // Called when an ad request has successfully loaded.
-            this.bannerView.OnAdLoaded += this.HandleOnAdLoaded;
-            // Called when an ad request failed to load.
-            this.bannerView.OnAdFailedToLoad += this.HandleOnAdFailedToLoad;
-            // Called when an ad is clicked.
-            this.bannerView.OnAdOpening += this.HandleOnAdOpened;
-            // Called when the user returned from the app after an ad click.
-            this.bannerView.OnAdClosed += this.HandleOnAdClosed;
+            bannerView.OnAdLoaded += HandleOnAdLoaded;
+            bannerView.OnAdFailedToLoad += HandleOnAdFailedToLoad;
+            bannerView.OnAdOpening += HandleOnAdOpened;
+            bannerView.OnAdClosed += HandleOnAdClosed;
         }
         
         public void HandleOnAdLoaded(object sender, EventArgs args)

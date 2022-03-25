@@ -1,4 +1,5 @@
-﻿using Core.Bonuses;
+﻿using Ads;
+using Core.Bonuses;
 using Data;
 using Data.Core;
 using Progress;
@@ -10,6 +11,8 @@ namespace Core
 {
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] private RewardAds rewardAds;
+        [SerializeField] private InterstitialAds interstitialAds;
         [SerializeField] private LevelProgress levelProgress;
         [SerializeField] private ScorePanel scorePanel;
         [SerializeField] private FinishLevelUI finishLevelUI;
@@ -27,7 +30,7 @@ namespace Core
         [SerializeField] private KeyPanel keyPanel;
         [SerializeField] private FailedInfinityUI failedInfinityUI;
         [SerializeField] private SessionData sessionData;
-        
+
         public bool gameStarted { get; private set; }
 
         private void Start()
@@ -168,10 +171,32 @@ namespace Core
             uiManager.SetActiveLevelsMenu(false);
         }
 
-        public void ContinueGame()
+        public void ContinueGameAds()
         {
-            uiManager.SetActiveGameMenu(true);
+            rewardAds.TryShowRewardedAd();
+            if (platformMover.isLevelMode)
+                uiManager.SetActiveLevelUI(true);
+            else
+                uiManager.SetActiveGameMenu(true);
+            
             uiManager.SetActiveFailedInfinityPanel(false);
+            uiManager.SetActiveFailedLevelPanel(false);
+            
+            platformMover.DestroyPlatform();
+            player.ContinueGame();
+            gameStarted = true;
+        }
+        
+        public void ContinueGameKeys()
+        {
+            if (platformMover.isLevelMode)
+                uiManager.SetActiveLevelUI(true);
+            else
+                uiManager.SetActiveGameMenu(true);
+            
+            uiManager.SetActiveFailedInfinityPanel(false);
+            uiManager.SetActiveFailedLevelPanel(false);
+            
             platformMover.DestroyPlatform();
             player.ContinueGame();
             gameStarted = true;
@@ -201,6 +226,8 @@ namespace Core
 
         public void FailedGame()
         {
+            interstitialAds.TryShowInterstitialAd();
+           
             gameStarted = false;
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveMainMenu(false);
@@ -216,10 +243,12 @@ namespace Core
             
             uiManager.SetActiveFailedLevelPanel(false);
             uiManager.SetActiveLevelsMenu(false);
+            
         }
 
         public void FailedLevel()
         {
+            interstitialAds.TryShowInterstitialAd();
             gameStarted = false;
             platformMover.SetDefaultState();
             uiManager.SetActiveUpgradeMenu(false);
@@ -240,7 +269,7 @@ namespace Core
             uiManager.scorePanel.GetComponent<ScorePanel>().ResetCounter();
             gameStarted = true;
             platformMover.SetDefaultState();
-
+            
             uiManager.SetActiveUpgradeMenu(false);
             platformMover.gameManager.gameMode.levelMode.ResetPointer();
             platformMover.InitializePlatforms();

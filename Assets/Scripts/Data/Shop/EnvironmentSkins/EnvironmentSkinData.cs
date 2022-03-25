@@ -14,5 +14,6 @@ namespace Data.Shop.TubeSkins
         public Material groundSegmentMaterial;
         public Mesh segment;
         public Mesh tube;
+        public Color[] platformColors;
     }
 }

@@ -17,7 +17,7 @@ namespace Core
             if (start && progressController.currentState.currenciesProgress.keys >= currentUsageStep)
             {
                 keyPanel.MinusKeys(currentUsageStep);
-                gameManager.ContinueGame();
+                gameManager.ContinueGameKeys();
                 start = false;
                 currentUsageStep *= 2;
                 return;
@@ -26,7 +26,7 @@ namespace Core
             if (progressController.currentState.currenciesProgress.keys >= currentUsageStep)
             {
                 keyPanel.MinusKeys(currentUsageStep);
-                gameManager.ContinueGame();
+                gameManager.ContinueGameKeys();
                 currentUsageStep *= 2;
             }
         }

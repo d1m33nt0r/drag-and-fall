@@ -15,14 +15,7 @@ namespace Core
         private Platform platform;
         private BonusController bonusController;
         private SegmentContentPool segmentContentPool;
-        [SerializeField] private GameObject coinPrefab;
-        [SerializeField] private GameObject crystalPrefab;
-        [SerializeField] private GameObject multiplier;
-        [SerializeField] private GameObject shield;
-        [SerializeField] private GameObject acceleration;
-        [SerializeField] private GameObject magnet;
-        [SerializeField] private GameObject key;
-        
+
         public void Initialize(SegmentData _segmentData, PlatformMover platformMover, Platform _platform, 
             BonusController _bonusController, SegmentContentPool segmentContentPool)
         {
@@ -50,6 +43,13 @@ namespace Core
             }
         }
 
+        public void ChangeColor(int countTouches)
+        {
+            if (segmentData.segmentType == SegmentType.Hole) return;
+            if (segmentData.segmentType == SegmentType.Let && countTouches <= 2) return;
+            transform.GetComponent<MeshRenderer>().material.color = platformMover.visualController.GetPlatformColors()[countTouches];
+        }
+        
         public void TryOnTheme(EnvironmentSkinData _environmentSkinData)
         {
             if (segmentData.segmentType == SegmentType.Hole)

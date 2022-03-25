@@ -59,6 +59,11 @@ namespace Core
         {
             return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].tubeMaterial;
         }
+        
+        public Color[] GetPlatformColors()
+        {
+            return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].platformColors;
+        }
 
         public Mesh GetTubeMesh()
         {

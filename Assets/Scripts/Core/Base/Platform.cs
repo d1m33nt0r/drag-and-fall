@@ -1,8 +1,6 @@
 ﻿using System;
 using Core.Bonuses;
 using Data.Core;
-using Data.Core.Segments;
-using Data.Core.Segments.Content;
 using ObjectPool;
 using UI;
 using UnityEngine;
@@ -59,10 +57,11 @@ namespace Core
             {
                 for (var i = 0; i < 12; i++)
                 {
-                    if (segments[i].segmentData.segmentType == SegmentType.Ground)
+                    segments[i].GetComponent<Segment>().ChangeColor(1);
+                    /*if (segments[i].segmentData.segmentType == SegmentType.Ground)
                     {
                         segments[i].GetComponent<MeshRenderer>().material.color = Color.blue;
-                    }
+                    }*/
                 }
             }
 
@@ -70,10 +69,11 @@ namespace Core
             {
                 for (var i = 0; i < 12; i++)
                 {
-                    if (segments[i].segmentData.segmentType == SegmentType.Ground)
+                    segments[i].GetComponent<Segment>().ChangeColor(2);
+                    /*if (segments[i].segmentData.segmentType == SegmentType.Ground)
                     {
                         segments[i].GetComponent<MeshRenderer>().material.color = Color.magenta;
-                    }
+                    }*/
                 }
             }
             
@@ -83,6 +83,15 @@ namespace Core
         
         public void DestroyPlatform()
         {
+            for (var i = 0; i < 12; i++)
+            {
+                segments[i].GetComponent<Segment>().ChangeColor(3);
+                /*if (segments[i].segmentData.segmentType == SegmentType.Ground)
+                {
+                    segments[i].GetComponent<MeshRenderer>().material.color = Color.magenta;
+                }*/
+            }
+            
             gainScore.SetText(1);
             gainScore.Animate();
             
@@ -95,9 +104,10 @@ namespace Core
             {
                 segments[i].ReturnSegmentContentToPool();
             }
-            Destroy(gameObject);
+            BreakDownPlatform();
+            //Destroy(gameObject);
         }
-
+        
         private void OnDestroy()
         {
             player.SetTriggerStay(false);
@@ -105,16 +115,15 @@ namespace Core
 
         public void BreakDownPlatform()
         {
-            Rigidbody[] rb = new Rigidbody[segments.Length];
-
             for(var i = 0; i < segments.Length; i++)
             {
                 segments[i].gameObject.GetComponent<MeshCollider>().enabled = false;
-                rb[i] = segments[i].gameObject.AddComponent(typeof(Rigidbody)) as Rigidbody;
+                var rb = segments[i].gameObject.GetComponent<Rigidbody>();
+                rb.useGravity = true;
+                rb.isKinematic = false;
+                rb.AddForce(Random.Range(-3, 3), Random.Range(0, 10), Random.Range(2, 5), ForceMode.Impulse);
             }
-
-            for(var i = 0; i < segments.Length; i++)
-                rb[i].AddForce(Random.Range(-10, 10), Random.Range(0, 10), Random.Range(2, 5), ForceMode.Impulse);
+            player.SetTriggerStay(false);
         }
     }
 }

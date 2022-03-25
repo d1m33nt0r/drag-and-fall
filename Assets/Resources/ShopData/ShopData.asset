@@ -21,6 +21,11 @@ MonoBehaviour:
     groundSegmentMaterial: {fileID: 2100000, guid: 2968799f499957441ab6327f8895fb03, type: 2}
     segment: {fileID: 5937585607563464161, guid: 0110f3aecfa193240957a29499f44225, type: 3}
     tube: {fileID: -309684176625119091, guid: 0110f3aecfa193240957a29499f44225, type: 3}
+    platformColors:
+    - {r: 1, g: 1, b: 1, a: 0}
+    - {r: 0.6786668, g: 0.9528302, b: 0.7047429, a: 1}
+    - {r: 0.41037738, g: 1, b: 0.4644714, a: 0}
+    - {r: 0.03127098, g: 1, b: 0, a: 0}
   - isBought: 0
     price: 600
     skybox: {fileID: 0}
@@ -29,6 +34,7 @@ MonoBehaviour:
     groundSegmentMaterial: {fileID: 2100000, guid: a46e7ac6201b9bb4ca243d7c6a278452, type: 2}
     segment: {fileID: 1756636075752431679, guid: 0110f3aecfa193240957a29499f44225, type: 3}
     tube: {fileID: -309684176625119091, guid: 0110f3aecfa193240957a29499f44225, type: 3}
+    platformColors: []
   PlayerSkinData:
   - isBought: 1
     price: 0
