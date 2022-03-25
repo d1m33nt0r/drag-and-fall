@@ -11,6 +11,7 @@ namespace Core
     {
         public event Action failed;
 
+        [SerializeField] private GameObject shieldEffect;
         [SerializeField] private PlatformMover platformMover;
         [SerializeField] private MagnetPlayer magnetPlayer;
         [SerializeField] private Animator animator;
@@ -144,6 +145,11 @@ namespace Core
         {
             SetFallingTrailState();
         }
+
+        public void MovePlatforms()
+        {
+            platformMover.MovePlatforms();
+        }
         
         private void Update()
         {
@@ -159,6 +165,15 @@ namespace Core
                 
                 var segment = centerHit.collider.GetComponent<Segment>();
 
+                if (platformMover.platformMovementSpeed == 6 && segment.segmentData.segmentType != SegmentType.Hole && !bonusController.accelerationIsActive)
+                {
+                    //GetComponent<Animator>().Play("SpecialBounce");
+                    SetTriggerStay(true);
+                    platformMover.DestroyPlatform();
+                    platformMover.SetMovementSpeed(2);
+                    return;
+                }
+                
                 switch (segment.segmentData.segmentType)
                 {
                     case SegmentType.Ground:

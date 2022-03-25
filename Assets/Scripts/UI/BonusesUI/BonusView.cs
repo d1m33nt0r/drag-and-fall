@@ -15,7 +15,7 @@ namespace UI.Bonuses
         public BonusType bonusType;
         public Coroutine coroutine;
         private float defaultTimerValue;
-
+        [SerializeField] private GameObject shieldPlayerEffect;
         public void Construct()
         {
             isActive = true;
@@ -56,6 +56,8 @@ namespace UI.Bonuses
         {
             isActive = value;
             gameObject.SetActive(value);
+            if (bonusType == BonusType.Shield)
+                shieldPlayerEffect.SetActive(value);
         }
         
         private void SetTimerValue(float time) =>

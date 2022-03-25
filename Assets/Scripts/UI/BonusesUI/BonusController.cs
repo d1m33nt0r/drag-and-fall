@@ -175,8 +175,7 @@ namespace Core.Bonuses
             switch (bonusType)
             {
                 case BonusType.Acceleration:
-                    platformMover.SetMovementSpeed(5f);
-                    player.SetActiveFireEffect(true);
+                    platformMover.SetMovementSpeed(6f);
                     workCountPlatformsAcceleration = countPlatformsForAcceleration;
                     accelerationIsActive = true;
                     break;

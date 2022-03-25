@@ -55,23 +55,6 @@ namespace Core
         public void SetMovementSpeed(float speed)
         {
             platformMovementSpeed = speed;
-        }
-        
-        public void FinishLevel(LevelData _levelData)
-        {
-            gameManager.FinishLevel(_levelData);
-        }
-        
-        public void Failed()
-        {
-            if (isLevelMode) gameManager.FailedLevel();
-            else gameManager.FailedGame();
-        }
-
-        public void IncreaseSpeed(float value)
-        {
-            platformMovementSpeed += value;
-            
             if (platformMovementSpeed == 6)
             {
                 player.SetActiveFireEffect(true);
@@ -87,6 +70,28 @@ namespace Core
                 player.SetActiveFireEffect(true);
                 player.IncreaseFireEffect4();
             }
+            else if (platformMovementSpeed == 2)
+            {
+                player.SetActiveFireEffect(false);
+            }
+        }
+        
+        public void FinishLevel(LevelData _levelData)
+        {
+            gameManager.FinishLevel(_levelData);
+        }
+        
+        public void Failed()
+        {
+            if (isLevelMode) gameManager.FailedLevel();
+            else gameManager.FailedGame();
+        }
+
+        public void IncreaseSpeed(float value)
+        {
+            SetMovementSpeed(platformMovementSpeed += value);
+            
+            
         }
 
         public void ResetDefaultSpeed()
