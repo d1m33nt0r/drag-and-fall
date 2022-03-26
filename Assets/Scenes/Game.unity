@@ -56059,6 +56059,7 @@ MonoBehaviour:
   sessionData: {fileID: 1357667550}
   freeSpeedIncrease: {fileID: 299243785}
   fireEffect: {fileID: 106817234}
+  sled: {fileID: 5288686625605980999, guid: 6e5257dcf4407a5498de1613dfbb9fde, type: 3}
 --- !u!95 &1776688607
 Animator:
   serializedVersion: 3

@@ -27,6 +27,7 @@ namespace Core
         [SerializeField] private SessionData sessionData;
         [SerializeField] private FreeSpeedIncrease freeSpeedIncrease;
         [SerializeField] private GameObject fireEffect;
+        [SerializeField] private GameObject sled;
         
         private bool triggerStay;
 
@@ -164,7 +165,7 @@ namespace Core
                 if (!centerHit.transform.CompareTag("Segment")) return;
                 
                 var segment = centerHit.collider.GetComponent<Segment>();
-
+                
                 if (platformMover.platformMovementSpeed == 6 && segment.segmentData.segmentType != SegmentType.Hole && !bonusController.accelerationIsActive)
                 {
                     //GetComponent<Animator>().Play("SpecialBounce");
@@ -192,6 +193,8 @@ namespace Core
                             SetDefaultState();
                             segment.IncreasePlatformTouchCounter();
                             freeSpeedIncrease.ResetSpeed();
+                            var instance = Instantiate(sled, new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z), Quaternion.Euler(-90, 0, 0), segment.transform);
+                            instance.GetComponent<Animator>().Play("Touch");
                         }
                         break;
                     case SegmentType.Hole:
