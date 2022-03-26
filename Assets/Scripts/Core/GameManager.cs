@@ -182,7 +182,7 @@ namespace Core
             uiManager.SetActiveFailedInfinityPanel(false);
             uiManager.SetActiveFailedLevelPanel(false);
             
-            platformMover.DestroyPlatform();
+            platformMover.DestroyPlatform(true);
             player.ContinueGame();
             gameStarted = true;
         }
@@ -197,7 +197,7 @@ namespace Core
             uiManager.SetActiveFailedInfinityPanel(false);
             uiManager.SetActiveFailedLevelPanel(false);
             
-            platformMover.DestroyPlatform();
+            platformMover.DestroyPlatform(true);
             player.ContinueGame();
             gameStarted = true;
         }

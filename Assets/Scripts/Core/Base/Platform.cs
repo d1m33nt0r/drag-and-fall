@@ -62,10 +62,10 @@ namespace Core
             }
             
             if (countTouches == 2) resetConcentraion?.Invoke();
-            if (countTouches == 3) DestroyPlatform();
+            if (countTouches == 3) DestroyPlatform(true);
         }
         
-        public void DestroyPlatform()
+        public void DestroyPlatform(bool platformsIsMoving)
         {
             for (var i = 0; i < 12; i++)
             {
@@ -78,7 +78,9 @@ namespace Core
             if (platformMover.isLevelMode && patternData.isLast) platformMover.FinishLevel(platformMover.gameManager.gameMode.levelMode.level);
             platformDestroyed?.Invoke();
             
-            platformMover.MovePlatforms();
+            if (platformsIsMoving)
+                platformMover.MovePlatforms();
+            
             increaseConcentraion?.Invoke();
             for (var i = 0; i < segments.Length; i++)
             {

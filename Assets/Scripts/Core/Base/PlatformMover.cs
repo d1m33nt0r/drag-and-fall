@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Common;
 using Core.Bonuses;
@@ -70,7 +71,7 @@ namespace Core
                 player.SetActiveFireEffect(true);
                 player.IncreaseFireEffect4();
             }
-            else if (platformMovementSpeed == 2)
+            else if (platformMovementSpeed == 3)
             {
                 player.SetActiveFireEffect(false);
             }
@@ -90,13 +91,11 @@ namespace Core
         public void IncreaseSpeed(float value)
         {
             SetMovementSpeed(platformMovementSpeed += value);
-            
-            
         }
 
         public void ResetDefaultSpeed()
         {
-            platformMovementSpeed = 2f;
+            platformMovementSpeed = 3f;
             player.SetActiveFireEffect(false);
         }
         
@@ -172,6 +171,7 @@ namespace Core
 
         private IEnumerator Moving()
         {
+            var speed = platformMovementSpeed;
             destroyTubeNeeded = !destroyTubeNeeded;
             for (var i = 1; i < countPlatforms; i++)
                 platforms[i - 1] = platforms[i];
@@ -197,16 +197,24 @@ namespace Core
                 targetPositions[i] = currentPositions[i] + Vector3.up;
             }
 
-            var distCovered = (Time.time - startTime) * platformMovementSpeed;
+            var distCovered = (Time.time - startTime) * speed;
             var fractionOfJourney = distCovered / journeyLength;
             
             while (distCovered / journeyLength != 1)
             {
                 for (var i = 1; i < countPlatforms; i++)
                 {
-                    distCovered = (Time.time - startTime) * platformMovementSpeed;
-                    fractionOfJourney = distCovered / journeyLength;
-                    platforms[i - 1].transform.position = Vector3.Lerp(localPositionsOfPlatforms[i], localPositionsOfPlatforms[i - 1], fractionOfJourney);
+                    try
+                    {
+                        distCovered = (Time.time - startTime) * speed;
+                        fractionOfJourney = distCovered / journeyLength;
+                        platforms[i - 1].transform.position = Vector3.Lerp(localPositionsOfPlatforms[i], localPositionsOfPlatforms[i - 1], fractionOfJourney);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
                 }
 
                 yield return null;
@@ -378,9 +386,9 @@ namespace Core
                 platforms[i].gameObject.SetActive(false);
         }
 
-        public void DestroyPlatform()
+        public void DestroyPlatform(bool platformsIsMoving)
         {
-            platforms[0].DestroyPlatform();
+            platforms[0].DestroyPlatform(platformsIsMoving);
         }
 
         public void SetShopState()

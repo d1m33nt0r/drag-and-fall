@@ -169,8 +169,11 @@ namespace Core
                 {
                     //GetComponent<Animator>().Play("SpecialBounce");
                     SetTriggerStay(true);
-                    platformMover.DestroyPlatform();
-                    platformMover.SetMovementSpeed(2);
+                    //SetDefaultState();
+                    
+                    platformMover.DestroyPlatform(true);
+                    
+                    freeSpeedIncrease.ResetSpeed();
                     return;
                 }
                 
@@ -180,7 +183,7 @@ namespace Core
                         if (bonusController.accelerationIsActive)
                         {
                             SetTriggerStay(true);
-                            platformMover.DestroyPlatform();
+                            platformMover.DestroyPlatform(true);
                             bonusController.StepAcceleration();
                         }
                         else
@@ -195,21 +198,21 @@ namespace Core
                         if (bonusController.accelerationIsActive)
                         {
                             SetTriggerStay(true);
-                            platformMover.DestroyPlatform();
+                            platformMover.DestroyPlatform(true);
                             bonusController.StepAcceleration();
                         }
                         else
                         {
                             freeSpeedIncrease.IncreaseSpeed();
                             SetTriggerStay(true);
-                            platformMover.DestroyPlatform();
+                            platformMover.DestroyPlatform(true);
                         }
                         break;
                     case SegmentType.Let:
                         if (bonusController.accelerationIsActive)
                         {
                             SetTriggerStay(true);
-                            platformMover.DestroyPlatform();
+                            platformMover.DestroyPlatform(true);
                             bonusController.StepAcceleration();
                             return;
                         }
