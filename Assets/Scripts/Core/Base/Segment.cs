@@ -1,4 +1,5 @@
 ﻿using Core.Bonuses;
+using Core.Effects;
 using Data.Core.Segments;
 using Data.Core.Segments.Content;
 using Data.Shop.TubeSkins;
@@ -119,6 +120,12 @@ namespace Core
                     keyInstance.GetComponent<Key>().Construct(bonusController, segmentContentPool);
                     break;
             }
+        }
+
+        public void ReturnTouchEffectToPool()
+        {
+            if (transform.childCount > 1)
+                transform.GetChild(1).GetComponent<TouchEffect>().ReturnToPool();
         }
 
         public void ReturnSegmentContentToPool()

@@ -20,6 +20,7 @@ namespace Core.Bonuses
             if (!other.CompareTag("Player")) return;
             
             other.GetComponent<Player>().SetActiveMagnet(true);
+            other.GetComponent<Player>().SpawnBonusCollectingEffect();
             bonusController.ActivateBonus(BonusType.Magnet);
 
             segmentContentPool.ReturnObjectToPool(SegmentContent.Magnet, gameObject);

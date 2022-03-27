@@ -28,6 +28,7 @@ namespace Core
             if (other.CompareTag("Player"))
             {
                 other.GetComponent<Player>().CollectCrystal(count);
+                other.GetComponent<Player>().SpawnCrystalCollectingEffect();
                 segmentContentPool.ReturnObjectToPool(SegmentContent.Crystal, gameObject);
             }
         }

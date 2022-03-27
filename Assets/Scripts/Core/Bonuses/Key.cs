@@ -20,6 +20,7 @@ namespace Core.Bonuses
             if (other.CompareTag("Player"))
             {
                 other.GetComponent<Player>().CollectKey(1);
+                other.GetComponent<Player>().SpawnKeyCollectingEffect();
                 segmentContentPool.ReturnObjectToPool(SegmentContent.Key, gameObject);
             }
         }

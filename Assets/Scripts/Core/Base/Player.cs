@@ -2,6 +2,7 @@
 using Core.Bonuses;
 using Data;
 using Data.Core.Segments;
+using ObjectPool;
 using UI.InfinityUI;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace Core
     {
         public event Action failed;
 
+        [SerializeField] private EffectsPool effectsPool;
         [SerializeField] private GameObject shieldEffect;
         [SerializeField] private PlatformMover platformMover;
         [SerializeField] private MagnetPlayer magnetPlayer;
@@ -39,6 +41,42 @@ namespace Core
             fireEffect.SetActive(value);
         }
 
+        public void SpawnBonusCollectingEffect()
+        {
+            var effect = effectsPool.GetBonusCollectingEffect();
+            effect.transform.SetParent(null);
+            effect.SetActive(true);
+            effect.transform.position = transform.position;
+            effect.GetComponent<ParticleSystem>().Play();
+        }
+        
+        public void SpawnCoinCollectingEffect()
+        {
+            var effect = effectsPool.GetCoinCollectingEffect();
+            effect.transform.SetParent(null);
+            effect.SetActive(true);
+            effect.transform.position = transform.position;
+            effect.GetComponent<ParticleSystem>().Play();
+        }
+        
+        public void SpawnCrystalCollectingEffect()
+        {
+            var effect = effectsPool.GetCrystalCollectingEffect();
+            effect.transform.SetParent(null);
+            effect.SetActive(true);
+            effect.transform.position = transform.position;
+            effect.GetComponent<ParticleSystem>().Play();
+        }
+        
+        public void SpawnKeyCollectingEffect()
+        {
+            var effect = effectsPool.GetKeyCollectingEffect();
+            effect.transform.SetParent(null);
+            effect.SetActive(true);
+            effect.transform.position = transform.position;
+            effect.GetComponent<ParticleSystem>().Play();
+        }
+        
         public void IncreaseFireEffect6()
         {
             var fireParticle = fireEffect.GetComponent<ParticleSystem>();
@@ -193,7 +231,12 @@ namespace Core
                             SetDefaultState();
                             segment.IncreasePlatformTouchCounter();
                             freeSpeedIncrease.ResetSpeed();
-                            var instance = Instantiate(sled, new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z), Quaternion.Euler(-90, 0, 0), segment.transform);
+                            var instance = Instantiate(sled, new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z), Quaternion.Euler(-90, 0, 0), segment.transform);//effectsPool.GetTouchEffect();
+                            //instance.gameObject.SetActive(true);
+                            //instance.transform.position = new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z);
+                            //instance.transform.rotation = Quaternion.Euler(-90, 0, 0);
+                            //instance.transform.SetParent(segment.transform);
+                                //Instantiate(sled, new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z), Quaternion.Euler(-90, 0, 0), segment.transform);
                             instance.GetComponent<Animator>().Play("Touch");
                         }
                         break;

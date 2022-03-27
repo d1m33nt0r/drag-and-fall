@@ -19,6 +19,7 @@ namespace Core.Bonuses
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("Player")) return;
+            other.GetComponent<Player>().SpawnBonusCollectingEffect();
             bonusController.ActivateBonus(BonusType.Shield);
             segmentContentPool.ReturnObjectToPool(SegmentContent.Shield, gameObject);
         }

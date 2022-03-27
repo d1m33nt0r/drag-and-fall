@@ -13,6 +13,7 @@ namespace Core
 {
     public class PlatformMover : MonoBehaviour
     {
+        [SerializeField] private CameraController cameraController;
         [SerializeField] private SegmentContentPool segmentContentPool;
         [SerializeField] private GainScore gainScore;
         [SerializeField] private Player player;
@@ -44,6 +45,7 @@ namespace Core
         private Vector3[] localPositionsOfPlatforms;
         private Vector3[] localPositionsOfTubeParts;
         private bool destroyTubeNeeded = true;
+        private Coroutine movingCoroutine;
         
         private void Awake()
         {
@@ -56,6 +58,7 @@ namespace Core
         public void SetMovementSpeed(float speed)
         {
             platformMovementSpeed = speed;
+            cameraController.ChangeFieldView(speed);
             if (platformMovementSpeed == 6)
             {
                 player.SetActiveFireEffect(true);
@@ -95,7 +98,7 @@ namespace Core
 
         public void ResetDefaultSpeed()
         {
-            platformMovementSpeed = 3f;
+            SetMovementSpeed(3f);
             player.SetActiveFireEffect(false);
         }
         
@@ -166,12 +169,12 @@ namespace Core
         public void MovePlatforms()
         {
             startTime = Time.time;
-            StartCoroutine(Moving());
+            if (movingCoroutine != null) StopCoroutine(movingCoroutine);
+            movingCoroutine = StartCoroutine(Moving(platformMovementSpeed));
         }
 
-        private IEnumerator Moving()
+        private IEnumerator Moving(float speed)
         {
-            var speed = platformMovementSpeed;
             destroyTubeNeeded = !destroyTubeNeeded;
             for (var i = 1; i < countPlatforms; i++)
                 platforms[i - 1] = platforms[i];

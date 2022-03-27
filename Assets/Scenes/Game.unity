@@ -35015,6 +35015,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -35106,6 +35107,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3044d9d89d847348386ca4ec663dc91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.1
 --- !u!1 &964992048
 GameObject:
   m_ObjectHideFlags: 0
@@ -55107,6 +55121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24dbc39ba66317b489980409cd07c2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraController: {fileID: 963194230}
   segmentContentPool: {fileID: 578498416}
   gainScore: {fileID: 1405330971}
   player: {fileID: 1776688606}
@@ -56043,6 +56058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b975d66b9612402d85edd1d09b66d943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectsPool: {fileID: 2041678699}
   shieldEffect: {fileID: 0}
   platformMover: {fileID: 1755819904}
   magnetPlayer: {fileID: 392134585}
@@ -62946,6 +62962,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2038221191}
   m_CullTransparentMesh: 1
+--- !u!1 &2041678698
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2041678700}
+  - component: {fileID: 2041678699}
+  m_Layer: 0
+  m_Name: EffectsPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2041678699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041678698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14dc5dc43e214356a9181922ce8fd059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  touchEffect: {fileID: 8513849329434092675, guid: 6e5257dcf4407a5498de1613dfbb9fde, type: 3}
+  touchPoolSize: 3
+  bonusCollectingEffect: {fileID: 4863219060617643236, guid: a1684f5904ebdf643a12c6b49a520022, type: 3}
+  bonusEffectPoolSize: 3
+  coinCollectingEffect: {fileID: 4863219060617643236, guid: 4618a756eb4b47d4f805e4c5800b9c57, type: 3}
+  coinEffectPoolSize: 5
+  crystalCollectingEffect: {fileID: 4863219060617643236, guid: 5e7a57a29799c264db6dec73736c9131, type: 3}
+  crystalEffectPoolSize: 3
+  keyCollectingEffect: {fileID: 4863219060617643236, guid: 35d02983b391c2445b75e15e0e45e541, type: 3}
+  keyEffectPoolSize: 2
+--- !u!4 &2041678700
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041678698}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.000000029802322, y: 0.15, z: -0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2050882548
 GameObject:
   m_ObjectHideFlags: 0

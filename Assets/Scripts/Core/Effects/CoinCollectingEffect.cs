@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Core.Effects
 {
-    public class TouchEffect : MonoBehaviour
+    public class CoinCollectingEffect : MonoBehaviour
     {
         private EffectsPool effectsPool;
         
@@ -14,8 +14,13 @@ namespace Core.Effects
         
         public void ReturnToPool()
         {
-            Destroy(gameObject);
-            //effectsPool.ReturnObjectToPool(this);
+            //Destroy(gameObject);
+            effectsPool.ReturnBonusCollectingEffectToPool(gameObject);
+        }
+        
+        void OnParticleSystemStopped()
+        {
+            ReturnToPool();
         }
     }
 }

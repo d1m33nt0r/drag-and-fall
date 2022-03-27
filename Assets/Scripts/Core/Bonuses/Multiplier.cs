@@ -19,6 +19,7 @@ namespace Core.Bonuses
         {
             if (!other.CompareTag("Player")) return;
             
+            other.GetComponent<Player>().SpawnBonusCollectingEffect();
             bonusController.ActivateBonus(BonusType.Multiplier);
             
             segmentContentPool.ReturnObjectToPool(SegmentContent.Multiplier, gameObject);

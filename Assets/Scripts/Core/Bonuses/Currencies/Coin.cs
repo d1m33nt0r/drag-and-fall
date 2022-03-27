@@ -28,6 +28,7 @@ namespace Core
             if (other.CompareTag("Player"))
             {
                 other.GetComponent<Player>().CollectCoin(count);
+                other.GetComponent<Player>().SpawnCoinCollectingEffect();
                 segmentContentPool.ReturnObjectToPool(SegmentContent.Coin, gameObject);
             }
         }

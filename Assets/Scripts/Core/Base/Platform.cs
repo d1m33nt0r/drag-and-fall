@@ -84,6 +84,7 @@ namespace Core
             increaseConcentraion?.Invoke();
             for (var i = 0; i < segments.Length; i++)
             {
+                //segments[i].ReturnTouchEffectToPool();
                 segments[i].ReturnSegmentContentToPool();
             }
             BreakDownPlatform();
@@ -93,13 +94,14 @@ namespace Core
 
         public void DestroyAfterBreakAnimation()
         {
+            
             Destroy(gameObject);
         }
 
         private void BreakDownPlatform()
         {
             GetComponent<Animator>().Play("Break");
-            for(var i = 0; i < segments.Length; i++)
+            for (var i = 0; i < segments.Length; i++)
             {
                 segments[i].gameObject.GetComponent<MeshCollider>().enabled = false;
                 /*var rb = segments[i].gameObject.GetComponent<Rigidbody>();
