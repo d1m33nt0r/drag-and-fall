@@ -82,11 +82,13 @@ namespace Core
         
         public void FinishLevel(LevelData _levelData)
         {
+            SetMovementSpeed(3f);
             gameManager.FinishLevel(_levelData);
         }
         
         public void Failed()
         {
+            SetMovementSpeed(3f);
             if (isLevelMode) gameManager.FailedLevel();
             else gameManager.FailedGame();
         }

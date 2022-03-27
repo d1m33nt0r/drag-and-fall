@@ -30,7 +30,8 @@ namespace Core
         [SerializeField] private KeyPanel keyPanel;
         [SerializeField] private FailedInfinityUI failedInfinityUI;
         [SerializeField] private SessionData sessionData;
-
+        [SerializeField] private Concentration concentration;
+        
         public bool gameStarted { get; private set; }
 
         private void Start()
@@ -49,6 +50,8 @@ namespace Core
 
         public void StartGame()
         {
+            concentration.Reset();
+            bonusController.DeactivateAllBonuses();
             uiManager.SetActiveScorePanel(true);
             uiManager.scorePanel.ResetCounter();
             sessionData.ResetData();
@@ -132,6 +135,7 @@ namespace Core
 
         public void FinishLevel(LevelData levelsData)
         {
+            bonusController.DeactivateAllBonuses();
             finishLevelUI.SetText(scorePanel.GetPoints(), levelsData.levelIndex + 1);
             gameStarted = false;
             uiManager.SetActiveUpgradeMenu(false);
@@ -154,6 +158,8 @@ namespace Core
 
         public void ShowMainMenu()
         {
+            bonusController.DeactivateAllBonuses();
+            concentration.Reset();
             uiManager.SetActiveScorePanel(false);
             //bonusController.DeactivateAllBonuses();
             platformMover.SetLevelMode(false);
@@ -204,6 +210,7 @@ namespace Core
         
         public void StartNextLevel()
         {
+            concentration.Reset();
             uiManager.scorePanel.ResetCounter();
             bonusController.DeactivateAllBonuses();
             gameStarted = true;
@@ -217,7 +224,7 @@ namespace Core
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveShopMenu(false);
             uiManager.SetActiveLevelUI(true);
-            uiManager.SetActiveGameMenu(false);
+            uiManager.SetActiveGameMenu(true);
             uiManager.SetActiveFinishLevel(false);
             uiManager.SetActiveFailedInfinityPanel(false);
             uiManager.SetActiveFailedLevelPanel(false);
@@ -264,6 +271,8 @@ namespace Core
 
         public void StartedLevel()
         {
+            bonusController.DeactivateAllBonuses();
+            concentration.Reset();
             sessionData.ResetData();
             uiManager.SetActiveScorePanel(true);
             uiManager.scorePanel.GetComponent<ScorePanel>().ResetCounter();
@@ -277,7 +286,7 @@ namespace Core
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveShopMenu(false);
             uiManager.SetActiveLevelUI(true);
-            uiManager.SetActiveGameMenu(false);
+            uiManager.SetActiveGameMenu(true);
             uiManager.SetActiveFinishLevel(false);
             uiManager.SetActiveFailedInfinityPanel(false);
             uiManager.SetActiveFailedLevelPanel(false);
