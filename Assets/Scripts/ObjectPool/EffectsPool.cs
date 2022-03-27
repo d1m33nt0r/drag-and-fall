@@ -9,23 +9,23 @@ namespace ObjectPool
         [SerializeField] private TouchEffect touchEffect;
         [SerializeField] private int touchPoolSize;
 
-        [SerializeField] private GameObject bonusCollectingEffect;
+        [SerializeField] private BonusCollectingEffect bonusCollectingEffect;
         [SerializeField] private int bonusEffectPoolSize;
 
-        [SerializeField] private GameObject coinCollectingEffect;
+        [SerializeField] private CoinCollectingEffect coinCollectingEffect;
         [SerializeField] private int coinEffectPoolSize;
 
-        [SerializeField] private GameObject crystalCollectingEffect;
+        [SerializeField] private CrystalCollectingEffect crystalCollectingEffect;
         [SerializeField] private int crystalEffectPoolSize;
 
-        [SerializeField] private GameObject keyCollectingEffect;
+        [SerializeField] private KeyCollectingEffect keyCollectingEffect;
         [SerializeField] private int keyEffectPoolSize;
         
         private Queue<TouchEffect> touchPool = new Queue<TouchEffect>();
-        private Queue<GameObject> bonusEffectPool = new Queue<GameObject>();
-        private Queue<GameObject> coinEffectPool = new Queue<GameObject>();
-        private Queue<GameObject> crystalEffectPool = new Queue<GameObject>();
-        private Queue<GameObject> keyEffectPool = new Queue<GameObject>();
+        private Queue<BonusCollectingEffect> bonusEffectPool = new Queue<BonusCollectingEffect>();
+        private Queue<CoinCollectingEffect> coinEffectPool = new Queue<CoinCollectingEffect>();
+        private Queue<CrystalCollectingEffect> crystalEffectPool = new Queue<CrystalCollectingEffect>();
+        private Queue<KeyCollectingEffect> keyEffectPool = new Queue<KeyCollectingEffect>();
         
         private void Awake()
         {
@@ -40,7 +40,7 @@ namespace ObjectPool
             {
                 var instance = Instantiate(bonusCollectingEffect, transform);
                 instance.GetComponent<BonusCollectingEffect>().Construct(this);
-                instance.SetActive(false);
+                instance.gameObject.SetActive(false);
                 bonusEffectPool.Enqueue(instance);
             }
             
@@ -48,7 +48,7 @@ namespace ObjectPool
             {
                 var instance = Instantiate(coinCollectingEffect, transform);
                 instance.GetComponent<CoinCollectingEffect>().Construct(this);
-                instance.SetActive(false);
+                instance.gameObject.SetActive(false);
                 coinEffectPool.Enqueue(instance);
             }
             
@@ -56,7 +56,7 @@ namespace ObjectPool
             {
                 var instance = Instantiate(crystalCollectingEffect, transform);
                 instance.GetComponent<CrystalCollectingEffect>().Construct(this);
-                instance.SetActive(false);
+                instance.gameObject.SetActive(false);
                 crystalEffectPool.Enqueue(instance);
             }
             
@@ -64,21 +64,27 @@ namespace ObjectPool
             {
                 var instance = Instantiate(keyCollectingEffect, transform);
                 instance.GetComponent<KeyCollectingEffect>().Construct(this);
-                instance.SetActive(false);
+                instance.gameObject.SetActive(false);
                 keyEffectPool.Enqueue(instance);
             }
         }
         
-        public void ReturnKeyCollectingEffectToPool(GameObject effect)
+        public void ReturnKeyCollectingEffectToPool(KeyCollectingEffect effect)
         {
             effect.transform.SetParent(transform);
             keyEffectPool.Enqueue(effect);
             effect.gameObject.SetActive(false);
         }
 
-        public GameObject GetKeyCollectingEffect()
+        public KeyCollectingEffect GetKeyCollectingEffect()
         {
-            if (keyEffectPool.Count > 0) return keyEffectPool.Dequeue();
+            if (keyEffectPool.Count > 0)
+            {
+                var effect = keyEffectPool.Dequeue();
+                effect.gameObject.SetActive(true);
+                effect.transform.SetParent(null);
+                return effect;
+            }
             
             var instance = Instantiate(keyCollectingEffect, transform);
             instance.GetComponent<KeyCollectingEffect>().Construct(this);
@@ -86,16 +92,22 @@ namespace ObjectPool
             return instance;
         }
         
-        public void ReturnBonusCollectingEffectToPool(GameObject effect)
+        public void ReturnBonusCollectingEffectToPool(BonusCollectingEffect effect)
         {
             effect.transform.SetParent(transform);
             bonusEffectPool.Enqueue(effect);
             effect.gameObject.SetActive(false);
         }
 
-        public GameObject GetBonusCollectingEffect()
+        public BonusCollectingEffect GetBonusCollectingEffect()
         {
-            if (bonusEffectPool.Count > 0) return bonusEffectPool.Dequeue();
+            if (bonusEffectPool.Count > 0)
+            {
+                var effect = bonusEffectPool.Dequeue();
+                effect.gameObject.SetActive(true);
+                effect.transform.SetParent(null);
+                return effect;
+            }
             
             var instance = Instantiate(bonusCollectingEffect, transform);
             instance.GetComponent<BonusCollectingEffect>().Construct(this);
@@ -103,16 +115,22 @@ namespace ObjectPool
             return instance;
         }
         
-        public void ReturnCoinCollectingEffectToPool(GameObject effect)
+        public void ReturnCoinCollectingEffectToPool(CoinCollectingEffect effect)
         {
             effect.transform.SetParent(transform);
             coinEffectPool.Enqueue(effect);
             effect.gameObject.SetActive(false);
         }
 
-        public GameObject GetCoinCollectingEffect()
+        public CoinCollectingEffect GetCoinCollectingEffect()
         {
-            if (coinEffectPool.Count > 0) return coinEffectPool.Dequeue();
+            if (coinEffectPool.Count > 0)
+            {
+                var effect = coinEffectPool.Dequeue();
+                effect.gameObject.SetActive(true);
+                effect.transform.SetParent(null);
+                return effect;
+            }
             
             var instance = Instantiate(coinCollectingEffect, transform);
             instance.GetComponent<CoinCollectingEffect>().Construct(this);
@@ -120,16 +138,22 @@ namespace ObjectPool
             return instance;
         }
         
-        public void ReturnCrystalCollectingEffectToPool(GameObject effect)
+        public void ReturnCrystalCollectingEffectToPool(CrystalCollectingEffect effect)
         {
             effect.transform.SetParent(transform);
             crystalEffectPool.Enqueue(effect);
             effect.gameObject.SetActive(false);
         }
 
-        public GameObject GetCrystalCollectingEffect()
+        public CrystalCollectingEffect GetCrystalCollectingEffect()
         {
-            if (crystalEffectPool.Count > 0) return crystalEffectPool.Dequeue();
+            if (crystalEffectPool.Count > 0)
+            {
+                var effect = crystalEffectPool.Dequeue();
+                effect.gameObject.SetActive(true);
+                effect.transform.SetParent(null);
+                return effect;
+            }
             
             var instance = Instantiate(crystalCollectingEffect, transform);
             instance.GetComponent<CrystalCollectingEffect>().Construct(this);

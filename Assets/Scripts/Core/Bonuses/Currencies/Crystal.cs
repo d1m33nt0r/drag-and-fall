@@ -17,6 +17,7 @@ namespace Core
         private float journeyLength;
         private bool ismove = true;
         private SegmentContentPool segmentContentPool;
+        private Coroutine coroutine;
         
         public void Construct(SegmentContentPool segmentContentPool)
         {
@@ -39,7 +40,8 @@ namespace Core
             endMarker = _transform;
             startTime = Time.time;
             journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
-            StartCoroutine(Move());
+            if (coroutine != null) StopCoroutine(coroutine);
+            coroutine = StartCoroutine(Move());
         }
     
         private IEnumerator Move()

@@ -14,7 +14,7 @@ namespace Core.Effects
         
         public void ReturnToPool()
         {
-            effectsPool.ReturnBonusCollectingEffectToPool(gameObject);
+            effectsPool.ReturnKeyCollectingEffectToPool(this);
         }
         
         void OnParticleSystemStopped()

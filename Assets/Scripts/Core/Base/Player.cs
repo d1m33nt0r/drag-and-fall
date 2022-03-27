@@ -45,7 +45,6 @@ namespace Core
         {
             var effect = effectsPool.GetBonusCollectingEffect();
             effect.transform.SetParent(null);
-            effect.SetActive(true);
             effect.transform.position = transform.position;
             effect.GetComponent<ParticleSystem>().Play();
         }
@@ -54,7 +53,6 @@ namespace Core
         {
             var effect = effectsPool.GetCoinCollectingEffect();
             effect.transform.SetParent(null);
-            effect.SetActive(true);
             effect.transform.position = transform.position;
             effect.GetComponent<ParticleSystem>().Play();
         }
@@ -63,7 +61,6 @@ namespace Core
         {
             var effect = effectsPool.GetCrystalCollectingEffect();
             effect.transform.SetParent(null);
-            effect.SetActive(true);
             effect.transform.position = transform.position;
             effect.GetComponent<ParticleSystem>().Play();
         }
@@ -72,7 +69,6 @@ namespace Core
         {
             var effect = effectsPool.GetKeyCollectingEffect();
             effect.transform.SetParent(null);
-            effect.SetActive(true);
             effect.transform.position = transform.position;
             effect.GetComponent<ParticleSystem>().Play();
         }

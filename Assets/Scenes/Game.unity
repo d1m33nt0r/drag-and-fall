@@ -23950,7 +23950,7 @@ MonoBehaviour:
   acceleration: {fileID: 8494222614144849981, guid: 64d2a6b3b876abb4ab0ade2cdfc55f04, type: 3}
   magnet: {fileID: 705712189710851890, guid: 5170fb0dee6405e48937f3553da3771d, type: 3}
   key: {fileID: 4469818098743479962, guid: cb03a77d9ab8e1d468c6815be230e34c, type: 3}
-  coinPoolSize: 30
+  coinPoolSize: 12
   crystalPoolSize: 10
   multiplierPoolSize: 3
   shieldPoolSize: 3
@@ -62993,13 +62993,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   touchEffect: {fileID: 8513849329434092675, guid: 6e5257dcf4407a5498de1613dfbb9fde, type: 3}
   touchPoolSize: 3
-  bonusCollectingEffect: {fileID: 4863219060617643236, guid: a1684f5904ebdf643a12c6b49a520022, type: 3}
+  bonusCollectingEffect: {fileID: 3186564956786796830, guid: a1684f5904ebdf643a12c6b49a520022, type: 3}
   bonusEffectPoolSize: 3
-  coinCollectingEffect: {fileID: 4863219060617643236, guid: 4618a756eb4b47d4f805e4c5800b9c57, type: 3}
+  coinCollectingEffect: {fileID: 2715742674312602747, guid: 4618a756eb4b47d4f805e4c5800b9c57, type: 3}
   coinEffectPoolSize: 5
-  crystalCollectingEffect: {fileID: 4863219060617643236, guid: 5e7a57a29799c264db6dec73736c9131, type: 3}
+  crystalCollectingEffect: {fileID: 8949316395278816193, guid: 5e7a57a29799c264db6dec73736c9131, type: 3}
   crystalEffectPoolSize: 3
-  keyCollectingEffect: {fileID: 4863219060617643236, guid: 35d02983b391c2445b75e15e0e45e541, type: 3}
+  keyCollectingEffect: {fileID: -5203103904055294609, guid: 35d02983b391c2445b75e15e0e45e541, type: 3}
   keyEffectPoolSize: 2
 --- !u!4 &2041678700
 Transform:
