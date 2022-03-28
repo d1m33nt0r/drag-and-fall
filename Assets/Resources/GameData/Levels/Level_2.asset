@@ -274,3 +274,6 @@ MonoBehaviour:
       segmentContent: 0
     - segmentType: 0
       segmentContent: 0
+  bestScore: 0
+  middleScore: 0
+  bottomScore: 0

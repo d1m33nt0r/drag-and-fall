@@ -188,7 +188,6 @@ namespace Core
         
         private void Update()
         {
-            if (!gameManager.gameStarted) return;
             if (triggerStay) return;
             
             var position = transform.position;
@@ -225,7 +224,7 @@ namespace Core
                         {
                             SetTriggerStay(true);
                             SetDefaultState();
-                            segment.IncreasePlatformTouchCounter();
+                            if (gameManager.gameStarted) segment.IncreasePlatformTouchCounter();
                             freeSpeedIncrease.ResetSpeed();
                             var instance = Instantiate(sled, new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z), Quaternion.Euler(-90, 0, 0), segment.transform);//effectsPool.GetTouchEffect();
                             //instance.gameObject.SetActive(true);
@@ -237,6 +236,7 @@ namespace Core
                         }
                         break;
                     case SegmentType.Hole:
+                        if (!gameManager.gameStarted) return;
                         if (bonusController.accelerationIsActive)
                         {
                             SetTriggerStay(true);
@@ -251,6 +251,7 @@ namespace Core
                         }
                         break;
                     case SegmentType.Let:
+                        if (!gameManager.gameStarted) return;
                         if (bonusController.accelerationIsActive)
                         {
                             SetTriggerStay(true);

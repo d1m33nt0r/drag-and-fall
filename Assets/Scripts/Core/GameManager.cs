@@ -135,12 +135,33 @@ namespace Core
 
         public void FinishLevel(LevelData levelsData)
         {
+            if (scorePanel.GetPoints() >= levelsData.bestScore)
+            {
+                finishLevelUI.ShowThreeStars();
+                if (progressController.levelsProgress.levelsProgresses[levelsData.levelIndex].countStars < 3)
+                    progressController.levelsProgress.levelsProgresses[levelsData.levelIndex].countStars = 3;
+                    
+            }
+            else if (scorePanel.GetPoints() >= levelsData.middleScore)
+            {
+                finishLevelUI.ShowTwoStars();
+                if (progressController.levelsProgress.levelsProgresses[levelsData.levelIndex].countStars < 2)
+                    progressController.levelsProgress.levelsProgresses[levelsData.levelIndex].countStars = 2;
+            }
+            else
+            {
+                finishLevelUI.ShowOneStar();
+                if (progressController.levelsProgress.levelsProgresses[levelsData.levelIndex].countStars < 1)
+                    progressController.levelsProgress.levelsProgresses[levelsData.levelIndex].countStars = 1;
+            }
+
             bonusController.DeactivateAllBonuses();
             finishLevelUI.SetText(scorePanel.GetPoints(), levelsData.levelIndex + 1);
             gameStarted = false;
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveLevelsMenu(false);
             progressController.levelsProgress.levelsProgresses[levelsData.levelIndex].isCompleted = true;
+            
             if (levelsData.levelIndex + 1 < progressController.levelsProgress.levelsProgresses.Count)
                 progressController.levelsProgress.levelsProgresses[levelsData.levelIndex + 1].isUnlocked = true;
             progressController.SaveLevelsProgress(progressController.levelsProgress);

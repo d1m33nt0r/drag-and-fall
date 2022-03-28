@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Player_Default 1
   m_Shader: {fileID: 4800000, guid: cabbd11a2419d0e48ba1723153f2081c, type: 3}
-  m_ShaderKeywords: TCP2_AMBIENT
+  m_ShaderKeywords: TCP2_AMBIENT TCP2_RIM_LIGHTING
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -85,10 +85,10 @@ Material:
     - _RampSmoothingOtherLights: 1
     - _RampThreshold: 1
     - _RampThresholdOtherLights: 1
-    - _RimMax: 2
-    - _RimMin: 1.33
+    - _RimMax: 1.82
+    - _RimMin: 0.42
     - _Shadow_HSV_H: 0
-    - _Shadow_HSV_S: -1
+    - _Shadow_HSV_S: 0
     - _Shadow_HSV_V: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -98,7 +98,7 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _UseAmbient: 1
-    - _UseRim: 0
+    - _UseRim: 1
     - _UseSpecular: 0
     - _UseTexturedThreshold: 0
     - _ZWrite: 1
@@ -107,7 +107,7 @@ Material:
     - __dummy__: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DiffuseTint: {r: 0, g: 0.6102464, b: 1, a: 1}
+    - _DiffuseTint: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
@@ -120,5 +120,5 @@ Material:
     - _TCP2_AMBIENT_FRONT: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_LEFT: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_RIGHT: {r: 0, g: 0, b: 0, a: 1}
-    - _TCP2_AMBIENT_TOP: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
+    - _TCP2_AMBIENT_TOP: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
   m_BuildTextureStacks: []
