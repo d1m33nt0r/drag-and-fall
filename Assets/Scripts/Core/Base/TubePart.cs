@@ -5,11 +5,11 @@ namespace Core
 {
     public class TubePart : MonoBehaviour
     {
-        private PlatformMover platformMover; 
+        private TubeMover tubeMover; 
         
-        public void Initialize(PlatformMover _platformMover)
+        public void Initialize(TubeMover _tubeMover)
         {
-            platformMover = _platformMover;
+            tubeMover = _tubeMover;
             ChangeTheme();
         }
 
@@ -21,14 +21,14 @@ namespace Core
         
         public void ChangeTheme()
         {
-            GetComponent<MeshRenderer>().material = platformMover.visualController.GetTubeMaterial();
-            GetComponent<MeshFilter>().mesh = platformMover.visualController.GetTubeMesh();
+            GetComponent<MeshRenderer>().material = tubeMover.platformMover.visualController.GetTubeMaterial();
+            GetComponent<MeshFilter>().mesh = tubeMover.platformMover.visualController.GetTubeMesh();
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("TubeTrigger")) return;
-            platformMover.CreateNewTubePart();
+            if (!other.CompareTag("TubeTrigger")) return; 
+            tubeMover.CreateNewTubePart();
             Destroy(gameObject);
         }
     }

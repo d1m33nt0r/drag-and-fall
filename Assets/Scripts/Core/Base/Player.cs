@@ -12,6 +12,7 @@ namespace Core
     {
         public event Action failed;
 
+        [SerializeField] private TubeMover tubeMover;
         [SerializeField] private EffectsPool effectsPool;
         [SerializeField] private GameObject shieldEffect;
         [SerializeField] private PlatformMover platformMover;
@@ -183,6 +184,7 @@ namespace Core
 
         public void MovePlatforms()
         {
+            tubeMover.MoveTube();
             platformMover.MovePlatforms();
         }
         

@@ -23,15 +23,17 @@ namespace Core
         [SerializeField] private Segment[] segments;
         private GainScore gainScore;
         private SegmentContentPool segmentContentPool;
+        private TubeMover tubeMover;
         
         public void Initialize(int _segmentsCount, PatternData patternData, PlatformMover platformMover, 
-            Player _player, BonusController _bonusController, GainScore gainScore, SegmentContentPool segmentContentPool)
+            Player _player, BonusController _bonusController, GainScore gainScore, SegmentContentPool segmentContentPool,
+            TubeMover _tubeMover)
         {
             this.segmentContentPool = segmentContentPool;
             this.platformMover = platformMover;
             this.gainScore = gainScore;
             this.patternData = patternData;
-
+            this.tubeMover = _tubeMover;
             for (var i = 1; i <= patternData.segmentsData.Length; i++)
             {
                 segments[i - 1].Initialize(patternData.segmentsData[i - 1], platformMover, this, _bonusController, segmentContentPool);
@@ -77,9 +79,12 @@ namespace Core
             
             if (platformMover.isLevelMode && patternData.isLast) platformMover.FinishLevel(platformMover.gameManager.gameMode.levelMode.level);
             platformDestroyed?.Invoke();
-            
+
             if (platformsIsMoving)
+            {
+                tubeMover.MoveTube();
                 platformMover.MovePlatforms();
+            }
             
             increaseConcentraion?.Invoke();
             for (var i = 0; i < segments.Length; i++)

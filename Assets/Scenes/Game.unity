@@ -19049,7 +19049,7 @@ GameObject:
   m_Layer: 0
   m_Name: TubeTrigger
   m_TagString: TubeTrigger
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -55294,13 +55294,32 @@ GameObject:
   m_Component:
   - component: {fileID: 1755819903}
   - component: {fileID: 1755819904}
+  - component: {fileID: 1755819901}
   m_Layer: 0
-  m_Name: PlatformMover
+  m_Name: Mover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1755819901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755819900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88a4d7a9ff00436ab5d1f18096f7b7d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tubePrefab: {fileID: 6258718019660764072, guid: 74d06b32c97d0044897d396e3131e7df, type: 3}
+  distanceBetweenTubeParts: 3
+  countTubeParts: 8
+  tubeParts: []
+  platformMover: {fileID: 1755819904}
+  tubeIsInitialized: 0
 --- !u!4 &1755819903
 Transform:
   m_ObjectHideFlags: 0
@@ -55332,10 +55351,8 @@ MonoBehaviour:
   gainScore: {fileID: 1405330971}
   player: {fileID: 1776688606}
   platformPrefab: {fileID: 519894861839142882, guid: 1aa3279ae3c1a884b8bbe2b0b130ecb4, type: 3}
-  tubePrefab: {fileID: 6258718019660764072, guid: 74d06b32c97d0044897d396e3131e7df, type: 3}
+  tubeMover: {fileID: 1755819901}
   countPlatforms: 8
-  countTubeParts: 8
-  distanceBetweenTubeParts: 2
   distanceBetweenPlatforms: 1.5
   platformMovementSpeed: 3
   dragController: {fileID: 1864669949}
@@ -55345,11 +55362,9 @@ MonoBehaviour:
   levelsData: {fileID: 11400000, guid: 961a9376c0b1dfd4fa48d2081b5c3866, type: 2}
   bonusController: {fileID: 507011436}
   levelProgress: {fileID: 622633130}
-  tubeIsInitialized: 0
   platformsIsInitialized: 0
   isLevelMode: 0
   platforms: []
-  tubeParts: []
 --- !u!1 &1756172929
 GameObject:
   m_ObjectHideFlags: 0
@@ -56264,6 +56279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b975d66b9612402d85edd1d09b66d943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tubeMover: {fileID: 0}
   effectsPool: {fileID: 2041678699}
   shieldEffect: {fileID: 0}
   platformMover: {fileID: 1755819904}
