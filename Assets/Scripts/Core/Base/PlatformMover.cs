@@ -46,6 +46,7 @@ namespace Core
         private Vector3[] localPositionsOfTubeParts;
         private bool destroyTubeNeeded = true;
         private Coroutine movingCoroutine;
+        private Coroutine tubePartCoroutine;
         
         private void Awake()
         {
@@ -172,7 +173,9 @@ namespace Core
         {
             startTime = Time.time;
             if (movingCoroutine != null) StopCoroutine(movingCoroutine);
+            if (tubePartCoroutine != null) StopCoroutine(tubePartCoroutine);
             movingCoroutine = StartCoroutine(Moving(platformMovementSpeed));
+            tubePartCoroutine = StartCoroutine(MovingTube(platformMovementSpeed));
         }
 
         private IEnumerator Moving(float speed)
@@ -192,16 +195,7 @@ namespace Core
                 CreateNewPlatform(countPlatforms - 1, new PatternData(12), true);
             else
                 CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
-
-            var targetPositions = new Vector3[countTubeParts];
-            var currentPositions = new Vector3[countTubeParts];
-
-            for (var i = 0; i < countTubeParts; i++)
-            {
-                currentPositions[i] = tubeParts[i].transform.position;
-                targetPositions[i] = currentPositions[i] + Vector3.up;
-            }
-
+            
             var distCovered = (Time.time - startTime) * speed;
             var fractionOfJourney = distCovered / journeyLength;
             
@@ -226,22 +220,31 @@ namespace Core
             }
         }
 
-        public IEnumerator MovingTube()
+        public IEnumerator MovingTube(float speed)
         {
-            float distCovered = (Time.time - startTime) * platformMovementSpeed;
-            float fractionOfJourney = distCovered / journeyLength;
+            var distCovered = (Time.time - startTime) * speed;
+            var fractionOfJourney = distCovered / journeyLength;
+            
+            var targetPositions = new Vector3[countTubeParts];
+            var currentPositions = new Vector3[countTubeParts];
+
+            for (var i = 0; i < countTubeParts; i++)
+            {
+                currentPositions[i] = tubeParts[i].transform.position;
+                targetPositions[i] = currentPositions[i] + new Vector3(currentPositions[i].x, currentPositions[i].y + 1.5f, currentPositions[i].z);
+            }
+            
             while (distCovered / journeyLength != 1)
             {
                 for (var i = 0; i < countTubeParts; i++)
                 {
-                    distCovered = (Time.time - startTime) * platformMovementSpeed;
+                    distCovered = (Time.time - startTime) * speed;
                     fractionOfJourney = distCovered / journeyLength;
-                    //tubeParts[i].transform.position = Vector3.Lerp(currentPositions[i], targetPositions[i], fractionOfJourney);
+                    tubeParts[i].transform.position = Vector3.Lerp(currentPositions[i], targetPositions[i], fractionOfJourney);
                 }
 
                 yield return null;
             }
-            
         }
 
         public void CreateNewTubePart()
