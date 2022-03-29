@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DafEditor.Editor.Common;
 using DafEditor.Editor.Intefraces;
 using Data.Core;
 using UnityEditor;
@@ -21,9 +22,9 @@ namespace DafEditor.Editor.Layout
         
         public void Draw()
         {
-            GUILayout.BeginArea(new Rect(new Vector2(0, GameEditorWindow.instance.m_topBar.TOP_BAR_HEIGHT), 
-                new Vector2(GameEditorWindow.instance.m_splitLine.xSplitCoordinate - 
-                            GameEditorWindow.instance.m_splitLine.lineWidth,GameEditorWindow.instance.position.height)), EditorStyles.LeftSidebarStyle());
+            GUILayout.BeginArea(new Rect(new Vector2(0, 0), 
+                new Vector2(GameEditorWindow.instance.leftSplitLine.xSplitCoordinate - 
+                            GameEditorWindow.instance.leftSplitLine.lineWidth,GameEditorWindow.instance.position.height)), EditorStyles.LeftSidebarStyle());
 
             GUILayout.Label("Manage patterns", EditorStyles.HeaderOfBlockInLeftSideBar());
 
@@ -60,8 +61,8 @@ namespace DafEditor.Editor.Layout
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button(levelsData.leves[i].name, EditorStyles.DarkButtonStyle(22)))
                 {
-                    GameEditorWindow.instance.currentPatternData = levelsData.leves[i].patterns;
-                    GameEditorWindow.instance.m_content.SetPatterns(GameEditorWindow.instance.currentPatternData, levelsData.leves[i].name);
+                    GameEditorWindow.instance.currentPatternsData = levelsData.leves[i].patterns;
+                    GameEditorWindow.instance.content.SetPatterns(GameEditorWindow.instance.currentPatternsData, levelsData.leves[i].name);
                 }
                 GUILayout.Button("X", EditorStyles.RedButtonStyle(22), GUILayout.Width(25));
                 GUILayout.EndHorizontal();
@@ -81,6 +82,7 @@ namespace DafEditor.Editor.Layout
                 var count = infinityData.patternSets.Count + 1;
                 AssetDatabase.CreateAsset(setData, INFINITY_DATA_PATH + count + "_Set.asset");
                 infinityData.patternSets.Add(setData);
+                EditorUtility.SetDirty(infinityData);
             }
             
             GUILayout.BeginVertical("box");
@@ -88,10 +90,48 @@ namespace DafEditor.Editor.Layout
             for (var i = 0; i < infinityData.patternSets.Count; i++)
             {
                 GUILayout.BeginHorizontal();
+                if (GUILayout.Button(infinityData.patternSets[i].isRandom ? "R" : "", 
+                    EditorStyles.RedButtonStyle(22), GUILayout.Width(25)))
+                {
+                    if (Event.current.button == 0)
+                    {
+                        infinityData.patternSets[i].isRandom = !infinityData.patternSets[i].isRandom;
+                        if (!infinityData.patternSets[i].isRandom)
+                        {
+                            GameEditorWindow.instance.SetRightPanelState(RightPanelState.Empty);
+                            GameEditorWindow.instance.SetCurrentRandomPatternData(null);
+                            GameEditorWindow.instance.SetCurrentRandomSetData(null);
+                            infinityData.patternSets[i].isRandom = false;
+                        }
+                        else
+                        {
+                            GameEditorWindow.instance.SetRightPanelState(RightPanelState.SetRandomSettings);
+                            GameEditorWindow.instance.SetCurrentRandomPatternData(null);
+                            GameEditorWindow.instance.SetCurrentRandomSetData(infinityData.patternSets[i]);
+                            infinityData.patternSets[i].isRandom = true;
+                        }
+                    }
+                    if (Event.current.button == 2)
+                    {
+                        if (infinityData.patternSets[i].isRandom)
+                        {
+                            GameEditorWindow.instance.SetRightPanelState(RightPanelState.SetRandomSettings);
+                            GameEditorWindow.instance.SetCurrentRandomPatternData(null);
+                            GameEditorWindow.instance.SetCurrentRandomSetData(infinityData.patternSets[i]);
+                        }
+                        else
+                        {
+                            GameEditorWindow.instance.SetCurrentRandomPatternData(null);
+                            GameEditorWindow.instance.SetCurrentRandomSetData(null);
+                            GameEditorWindow.instance.SetRightPanelState(RightPanelState.Empty);
+                        }
+                    }
+                }
                 if (GUILayout.Button(infinityData.patternSets[i].name, EditorStyles.DarkButtonStyle(22)))
                 {
-                    GameEditorWindow.instance.currentPatternData = infinityData.patternSets[i].patterns;
-                    GameEditorWindow.instance.m_content.SetPatterns(GameEditorWindow.instance.currentPatternData, infinityData.patternSets[i].name);
+                    GameEditorWindow.instance.currentPatternsData = infinityData.patternSets[i].patterns;
+                    GameEditorWindow.instance.currentSetData = infinityData.patternSets[i];
+                    GameEditorWindow.instance.content.SetPatterns(GameEditorWindow.instance.currentPatternsData, infinityData.patternSets[i].name);
                 }
                 GUILayout.Button("X", EditorStyles.RedButtonStyle(22), GUILayout.Width(25));
                 GUILayout.EndHorizontal();

@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Core.Bonuses;
 using Data.Core;
+using Data.Core.Segments;
+using Data.Core.Segments.Content;
 using ObjectPool;
 using UI;
 using UnityEngine;
@@ -29,18 +32,110 @@ namespace Core
             Player _player, BonusController _bonusController, GainScore gainScore, SegmentContentPool segmentContentPool,
             TubeMover _tubeMover)
         {
+            if (!patternData.isRandom)
+                InitializeHandMadePlatform(patternData, platformMover, _player, _bonusController, gainScore, segmentContentPool, _tubeMover);
+            else
+                InitializeRandomPlatform(patternData, platformMover, _player, _bonusController, gainScore, segmentContentPool, _tubeMover);
+        }
+
+        private void InitializeRandomPlatform(PatternData patternData, PlatformMover platformMover, Player _player,
+            BonusController bonusController, GainScore gainScore, SegmentContentPool segmentContentPool, TubeMover tubeMover)
+        {
+            this.segmentContentPool = segmentContentPool;
+            this.platformMover = platformMover;
+            this.gainScore = gainScore;
+            this.patternData = patternData;
+            this.tubeMover = tubeMover;
+
+            var availablePositions = PrepareAvailablePositions();
+            PlaceSegments(ref availablePositions, bonusController, segmentContentPool);
+
+            platformDestroyed += _player.SetFallingTrailState;
+            player = _player;
+        }
+
+        private void InitializeHandMadePlatform(PatternData patternData, PlatformMover platformMover, Player _player,
+            BonusController _bonusController, GainScore gainScore, SegmentContentPool segmentContentPool, TubeMover _tubeMover)
+        {
             this.segmentContentPool = segmentContentPool;
             this.platformMover = platformMover;
             this.gainScore = gainScore;
             this.patternData = patternData;
             this.tubeMover = _tubeMover;
+            
             for (var i = 1; i <= patternData.segmentsData.Length; i++)
-            {
-                segments[i - 1].Initialize(patternData.segmentsData[i - 1], platformMover, this, _bonusController, segmentContentPool);
-            }
+                segments[i - 1].Initialize(patternData.segmentsData[i - 1], platformMover, this, _bonusController,
+                    segmentContentPool);
 
             platformDestroyed += _player.SetFallingTrailState;
             player = _player;
+        }
+        
+        private List<int> PrepareAvailablePositions()
+        {
+            var availablePositions = new List<int>();
+
+            for (var i = 0; i < 12; i++)
+                availablePositions.Add(i);
+
+            return availablePositions;
+        }
+
+        public void PlaceSegments(ref List<int> availablePositions, BonusController bonusController, SegmentContentPool segmentContentPool)
+        {
+            PlaceHoleSegments(ref availablePositions, bonusController, segmentContentPool);
+            PlaceLetSegments(ref availablePositions, bonusController, segmentContentPool);
+            PlaceGroundSegments(ref availablePositions, bonusController, segmentContentPool);
+        }
+        
+        private void PlaceGroundSegments(ref List<int> availablePositions, BonusController bonusController,
+            SegmentContentPool segmentContentPool)
+        {
+            
+            for (var j = 0; j < availablePositions.Count; j++)
+            {
+                var segmentData = new SegmentData
+                {
+                    segmentContent = SegmentContent.None,
+                    segmentType = SegmentType.Ground
+                };
+                segments[availablePositions[j]].Initialize(segmentData, platformMover, this, bonusController, segmentContentPool);
+            }
+        }
+
+        private void PlaceLetSegments(ref List<int> availablePositions, BonusController bonusController,
+            SegmentContentPool segmentContentPool)
+        {
+            var randomAmount = Random.Range(patternData.minLetAmount, patternData.maxLetAmount);
+
+            for (var j = 0; j < randomAmount; j++)
+            {
+                var randomPosition = Random.Range(0, availablePositions.Count);
+                var segmentData = new SegmentData
+                {
+                    segmentContent = SegmentContent.None,
+                    segmentType = SegmentType.Let
+                };
+                segments[availablePositions[randomPosition]].Initialize(segmentData, platformMover, this, bonusController, segmentContentPool);
+                availablePositions.Remove(availablePositions[randomPosition]);
+            }
+        }
+
+        private void PlaceHoleSegments(ref List<int> availablePositions, BonusController bonusController, SegmentContentPool segmentContentPool)
+        {
+            var randomAmount = Random.Range(patternData.minHoleAmount, patternData.maxHoleAmount);
+
+            for (var j = 0; j < randomAmount; j++)
+            {
+                var randomPosition = Random.Range(0, availablePositions.Count);
+                var segmentData = new SegmentData
+                {
+                    segmentContent = SegmentContent.None,
+                    segmentType = SegmentType.Hole
+                };
+                segments[availablePositions[randomPosition]].Initialize(segmentData, platformMover, this, bonusController, segmentContentPool);
+                availablePositions.Remove(availablePositions[randomPosition]);
+            }
         }
 
         public void IncreaseTouchCounter()
@@ -94,27 +189,20 @@ namespace Core
             }
             BreakDownPlatform();
             player.SetTriggerStay(false);
-            //Destroy(gameObject);
+            
         }
 
         public void DestroyAfterBreakAnimation()
         {
-            
             Destroy(gameObject);
         }
 
         private void BreakDownPlatform()
         {
-            GetComponent<Animator>().Play("Break");
             for (var i = 0; i < segments.Length; i++)
-            {
                 segments[i].gameObject.GetComponent<MeshCollider>().enabled = false;
-                /*var rb = segments[i].gameObject.GetComponent<Rigidbody>();
-                rb.useGravity = true;
-                rb.isKinematic = false;
-                rb.AddForce(Random.Range(-3, 3), Random.Range(0, 10), Random.Range(2, 5), ForceMode.Impulse);*/
-            }
             
+            GetComponent<Animator>().Play("Break");
         }
     }
 }

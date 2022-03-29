@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: 2_Set
   m_EditorClassIdentifier: 
   patterns:
-  - isLast: 0
+  - isRandom: 0
+    maxLetAmount: 0
+    minLetAmount: 0
+    maxHoleAmount: 0
+    minHoleAmount: 0
+    isLast: 0
     segmentsData:
     - segmentType: 0
       segmentContent: 0

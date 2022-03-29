@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DafEditor.Editor.Layout
 {
-    public class Content : IDrawer
+    public class Content : LayoutComponent, IDrawer
     {
         private GridDrawer gridDrawer = new GridDrawer();
         private string name;
@@ -19,21 +19,20 @@ namespace DafEditor.Editor.Layout
             this.name = name;
             PatternDatas = _patternDatas;
             for (var i = 0; i < _patternDatas.Count; i++)
-                patterns.Add(new Pattern(_patternDatas[i].segmentsData, i));
+                patterns.Add(new Pattern(_patternDatas[i], i));
         }
         
         public void Draw()
         {
+            if (!isInitialized) return;
             GUILayout.BeginArea(new Rect(
-                new Vector2(GameEditorWindow.instance.m_splitLine.xSplitCoordinate,
-                    GameEditorWindow.instance.m_topBar.TOP_BAR_HEIGHT),
+                new Vector2(gameEditorWindow.leftSplitLine.xSplitCoordinate,0),
                 new Vector2(
-                    GameEditorWindow.instance.position.width - GameEditorWindow.instance.m_splitLine.xSplitCoordinate,
-                    GameEditorWindow.instance.position.height)), EditorStyles.LeftSidebarStyle());
-
-            gridDrawer.Draw();
-
+                    gameEditorWindow.position.size.x - gameEditorWindow.leftSplitLine.xSplitCoordinate - 250,
+                    55)), EditorStyles.LeftSidebarStyle());
+            
             GUILayout.Label(name, EditorStyles.HeaderOfBlockInLeftSideBar());
+            
             if (GUILayout.Button("Add new pattern"))
             {
                 PatternDatas.Add(new PatternData(12));
@@ -41,7 +40,18 @@ namespace DafEditor.Editor.Layout
                 PatternDatas[PatternDatas.Count - 1].isLast = true;
                 SetPatterns(PatternDatas, name);
             }
+            
+            GUILayout.EndArea();
+            
+            
+            GUILayout.BeginArea(new Rect(
+                new Vector2(gameEditorWindow.leftSplitLine.xSplitCoordinate,55),
+                new Vector2(
+                    gameEditorWindow.position.size.x - gameEditorWindow.leftSplitLine.xSplitCoordinate - 250,
+                    gameEditorWindow.position.height)), EditorStyles.LeftSidebarStyle());
 
+            gridDrawer.Draw();
+            
             for (var i = 0; i < patterns.Count; i++)
                 patterns[i].Draw();
 

@@ -129,6 +129,20 @@ namespace DafEditor.Editor.Common
             return style;
         }
         
+        public static GUIStyle HeaderOfBlockInRightSideBar()
+        {
+            var style = new GUIStyle();
+            var texture = new Texture2D(1, 1);
+            texture.SetPixel(1, 1, new Color(0.0f, 0.0f, 0.1f, 0.1f));
+            texture.Apply();
+            style.fixedHeight = 24;
+            style.normal.background = texture;
+            style.alignment = TextAnchor.MiddleCenter;
+            style.normal.textColor = Color.white;
+
+            return style;
+        }
+        
         public static GUIStyle IdLabelStyle(int _height, int _width)
         {
             var style = new GUIStyle();

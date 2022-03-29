@@ -4,6 +4,7 @@
     {
         Ground,
         Let,
-        Hole
+        Hole,
+        Random
     }
 }

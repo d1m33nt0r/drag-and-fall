@@ -4,14 +4,14 @@ namespace DafEditor.Editor.Common
 {
     public class CenterPoint
     {
-        private SplitLine m_splitLine;
+        private LeftSplitLine mLeftSplitLine;
 
         public Vector2 GetCenterCoordinate()
         {
-            if (m_splitLine == null)
-                m_splitLine = GameEditorWindow.instance.m_splitLine;
+            if (mLeftSplitLine == null)
+                mLeftSplitLine = GameEditorWindow.instance.leftSplitLine;
 
-            var flowWidth = GameEditorWindow.instance.position.width - m_splitLine.xSplitCoordinate;
+            var flowWidth = GameEditorWindow.instance.position.width - mLeftSplitLine.xSplitCoordinate;
 
             var centerX = flowWidth / 2;
             var centerY = GameEditorWindow.instance.position.height / 2;
@@ -21,10 +21,10 @@ namespace DafEditor.Editor.Common
         
         public Vector2 GetFirstPositionCoordinate()
         {
-            if (m_splitLine == null)
-                m_splitLine = GameEditorWindow.instance.m_splitLine;
+            if (mLeftSplitLine == null)
+                mLeftSplitLine = GameEditorWindow.instance.leftSplitLine;
 
-            var flowWidth = GameEditorWindow.instance.position.width - m_splitLine.xSplitCoordinate;
+            var flowWidth = GameEditorWindow.instance.position.width - mLeftSplitLine.xSplitCoordinate - 249;
 
             var centerX = flowWidth / 2;
             var centerY = 100;
