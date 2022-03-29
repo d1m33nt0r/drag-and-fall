@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09d77c3811e4596942c73ed357f4c40, type: 3}
   m_Name: 1_Set
   m_EditorClassIdentifier: 
+  isRandom: 1
+  minPlatformsCount: 12
+  maxPlatformsCount: 32
+  maxLetAmount: 3
+  minLetAmount: 2
+  maxHoleAmount: 6
+  minHoleAmount: 4
   patterns:
   - isRandom: 0
     maxLetAmount: 3
@@ -47,7 +54,7 @@ MonoBehaviour:
   - isRandom: 1
     maxLetAmount: 3
     minLetAmount: 3
-    maxHoleAmount: 1
+    maxHoleAmount: 2
     minHoleAmount: 1
     isLast: 0
     segmentsData:
@@ -251,7 +258,7 @@ MonoBehaviour:
       segmentContent: 6
     - segmentType: 2
       segmentContent: 7
-    - segmentType: 0
+    - segmentType: 2
       segmentContent: 6
     - segmentType: 0
       segmentContent: 0

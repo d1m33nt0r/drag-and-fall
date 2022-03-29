@@ -77,6 +77,62 @@ namespace DafEditor.Editor.Layout
                     break;
                 case RightPanelState.SetRandomSettings:
                     GUILayout.Label("Set random settings", Common.EditorStyles.HeaderOfBlockInRightSideBar());
+                    GUILayout.BeginVertical();
+                    
+                    EditorGUI.BeginChangeCheck();
+                    
+                    GUILayout.BeginHorizontal();
+                    GUILayout.BeginHorizontal(new GUIStyle{fixedWidth = 100});
+                    GUILayout.Label("Min platforms");
+                    GUILayout.EndHorizontal();
+                    gameEditorWindow.currentSetData.minPlatformsCount = 
+                        EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.minPlatformsCount, 0, 50);
+                    GUILayout.EndHorizontal();
+                    
+                    GUILayout.BeginHorizontal();
+                    GUILayout.BeginHorizontal(new GUIStyle{fixedWidth = 100});
+                    GUILayout.Label("Max platforms");
+                    GUILayout.EndHorizontal();
+                    gameEditorWindow.currentSetData.maxPlatformsCount = 
+                        EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.maxPlatformsCount, 0, 50);
+                    GUILayout.EndHorizontal();
+                    
+                    GUILayout.BeginHorizontal();
+                    GUILayout.BeginHorizontal(new GUIStyle{fixedWidth = 100});
+                    GUILayout.Label("Min hole amount");
+                    GUILayout.EndHorizontal();
+                    gameEditorWindow.currentSetData.minHoleAmount = 
+                        EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.minHoleAmount, 0, 12);
+                    GUILayout.EndHorizontal();
+                    
+                    GUILayout.BeginHorizontal();
+                    GUILayout.BeginHorizontal(new GUIStyle{fixedWidth = 100});
+                    GUILayout.Label("Max hole amount");
+                    GUILayout.EndHorizontal();
+                    gameEditorWindow.currentSetData.maxHoleAmount = 
+                        EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.maxHoleAmount, 0, 12);
+                    GUILayout.EndHorizontal();
+                    
+                    GUILayout.BeginHorizontal();
+                    GUILayout.BeginHorizontal(new GUIStyle{fixedWidth = 100});
+                    GUILayout.Label("Min let amount");
+                    GUILayout.EndHorizontal();
+                    gameEditorWindow.currentSetData.minLetAmount = 
+                        EditorGUILayout.IntSlider( gameEditorWindow.currentSetData.minLetAmount, 0, 12);
+                    GUILayout.EndHorizontal();
+                    
+                    GUILayout.BeginHorizontal();
+                    GUILayout.BeginHorizontal(new GUIStyle{fixedWidth = 100});
+                    GUILayout.Label("Max let amount");
+                    GUILayout.EndHorizontal();
+                    gameEditorWindow.currentSetData.maxLetAmount = 
+                        EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.maxLetAmount, 0, 12);
+                    GUILayout.EndHorizontal();
+                    
+                    if (EditorGUI.EndChangeCheck())
+                    {
+                        EditorUtility.SetDirty(gameEditorWindow.infinityData.patternSets[0]);
+                    }
                     break;
             }
             

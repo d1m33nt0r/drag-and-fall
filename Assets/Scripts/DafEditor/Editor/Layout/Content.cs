@@ -43,7 +43,6 @@ namespace DafEditor.Editor.Layout
             
             GUILayout.EndArea();
             
-            
             GUILayout.BeginArea(new Rect(
                 new Vector2(gameEditorWindow.leftSplitLine.xSplitCoordinate,55),
                 new Vector2(

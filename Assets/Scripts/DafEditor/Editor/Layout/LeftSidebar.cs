@@ -42,6 +42,9 @@ namespace DafEditor.Editor.Layout
 
         private void DrawLevels()
         {
+            GameEditorWindow.instance.SetRightPanelState(RightPanelState.Empty);
+            GameEditorWindow.instance.SetCurrentRandomPatternData(null);
+            GameEditorWindow.instance.SetCurrentRandomSetData(null);
             var levelsData = AssetDatabase.LoadAssetAtPath<LevelsData>(LEVELS_DATA_ASSET_PATH);
             
             if (GUILayout.Button("Create new level", EditorStyles.DarkButtonStyle(22)))
