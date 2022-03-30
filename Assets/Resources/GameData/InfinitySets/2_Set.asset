@@ -12,35 +12,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09d77c3811e4596942c73ed357f4c40, type: 3}
   m_Name: 2_Set
   m_EditorClassIdentifier: 
-  patterns:
-  - isRandom: 0
-    maxLetAmount: 0
-    minLetAmount: 0
-    maxHoleAmount: 0
-    minHoleAmount: 0
-    isLast: 0
-    segmentsData:
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 2
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 2
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 2
-      segmentContent: 0
-    - segmentType: 2
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
+  isRandom: 0
+  minPlatformsCount: 0
+  maxPlatformsCount: 0
+  maxLetAmount: 0
+  minLetAmount: 0
+  maxHoleAmount: 0
+  minHoleAmount: 0
+  attemptsOfShieldInstantiate: 0
+  shieldPositions: 
+  spawnShieldOnLet: 0
+  spawnShieldOnGround: 0
+  spawnShieldOnHole: 0
+  spawnShieldChance: 0
+  attemptsOfKeyInstantiate: 0
+  keyPositions: 
+  spawnKeyOnLet: 0
+  spawnKeyOnGround: 0
+  spawnKeyOnHole: 0
+  spawnKeyChance: 0
+  attemptsOfMagnetInstantiate: 0
+  magnetPositions: 
+  spawnMagnetOnLet: 0
+  spawnMagnetOnGround: 0
+  spawnMagnetOnHole: 0
+  spawnMagnetChance: 0
+  attemptsOfMultiplierInstantiate: 0
+  multiplierPositions: 
+  spawnMultiplierOnLet: 0
+  spawnMultiplierOnGround: 0
+  spawnMultiplierOnHole: 0
+  spawnMultiplierChance: 0
+  attemptsOfAccelerationInstantiate: 0
+  accelerationPositions: 
+  spawnAccelerationOnLet: 0
+  spawnAccelerationOnGround: 0
+  spawnAccelerationOnHole: 0
+  spawnAccelerationChance: 0
+  maxCoinAmount: 0
+  minCoinAmount: 0
+  coinAccuracyLevel: 0
+  crystalAccuracyLevel: 0
+  maxCrystalAmount: 0
+  minCrystalAmount: 0
+  patterns: []

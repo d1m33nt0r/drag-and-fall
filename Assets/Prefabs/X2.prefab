@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -8984513179328962535}
   m_Layer: 0
   m_Name: X2
-  m_TagString: Untagged
+  m_TagString: SegmentContent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,3 +124,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02d771a664814e8894a02c14e66562a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endMarker: {fileID: 0}
+  speed: 1

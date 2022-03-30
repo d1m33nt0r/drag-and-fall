@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Core.Bonuses;
+using UnityEngine;
 
 namespace Core
 {
@@ -12,12 +13,36 @@ namespace Core
             if (other.TryGetComponent<Coin>(out var coin))
             {
                 coin.MoveToTargetTransform(transform);
-                return;
             }
 
             if (other.TryGetComponent<Crystal>(out var crystal))
             {
                 crystal.MoveToTargetTransform(transform);
+            }
+
+            if (other.TryGetComponent<Acceleration>(out var acceleration))
+            {
+                acceleration.MoveToTargetTransform(transform);
+            }
+            
+            if (other.TryGetComponent<Key>(out var key))
+            {
+                key.MoveToTargetTransform(transform);
+            }
+            
+            if (other.TryGetComponent<Magnet>(out var magnet))
+            {
+                magnet.MoveToTargetTransform(transform);
+            }
+            
+            if (other.TryGetComponent<Multiplier>(out var multiplier))
+            {
+                multiplier.MoveToTargetTransform(transform);
+            }
+            
+            if (other.TryGetComponent<Shield>(out var shield))
+            {
+                shield.MoveToTargetTransform(transform);
             }
         }
     }

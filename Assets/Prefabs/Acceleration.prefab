@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3835753346554428398}
   m_Layer: 0
   m_Name: Acceleration
-  m_TagString: Untagged
+  m_TagString: SegmentContent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa6eadfd3fa43169a3fdfbcd4334c2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endMarker: {fileID: 0}
+  speed: 1
 --- !u!114 &7447054907608787343
 MonoBehaviour:
   m_ObjectHideFlags: 0

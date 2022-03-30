@@ -131,7 +131,7 @@ namespace Core
                     infinityData.patternSets[setPointer].spawnShieldOnLet,
                     infinityData.patternSets[setPointer].spawnShieldOnGround,
                     infinityData.patternSets[setPointer].spawnShieldOnHole);
-                TryPlacePowerUp(ref powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Shield);
+                TryPlacePowerUp(ref powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Shield, infinityData.patternSets[setPointer].spawnShieldChance);
             }
 
             for (var i = 0; i < magnetPositions.Length; i++)
@@ -141,7 +141,7 @@ namespace Core
                     infinityData.patternSets[setPointer].spawnMagnetOnLet,
                     infinityData.patternSets[setPointer].spawnMagnetOnGround,
                     infinityData.patternSets[setPointer].spawnMagnetOnHole);
-                TryPlacePowerUp(ref powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Magnet);
+                TryPlacePowerUp(ref powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Magnet, infinityData.patternSets[setPointer].spawnMagnetChance);
             }
 
             for (var i = 0; i < multiplierPositions.Length; i++)
@@ -151,7 +151,7 @@ namespace Core
                     infinityData.patternSets[setPointer].spawnMultiplierOnLet,
                     infinityData.patternSets[setPointer].spawnMultiplierOnGround,
                     infinityData.patternSets[setPointer].spawnMultiplierOnHole);
-                TryPlacePowerUp(ref powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Multiplier);
+                TryPlacePowerUp(ref powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Multiplier, infinityData.patternSets[setPointer].spawnMultiplierChance);
             }
 
             for (var i = 0; i < accelerationPositions.Length; i++)
@@ -161,7 +161,7 @@ namespace Core
                     infinityData.patternSets[setPointer].spawnAccelerationOnLet,
                     infinityData.patternSets[setPointer].spawnAccelerationOnGround,
                     infinityData.patternSets[setPointer].spawnAccelerationOnHole);
-                TryPlacePowerUp(ref powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Acceleration);
+                TryPlacePowerUp(ref powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Acceleration, infinityData.patternSets[setPointer].spawnAccelerationChance);
             }
 
             for (var i = 0; i < keyPositions.Length; i++)
@@ -171,7 +171,7 @@ namespace Core
                     infinityData.patternSets[setPointer].spawnKeyOnLet, 
                     infinityData.patternSets[setPointer].spawnKeyOnGround,
                     infinityData.patternSets[setPointer].spawnKeyOnHole);
-                TryPlacePowerUp(ref powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Key);
+                TryPlacePowerUp(ref powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Key, infinityData.patternSets[setPointer].spawnKeyChance);
             }
         }
 
@@ -212,10 +212,10 @@ namespace Core
             return availablePositions;
         }
 
-        public void TryPlacePowerUp(ref List<int> availablePositions, SegmentData[] segmentDatas, SegmentContent segmentContent)
+        public void TryPlacePowerUp(ref List<int> availablePositions, SegmentData[] segmentDatas, SegmentContent segmentContent, int chance)
         {
-            var neProshel = 1;//Random.Range(0, 1);
-            if (neProshel != 1) return;
+            var randomChance = Random.Range(0, 100);
+            if (randomChance >= chance) return;
             
             var randPositionIndex = Random.Range(0, availablePositions.Count);
             segmentDatas[availablePositions[randPositionIndex]].segmentContent = segmentContent;

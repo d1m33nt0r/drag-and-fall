@@ -8,16 +8,19 @@ namespace DafEditor.Editor.Layout
 {
     public class RightSidebar : LayoutComponent, IDrawer
     {
+        private Vector2 scrollPos;
+        
         public void Draw()
         {
             if (!isInitialized) return;
             
-            GUILayout.BeginArea(new Rect(new Vector2(gameEditorWindow.position.size.x - 249, 0),
-                new Vector2(250,
+            GUILayout.BeginArea(new Rect(new Vector2(gameEditorWindow.position.size.x - 300, 0),
+                new Vector2(300,
                     gameEditorWindow.position.height)), Common.EditorStyles.LeftSidebarStyle());
 
             GUILayout.Label("Random settings", Common.EditorStyles.HeaderOfBlockInLeftSideBar());
-
+            scrollPos =
+                EditorGUILayout.BeginScrollView(scrollPos, GUIStyle.none, GUI.skin.verticalScrollbar, GUILayout.Width(300), GUILayout.Height(gameEditorWindow.position.height - 30));
             switch (gameEditorWindow.currentRightPanelState)
             {
                 case RightPanelState.BonusRandomSettings:
@@ -104,7 +107,7 @@ namespace DafEditor.Editor.Layout
                     
                     break;
             }
-            
+            EditorGUILayout.EndScrollView();
             GUILayout.EndArea();
         }
 
@@ -117,7 +120,7 @@ namespace DafEditor.Editor.Layout
             GUILayout.Label("Min platforms");
             GUILayout.EndHorizontal();
             gameEditorWindow.currentSetData.minPlatformsCount =
-                EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.minPlatformsCount, 0, 50);
+                EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.minPlatformsCount, 0, 500);
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
@@ -125,7 +128,7 @@ namespace DafEditor.Editor.Layout
             GUILayout.Label("Max platforms");
             GUILayout.EndHorizontal();
             gameEditorWindow.currentSetData.maxPlatformsCount =
-                EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.maxPlatformsCount, 0, 50);
+                EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.maxPlatformsCount, 0, 500);
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
@@ -230,6 +233,15 @@ namespace DafEditor.Editor.Layout
                 EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.attemptsOfKeyInstantiate, 0, 5);
             GUILayout.EndHorizontal();
 
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
+            GUILayout.Label("Spawn chance");
+            GUILayout.EndHorizontal();
+            gameEditorWindow.currentSetData.spawnKeyChance = 
+                EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.spawnKeyChance, 0, 100);
+            //GUILayout.Label("%", new GUIStyle{fixedWidth = 10, alignment = TextAnchor.MiddleCenter, fontSize = 16, border = new RectOffset(5, 0, 0, 0)});
+            GUILayout.EndHorizontal();
+            
             if (gameEditorWindow.currentSetData.keyPositions.Length !=
                 gameEditorWindow.currentSetData.attemptsOfKeyInstantiate)
             {
@@ -252,30 +264,33 @@ namespace DafEditor.Editor.Layout
                 }
             }
 
+            GUILayout.BeginVertical("box");
+            
+            
             GUILayout.BeginHorizontal();
             GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
-            GUILayout.Label("Spawn on let");
+            GUILayout.Label("");
             GUILayout.EndHorizontal();
+            GUILayout.Label("L");
+            GUILayout.Label("G");
+            GUILayout.Label("H");
+            GUILayout.EndHorizontal();
+            
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
+            GUILayout.Label("Spawn on");
+            GUILayout.EndHorizontal();
+            
             gameEditorWindow.currentSetData.spawnKeyOnLet =
                 EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnKeyOnLet);
-            GUILayout.EndHorizontal();
-            
-            GUILayout.BeginHorizontal();
-            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
-            GUILayout.Label("Spawn on ground");
-            GUILayout.EndHorizontal();
             gameEditorWindow.currentSetData.spawnKeyOnGround =
                 EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnKeyOnGround);
-            GUILayout.EndHorizontal();
-            
-            GUILayout.BeginHorizontal();
-            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
-            GUILayout.Label("Spawn on hole");
-            GUILayout.EndHorizontal();
             gameEditorWindow.currentSetData.spawnKeyOnHole =
                 EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnKeyOnHole);
-            GUILayout.EndHorizontal();
             
+            GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
+
             for (var i = 0; i < gameEditorWindow.currentSetData.attemptsOfKeyInstantiate; i++)
             {
                 GUILayout.BeginHorizontal();
@@ -301,6 +316,15 @@ namespace DafEditor.Editor.Layout
                 EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.attemptsOfMagnetInstantiate, 0, 5);
             GUILayout.EndHorizontal();
 
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
+            GUILayout.Label("Spawn chance");
+            GUILayout.EndHorizontal();
+            gameEditorWindow.currentSetData.spawnMagnetChance = 
+                EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.spawnMagnetChance, 0, 100);
+            //GUILayout.Label("%", new GUIStyle{fixedWidth = 10, alignment = TextAnchor.MiddleCenter, fontSize = 16, border = new RectOffset(5, 0, 0, 0)});
+            GUILayout.EndHorizontal();
+            
             if (gameEditorWindow.currentSetData.magnetPositions.Length !=
                 gameEditorWindow.currentSetData.attemptsOfMagnetInstantiate)
             {
@@ -322,30 +346,33 @@ namespace DafEditor.Editor.Layout
                     gameEditorWindow.currentSetData.magnetPositions = newPositions;
                 }
             }
-
+            
+            GUILayout.BeginVertical("box");
+            
+            
             GUILayout.BeginHorizontal();
             GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
-            GUILayout.Label("Spawn on let");
+            GUILayout.Label("");
             GUILayout.EndHorizontal();
+            GUILayout.Label("L");
+            GUILayout.Label("G");
+            GUILayout.Label("H");
+            GUILayout.EndHorizontal();
+            
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
+            GUILayout.Label("Spawn on");
+            GUILayout.EndHorizontal();
+            
             gameEditorWindow.currentSetData.spawnMagnetOnLet =
                 EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnMagnetOnLet);
-            GUILayout.EndHorizontal();
-            
-            GUILayout.BeginHorizontal();
-            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
-            GUILayout.Label("Spawn on ground");
-            GUILayout.EndHorizontal();
             gameEditorWindow.currentSetData.spawnMagnetOnGround =
                 EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnMagnetOnGround);
-            GUILayout.EndHorizontal();
-            
-            GUILayout.BeginHorizontal();
-            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
-            GUILayout.Label("Spawn on hole");
-            GUILayout.EndHorizontal();
             gameEditorWindow.currentSetData.spawnMagnetOnHole =
                 EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnMagnetOnHole);
+            
             GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
             
             for (var i = 0; i < gameEditorWindow.currentSetData.attemptsOfMagnetInstantiate; i++)
             {
@@ -372,6 +399,15 @@ namespace DafEditor.Editor.Layout
                 EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.attemptsOfMultiplierInstantiate, 0, 5);
             GUILayout.EndHorizontal();
 
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
+            GUILayout.Label("Spawn chance");
+            GUILayout.EndHorizontal();
+            gameEditorWindow.currentSetData.spawnMultiplierChance = 
+                EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.spawnMultiplierChance, 0, 100);
+            //GUILayout.Label("%", new GUIStyle{fixedWidth = 10, alignment = TextAnchor.MiddleCenter, fontSize = 16, border = new RectOffset(5, 0, 0, 0)});
+            GUILayout.EndHorizontal();
+            
             if (gameEditorWindow.currentSetData.multiplierPositions.Length !=
                 gameEditorWindow.currentSetData.attemptsOfMultiplierInstantiate)
             {
@@ -394,30 +430,33 @@ namespace DafEditor.Editor.Layout
                 }
             }
 
+            GUILayout.BeginVertical("box");
+            
+            
             GUILayout.BeginHorizontal();
             GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
-            GUILayout.Label("Spawn on let");
+            GUILayout.Label("");
             GUILayout.EndHorizontal();
+            GUILayout.Label("L");
+            GUILayout.Label("G");
+            GUILayout.Label("H");
+            GUILayout.EndHorizontal();
+            
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
+            GUILayout.Label("Spawn on");
+            GUILayout.EndHorizontal();
+            
             gameEditorWindow.currentSetData.spawnMultiplierOnLet =
                 EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnMultiplierOnLet);
-            GUILayout.EndHorizontal();
-            
-            GUILayout.BeginHorizontal();
-            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
-            GUILayout.Label("Spawn on ground");
-            GUILayout.EndHorizontal();
             gameEditorWindow.currentSetData.spawnMultiplierOnGround =
                 EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnMultiplierOnGround);
-            GUILayout.EndHorizontal();
-            
-            GUILayout.BeginHorizontal();
-            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
-            GUILayout.Label("Spawn on hole");
-            GUILayout.EndHorizontal();
             gameEditorWindow.currentSetData.spawnMultiplierOnHole =
                 EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnMultiplierOnHole);
-            GUILayout.EndHorizontal();
             
+            GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
+
             for (var i = 0; i < gameEditorWindow.currentSetData.attemptsOfMultiplierInstantiate; i++)
             {
                 GUILayout.BeginHorizontal();
@@ -443,6 +482,15 @@ namespace DafEditor.Editor.Layout
                 EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.attemptsOfAccelerationInstantiate, 0, 5);
             GUILayout.EndHorizontal();
 
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
+            GUILayout.Label("Spawn chance");
+            GUILayout.EndHorizontal();
+            gameEditorWindow.currentSetData.spawnAccelerationChance = 
+                EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.spawnAccelerationChance, 0, 100);
+            //GUILayout.Label("%", new GUIStyle{fixedWidth = 10, alignment = TextAnchor.MiddleCenter, fontSize = 16, border = new RectOffset(5, 0, 0, 0)});
+            GUILayout.EndHorizontal();
+            
             if (gameEditorWindow.currentSetData.accelerationPositions.Length !=
                 gameEditorWindow.currentSetData.attemptsOfAccelerationInstantiate)
             {
@@ -465,30 +513,33 @@ namespace DafEditor.Editor.Layout
                 }
             }
 
+            GUILayout.BeginVertical("box");
+            
+            
             GUILayout.BeginHorizontal();
             GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
-            GUILayout.Label("Spawn on let");
+            GUILayout.Label("");
             GUILayout.EndHorizontal();
+            GUILayout.Label("L");
+            GUILayout.Label("G");
+            GUILayout.Label("H");
+            GUILayout.EndHorizontal();
+            
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
+            GUILayout.Label("Spawn on");
+            GUILayout.EndHorizontal();
+            
             gameEditorWindow.currentSetData.spawnAccelerationOnLet =
                 EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnAccelerationOnLet);
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
-            GUILayout.Label("Spawn on ground");
-            GUILayout.EndHorizontal();
             gameEditorWindow.currentSetData.spawnAccelerationOnGround =
                 EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnAccelerationOnGround);
-            GUILayout.EndHorizontal();
-            
-            GUILayout.BeginHorizontal();
-            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
-            GUILayout.Label("Spawn on hole");
-            GUILayout.EndHorizontal();
             gameEditorWindow.currentSetData.spawnAccelerationOnHole =
                 EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnAccelerationOnHole);
-            GUILayout.EndHorizontal();
             
+            GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
+
             for (var i = 0; i < gameEditorWindow.currentSetData.attemptsOfAccelerationInstantiate; i++)
             {
                 GUILayout.BeginHorizontal();
@@ -514,6 +565,15 @@ namespace DafEditor.Editor.Layout
                 EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.attemptsOfShieldInstantiate, 0, 5);
             GUILayout.EndHorizontal();
 
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
+            GUILayout.Label("Spawn chance");
+            GUILayout.EndHorizontal();
+            gameEditorWindow.currentSetData.spawnShieldChance = 
+                EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.spawnShieldChance, 0, 100);
+            //GUILayout.Label("%", new GUIStyle{fixedWidth = 10, alignment = TextAnchor.MiddleCenter, fontSize = 16, border = new RectOffset(5, 0, 0, 0)});
+            GUILayout.EndHorizontal();
+            
             if (gameEditorWindow.currentSetData.shieldPositions.Length !=
                 gameEditorWindow.currentSetData.attemptsOfShieldInstantiate)
             {
@@ -535,8 +595,12 @@ namespace DafEditor.Editor.Layout
                     gameEditorWindow.currentSetData.shieldPositions = newPositions;
                 }
             }
-
+            
+            
+            
             GUILayout.BeginVertical("box");
+            
+            
             GUILayout.BeginHorizontal();
             GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
             GUILayout.Label("");
@@ -548,7 +612,7 @@ namespace DafEditor.Editor.Layout
             
             GUILayout.BeginHorizontal();
             GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
-            GUILayout.Label("Spawn settings");
+            GUILayout.Label("Spawn on");
             GUILayout.EndHorizontal();
             
             gameEditorWindow.currentSetData.spawnShieldOnLet =

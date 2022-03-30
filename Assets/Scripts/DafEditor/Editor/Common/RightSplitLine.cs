@@ -13,8 +13,8 @@ namespace DafEditor.Editor.Common
         {
             if (!isInitialized) return;
             Handles.color = SPLIT_LINE_COLOR;
-            var m_startPosition = new Vector2(gameEditorWindow.position.size.x - 250, 25);
-            Handles.DrawLine(m_startPosition, new Vector2(gameEditorWindow.position.size.x - 250, gameEditorWindow.position.height), 0f);
+            var m_startPosition = new Vector2(gameEditorWindow.position.size.x - 300, 25);
+            Handles.DrawLine(m_startPosition, new Vector2(gameEditorWindow.position.size.x - 300, gameEditorWindow.position.height), 0f);
         }
     }
 }

@@ -13,37 +13,42 @@ MonoBehaviour:
   m_Name: 1_Set
   m_EditorClassIdentifier: 
   isRandom: 1
-  minPlatformsCount: 50
-  maxPlatformsCount: 50
-  maxLetAmount: 3
-  minLetAmount: 1
-  maxHoleAmount: 7
-  minHoleAmount: 4
-  attemptsOfShieldInstantiate: 1
-  shieldPositions: 02000000
+  minPlatformsCount: 500
+  maxPlatformsCount: 500
+  maxLetAmount: 2
+  minLetAmount: 0
+  maxHoleAmount: 8
+  minHoleAmount: 5
+  attemptsOfShieldInstantiate: 5
+  shieldPositions: 0f00000073000000d70000003b0100009f010000
   spawnShieldOnLet: 0
-  spawnShieldOnGround: 0
+  spawnShieldOnGround: 1
   spawnShieldOnHole: 1
+  spawnShieldChance: 100
   attemptsOfKeyInstantiate: 1
-  keyPositions: 0a000000
+  keyPositions: ff000000
   spawnKeyOnLet: 0
-  spawnKeyOnGround: 0
-  spawnKeyOnHole: 1
-  attemptsOfMagnetInstantiate: 1
-  magnetPositions: 08000000
+  spawnKeyOnGround: 1
+  spawnKeyOnHole: 0
+  spawnKeyChance: 40
+  attemptsOfMagnetInstantiate: 5
+  magnetPositions: 370000009b000000ff00000063010000c7010000
   spawnMagnetOnLet: 0
-  spawnMagnetOnGround: 0
+  spawnMagnetOnGround: 1
   spawnMagnetOnHole: 1
-  attemptsOfMultiplierInstantiate: 1
-  multiplierPositions: 06000000
+  spawnMagnetChance: 100
+  attemptsOfMultiplierInstantiate: 5
+  multiplierPositions: 4c000000b00000001401000051010000dc010000
   spawnMultiplierOnLet: 0
-  spawnMultiplierOnGround: 0
+  spawnMultiplierOnGround: 1
   spawnMultiplierOnHole: 1
-  attemptsOfAccelerationInstantiate: 1
-  accelerationPositions: 04000000
+  spawnMultiplierChance: 100
+  attemptsOfAccelerationInstantiate: 5
+  accelerationPositions: 2300000087000000eb0000004f010000b3010000
   spawnAccelerationOnLet: 0
-  spawnAccelerationOnGround: 0
-  spawnAccelerationOnHole: 1
+  spawnAccelerationOnGround: 1
+  spawnAccelerationOnHole: 0
+  spawnAccelerationChance: 100
   maxCoinAmount: 0
   minCoinAmount: 0
   coinAccuracyLevel: 0
