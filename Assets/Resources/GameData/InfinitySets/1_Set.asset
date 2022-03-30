@@ -13,12 +13,33 @@ MonoBehaviour:
   m_Name: 1_Set
   m_EditorClassIdentifier: 
   isRandom: 1
-  minPlatformsCount: 12
-  maxPlatformsCount: 32
+  minPlatformsCount: 5
+  maxPlatformsCount: 5
   maxLetAmount: 3
-  minLetAmount: 2
-  maxHoleAmount: 6
+  minLetAmount: 1
+  maxHoleAmount: 7
   minHoleAmount: 4
+  attemptsOfShieldInstantiate: 2
+  shieldPositions: 0000000000000000
+  spawnShieldOnLet: 0
+  attemptsOfKeyInstantiate: 2
+  keyPositions: 0000000000000000
+  spawnKeyOnLet: 0
+  attemptsOfMagnetInstantiate: 2
+  magnetPositions: 0000000000000000
+  spawnMagnetOnLet: 0
+  attemptsOfMultiplierInstantiate: 2
+  multiplierPositions: 0000000000000000
+  spawnMultiplierOnLet: 0
+  attemptsOfAccelerationInstantiate: 2
+  accelerationPositions: 0000000000000000
+  spawnAccelerationOnLet: 0
+  maxCoinAmount: 0
+  minCoinAmount: 0
+  coinAccuracyLevel: 0
+  crystalAccuracyLevel: 0
+  maxCrystalAmount: 0
+  minCrystalAmount: 0
   patterns:
   - isRandom: 0
     maxLetAmount: 3

@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using Core.Bonuses;
-using Data.Core;
-using Data.Core.Segments;
-using Data.Core.Segments.Content;
-using ObjectPool;
+﻿using Data.Core;
 using UnityEngine;
 
 namespace Core
@@ -12,9 +7,13 @@ namespace Core
     {
         public InfinityData infinityData;
 
-        private int randomPlatformsAmount;
+        private int randPlatformsAmount;
         private bool randIsInitialized;
-        
+        private int shieldPositions;
+        private int magnetPositions;
+        private int multiplierPositions;
+        private int accelerationPositions;
+        private int keyPositions;
         private int setPointer;
         private int patternPointer;
 
@@ -22,7 +21,7 @@ namespace Core
         {
             setPointer = 0;
             patternPointer = 0;
-            randomPlatformsAmount = 0;
+            randPlatformsAmount = 0;
             randIsInitialized = false;
         }
         
@@ -32,13 +31,13 @@ namespace Core
             {
                 if (!randIsInitialized)
                 {
-                    randomPlatformsAmount = Random.Range(infinityData.patternSets[setPointer].minPlatformsCount,
+                    randPlatformsAmount = Random.Range(infinityData.patternSets[setPointer].minPlatformsCount,
                         infinityData.patternSets[setPointer].maxPlatformsCount);
                     
                     randIsInitialized = true;
                 }
                 
-                if (randomPlatformsAmount > patternPointer + 1)
+                if (randPlatformsAmount > patternPointer + 1)
                 {
                     var patternData1 = new PatternData(12);
                     patternData1.isRandom = true;
@@ -59,6 +58,7 @@ namespace Core
                     patternData2.minLetAmount = infinityData.patternSets[setPointer].minLetAmount;
                     patternData2.maxLetAmount = infinityData.patternSets[setPointer].maxLetAmount;
                     patternData2.isLast = true;
+                    randIsInitialized = false;
                     patternPointer = 0;
                     setPointer++;
                     return patternData2;
@@ -71,6 +71,7 @@ namespace Core
                 patternData3.minLetAmount = infinityData.patternSets[setPointer].minLetAmount;
                 patternData3.maxLetAmount = infinityData.patternSets[setPointer].maxLetAmount;
                 patternData3.isLast = true;
+                randIsInitialized = false;
                 patternPointer = 0;
                 setPointer = 0;
                 return patternData3;

@@ -133,6 +133,20 @@ namespace DafEditor.Editor.Common
         {
             var style = new GUIStyle();
             var texture = new Texture2D(1, 1);
+            texture.SetPixel(1, 1, new Color(0.0f, 0.0f, 0.1f, 0.3f));
+            texture.Apply();
+            style.fixedHeight = 24;
+            style.normal.background = texture;
+            style.alignment = TextAnchor.MiddleCenter;
+            style.normal.textColor = Color.white;
+
+            return style;
+        }
+        
+        public static GUIStyle HeaderOfBlockInRightSideBar2()
+        {
+            var style = new GUIStyle();
+            var texture = new Texture2D(1, 1);
             texture.SetPixel(1, 1, new Color(0.0f, 0.0f, 0.1f, 0.1f));
             texture.Apply();
             style.fixedHeight = 24;

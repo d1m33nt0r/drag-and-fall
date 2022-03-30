@@ -130,6 +130,17 @@ namespace DafEditor.Editor.Layout
                         }
                     }
                 }
+
+                if (GUILayout.Button("↑", EditorStyles.RedButtonStyle(22), GUILayout.Width(25)))
+                {
+                    
+                }
+                
+                if (GUILayout.Button("↓", EditorStyles.RedButtonStyle(22), GUILayout.Width(25)))
+                {
+                    
+                }
+                
                 if (GUILayout.Button(infinityData.patternSets[i].name, EditorStyles.DarkButtonStyle(22)))
                 {
                     GameEditorWindow.instance.currentPatternsData = infinityData.patternSets[i].patterns;
