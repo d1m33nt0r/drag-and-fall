@@ -253,11 +253,27 @@ namespace DafEditor.Editor.Layout
             }
 
             GUILayout.BeginHorizontal();
-            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
             GUILayout.Label("Spawn on let");
             GUILayout.EndHorizontal();
             gameEditorWindow.currentSetData.spawnKeyOnLet =
                 EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnKeyOnLet);
+            GUILayout.EndHorizontal();
+            
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
+            GUILayout.Label("Spawn on ground");
+            GUILayout.EndHorizontal();
+            gameEditorWindow.currentSetData.spawnKeyOnGround =
+                EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnKeyOnGround);
+            GUILayout.EndHorizontal();
+            
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
+            GUILayout.Label("Spawn on hole");
+            GUILayout.EndHorizontal();
+            gameEditorWindow.currentSetData.spawnKeyOnHole =
+                EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnKeyOnHole);
             GUILayout.EndHorizontal();
             
             for (var i = 0; i < gameEditorWindow.currentSetData.attemptsOfKeyInstantiate; i++)
@@ -308,11 +324,27 @@ namespace DafEditor.Editor.Layout
             }
 
             GUILayout.BeginHorizontal();
-            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
             GUILayout.Label("Spawn on let");
             GUILayout.EndHorizontal();
             gameEditorWindow.currentSetData.spawnMagnetOnLet =
                 EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnMagnetOnLet);
+            GUILayout.EndHorizontal();
+            
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
+            GUILayout.Label("Spawn on ground");
+            GUILayout.EndHorizontal();
+            gameEditorWindow.currentSetData.spawnMagnetOnGround =
+                EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnMagnetOnGround);
+            GUILayout.EndHorizontal();
+            
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
+            GUILayout.Label("Spawn on hole");
+            GUILayout.EndHorizontal();
+            gameEditorWindow.currentSetData.spawnMagnetOnHole =
+                EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnMagnetOnHole);
             GUILayout.EndHorizontal();
             
             for (var i = 0; i < gameEditorWindow.currentSetData.attemptsOfMagnetInstantiate; i++)
@@ -363,11 +395,27 @@ namespace DafEditor.Editor.Layout
             }
 
             GUILayout.BeginHorizontal();
-            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
             GUILayout.Label("Spawn on let");
             GUILayout.EndHorizontal();
             gameEditorWindow.currentSetData.spawnMultiplierOnLet =
                 EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnMultiplierOnLet);
+            GUILayout.EndHorizontal();
+            
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
+            GUILayout.Label("Spawn on ground");
+            GUILayout.EndHorizontal();
+            gameEditorWindow.currentSetData.spawnMultiplierOnGround =
+                EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnMultiplierOnGround);
+            GUILayout.EndHorizontal();
+            
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
+            GUILayout.Label("Spawn on hole");
+            GUILayout.EndHorizontal();
+            gameEditorWindow.currentSetData.spawnMultiplierOnHole =
+                EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnMultiplierOnHole);
             GUILayout.EndHorizontal();
             
             for (var i = 0; i < gameEditorWindow.currentSetData.attemptsOfMultiplierInstantiate; i++)
@@ -418,11 +466,27 @@ namespace DafEditor.Editor.Layout
             }
 
             GUILayout.BeginHorizontal();
-            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
             GUILayout.Label("Spawn on let");
             GUILayout.EndHorizontal();
             gameEditorWindow.currentSetData.spawnAccelerationOnLet =
                 EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnAccelerationOnLet);
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
+            GUILayout.Label("Spawn on ground");
+            GUILayout.EndHorizontal();
+            gameEditorWindow.currentSetData.spawnAccelerationOnGround =
+                EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnAccelerationOnGround);
+            GUILayout.EndHorizontal();
+            
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
+            GUILayout.Label("Spawn on hole");
+            GUILayout.EndHorizontal();
+            gameEditorWindow.currentSetData.spawnAccelerationOnHole =
+                EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnAccelerationOnHole);
             GUILayout.EndHorizontal();
             
             for (var i = 0; i < gameEditorWindow.currentSetData.attemptsOfAccelerationInstantiate; i++)
@@ -472,14 +536,31 @@ namespace DafEditor.Editor.Layout
                 }
             }
 
+            GUILayout.BeginVertical("box");
             GUILayout.BeginHorizontal();
-            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
-            GUILayout.Label("Spawn on let");
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
+            GUILayout.Label("");
             GUILayout.EndHorizontal();
-            gameEditorWindow.currentSetData.spawnShieldOnLet =
-                EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnShieldOnLet);
+            GUILayout.Label("L");
+            GUILayout.Label("G");
+            GUILayout.Label("H");
             GUILayout.EndHorizontal();
             
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
+            GUILayout.Label("Spawn settings");
+            GUILayout.EndHorizontal();
+            
+            gameEditorWindow.currentSetData.spawnShieldOnLet =
+                EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnShieldOnLet);
+            gameEditorWindow.currentSetData.spawnShieldOnGround =
+                EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnShieldOnGround);
+            gameEditorWindow.currentSetData.spawnShieldOnHole =
+                EditorGUILayout.Toggle(gameEditorWindow.currentSetData.spawnShieldOnHole);
+            
+            GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
+
             for (var i = 0; i < gameEditorWindow.currentSetData.attemptsOfShieldInstantiate; i++)
             {
                 GUILayout.BeginHorizontal();
