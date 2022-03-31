@@ -44,10 +44,10 @@ MonoBehaviour:
     price: 0
     mesh: {fileID: 4711208715938537054, guid: 0110f3aecfa193240957a29499f44225, type: 3}
     material: {fileID: 2100000, guid: 97593259f1f8f004484fe595f4e472f9, type: 2}
-  - isBought: 0
+  - isBought: 1
     price: 300
-    mesh: {fileID: 4711208715938537054, guid: 0110f3aecfa193240957a29499f44225, type: 3}
-    material: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+    mesh: {fileID: 6840333135571099348, guid: 1b19154ba0e913d44bf62ea327207638, type: 3}
+    material: {fileID: 2100000, guid: 82c92c4c2a35f254e9a7a53439dcda88, type: 2}
   TrailSkinData:
   - isBought: 1
     price: 0
