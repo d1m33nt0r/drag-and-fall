@@ -103,7 +103,12 @@ namespace Core
                 //segments[i].ReturnTouchEffectToPool();
                 segments[i].ReturnSegmentContentToPool();
             }
-            BreakDownPlatform();
+            
+            if (platformsIsMoving)
+                BreakDownPlatform();
+            else
+                DestroyAfterBreakAnimation();
+            
             player.SetTriggerStay(false);
             
         }

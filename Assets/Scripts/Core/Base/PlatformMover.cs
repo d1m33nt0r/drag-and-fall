@@ -13,6 +13,7 @@ namespace Core
 {
     public class PlatformMover : MonoBehaviour
     {
+        private bool isFirstPlatform = true;
         [SerializeField] private CameraController cameraController;
         [SerializeField] private SegmentContentPool segmentContentPool;
         [SerializeField] private GainScore gainScore;
@@ -226,8 +227,10 @@ namespace Core
                 gameManager.gameMode.levelMode.ResetPointer();
                 for (var i = 0; i < countPlatforms; i++)
                 {
-                    Destroy(platforms[i].gameObject);
+                    platforms[i].DestroyPlatform(false);
                 }
+
+                isFirstPlatform = true;
             }
             
             platforms = new Platform[countPlatforms];
@@ -235,9 +238,21 @@ namespace Core
             for (var i = 0; i < countPlatforms; i++)
             {
                 if (!isLevelMode)
-                    currentPatternData = gameManager.gameMode.infinityMode.GetPatternData();
+                {
+                    if (isFirstPlatform)
+                    {
+                        currentPatternData = new PatternData(12);
+                        isFirstPlatform = false;
+                    }
+                    else
+                    {
+                        currentPatternData = gameManager.gameMode.infinityMode.GetPatternData();
+                    }
+                }
                 else
-                    currentPatternData = gameManager.gameMode.levelMode.GetPatternData();
+                {
+                    currentPatternData = gameManager.gameMode.levelMode.GetPatternData(); 
+                }
                 
                 CreateNewPlatform(i, currentPatternData, false);
             }

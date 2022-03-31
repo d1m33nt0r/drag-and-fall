@@ -53,19 +53,19 @@ MonoBehaviour:
   - spawnOnLet: 0
     spawnOnGround: 1
     spawnOnHole: 1
-    spawnChance: 100
+    spawnChance: 20
     currencyType: 0
-    rangeStart: 11
-    rangeEnd: 34
-    accuracyLevel: 3
+    rangeStart: 2
+    rangeEnd: 99
+    accuracyLevel: 0
   - spawnOnLet: 1
     spawnOnGround: 1
-    spawnOnHole: 1
-    spawnChance: 100
-    currencyType: 0
-    rangeStart: 0
-    rangeEnd: 0
-    accuracyLevel: 3
+    spawnOnHole: 0
+    spawnChance: 10
+    currencyType: 1
+    rangeStart: 23
+    rangeEnd: 57
+    accuracyLevel: 1
   patterns:
   - isRandom: 0
     maxLetAmount: 3

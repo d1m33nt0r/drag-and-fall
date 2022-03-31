@@ -256,6 +256,13 @@ namespace DafEditor.Editor.Layout
             gameEditorWindow.currentSetData.currencyRandomSettings[index].accuracyLevel =
                 (AccuracyLevel) EditorGUILayout.EnumPopup(gameEditorWindow.currentSetData.currencyRandomSettings[index].accuracyLevel);
             GUILayout.EndHorizontal();
+
+            if (GUILayout.Button("Remove profile"))
+            {
+                var list = gameEditorWindow.currentSetData.currencyRandomSettings.ToList();
+                list.Remove(gameEditorWindow.currentSetData.currencyRandomSettings[index]);
+                gameEditorWindow.currentSetData.currencyRandomSettings = list.ToArray();
+            }
             
             GUILayout.EndVertical();
         }

@@ -13,40 +13,57 @@ MonoBehaviour:
   m_Name: 2_Set
   m_EditorClassIdentifier: 
   isRandom: 1
-  minPlatformsCount: 0
-  maxPlatformsCount: 0
-  maxLetAmount: 0
-  minLetAmount: 0
-  maxHoleAmount: 0
-  minHoleAmount: 0
-  attemptsOfShieldInstantiate: 0
-  shieldPositions: 
-  spawnShieldOnLet: 0
-  spawnShieldOnGround: 0
+  minPlatformsCount: 100
+  maxPlatformsCount: 100
+  maxLetAmount: 3
+  minLetAmount: 1
+  maxHoleAmount: 8
+  minHoleAmount: 4
+  attemptsOfShieldInstantiate: 5
+  shieldPositions: 180000000b000000340000003f0000004a000000
+  spawnShieldOnLet: 1
+  spawnShieldOnGround: 1
   spawnShieldOnHole: 0
-  spawnShieldChance: 0
-  attemptsOfKeyInstantiate: 0
-  keyPositions: 
-  spawnKeyOnLet: 0
-  spawnKeyOnGround: 0
+  spawnShieldChance: 65
+  attemptsOfKeyInstantiate: 1
+  keyPositions: 38000000
+  spawnKeyOnLet: 1
+  spawnKeyOnGround: 1
   spawnKeyOnHole: 0
-  spawnKeyChance: 0
-  attemptsOfMagnetInstantiate: 0
-  magnetPositions: 
+  spawnKeyChance: 1
+  attemptsOfMagnetInstantiate: 5
+  magnetPositions: 23000000380000002c0000004f00000063000000
   spawnMagnetOnLet: 0
-  spawnMagnetOnGround: 0
-  spawnMagnetOnHole: 0
-  spawnMagnetChance: 0
-  attemptsOfMultiplierInstantiate: 0
-  multiplierPositions: 
+  spawnMagnetOnGround: 1
+  spawnMagnetOnHole: 1
+  spawnMagnetChance: 65
+  attemptsOfMultiplierInstantiate: 5
+  multiplierPositions: 1a0000002200000059000000300000005f000000
   spawnMultiplierOnLet: 0
-  spawnMultiplierOnGround: 0
+  spawnMultiplierOnGround: 1
   spawnMultiplierOnHole: 0
-  spawnMultiplierChance: 0
-  attemptsOfAccelerationInstantiate: 0
-  accelerationPositions: 
-  spawnAccelerationOnLet: 0
-  spawnAccelerationOnGround: 0
+  spawnMultiplierChance: 65
+  attemptsOfAccelerationInstantiate: 5
+  accelerationPositions: 0400000017000000400000001100000035000000
+  spawnAccelerationOnLet: 1
+  spawnAccelerationOnGround: 1
   spawnAccelerationOnHole: 0
-  spawnAccelerationChance: 0
+  spawnAccelerationChance: 65
+  currencyRandomSettings:
+  - spawnOnLet: 0
+    spawnOnGround: 1
+    spawnOnHole: 0
+    spawnChance: 36
+    currencyType: 0
+    rangeStart: 46
+    rangeEnd: 75
+    accuracyLevel: 1
+  - spawnOnLet: 1
+    spawnOnGround: 1
+    spawnOnHole: 0
+    spawnChance: 2
+    currencyType: 1
+    rangeStart: 34
+    rangeEnd: 80
+    accuracyLevel: 1
   patterns: []
