@@ -231,6 +231,7 @@ namespace Core
         
         public void StartNextLevel()
         {
+            platformMover.transform.rotation = Quaternion.Euler(0, 0, 0);
             concentration.Reset();
             uiManager.scorePanel.ResetCounter();
             bonusController.DeactivateAllBonuses();
@@ -276,6 +277,7 @@ namespace Core
 
         public void FailedLevel()
         {
+            platformMover.transform.rotation = Quaternion.Euler(0, 0, 0);
             interstitialAds.TryShowInterstitialAd();
             gameStarted = false;
             platformMover.SetDefaultState();
@@ -292,6 +294,7 @@ namespace Core
 
         public void StartedLevel()
         {
+            platformMover.transform.rotation = Quaternion.Euler(0, 0, 0);
             bonusController.DeactivateAllBonuses();
             concentration.Reset();
             sessionData.ResetData();

@@ -44,12 +44,7 @@ namespace Data.Core
         public bool spawnAccelerationOnGround;
         public bool spawnAccelerationOnHole;
         public int spawnAccelerationChance;
-        public int maxCoinAmount;
-        public int minCoinAmount;
-        public AccuracyLevel coinAccuracyLevel;
-        public AccuracyLevel crystalAccuracyLevel;
-        public int maxCrystalAmount;
-        public int minCrystalAmount;
+        public CurrencyRandomSettings[] currencyRandomSettings;
 
         public List<PatternData> patterns;
     }

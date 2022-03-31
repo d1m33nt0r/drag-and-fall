@@ -13,48 +13,59 @@ MonoBehaviour:
   m_Name: 1_Set
   m_EditorClassIdentifier: 
   isRandom: 1
-  minPlatformsCount: 500
-  maxPlatformsCount: 500
+  minPlatformsCount: 100
+  maxPlatformsCount: 100
   maxLetAmount: 2
   minLetAmount: 0
   maxHoleAmount: 8
   minHoleAmount: 5
   attemptsOfShieldInstantiate: 5
-  shieldPositions: 0f00000073000000d70000003b0100009f010000
+  shieldPositions: 0a0000001e00000032000000460000005a000000
   spawnShieldOnLet: 0
   spawnShieldOnGround: 1
-  spawnShieldOnHole: 1
-  spawnShieldChance: 100
+  spawnShieldOnHole: 0
+  spawnShieldChance: 65
   attemptsOfKeyInstantiate: 1
-  keyPositions: ff000000
+  keyPositions: 62000000
   spawnKeyOnLet: 0
   spawnKeyOnGround: 1
   spawnKeyOnHole: 0
   spawnKeyChance: 40
   attemptsOfMagnetInstantiate: 5
-  magnetPositions: 370000009b000000ff00000063010000c7010000
+  magnetPositions: 10000000260000003b0000004900000059000000
   spawnMagnetOnLet: 0
   spawnMagnetOnGround: 1
-  spawnMagnetOnHole: 1
-  spawnMagnetChance: 100
+  spawnMagnetOnHole: 0
+  spawnMagnetChance: 65
   attemptsOfMultiplierInstantiate: 5
-  multiplierPositions: 4c000000b00000001401000051010000dc010000
+  multiplierPositions: 0e00000022000000360000004a0000005e000000
   spawnMultiplierOnLet: 0
   spawnMultiplierOnGround: 1
-  spawnMultiplierOnHole: 1
-  spawnMultiplierChance: 100
+  spawnMultiplierOnHole: 0
+  spawnMultiplierChance: 65
   attemptsOfAccelerationInstantiate: 5
-  accelerationPositions: 2300000087000000eb0000004f010000b3010000
+  accelerationPositions: 0c0000002000000034000000480000005c000000
   spawnAccelerationOnLet: 0
   spawnAccelerationOnGround: 1
   spawnAccelerationOnHole: 0
-  spawnAccelerationChance: 100
-  maxCoinAmount: 0
-  minCoinAmount: 0
-  coinAccuracyLevel: 0
-  crystalAccuracyLevel: 0
-  maxCrystalAmount: 0
-  minCrystalAmount: 0
+  spawnAccelerationChance: 65
+  currencyRandomSettings:
+  - spawnOnLet: 0
+    spawnOnGround: 1
+    spawnOnHole: 1
+    spawnChance: 100
+    currencyType: 0
+    rangeStart: 11
+    rangeEnd: 34
+    accuracyLevel: 3
+  - spawnOnLet: 1
+    spawnOnGround: 1
+    spawnOnHole: 1
+    spawnChance: 100
+    currencyType: 0
+    rangeStart: 0
+    rangeEnd: 0
+    accuracyLevel: 3
   patterns:
   - isRandom: 0
     maxLetAmount: 3

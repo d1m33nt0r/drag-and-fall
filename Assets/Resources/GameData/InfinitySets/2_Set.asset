@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09d77c3811e4596942c73ed357f4c40, type: 3}
   m_Name: 2_Set
   m_EditorClassIdentifier: 
-  isRandom: 0
+  isRandom: 1
   minPlatformsCount: 0
   maxPlatformsCount: 0
   maxLetAmount: 0
@@ -49,10 +49,4 @@ MonoBehaviour:
   spawnAccelerationOnGround: 0
   spawnAccelerationOnHole: 0
   spawnAccelerationChance: 0
-  maxCoinAmount: 0
-  minCoinAmount: 0
-  coinAccuracyLevel: 0
-  crystalAccuracyLevel: 0
-  maxCrystalAmount: 0
-  minCrystalAmount: 0
   patterns: []

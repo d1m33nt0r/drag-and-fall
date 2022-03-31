@@ -129,6 +129,8 @@ namespace DafEditor.Editor.Layout
                             GameEditorWindow.instance.SetRightPanelState(RightPanelState.Empty);
                         }
                     }
+                    
+                    EditorUtility.SetDirty(infinityData.patternSets[i]);
                 }
 
                 if (GUILayout.Button("↑", EditorStyles.RedButtonStyle(22), GUILayout.Width(25)))

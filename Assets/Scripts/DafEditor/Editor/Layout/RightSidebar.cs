@@ -1,4 +1,5 @@
-﻿using DafEditor.Editor.Common;
+﻿using System.Linq;
+using DafEditor.Editor.Common;
 using DafEditor.Editor.Intefraces;
 using Data;
 using UnityEditor;
@@ -95,14 +96,36 @@ namespace DafEditor.Editor.Layout
                     DrawKeyRandomSettings();
 
                     GUILayout.Label("Currencies random settings", Common.EditorStyles.HeaderOfBlockInRightSideBar2());
-                    
-                    DrawCoinRandomSettings();
 
-                    DrawCrystalRandomSettings();
+                    if (gameEditorWindow.currentSetData.currencyRandomSettings == null)
+                    {
+                        GUILayout.Label("Add first currency profile!");
+                    }
+                    else
+                    {
+                        for (var i = 0; i < gameEditorWindow.currentSetData.currencyRandomSettings.Length; i++)
+                        {
+                            DrawCoinRandomSettings(i);
+                        } 
+                    }
+                    
+                    if (GUILayout.Button("Add currency profile"))
+                    {
+                        if (gameEditorWindow.currentSetData.currencyRandomSettings == null)
+                        {
+                            gameEditorWindow.currentSetData.currencyRandomSettings = new CurrencyRandomSettings[1];
+                        }
+                        else
+                        {
+                            var list = gameEditorWindow.currentSetData.currencyRandomSettings.ToList();
+                            list.Add(new CurrencyRandomSettings());
+                            gameEditorWindow.currentSetData.currencyRandomSettings = list.ToArray(); 
+                        }
+                    }
 
                     if (EditorGUI.EndChangeCheck())
                     {
-                        EditorUtility.SetDirty(gameEditorWindow.infinityData.patternSets[0]);
+                        EditorUtility.SetDirty(gameEditorWindow.currentSetData);
                     }
                     
                     break;
@@ -164,61 +187,76 @@ namespace DafEditor.Editor.Layout
             GUILayout.EndHorizontal();
         }
 
-        private void DrawCrystalRandomSettings()
+        private void DrawCoinRandomSettings(int index)
         {
             GUILayout.BeginVertical("box");
-            GUILayout.BeginHorizontal();
-            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
-            GUILayout.Label("Min crystal");
-            GUILayout.EndHorizontal();
-            gameEditorWindow.currentSetData.minCrystalAmount =
-                EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.minCrystalAmount, 0, 100);
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
-            GUILayout.Label("Max crystal");
-            GUILayout.EndHorizontal();
-            gameEditorWindow.currentSetData.maxCrystalAmount =
-                EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.maxCrystalAmount, 0, 100);
-            GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
-            GUILayout.Label("Accuracy level");
+            GUILayout.Label("Currency type");
             GUILayout.EndHorizontal();
-            gameEditorWindow.currentSetData.crystalAccuracyLevel =
-                (AccuracyLevel) EditorGUILayout.EnumPopup(gameEditorWindow.currentSetData.crystalAccuracyLevel);
+            gameEditorWindow.currentSetData.currencyRandomSettings[index].currencyType =
+                (CurrencyType)EditorGUILayout.EnumPopup(gameEditorWindow.currentSetData.currencyRandomSettings[index].currencyType);
+            GUILayout.EndHorizontal();
+            
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
+            GUILayout.Label("Spawn chance");
+            GUILayout.EndHorizontal();
+            gameEditorWindow.currentSetData.currencyRandomSettings[index].spawnChance =
+                EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.currencyRandomSettings[index].spawnChance, 0, 100);
+            GUILayout.EndHorizontal();
+            
+            GUILayout.BeginVertical("box");
+            
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
+            GUILayout.Label("");
+            GUILayout.EndHorizontal();
+            GUILayout.Label("L");
+            GUILayout.Label("G");
+            GUILayout.Label("H");
+            GUILayout.EndHorizontal();
+            
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
+            GUILayout.Label("Spawn on");
+            GUILayout.EndHorizontal();
+            
+            gameEditorWindow.currentSetData.currencyRandomSettings[index].spawnOnLet =
+                EditorGUILayout.Toggle(gameEditorWindow.currentSetData.currencyRandomSettings[index].spawnOnLet);
+            gameEditorWindow.currentSetData.currencyRandomSettings[index].spawnOnGround =
+                EditorGUILayout.Toggle(gameEditorWindow.currentSetData.currencyRandomSettings[index].spawnOnGround);
+            gameEditorWindow.currentSetData.currencyRandomSettings[index].spawnOnHole =
+                EditorGUILayout.Toggle(gameEditorWindow.currentSetData.currencyRandomSettings[index].spawnOnHole);
+            
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
-        }
 
-        private void DrawCoinRandomSettings()
-        {
-            GUILayout.BeginVertical("box");
             GUILayout.BeginHorizontal();
             GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
-            GUILayout.Label("Min coins");
+            GUILayout.Label("Range start");
             GUILayout.EndHorizontal();
-            gameEditorWindow.currentSetData.minCoinAmount =
-                EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.minCoinAmount, 0, 100);
+            gameEditorWindow.currentSetData.currencyRandomSettings[index].rangeStart =
+                EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.currencyRandomSettings[index].rangeStart, 0, 500);
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
-            GUILayout.Label("Max coins");
+            GUILayout.Label("Range end");
             GUILayout.EndHorizontal();
-            gameEditorWindow.currentSetData.maxCoinAmount =
-                EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.maxCoinAmount, 0, 100);
+            gameEditorWindow.currentSetData.currencyRandomSettings[index].rangeEnd =
+                EditorGUILayout.IntSlider(gameEditorWindow.currentSetData.currencyRandomSettings[index].rangeEnd, 0, 500);
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
             GUILayout.Label("Accuracy level");
             GUILayout.EndHorizontal();
-            gameEditorWindow.currentSetData.coinAccuracyLevel =
-                (AccuracyLevel) EditorGUILayout.EnumPopup(gameEditorWindow.currentSetData.coinAccuracyLevel);
+            gameEditorWindow.currentSetData.currencyRandomSettings[index].accuracyLevel =
+                (AccuracyLevel) EditorGUILayout.EnumPopup(gameEditorWindow.currentSetData.currencyRandomSettings[index].accuracyLevel);
             GUILayout.EndHorizontal();
+            
             GUILayout.EndVertical();
         }
 
@@ -265,7 +303,6 @@ namespace DafEditor.Editor.Layout
             }
 
             GUILayout.BeginVertical("box");
-            
             
             GUILayout.BeginHorizontal();
             GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 110});
