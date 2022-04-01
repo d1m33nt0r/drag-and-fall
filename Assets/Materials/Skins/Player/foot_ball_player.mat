@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_Default 1
+  m_Name: foot_ball_player
   m_Shader: {fileID: 4800000, guid: cabbd11a2419d0e48ba1723153f2081c, type: 3}
-  m_ShaderKeywords: TCP2_AMBIENT TCP2_RIM_LIGHTING
+  m_ShaderKeywords: TCP2_RIM_LIGHTING _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -20,11 +20,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: e72d84ecd7f9340469bf190e686c66d3, type: 3}
+        m_Texture: {fileID: 2800000, guid: fc2310f41bc20d049871d019e21d0f94, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 7cf0dbcac44371840a6bd5146d64e80a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -60,15 +60,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _StylizedThreshold:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 6cc453759fa72fd4fbfaf3cdc3174e6f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AnisotropicSpread: 0
-    - _BandsCount: 1
-    - _BandsCountOtherLights: 12
-    - _BandsSmoothing: 1
-    - _BandsSmoothingOtherLights: 1
+    - _AnisotropicSpread: 1
+    - _BandsCount: 3
+    - _BandsCountOtherLights: 4
+    - _BandsSmoothing: 0.001
+    - _BandsSmoothingOtherLights: 0.1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -76,28 +76,29 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LightWrapFactor: 0.42
+    - _LightWrapFactor: 1.56
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RampSmoothing: 1
-    - _RampSmoothingOtherLights: 1
-    - _RampThreshold: 1
-    - _RampThresholdOtherLights: 1
-    - _RimMax: 1.82
-    - _RimMin: 0.42
+    - _RampSmoothing: 0.33
+    - _RampSmoothingOtherLights: 0.5
+    - _RampThreshold: 0.818
+    - _RampThresholdOtherLights: 0.5
+    - _RimMax: 0.86
+    - _RimMin: 0.19
     - _Shadow_HSV_H: 0
-    - _Shadow_HSV_S: 0
-    - _Shadow_HSV_V: 0
+    - _Shadow_HSV_S: 0.07
+    - _Shadow_HSV_V: 0.01
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SpecularSmoothness: 0.2
-    - _SpecularToonSize: 0.783
-    - _SpecularToonSmoothness: 0.313
+    - _SpecularToonSize: 0.25
+    - _SpecularToonSmoothness: 0.05
     - _SrcBlend: 1
     - _UVSec: 0
-    - _UseAmbient: 1
+    - _UseAmbient: 0
+    - _UseNormalMap: 1
     - _UseRim: 1
     - _UseSpecular: 0
     - _UseTexturedThreshold: 0
@@ -107,18 +108,18 @@ Material:
     - __dummy__: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DiffuseTint: {r: 1, g: 1, b: 1, a: 1}
+    - _DiffuseTint: {r: 0, g: 0, b: 0, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 0.5}
-    - _RimDir: {r: -1.8, g: 0.44, b: 1, a: 1}
-    - _SColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 0.5}
+    - _RimDir: {r: 0, g: 0, b: 1, a: 1}
+    - _SColor: {r: 0.8679245, g: 0.8679245, b: 0.8679245, a: 1}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _TCP2_AMBIENT_BACK: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_BOTTOM: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_FRONT: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_LEFT: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_RIGHT: {r: 0, g: 0, b: 0, a: 1}
-    - _TCP2_AMBIENT_TOP: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
+    - _TCP2_AMBIENT_TOP: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
