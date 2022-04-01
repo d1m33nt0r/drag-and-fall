@@ -2,9 +2,11 @@
 using Core.Bonuses;
 using Data;
 using Data.Core.Segments;
+using DG.Tweening;
 using ObjectPool;
 using UI.InfinityUI;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Core
 {
@@ -40,6 +42,14 @@ namespace Core
         public void SetActiveFireEffect(bool value)
         {
             fireEffect.SetActive(value);
+        }
+        
+        public void RandomRotate()
+        {
+            var randomX = Random.Range(-35, 35);
+            var randomY = Random.Range(-35, 60);
+            var randomZ = Random.Range(0, 35);
+            transform.DORotate(new Vector3(randomX, randomY, randomZ), 0.5f);
         }
 
         public void SpawnBonusCollectingEffect()
@@ -120,7 +130,7 @@ namespace Core
             
             trail = Instantiate(visualController.GetTrail(), transform.position, Quaternion.identity, transform);
             fallingTrail = Instantiate(visualController.GetFallingTrail(), transform.position, Quaternion.identity,
-                transform);
+                transform.parent);
         }
 
         public void TryOnPlayerSkin(Mesh _mesh, Material _material)

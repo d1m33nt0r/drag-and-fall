@@ -35,10 +35,7 @@ Shader "DragAndFall/CustomShader"
 		[TCP2HeaderHelp(Specular)]
 		[Toggle(TCP2_SPECULAR)] _UseSpecular ("Enable Specular", Float) = 0
 		[TCP2ColorNoAlpha] _SpecularColor ("Specular Color", Color) = (0.5,0.5,0.5,1)
-		_SpecularSmoothness ("Smoothness", Float) = 0.2
-		_AnisotropicSpread ("Anisotropic Spread", Range(0,2)) = 1
-		_SpecularToonSize ("Toon Size", Range(0,1)) = 0.25
-		_SpecularToonSmoothness ("Toon Smoothness", Range(0.001,0.5)) = 0.05
+		_SpecularRoughnessPBR ("Roughness", Range(0,1)) = 0.5
 		[TCP2Separator]
 
 		[TCP2HeaderHelp(Emission)]
@@ -115,10 +112,7 @@ Shader "DragAndFall/CustomShader"
 		fixed4 _HColor;
 		fixed4 _SColor;
 		fixed4 _DiffuseTint;
-		float _AnisotropicSpread;
-		float _SpecularSmoothness;
-		float _SpecularToonSize;
-		float _SpecularToonSmoothness;
+		float _SpecularRoughnessPBR;
 		fixed4 _SpecularColor;
 		float4 _RimDir;
 		float _RimMin;
@@ -171,6 +165,28 @@ Shader "DragAndFall/CustomShader"
 		}
 		float4 ApplyHSV_4(float color, float h, float s, float v) { return ApplyHSV_4(color.xxxx, h, s, v); }
 		
+		//Specular help functions (from UnityStandardBRDF.cginc)
+		inline half3 SpecSafeNormalize(half3 inVec)
+		{
+			half dp3 = max(0.001f, dot(inVec, inVec));
+			return inVec * rsqrt(dp3);
+		}
+		
+		//GGX
+		#define TCP2_PI 3.14159265359
+		#define TCP2_INV_PI        0.31830988618f
+		#if defined(SHADER_API_MOBILE)
+			#define TCP2_EPSILON 1e-4f
+		#else
+			#define TCP2_EPSILON 1e-7f
+		#endif
+		inline half GGX(half NdotH, half roughness)
+		{
+			half a2 = roughness * roughness;
+			half d = (NdotH * a2 - NdotH) * NdotH + 1.0f;
+			return TCP2_INV_PI * a2 / (d * d + TCP2_EPSILON);
+		}
+		
 		half3 DirAmbient (half3 normal)
 		{
 			fixed3 retColor =
@@ -221,7 +237,6 @@ Shader "DragAndFall/CustomShader"
 			half3 viewDir;
 			half3 tangent;
 			float3 worldPos;
-			half3 worldNormal; INTERNAL_DATA
 			float4 screenPosition;
 			float2 texcoord0;
 		};
@@ -256,13 +271,10 @@ Shader "DragAndFall/CustomShader"
 			half atten;
 			half3 Albedo;
 			half3 Normal;
-			half3 worldNormal;
 			half3 Emission;
 			half Specular;
 			half Gloss;
 			half Alpha;
-			half ndv;
-			half ndvRaw;
 			float3 normalTS;
 
 			Input input;
@@ -287,10 +299,7 @@ Shader "DragAndFall/CustomShader"
 			float3 __diffuseTint;
 			float __occlusion;
 			float __ambientIntensity;
-			float __anisotropicSpread;
-			float __specularSmoothness;
-			float __specularToonSize;
-			float __specularToonSmoothness;
+			float __specularRoughnessPbr;
 			float3 __specularColor;
 			float3 __rimDir;
 			float __rimMin;
@@ -304,9 +313,6 @@ Shader "DragAndFall/CustomShader"
 
 		void surf(Input input, inout SurfaceOutputCustom output)
 		{
-
-			input.worldNormal = WorldNormalVector(input, output.Normal);
-
 			// Shader Properties Sampling
 			float4 __normalMap = ( tex2D(_BumpMap, input.texcoord0.xy).rgba );
 			float4 __albedo = ( tex2D(_Albedo, input.texcoord0.xy).rgba );
@@ -332,10 +338,7 @@ Shader "DragAndFall/CustomShader"
 			output.__diffuseTint = ( _DiffuseTint.rgb );
 			output.__occlusion = ( __albedo.a );
 			output.__ambientIntensity = ( 1.0 );
-			output.__anisotropicSpread = ( _AnisotropicSpread );
-			output.__specularSmoothness = ( _SpecularSmoothness );
-			output.__specularToonSize = ( _SpecularToonSize );
-			output.__specularToonSmoothness = ( _SpecularToonSmoothness );
+			output.__specularRoughnessPbr = ( _SpecularRoughnessPBR );
 			output.__specularColor = ( _SpecularColor.rgb );
 			output.__rimDir = ( _RimDir.xyz );
 			output.__rimMin = ( _RimMin );
@@ -353,14 +356,6 @@ Shader "DragAndFall/CustomShader"
 
 			#endif
 
-			half3 worldNormal = WorldNormalVector(input, output.Normal);
-			output.worldNormal = worldNormal;
-
-			half ndv = abs(dot(input.viewDir, normalize(output.Normal.xyz)));
-			half ndvRaw = ndv;
-			output.ndv = ndv;
-			output.ndvRaw = ndvRaw;
-
 			output.Albedo = __albedo.rgb;
 			output.Alpha = __alpha;
 			
@@ -373,7 +368,6 @@ Shader "DragAndFall/CustomShader"
 
 		inline half4 LightingToonyColorsCustom(inout SurfaceOutputCustom surface, half3 viewDir, UnityGI gi)
 		{
-			half ndv = surface.ndv;
 			half3 lightDir = gi.light.dir;
 			#if defined(UNITY_PASS_FORWARDBASE)
 				half3 lightColor = _LightColor0.rgb;
@@ -452,15 +446,20 @@ Shader "DragAndFall/CustomShader"
 			#endif
 
 			#if defined(TCP2_SPECULAR)
-			//Anisotropic Specular
-			half3 h = normalize(lightDir + viewDir);
-			float ndh = max(0, dot (normal, h));
-			half3 binorm = cross(normal, surface.input.tangent);
-			float aX = dot(h, surface.input.tangent) / surface.__anisotropicSpread;
-			float aY = dot(h, binorm) / surface.__specularSmoothness;
-			float specAniso = sqrt(max(0.0, ndl / surface.ndvRaw)) * exp(-2.0 * (aX * aX + aY * aY) / (1.0 + ndh));
-			float spec = smoothstep(surface.__specularToonSize + surface.__specularToonSmoothness, surface.__specularToonSize - surface.__specularToonSmoothness,1 - (specAniso / (1+surface.__specularToonSmoothness)));
-			spec = saturate(spec);
+			//Specular: GGX
+			half3 halfDir = SpecSafeNormalize(lightDir + viewDir);
+			half roughness = surface.__specularRoughnessPbr*surface.__specularRoughnessPbr;
+			half nh = saturate(dot(normal, halfDir));
+			half spec = GGX(nh, saturate(roughness));
+			spec *= TCP2_PI * 0.05;
+			#ifdef UNITY_COLORSPACE_GAMMA
+				spec = max(0, sqrt(max(1e-4h, spec)));
+				half surfaceReduction = 1.0 - 0.28 * roughness * surface.__specularRoughnessPbr;
+			#else
+				half surfaceReduction = 1.0 / (roughness*roughness + 1.0);
+			#endif
+			spec = max(0, spec * ndl);
+			spec *= surfaceReduction;
 			spec *= atten;
 			
 			//Apply specular
@@ -508,5 +507,5 @@ Shader "DragAndFall/CustomShader"
 	CustomEditor "ToonyColorsPro.ShaderGenerator.MaterialInspector_SG2"
 }
 
-/* TCP_DATA u config(unity:"2020.3.12f1";ver:"2.7.4";tmplt:"SG2_Template_Default";features:list["UNITY_5_4","UNITY_5_5","UNITY_5_6","UNITY_2017_1","UNITY_2018_1","UNITY_2018_2","UNITY_2018_3","UNITY_2019_1","UNITY_2019_2","UNITY_2019_3","UNITY_2020_1","RAMP_MAIN_OTHER","RAMP_SEPARATED","WRAPPED_LIGHTING_CUSTOM","SHADOW_HSV","SPECULAR_ANISOTROPIC","SPECULAR","SPECULAR_TOON","SPECULAR_SHADER_FEATURE","EMISSION","RIM","RIM_DIR","RIM_SHADER_FEATURE","RIM_DIR_PERSP_CORRECTION","AMBIENT_SHADER_FEATURE","DIRAMBIENT","TEXTURED_THRESHOLD","TT_SHADER_FEATURE","DIFFUSE_TINT","RAMP_BANDS","BUMP","BUMP_SHADER_FEATURE","OCCLUSION"];flags:list[];flags_extra:dict[];keywords:dict[RENDER_TYPE="Opaque",RampTextureDrawer="[TCP2Gradient]",RampTextureLabel="Ramp Texture",SHADER_TARGET="3.0",RIM_LABEL="Rim Lighting"];shaderProperties:list[sp(name:"Albedo";imps:list[imp_mp_texture(uto:False;tov:"";tov_lbl:"";gto:False;sbt:False;scr:False;scv:"";scv_lbl:"";gsc:False;roff:False;goff:False;sin_anm:False;sin_anmv:"";sin_anmv_lbl:"";gsin:False;notile:False;triplanar_local:False;def:"white";locked_uv:False;uv:0;cc:4;chan:"RGBA";mip:-1;mipprop:False;ssuv_vert:False;ssuv_obj:False;uv_type:Texcoord;uv_chan:"XZ";uv_shaderproperty:__NULL__;prop:"_Albedo";md:"";gbv:False;custom:False;refs:"";guid:"971ced18-2182-4590-93fa-3248b5624a62";op:Multiply;lbl:"Albedo";gpu_inst:False;locked:False;impl_index:-1)];layers:list[];unlocked:list[];clones:dict[];isClone:False)];customTextures:list[ct(cimp:imp_mp_texture(uto:True;tov:"";tov_lbl:"";gto:False;sbt:True;scr:True;scv:"";scv_lbl:"";gsc:False;roff:False;goff:False;sin_anm:False;sin_anmv:"";sin_anmv_lbl:"";gsin:False;notile:False;triplanar_local:False;def:"white";locked_uv:False;uv:4;cc:4;chan:"RGBA";mip:0;mipprop:False;ssuv_vert:False;ssuv_obj:False;uv_type:ScreenSpace;uv_chan:"XZ";uv_shaderproperty:__NULL__;prop:"_ScrollingTexture";md:"";gbv:False;custom:True;refs:"";guid:"2a3fe211-db0a-46c2-8561-9b10c7d01d4d";op:Multiply;lbl:"Scrolling Texture";gpu_inst:False;locked:False;impl_index:-1);exp:True;uv_exp:False;imp_lbl:"Texture")];codeInjection:codeInjection(injectedFiles:list[];mark:False);matLayers:list[ml(uid:"5bafc8";name:"Material Layer";src:sp(name:"layer_5bafc8";imps:list[imp_mp_texture(uto:False;tov:"";tov_lbl:"";gto:False;sbt:False;scr:False;scv:"";scv_lbl:"";gsc:False;roff:False;goff:False;sin_anm:False;sin_anmv:"";sin_anmv_lbl:"";gsin:False;notile:False;triplanar_local:False;def:"white";locked_uv:False;uv:0;cc:1;chan:"R";mip:-1;mipprop:False;ssuv_vert:False;ssuv_obj:False;uv_type:Texcoord;uv_chan:"XZ";uv_shaderproperty:__NULL__;prop:"_layer_5bafc8";md:"";gbv:False;custom:False;refs:"";guid:"87db4f0f-d6a5-447d-918a-7ef8457e88e4";op:Multiply;lbl:"Source Texture";gpu_inst:False;locked:False;impl_index:-1)];layers:list[];unlocked:list[];clones:dict[];isClone:False);use_contrast:False;ctrst:__NULL__;use_noise:False;noise:__NULL__)]) */
-/* TCP_HASH eba4410ee2e0d4695ed8c51b24091760 */
+/* TCP_DATA u config(unity:"2020.3.12f1";ver:"2.7.4";tmplt:"SG2_Template_Default";features:list["UNITY_5_4","UNITY_5_5","UNITY_5_6","UNITY_2017_1","UNITY_2018_1","UNITY_2018_2","UNITY_2018_3","UNITY_2019_1","UNITY_2019_2","UNITY_2019_3","UNITY_2020_1","RAMP_MAIN_OTHER","RAMP_SEPARATED","WRAPPED_LIGHTING_CUSTOM","SHADOW_HSV","SPECULAR","SPECULAR_SHADER_FEATURE","EMISSION","RIM","RIM_DIR","RIM_SHADER_FEATURE","RIM_DIR_PERSP_CORRECTION","AMBIENT_SHADER_FEATURE","DIRAMBIENT","TEXTURED_THRESHOLD","TT_SHADER_FEATURE","DIFFUSE_TINT","RAMP_BANDS","BUMP","BUMP_SHADER_FEATURE","OCCLUSION","SPEC_PBR_GGX"];flags:list[];flags_extra:dict[];keywords:dict[RENDER_TYPE="Opaque",RampTextureDrawer="[TCP2Gradient]",RampTextureLabel="Ramp Texture",SHADER_TARGET="3.0",RIM_LABEL="Rim Lighting"];shaderProperties:list[sp(name:"Albedo";imps:list[imp_mp_texture(uto:False;tov:"";tov_lbl:"";gto:False;sbt:False;scr:False;scv:"";scv_lbl:"";gsc:False;roff:False;goff:False;sin_anm:False;sin_anmv:"";sin_anmv_lbl:"";gsin:False;notile:False;triplanar_local:False;def:"white";locked_uv:False;uv:0;cc:4;chan:"RGBA";mip:-1;mipprop:False;ssuv_vert:False;ssuv_obj:False;uv_type:Texcoord;uv_chan:"XZ";uv_shaderproperty:__NULL__;prop:"_Albedo";md:"";gbv:False;custom:False;refs:"";guid:"971ced18-2182-4590-93fa-3248b5624a62";op:Multiply;lbl:"Albedo";gpu_inst:False;locked:False;impl_index:-1)];layers:list[];unlocked:list[];clones:dict[];isClone:False)];customTextures:list[ct(cimp:imp_mp_texture(uto:True;tov:"";tov_lbl:"";gto:False;sbt:True;scr:True;scv:"";scv_lbl:"";gsc:False;roff:False;goff:False;sin_anm:False;sin_anmv:"";sin_anmv_lbl:"";gsin:False;notile:False;triplanar_local:False;def:"white";locked_uv:False;uv:4;cc:4;chan:"RGBA";mip:0;mipprop:False;ssuv_vert:False;ssuv_obj:False;uv_type:ScreenSpace;uv_chan:"XZ";uv_shaderproperty:__NULL__;prop:"_ScrollingTexture";md:"";gbv:False;custom:True;refs:"";guid:"2a3fe211-db0a-46c2-8561-9b10c7d01d4d";op:Multiply;lbl:"Scrolling Texture";gpu_inst:False;locked:False;impl_index:-1);exp:True;uv_exp:False;imp_lbl:"Texture")];codeInjection:codeInjection(injectedFiles:list[];mark:False);matLayers:list[ml(uid:"5bafc8";name:"Material Layer";src:sp(name:"layer_5bafc8";imps:list[imp_mp_texture(uto:False;tov:"";tov_lbl:"";gto:False;sbt:False;scr:False;scv:"";scv_lbl:"";gsc:False;roff:False;goff:False;sin_anm:False;sin_anmv:"";sin_anmv_lbl:"";gsin:False;notile:False;triplanar_local:False;def:"white";locked_uv:False;uv:0;cc:1;chan:"R";mip:-1;mipprop:False;ssuv_vert:False;ssuv_obj:False;uv_type:Texcoord;uv_chan:"XZ";uv_shaderproperty:__NULL__;prop:"_layer_5bafc8";md:"";gbv:False;custom:False;refs:"";guid:"87db4f0f-d6a5-447d-918a-7ef8457e88e4";op:Multiply;lbl:"Source Texture";gpu_inst:False;locked:False;impl_index:-1)];layers:list[];unlocked:list[];clones:dict[];isClone:False);use_contrast:False;ctrst:__NULL__;use_noise:False;noise:__NULL__)]) */
+/* TCP_HASH 7eeb5ffbcaf126d419e751847f80603e */
