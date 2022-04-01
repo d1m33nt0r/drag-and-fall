@@ -19,6 +19,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Albedo:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -36,6 +40,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMask:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -88,12 +96,14 @@ Material:
     - _Shadow_HSV_V: -0.53
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _SpecularRoughnessPBR: 0.5
     - _SpecularSmoothness: 0.2
     - _SpecularToonSize: 0.247
     - _SpecularToonSmoothness: 0.5
     - _SrcBlend: 1
     - _UVSec: 0
     - _UseAmbient: 0
+    - _UseNormalMap: 0
     - _UseRim: 1
     - _UseSpecular: 1
     - _UseTexturedThreshold: 0
@@ -102,7 +112,7 @@ Material:
     - __EndGroup: 0
     - __dummy__: 0
     m_Colors:
-    - _Color: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 1}
+    - _Color: {r: 0.21560161, g: 0.8962264, b: 0.37861583, a: 1}
     - _DiffuseTint: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 0, g: 0.4339623, b: 0.10400259, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

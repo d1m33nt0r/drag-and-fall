@@ -15,7 +15,7 @@ MonoBehaviour:
   EnvironmentSkinData:
   - isBought: 1
     price: 0
-    skybox: {fileID: 0}
+    skybox: {fileID: 2100000, guid: 456566f5776b74145bb9e42b56caf6f2, type: 2}
     tubeMaterial: {fileID: 2100000, guid: 0c8248b0e4151f646803628d4c2563e3, type: 2}
     letSegmentMaterial: {fileID: 2100000, guid: e2060d36a9813df4eb743adffb93967b, type: 2}
     groundSegmentMaterial: {fileID: 2100000, guid: 2968799f499957441ab6327f8895fb03, type: 2}
@@ -24,11 +24,11 @@ MonoBehaviour:
     platformColors:
     - {r: 1, g: 1, b: 1, a: 0}
     - {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
-    - {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
-    - {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
+    - {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
+    - {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
   - isBought: 0
     price: 600
-    skybox: {fileID: 0}
+    skybox: {fileID: 2100000, guid: 3e7499319482c054596e856e2377929c, type: 2}
     tubeMaterial: {fileID: 2100000, guid: e3dad7234d39bf348ab2702865544d1d, type: 2}
     letSegmentMaterial: {fileID: 2100000, guid: 75e4ac386d5f6bb4b9b43e5076405669, type: 2}
     groundSegmentMaterial: {fileID: 2100000, guid: a46e7ac6201b9bb4ca243d7c6a278452, type: 2}

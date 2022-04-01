@@ -8,7 +8,7 @@ namespace Data.Shop.TubeSkins
     {
         public bool isBought;
         public float price;
-        public Skybox skybox;
+        public Material skybox;
         public Material tubeMaterial;
         public Material letSegmentMaterial;
         public Material groundSegmentMaterial;

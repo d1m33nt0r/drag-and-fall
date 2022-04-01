@@ -15,12 +15,14 @@ namespace Core
 
         public void TryOnSkin(EnvironmentSkinData _environmentSkinData)
         {
+            RenderSettings.skybox = _environmentSkinData.skybox;
             GetComponent<MeshRenderer>().material = _environmentSkinData.tubeMaterial;
             GetComponent<MeshFilter>().mesh = _environmentSkinData.tube;
         }
         
         public void ChangeTheme()
         {
+            RenderSettings.skybox = tubeMover.platformMover.visualController.GetSkyboxMaterial();
             GetComponent<MeshRenderer>().material = tubeMover.platformMover.visualController.GetTubeMaterial();
             GetComponent<MeshFilter>().mesh = tubeMover.platformMover.visualController.GetTubeMesh();
         }

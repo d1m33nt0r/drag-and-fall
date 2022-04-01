@@ -45,6 +45,11 @@ namespace Core
             }
         }
 
+        public Material GetSkyboxMaterial()
+        {
+            return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].skybox;
+        }
+
         public Material GetPlayerMaterial()
         {
             return shopData.PlayerSkinData[progressController.currentState.playerSkin.index].material;

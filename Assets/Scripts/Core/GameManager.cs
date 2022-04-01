@@ -319,11 +319,11 @@ namespace Core
 
         public void ShowUpgradeMenu()
         {
-            platformMover.SetLevelMode(false);
+            //platformMover.SetLevelMode(false);
             gameStarted = false;
             uiManager.SetActiveUpgradeMenu(true);
-            platformMover.SetDefaultState();
-            platformMover.InitializePlatforms();
+            //platformMover.SetDefaultState();
+            //platformMover.InitializePlatforms();
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveLevelUI(false);
             uiManager.SetActiveShopMenu(false);
