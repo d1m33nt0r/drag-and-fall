@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections;
 using Data.Shop.TubeSkins;
+using ObjectPool;
 using UnityEngine;
 
 namespace Core
 {
     public class TubeMover : MonoBehaviour
     {
+        [SerializeField] private TubePool tubePool;
+        
         [SerializeField] private GameObject tubePrefab;
         [SerializeField] private int countTubeParts;
         public TubePart[] tubeParts;
@@ -47,7 +50,7 @@ namespace Core
             {
                 for (var i = 0; i < countTubeParts; i++)
                 {
-                    Destroy(tubeParts[i].gameObject);
+                    tubeParts[i].GetComponent<TubePart>().ReturnToPool();
                 }
             }
 
@@ -55,10 +58,11 @@ namespace Core
 
             for (var i = 0; i < countTubeParts; i++)
             {
-                var tubePartInstance = Instantiate(tubePrefab, localPositionsOfTubeParts[i],
-                    Quaternion.Euler(transform.rotation.eulerAngles),
-                    transform);
-                tubePartInstance.GetComponent<TubePart>().Initialize(this);
+                var tubePartInstance = tubePool.GetTubePart();
+                tubePartInstance.transform.position = localPositionsOfTubeParts[i];
+                tubePartInstance.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles);
+                tubePartInstance.transform.SetParent(transform);
+                    
                 tubeParts[i] = tubePartInstance.GetComponent<TubePart>();
                 //AlignRotation(tubePartInstance);
             }
@@ -84,16 +88,16 @@ namespace Core
 
         public void CreateNewTubePart()
         {
-            Destroy(tubeParts[0].gameObject);
+            tubeParts[0].ReturnToPool();
             
             for (var i = 1; i < countTubeParts; i++)
                 tubeParts[i - 1] = tubeParts[i];
 
-            var tubePartInstance = Instantiate(tubePrefab,
-                localPositionsOfTubeParts[localPositionsOfTubeParts.Length - 1],
-                Quaternion.Euler(transform.rotation.eulerAngles), transform);
-
-            tubePartInstance.GetComponent<TubePart>().Initialize(this);
+            var tubePartInstance = tubePool.GetTubePart();
+            tubePartInstance.transform.position = localPositionsOfTubeParts[localPositionsOfTubeParts.Length - 1];
+            tubePartInstance.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles);
+            tubePartInstance.transform.SetParent(transform);
+            
             tubeParts[countTubeParts - 1] = tubePartInstance.GetComponent<TubePart>();
         }
 

@@ -1,15 +1,18 @@
 ﻿using Data.Shop.TubeSkins;
+using ObjectPool;
 using UnityEngine;
 
 namespace Core
 {
     public class TubePart : MonoBehaviour
     {
-        private TubeMover tubeMover; 
+        private TubeMover tubeMover;
+        private TubePool tubePool;
         
-        public void Initialize(TubeMover _tubeMover)
+        public void Initialize(TubeMover _tubeMover, TubePool tubePool)
         {
             tubeMover = _tubeMover;
+            this.tubePool = tubePool;
             ChangeTheme();
         }
 
@@ -25,6 +28,11 @@ namespace Core
             RenderSettings.skybox = tubeMover.platformMover.visualController.GetSkyboxMaterial();
             GetComponent<MeshRenderer>().material = tubeMover.platformMover.visualController.GetTubeMaterial();
             GetComponent<MeshFilter>().mesh = tubeMover.platformMover.visualController.GetTubeMesh();
+        }
+
+        public void ReturnToPool()
+        {
+            tubePool.ReturnToPool(gameObject);
         }
     }
 }
