@@ -26,12 +26,5 @@ namespace Core
             GetComponent<MeshRenderer>().material = tubeMover.platformMover.visualController.GetTubeMaterial();
             GetComponent<MeshFilter>().mesh = tubeMover.platformMover.visualController.GetTubeMesh();
         }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (!other.CompareTag("TubeTrigger")) return; 
-            tubeMover.CreateNewTubePart();
-            Destroy(gameObject);
-        }
     }
 }

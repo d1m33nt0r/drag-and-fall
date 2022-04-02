@@ -8,7 +8,6 @@ namespace Core
     public class TubeMover : MonoBehaviour
     {
         [SerializeField] private GameObject tubePrefab;
-        [SerializeField] private float distanceBetweenTubeParts;
         [SerializeField] private int countTubeParts;
         public TubePart[] tubeParts;
         public PlatformMover platformMover;
@@ -34,12 +33,11 @@ namespace Core
         {
             localPositionsOfTubeParts = new Vector3[countTubeParts];
 
-            var j = 4;
+            var j = 6f;
             for (var i = 0; i < countTubeParts; i++)
             {
-                localPositionsOfTubeParts[i] = new Vector3(transform.position.x, transform.localPosition.y + j,
-                    transform.position.z);
-                j -= 2;
+                localPositionsOfTubeParts[i] = new Vector3(transform.position.x, transform.position.y + j, transform.position.z);
+                j -= 1.5f;
             }
         }
 
@@ -86,48 +84,45 @@ namespace Core
 
         public void CreateNewTubePart()
         {
+            Destroy(tubeParts[0].gameObject);
+            
             for (var i = 1; i < countTubeParts; i++)
                 tubeParts[i - 1] = tubeParts[i];
 
             var tubePartInstance = Instantiate(tubePrefab,
-                tubeParts[tubeParts.Length - 2].transform.position - Vector3.down * 2,
+                localPositionsOfTubeParts[localPositionsOfTubeParts.Length - 1],
                 Quaternion.Euler(transform.rotation.eulerAngles), transform);
 
             tubePartInstance.GetComponent<TubePart>().Initialize(this);
-            tubeParts[tubeParts.Length - 1] = tubePartInstance.GetComponent<TubePart>();
-            //AlignRotation(tubePartInstance);
+            tubeParts[countTubeParts - 1] = tubePartInstance.GetComponent<TubePart>();
         }
 
         public void MoveTube()
         {
             startTime = Time.time;
-            if (tubePartCoroutine != null) StopCoroutine(tubePartCoroutine);
-            //tubePartCoroutine = StartCoroutine(MovingTube(platformMover.platformMovementSpeed));
+            if (tubePartCoroutine != null)
+            {
+                StopCoroutine(tubePartCoroutine);
+            }
+            
+            CreateNewTubePart();
+            
+            tubePartCoroutine = StartCoroutine(MovingTube(platformMover.platformMovementSpeed));
         }
-
+        
         public IEnumerator MovingTube(float speed)
         {
             var distCovered = (Time.time - startTime) * speed;
             var fractionOfJourney = distCovered / journeyLength;
-
-            var targetPositions = new Vector3[countTubeParts];
-            var currentPositions = new Vector3[countTubeParts];
-
-            for (var i = 0; i < countTubeParts; i++)
-            {
-                currentPositions[i] = tubeParts[i].transform.position;
-                targetPositions[i] = currentPositions[i] + new Vector3(currentPositions[i].x,
-                    currentPositions[i].y + 2, currentPositions[i].z);
-            }
-
+            
             while (distCovered / journeyLength != 1)
             {
-                for (var i = 0; i < countTubeParts; i++)
+                for (var i = 0; i < countTubeParts - 1; i++)
                 {
                     distCovered = (Time.time - startTime) * speed;
                     fractionOfJourney = distCovered / journeyLength;
                     tubeParts[i].transform.position =
-                        Vector3.Lerp(currentPositions[i], targetPositions[i], fractionOfJourney);
+                        Vector3.Lerp(localPositionsOfTubeParts[i + 1], localPositionsOfTubeParts[i], fractionOfJourney);
                 }
 
                 yield return null;
