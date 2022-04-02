@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material
+  m_Name: LetHaker
   m_Shader: {fileID: 4800000, guid: cabbd11a2419d0e48ba1723153f2081c, type: 3}
-  m_ShaderKeywords: TCP2_AMBIENT TCP2_RIM_LIGHTING TCP2_SPECULAR
+  m_ShaderKeywords: TCP2_AMBIENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -20,11 +20,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: 48964b64e05852940bf52431c851b71a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0126d33f204182447a89224e5049c475, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: df815ab84c8b95e4d97d1920e4d93ea6, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -39,7 +39,15 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Emission:
+        m_Texture: {fileID: 2800000, guid: 1be0a05db85979b4b9d362a466dd306f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMask:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -60,7 +68,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _StylizedThreshold:
-        m_Texture: {fileID: 2800000, guid: 6cc453759fa72fd4fbfaf3cdc3174e6f, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -73,26 +81,29 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _FresnelMax: 1.5
+    - _FresnelMin: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LightWrapFactor: 1.56
+    - _LightWrapFactor: 0.48
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RampSmoothing: 0.56
+    - _RampSmoothing: 1
     - _RampSmoothingOtherLights: 0.5
-    - _RampThreshold: 0.818
+    - _RampThreshold: 0.01
     - _RampThresholdOtherLights: 0.5
-    - _RimMax: 0.86
-    - _RimMin: 0.19
-    - _Shadow_HSV_H: -19
+    - _ReflectionSmoothness: 0.5
+    - _RimMax: 1
+    - _RimMin: 0.5
+    - _Shadow_HSV_H: 0
     - _Shadow_HSV_S: 0
-    - _Shadow_HSV_V: 0.3
+    - _Shadow_HSV_V: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SpecularRoughnessPBR: 0.09
+    - _SpecularRoughnessPBR: 0.5
     - _SpecularSmoothness: 0.2
     - _SpecularToonSize: 0.25
     - _SpecularToonSmoothness: 0.05
@@ -100,27 +111,30 @@ Material:
     - _UVSec: 0
     - _UseAmbient: 1
     - _UseNormalMap: 0
-    - _UseRim: 1
-    - _UseSpecular: 1
+    - _UseReflections: 0
+    - _UseRim: 0
+    - _UseSpecular: 0
     - _UseTexturedThreshold: 0
     - _ZWrite: 1
     - __BeginGroup_ShadowHSV: 1
     - __EndGroup: 0
     - __dummy__: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.8537736, b: 0.8537736, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DiffuseTint: {r: 0, g: 0, b: 0, a: 1}
-    - _Emission: {r: 0.014705882, g: 0.014705882, b: 0.014705882, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HColor: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
-    - _RimColor: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 0.5}
+    - _Emission: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
+    - _EmissionMask_SC: {r: 0, g: 0, b: 0, a: 0}
+    - _HColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimColor: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 0.5}
     - _RimDir: {r: 0, g: 0, b: 1, a: 1}
-    - _SColor: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 1}
-    - _SpecularColor: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
+    - _SColor: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
+    - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _TCP2_AMBIENT_BACK: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_BOTTOM: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_FRONT: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_LEFT: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_RIGHT: {r: 0, g: 0, b: 0, a: 1}
-    - _TCP2_AMBIENT_TOP: {r: 0, g: 0, b: 0, a: 1}
+    - _TCP2_AMBIENT_TOP: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
   m_BuildTextureStacks: []

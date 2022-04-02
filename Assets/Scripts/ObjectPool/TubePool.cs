@@ -41,6 +41,14 @@ namespace ObjectPool
             return instance2;
         }
 
+        public void ChangeTheme()
+        {
+            foreach (var obj in tubePool)
+            {
+                obj.GetComponent<TubePart>().ChangeTheme();
+            }
+        }
+
         public void ReturnToPool(GameObject obj)
         {
             tubePool.Enqueue(obj);

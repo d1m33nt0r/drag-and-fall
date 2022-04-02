@@ -84,6 +84,7 @@ namespace Core
             {
                 tubePart.ChangeTheme();
             }
+            tubePool.ChangeTheme();
         }
 
         public void CreateNewTubePart()

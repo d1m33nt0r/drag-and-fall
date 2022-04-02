@@ -13951,6 +13951,8 @@ MonoBehaviour:
       isBought: 1
     - index: 1
       isBought: 0
+    - index: 2
+      isBought: 0
     playerSkins:
     - index: 0
       isBought: 1
