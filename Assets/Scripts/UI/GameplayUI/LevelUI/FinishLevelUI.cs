@@ -10,6 +10,7 @@ namespace UI
         [SerializeField] private GameObject oneStar;
         [SerializeField] private GameObject twoStar;
         [SerializeField] private GameObject threeStar;
+        [SerializeField] private Animator animator;
         
         public void SetText(int score, int level)
         {
@@ -23,14 +24,12 @@ namespace UI
             twoStar.SetActive(false);
             threeStar.SetActive(true);
         }
-
         public void ShowTwoStars()
         {
             oneStar.SetActive(false);
             twoStar.SetActive(true);
             threeStar.SetActive(false);
         }
-
         public void ShowOneStar()
         {
             oneStar.SetActive(true);
