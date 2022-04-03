@@ -73,7 +73,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AnisotropicSpread: 1
-    - _BandsCount: 20
+    - _BandsCount: 1
     - _BandsCountOtherLights: 4
     - _BandsSmoothing: 1
     - _BandsSmoothingOtherLights: 0.1
@@ -93,7 +93,7 @@ Material:
     - _Parallax: 0.02
     - _RampSmoothing: 1
     - _RampSmoothingOtherLights: 0.5
-    - _RampThreshold: 0.01
+    - _RampThreshold: 1
     - _RampThresholdOtherLights: 0.5
     - _ReflectionSmoothness: 0.5
     - _RimMax: 1
@@ -120,16 +120,16 @@ Material:
     - __EndGroup: 0
     - __dummy__: 0
     m_Colors:
-    - _Color: {r: 0.4433962, g: 0.2990833, b: 0.2990833, a: 1}
+    - _Color: {r: 1, g: 0.6084906, b: 0.6084906, a: 1}
     - _DiffuseTint: {r: 0, g: 0, b: 0, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissionColor: {r: 1024, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 1367.1202, g: 0, b: 0, a: 1}
     - _EmissionMask_SC: {r: 0, g: 0, b: 0, a: 0}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 0.5}
     - _RimDir: {r: 0, g: 0, b: 1, a: 1}
-    - _SColor: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
+    - _SColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _TCP2_AMBIENT_BACK: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_BOTTOM: {r: 0, g: 0, b: 0, a: 1}

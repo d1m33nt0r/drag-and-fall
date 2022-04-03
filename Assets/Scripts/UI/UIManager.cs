@@ -29,6 +29,12 @@ namespace Core
         public void SetActiveMainMenu(bool _value) => mainMenu.enabled = _value;
         public void SetActiveGameMenu(bool _value) => game.enabled = _value;
         public void SetActiveShopMenu(bool _value) => shop.enabled = _value;
+
+        public void SetDefaultStateForShop()
+        {
+            shop.GetComponent<ShopController>().SetDefaultState();
+        }
+        
         public void SetActiveLevelUI(bool value) => levelUI.enabled = value;
         public void SetActiveFinishLevel(bool value) => finishLevelPanel.SetActive(value);
         public void SetActiveFailedInfinityPanel(bool value) => failedInfinityPanel.SetActive(value);

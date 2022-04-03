@@ -76,6 +76,7 @@ namespace Core
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveLevelUI(false);
             uiManager.SetActiveShopMenu(true);
+            uiManager.SetDefaultStateForShop();
             uiManager.SetActiveGameMenu(false);
             uiManager.SetActiveFinishLevel(false);
             uiManager.SetActiveFailedInfinityPanel(false);

@@ -7,7 +7,8 @@ namespace Data.Shop.Trails
     public class TrailSkinData
     {
         public bool isBought;
-        public float price;
+        public float priceCoins;
+        public float priceCrystals;
         public GameObject skin;
     }
 }

@@ -7,7 +7,8 @@ namespace Data.Shop.TubeSkins
     public class EnvironmentSkinData
     {
         public bool isBought;
-        public float price;
+        public float priceCoins;
+        public float priceCrystals;
         public Material skybox;
         public Material tubeMaterial;
         public Material letSegmentMaterial;
