@@ -266,9 +266,7 @@ namespace Core
             var platform = platformInstance.GetComponent<Platform>();
             platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, 
                 player, bonusController, gainScore, segmentContentPool, tubeMover);
-            platform.increaseConcentraion += IncreaseConcentration;
-            platform.resetConcentraion += ResetConcentration;
-            platform.increaseConcentraion += LevelStep;
+            
             
             //AlignRotation(platformInstance);
             platforms[_platformIndex] = platform;
@@ -276,17 +274,17 @@ namespace Core
             if (hide) platforms[_platformIndex].gameObject.SetActive(false);
         }
 
-        private void LevelStep()
+        public void LevelStep()
         {
             levelProgress.Step();
         }
         
-        private void IncreaseConcentration()
+        public void IncreaseConcentration()
         {
             concentration.IncreaseConcentration();   
         }
 
-        private void ResetConcentration()
+        public void ResetConcentration()
         {
             concentration.Reset();
         }
