@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6258718019660764086}
   - component: {fileID: 6258718019660764073}
   - component: {fileID: 6258718019660764084}
-  - component: {fileID: -4214500191829043003}
   m_Layer: 0
   m_Name: TubePart
   m_TagString: Untagged
@@ -61,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0c8248b0e4151f646803628d4c2563e3, type: 2}
+  - {fileID: 2100000, guid: e3dad7234d39bf348ab2702865544d1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,16 +94,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63209c90232149998afd8b853425b505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &-4214500191829043003
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6258718019660764072}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6358018, y: 2, z: 0.5667614}
-  m_Center: {x: 0.007079914, y: -0.0000022649765, z: -0.0010433197}

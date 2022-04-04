@@ -1,35 +1,38 @@
 ﻿using Data.Shop.TubeSkins;
+using ObjectPool;
 using UnityEngine;
 
 namespace Core
 {
     public class TubePart : MonoBehaviour
     {
-        private PlatformMover platformMover; 
+        private TubeMover tubeMover;
+        private TubePool tubePool;
         
-        public void Initialize(PlatformMover _platformMover)
+        public void Initialize(TubeMover _tubeMover, TubePool tubePool)
         {
-            platformMover = _platformMover;
+            tubeMover = _tubeMover;
+            this.tubePool = tubePool;
             ChangeTheme();
         }
 
         public void TryOnSkin(EnvironmentSkinData _environmentSkinData)
         {
+            RenderSettings.skybox = _environmentSkinData.skybox;
             GetComponent<MeshRenderer>().material = _environmentSkinData.tubeMaterial;
             GetComponent<MeshFilter>().mesh = _environmentSkinData.tube;
         }
         
         public void ChangeTheme()
         {
-            GetComponent<MeshRenderer>().material = platformMover.visualController.GetTubeMaterial();
-            GetComponent<MeshFilter>().mesh = platformMover.visualController.GetTubeMesh();
+            RenderSettings.skybox = tubeMover.platformMover.visualController.GetSkyboxMaterial();
+            GetComponent<MeshRenderer>().material = tubeMover.platformMover.visualController.GetTubeMaterial();
+            GetComponent<MeshFilter>().mesh = tubeMover.platformMover.visualController.GetTubeMesh();
         }
 
-        private void OnTriggerEnter(Collider other)
+        public void ReturnToPool()
         {
-            if (!other.CompareTag("TubeTrigger")) return;
-            platformMover.CreateNewTubePart();
-            Destroy(gameObject);
+            tubePool.ReturnToPool(gameObject);
         }
     }
 }

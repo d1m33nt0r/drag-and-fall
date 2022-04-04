@@ -7,7 +7,8 @@ namespace Data.Shop.Players
     public class PlayerSkinData
     {
         public bool isBought;
-        public float price;
+        public float priceCoins;
+        public float priceCrystals;
         public Mesh mesh;
         public Material material;
     }

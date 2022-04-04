@@ -15,11 +15,13 @@ namespace UI
         {
             level.text = (levelData.levelIndex + 1).ToString();
             slider.value = 0;
+            slider.minValue = 0;
             slider.maxValue = levelData.patterns.Count;
         }
 
         public void ResetProgressValue()
         {
+            slider.minValue = 0;
             slider.value = 0;
         }
         

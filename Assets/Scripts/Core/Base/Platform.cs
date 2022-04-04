@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Core.Bonuses;
 using Data.Core;
 using Data.Core.Segments;
+using Data.Core.Segments.Content;
 using ObjectPool;
 using UI;
 using UnityEngine;
@@ -11,50 +13,41 @@ namespace Core
 {
     public class Platform : MonoBehaviour
     {
-        public event Action resetConcentraion;
-        public event Action increaseConcentraion;
-        
-        [SerializeField] private Segment segmentPrefab;
-        
-        private MainPool mainPool;
-        
         private bool destroy;
-        public Action platformDestroyed;
         public int countTouches = 0;
 
         public PatternData patternData;
         private Player player;
         private PlatformMover platformMover;
-        private Segment[] segments;
-        private float angle;
+        [SerializeField] private Segment[] segments;
         private GainScore gainScore;
         private SegmentContentPool segmentContentPool;
+        private TubeMover tubeMover;
         
         public void Initialize(int _segmentsCount, PatternData patternData, PlatformMover platformMover, 
-            Player _player, BonusController _bonusController, GainScore gainScore, SegmentContentPool segmentContentPool, MainPool mainPool)
+            Player _player, BonusController _bonusController, GainScore gainScore, SegmentContentPool segmentContentPool,
+            TubeMover _tubeMover)
+        {
+            InitializeHandMadePlatform(patternData, platformMover, _player, _bonusController, gainScore, segmentContentPool, _tubeMover);
+        }
+        
+        private void InitializeHandMadePlatform(PatternData patternData, PlatformMover platformMover, Player _player,
+            BonusController _bonusController, GainScore gainScore, SegmentContentPool segmentContentPool, TubeMover _tubeMover)
         {
             this.segmentContentPool = segmentContentPool;
-            angle = 360 / _segmentsCount;
-            segments = new Segment[_segmentsCount];
             this.platformMover = platformMover;
-            this.mainPool = mainPool;
             this.gainScore = gainScore;
             this.patternData = patternData;
-            var position = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
-
+            this.tubeMover = _tubeMover;
+            
             for (var i = 1; i <= patternData.segmentsData.Length; i++)
-            {
-                segments[i - 1] = mainPool.GetCleanSegmentInstance().GetComponent<Segment>();
-                //Instantiate(segmentPrefab, position, Quaternion.AngleAxis(angle * i, Vector3.up), transform);
-                segments[i - 1].transform.SetParent(transform);
-                segments[i - 1].transform.position = position;
-                segments[i - 1].transform.rotation = Quaternion.AngleAxis(angle * i, Vector3.up);
-                segments[i - 1].Initialize(patternData.segmentsData[i - 1], platformMover, this, _bonusController, segmentContentPool);
-            }
-
-            platformDestroyed += _player.SetFallingTrailState;
+                segments[i - 1].Initialize(patternData.segmentsData[i - 1], platformMover, this, _bonusController,
+                    segmentContentPool);
+            
             player = _player;
         }
+        
+        
 
         public void IncreaseTouchCounter()
         {
@@ -64,10 +57,7 @@ namespace Core
             {
                 for (var i = 0; i < 12; i++)
                 {
-                    if (segments[i].segmentData.segmentType == SegmentType.Ground)
-                    {
-                        segments[i].GetComponent<MeshRenderer>().material.color = Color.blue;
-                    }
+                    segments[i].GetComponent<Segment>().ChangeColor(1);
                 }
             }
 
@@ -75,62 +65,61 @@ namespace Core
             {
                 for (var i = 0; i < 12; i++)
                 {
-                    if (segments[i].segmentData.segmentType == SegmentType.Ground)
-                    {
-                        segments[i].GetComponent<MeshRenderer>().material.color = Color.magenta;
-                    }
+                    segments[i].GetComponent<Segment>().ChangeColor(2);
                 }
             }
             
-            if (countTouches == 2) resetConcentraion?.Invoke();
-            if (countTouches == 3) DestroyPlatform();
+            if (countTouches == 2) platformMover.ResetConcentration();
+            if (countTouches == 3) DestroyPlatform(true);
         }
         
-        public void DestroyPlatform()
+        public void DestroyPlatform(bool platformsIsMoving)
         {
-            gainScore.SetText(1);
-            gainScore.Animate();
+            for (var i = 0; i < 12; i++)
+            {
+                segments[i].GetComponent<Segment>().ChangeColor(3);
+            }
             
-            if (platformMover.isLevelMode && patternData.isLast)
+            if (platformsIsMoving)
+            {
+                tubeMover.MoveTube();
+                platformMover.MovePlatforms();
+                gainScore.SetText(1);
+                gainScore.Animate();
+                player.SetFallingTrailState();
+                platformMover.IncreaseConcentration();
+                platformMover.LevelStep();
+            }
+            
+            if (platformMover.isLevelMode && patternData.isLast) 
                 platformMover.FinishLevel(platformMover.gameManager.gameMode.levelMode.level);
-            
-            platformDestroyed?.Invoke();
-            platformMover.MovePlatforms();
-            increaseConcentraion?.Invoke();
-            
-            increaseConcentraion = null;
-            resetConcentraion = null;
-            increaseConcentraion = null;
-            platformDestroyed = null;
-            
-            ReturnSegmentContentToPool();
-            ReturnSegmentsToPool();
-            
-            mainPool.ReturnPlatformToPool(gameObject);
-            player.SetTriggerStay(false);
-        }
 
-        private void ReturnSegmentsToPool()
-        {
             for (var i = 0; i < segments.Length; i++)
-                mainPool.ReturnSegmentToPool(segments[i].gameObject);
-        }
-        
-        private void ReturnSegmentContentToPool()
-        {
-            for (var i = 0; i < segments.Length; i++)
+            {
+                //segments[i].ReturnTouchEffectToPool();
                 segments[i].ReturnSegmentContentToPool();
+            }
+            
+            if (platformsIsMoving)
+                BreakDownPlatform();
+            else
+                DestroyAfterBreakAnimation();
+            
+            player.SetTriggerStay(false);
+            
         }
 
-        public void BreakDownPlatform()
+        public void DestroyAfterBreakAnimation()
         {
-            var rb = new Rigidbody[segments.Length];
+            Destroy(gameObject);
+        }
 
-            for(var i = 0; i < segments.Length; i++)
-                rb[i] = segments[i].gameObject.AddComponent(typeof(Rigidbody)) as Rigidbody;
-
-            for(var i = 0; i < segments.Length; i++)
-                rb[i].AddForce(Random.Range(-10, 10), Random.Range(0, 10), Random.Range(2, 5), ForceMode.Impulse);
+        private void BreakDownPlatform()
+        {
+            for (var i = 0; i < segments.Length; i++)
+                segments[i].gameObject.GetComponent<MeshCollider>().enabled = false;
+            
+            GetComponent<Animator>().Play("Break");
         }
     }
 }

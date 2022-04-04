@@ -1,4 +1,5 @@
-﻿using Core.Bonuses;
+﻿using Ads;
+using Core.Bonuses;
 using Data;
 using Data.Core;
 using Progress;
@@ -10,6 +11,8 @@ namespace Core
 {
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] private RewardAds rewardAds;
+        [SerializeField] private InterstitialAds interstitialAds;
         [SerializeField] private LevelProgress levelProgress;
         [SerializeField] private ScorePanel scorePanel;
         [SerializeField] private FinishLevelUI finishLevelUI;
@@ -27,6 +30,7 @@ namespace Core
         [SerializeField] private KeyPanel keyPanel;
         [SerializeField] private FailedInfinityUI failedInfinityUI;
         [SerializeField] private SessionData sessionData;
+        [SerializeField] private Concentration concentration;
         
         public bool gameStarted { get; private set; }
 
@@ -46,6 +50,8 @@ namespace Core
 
         public void StartGame()
         {
+            concentration.Reset();
+            bonusController.DeactivateAllBonuses();
             uiManager.SetActiveScorePanel(true);
             uiManager.scorePanel.ResetCounter();
             sessionData.ResetData();
@@ -70,6 +76,7 @@ namespace Core
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveLevelUI(false);
             uiManager.SetActiveShopMenu(true);
+            uiManager.SetDefaultStateForShop();
             uiManager.SetActiveGameMenu(false);
             uiManager.SetActiveFinishLevel(false);
             uiManager.SetActiveFailedInfinityPanel(false);
@@ -117,7 +124,7 @@ namespace Core
             platformMover.SetLevelMode(false);
             platformMover.SetDefaultState();
             uiManager.SetActiveUpgradeMenu(false);
-            uiManager.SetActiveMainMenu(true);
+            uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveShopMenu(false);
             uiManager.SetActiveLevelUI(false);
             uiManager.SetActiveGameMenu(false);
@@ -129,28 +136,39 @@ namespace Core
 
         public void FinishLevel(LevelData levelsData)
         {
+            uiManager.SetActiveFinishLevel(true);
+            finishLevelUI.SetLevelData(levelsData);
+            finishLevelUI.SetMaxValue();
             finishLevelUI.SetText(scorePanel.GetPoints(), levelsData.levelIndex + 1);
+            finishLevelUI.PlayShowAnimation();
+
+            bonusController.DeactivateAllBonuses();
             gameStarted = false;
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveLevelsMenu(false);
+            
             progressController.levelsProgress.levelsProgresses[levelsData.levelIndex].isCompleted = true;
             if (levelsData.levelIndex + 1 < progressController.levelsProgress.levelsProgresses.Count)
                 progressController.levelsProgress.levelsProgresses[levelsData.levelIndex + 1].isUnlocked = true;
+            
             progressController.SaveLevelsProgress(progressController.levelsProgress);
+            
             coinPanel.SaveProgress();
             crystalPanel.SaveProgress();
-            uiManager.UpdateLevelsStatus();
+            
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveShopMenu(false);
             uiManager.SetActiveLevelUI(false);
             uiManager.SetActiveGameMenu(false);
-            uiManager.SetActiveFinishLevel(true);
+            
             uiManager.SetActiveFailedInfinityPanel(false);
             uiManager.SetActiveFailedLevelPanel(false);
         }
 
         public void ShowMainMenu()
         {
+            bonusController.DeactivateAllBonuses();
+            concentration.Reset();
             uiManager.SetActiveScorePanel(false);
             //bonusController.DeactivateAllBonuses();
             platformMover.SetLevelMode(false);
@@ -168,17 +186,41 @@ namespace Core
             uiManager.SetActiveLevelsMenu(false);
         }
 
-        public void ContinueGame()
+        public void ContinueGameAds()
         {
-            uiManager.SetActiveGameMenu(true);
+            rewardAds.TryShowRewardedAd();
+            if (platformMover.isLevelMode)
+                uiManager.SetActiveLevelUI(true);
+            else
+                uiManager.SetActiveGameMenu(true);
+            
             uiManager.SetActiveFailedInfinityPanel(false);
-            platformMover.DestroyPlatform();
+            uiManager.SetActiveFailedLevelPanel(false);
+            
+            platformMover.DestroyPlatform(true);
+            player.ContinueGame();
+            gameStarted = true;
+        }
+        
+        public void ContinueGameKeys()
+        {
+            if (platformMover.isLevelMode)
+                uiManager.SetActiveLevelUI(true);
+            else
+                uiManager.SetActiveGameMenu(true);
+            
+            uiManager.SetActiveFailedInfinityPanel(false);
+            uiManager.SetActiveFailedLevelPanel(false);
+            
+            platformMover.DestroyPlatform(true);
             player.ContinueGame();
             gameStarted = true;
         }
         
         public void StartNextLevel()
         {
+            platformMover.transform.rotation = Quaternion.Euler(0, 0, 0);
+            concentration.Reset();
             uiManager.scorePanel.ResetCounter();
             bonusController.DeactivateAllBonuses();
             gameStarted = true;
@@ -192,7 +234,7 @@ namespace Core
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveShopMenu(false);
             uiManager.SetActiveLevelUI(true);
-            uiManager.SetActiveGameMenu(false);
+            uiManager.SetActiveGameMenu(true);
             uiManager.SetActiveFinishLevel(false);
             uiManager.SetActiveFailedInfinityPanel(false);
             uiManager.SetActiveFailedLevelPanel(false);
@@ -201,6 +243,8 @@ namespace Core
 
         public void FailedGame()
         {
+            interstitialAds.TryShowInterstitialAd();
+           
             gameStarted = false;
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveMainMenu(false);
@@ -216,10 +260,13 @@ namespace Core
             
             uiManager.SetActiveFailedLevelPanel(false);
             uiManager.SetActiveLevelsMenu(false);
+            
         }
 
         public void FailedLevel()
         {
+            platformMover.transform.rotation = Quaternion.Euler(0, 0, 0);
+            interstitialAds.TryShowInterstitialAd();
             gameStarted = false;
             platformMover.SetDefaultState();
             uiManager.SetActiveUpgradeMenu(false);
@@ -235,12 +282,15 @@ namespace Core
 
         public void StartedLevel()
         {
+            platformMover.transform.rotation = Quaternion.Euler(0, 0, 0);
+            bonusController.DeactivateAllBonuses();
+            concentration.Reset();
             sessionData.ResetData();
             uiManager.SetActiveScorePanel(true);
             uiManager.scorePanel.GetComponent<ScorePanel>().ResetCounter();
             gameStarted = true;
             platformMover.SetDefaultState();
-
+            
             uiManager.SetActiveUpgradeMenu(false);
             platformMover.gameManager.gameMode.levelMode.ResetPointer();
             platformMover.InitializePlatforms();
@@ -248,7 +298,7 @@ namespace Core
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveShopMenu(false);
             uiManager.SetActiveLevelUI(true);
-            uiManager.SetActiveGameMenu(false);
+            uiManager.SetActiveGameMenu(true);
             uiManager.SetActiveFinishLevel(false);
             uiManager.SetActiveFailedInfinityPanel(false);
             uiManager.SetActiveFailedLevelPanel(false);
@@ -257,11 +307,11 @@ namespace Core
 
         public void ShowUpgradeMenu()
         {
-            platformMover.SetLevelMode(false);
+            //platformMover.SetLevelMode(false);
             gameStarted = false;
             uiManager.SetActiveUpgradeMenu(true);
-            platformMover.SetDefaultState();
-            platformMover.InitializePlatforms();
+            //platformMover.SetDefaultState();
+            //platformMover.InitializePlatforms();
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveLevelUI(false);
             uiManager.SetActiveShopMenu(false);

@@ -7,6 +7,11 @@ namespace Data.Core
     [Serializable]
     public class PatternData
     {
+        public bool isRandom;
+        public int maxLetAmount;
+        public int minLetAmount;
+        public int maxHoleAmount;
+        public int minHoleAmount;
         public bool isLast;
         public SegmentData[] segmentsData;
         

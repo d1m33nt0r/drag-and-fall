@@ -45,6 +45,11 @@ namespace Core
             }
         }
 
+        public Material GetSkyboxMaterial()
+        {
+            return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].skybox;
+        }
+
         public Material GetPlayerMaterial()
         {
             return shopData.PlayerSkinData[progressController.currentState.playerSkin.index].material;
@@ -58,6 +63,11 @@ namespace Core
         public Material GetTubeMaterial()
         {
             return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].tubeMaterial;
+        }
+        
+        public Color[] GetPlatformColors()
+        {
+            return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].platformColors;
         }
 
         public Mesh GetTubeMesh()

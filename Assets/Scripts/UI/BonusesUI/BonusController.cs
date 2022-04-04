@@ -17,7 +17,9 @@ namespace Core.Bonuses
     {
         [SerializeField] private ProgressController progressController;
         [SerializeField] private PlatformMover platformMover;
-
+        [SerializeField] private Player player;
+        [SerializeField] private FreeSpeedIncrease freeSpeedIncrease;
+        
         public int currentShieldLevel;
         public int currentMultiplierLevel;
         public int currentMagnetLevel;
@@ -173,7 +175,7 @@ namespace Core.Bonuses
             switch (bonusType)
             {
                 case BonusType.Acceleration:
-                    platformMover.SetMovementSpeed(5f);
+                    platformMover.SetMovementSpeed(6f);
                     workCountPlatformsAcceleration = countPlatformsForAcceleration;
                     accelerationIsActive = true;
                     break;

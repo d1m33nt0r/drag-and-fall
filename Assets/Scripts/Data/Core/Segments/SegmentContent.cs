@@ -10,7 +10,8 @@
         Crystal,
         Coin,
         Key,
-        Other
+        Other,
+        Random
     }
 }
 

@@ -1,4 +1,6 @@
-﻿using DafEditor.Editor.Intefraces;
+﻿using DafEditor.Editor.Common;
+using DafEditor.Editor.Intefraces;
+using Data.Core;
 using Data.Core.Segments;
 using Data.Core.Segments.Content;
 using UnityEditor;
@@ -20,11 +22,11 @@ namespace DafEditor.Editor.Layout
         Vector2 position => new Vector2(centerCoordinate.x - PATTERN_WIDTH / 2 + otstup.x + drag.x, centerCoordinate.y - PATTERN_HEIGHT / 2 + otstup.y + drag.y);
         Rect rect => new Rect(position, new Vector2(PATTERN_WIDTH, PATTERN_HEIGHT));
         
-        public SegmentData[] segmentData;
+        public PatternData patternData;
 
-        public Pattern(SegmentData[] _segmentData, int index)
+        public Pattern(PatternData patternData, int index)
         {
-            segmentData = _segmentData;
+            this.patternData = patternData;
             this.index = index;
         }
         
@@ -50,6 +52,7 @@ namespace DafEditor.Editor.Layout
             GUILayout.BeginArea(rect, EditorStyles.PatternStyle());
             
             GUILayout.BeginVertical();
+            
             DrawBonusLine();
             DrawSegmentLine();
             GUILayout.EndVertical();
@@ -67,29 +70,64 @@ namespace DafEditor.Editor.Layout
             
             for (var i = 0; i < 12; i++)
             {
-                switch (segmentData[i].segmentType)
+                switch (patternData.segmentsData[i].segmentType)
                 {
                     case SegmentType.Ground:
                         if (GUILayout.Button("G", GUILayout.Width(30)))
-                            segmentData[i].segmentType = SegmentType.Hole;
+                            patternData.segmentsData[i].segmentType = SegmentType.Hole;
                         break;
                     case SegmentType.Hole:
                         if (GUILayout.Button("H", GUILayout.Width(30)))
-                            segmentData[i].segmentType = SegmentType.Let;
+                            patternData.segmentsData[i].segmentType = SegmentType.Let;
                         break;
                     case SegmentType.Let:
                         if (GUILayout.Button("L", GUILayout.Width(30)))
-                            segmentData[i].segmentType = SegmentType.Ground;
+                            patternData.segmentsData[i].segmentType = SegmentType.Ground;
                         break;
                 }
             }
 
-            GUILayout.Button("✎");
+            if (GUILayout.Button(patternData.isRandom ? "R" : ""))
+            {
+                if (Event.current.button == 0)
+                {
+                    patternData.isRandom = !patternData.isRandom;
+                    if (!patternData.isRandom)
+                    {
+                        GameEditorWindow.instance.SetRightPanelState(RightPanelState.Empty);
+                        GameEditorWindow.instance.SetCurrentRandomPatternData(null);
+                        GameEditorWindow.instance.SetCurrentRandomSetData(null);
+                        patternData.isRandom = false;
+                    }
+                    else
+                    {
+                        GameEditorWindow.instance.SetRightPanelState(RightPanelState.PlatformRandomSettings);
+                        GameEditorWindow.instance.SetCurrentRandomPatternData(patternData);
+                        GameEditorWindow.instance.SetCurrentRandomSetData(null);
+                        patternData.isRandom = true;
+                    }
+                }
+                if (Event.current.button == 2)
+                {
+                    if (patternData.isRandom)
+                    {
+                        GameEditorWindow.instance.SetRightPanelState(RightPanelState.PlatformRandomSettings);
+                        GameEditorWindow.instance.SetCurrentRandomPatternData(patternData);
+                        GameEditorWindow.instance.SetCurrentRandomSetData(null);
+                    }
+                    else
+                    {
+                        GameEditorWindow.instance.SetCurrentRandomPatternData(null);
+                        GameEditorWindow.instance.SetCurrentRandomSetData(null);
+                        GameEditorWindow.instance.SetRightPanelState(RightPanelState.Empty);
+                    }
+                }
+            }
             
             GUILayout.EndHorizontal();
-            
             GUILayout.EndArea();
         }
+        
         void AddMenuItemForColor(GenericMenu menu, string menuPath, SegmentContent content)
         {
             menu.AddItem(new GUIContent(menuPath), false, OnMenuItemSelected, content);
@@ -97,7 +135,7 @@ namespace DafEditor.Editor.Layout
         
         void OnMenuItemSelected(object segmentContent)
         {
-            segmentData[segmentIndex].segmentContent = (SegmentContent) segmentContent;
+            patternData.segmentsData[segmentIndex].segmentContent = (SegmentContent) segmentContent;
         }
         private void DrawBonusLine()
         {
@@ -109,7 +147,7 @@ namespace DafEditor.Editor.Layout
 
             for (var i = 0; i < 12; i++)
             {
-                switch (segmentData[i].segmentContent)
+                switch (patternData.segmentsData[i].segmentContent)
                 {
                     case SegmentContent.Acceleration:
                         DrawSegmentContentButton(i, "AC");
@@ -135,6 +173,9 @@ namespace DafEditor.Editor.Layout
                     case SegmentContent.Key:
                         DrawSegmentContentButton(i, "KE");
                         break;
+                    case SegmentContent.Random:
+                        DrawSegmentContentButton(i, "R");
+                        break;
                 }
             }
 
@@ -149,25 +190,39 @@ namespace DafEditor.Editor.Layout
         {
             if (GUILayout.Button(content, GUILayout.Width(30)))
             {
-                segmentIndex = i;
-              
-                var menu = new GenericMenu();
+                if (Event.current.button == 0) {
+                    segmentIndex = i;
                 
-                AddMenuItemForColor(menu, "Bonus/Acceleration", SegmentContent.Acceleration);
-                AddMenuItemForColor(menu, "Bonus/Multiplier", SegmentContent.Multiplier);
-                AddMenuItemForColor(menu, "Bonus/Shield", SegmentContent.Shield);
-                AddMenuItemForColor(menu, "Bonus/Magnet", SegmentContent.Magnet);
-                AddMenuItemForColor(menu, "Bonus/Key", SegmentContent.Key);
-                
-                menu.AddSeparator("");
+                    var menu = new GenericMenu();
 
-                AddMenuItemForColor(menu, "Currencies/Coin", SegmentContent.Coin);
-                AddMenuItemForColor(menu, "Currencies/Crystal", SegmentContent.Crystal);
+                    AddMenuItemForColor(menu, "Bonus/Acceleration", SegmentContent.Acceleration);
+                    AddMenuItemForColor(menu, "Bonus/Multiplier", SegmentContent.Multiplier);
+                    AddMenuItemForColor(menu, "Bonus/Shield", SegmentContent.Shield);
+                    AddMenuItemForColor(menu, "Bonus/Magnet", SegmentContent.Magnet);
+                    AddMenuItemForColor(menu, "Bonus/Key", SegmentContent.Key);
                 
-                menu.AddSeparator("");
-                AddMenuItemForColor(menu, "None", SegmentContent.None);
+                    menu.AddSeparator("");
+
+                    AddMenuItemForColor(menu, "Currencies/Coin", SegmentContent.Coin);
+                    AddMenuItemForColor(menu, "Currencies/Crystal", SegmentContent.Crystal);
                 
-                menu.ShowAsContext();
+                    menu.AddSeparator("");
+                    AddMenuItemForColor(menu, "Random", SegmentContent.Random);
+                
+                    menu.AddSeparator("");
+                    AddMenuItemForColor(menu, "None", SegmentContent.None);
+                
+                    menu.ShowAsContext();
+                } else if (Event.current.button == 2) {
+                    if (patternData.segmentsData[segmentIndex].segmentContent == SegmentContent.Random)
+                    {
+                        GameEditorWindow.instance.currentRightPanelState = RightPanelState.BonusRandomSettings;
+                    }
+                    else
+                    {
+                        GameEditorWindow.instance.currentRightPanelState = RightPanelState.Empty;
+                    }
+                }
             }
         }
 

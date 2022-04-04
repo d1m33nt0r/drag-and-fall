@@ -10,17 +10,23 @@ namespace DafEditor.Editor
     {
         protected override string customTitle => "DAF Editor";
 
-        private LevelsData levelsData;
-        private InfinityData infinityData;
+        public LevelsData levelsData;
+        public InfinityData infinityData;
 
-        public List<PatternData> currentPatternData;
+        public List<PatternData> currentPatternsData;
         
-        public SplitLine m_splitLine;
-        public LeftSidebar m_leftSidebar;
+        public LeftSplitLine leftSplitLine;
+        public RightSplitLine rightSpitLine;
+        public LeftSidebar leftSidebar;
         public CenterPoint centerPoint;
-        public TopBar m_topBar;
-        public TopBarSplitLine m_topBarSplitLine;
-        public Content m_content;
+        public RightSidebar rightSidebar;
+        public Content content;
+
+        public SetData currentSetData;
+        public PatternData currentRandomPatternData;
+        
+
+        public RightPanelState currentRightPanelState;
         
         [MenuItem("Tools/DAF Editor")]
         private static void ShowWindow()
@@ -31,38 +37,40 @@ namespace DafEditor.Editor
         private void OnEnable()
         {
             centerPoint = new CenterPoint();
-            m_topBarSplitLine = new TopBarSplitLine();
-            m_splitLine = new SplitLine();
-            m_content = new Content();
-            m_leftSidebar = new LeftSidebar();
-            m_topBar = new TopBar();
-            
-            infinityData = AssetDatabase.LoadAssetAtPath<InfinityData>(m_leftSidebar.INFINITY_DATA_ASSET_PATH);
-            levelsData = AssetDatabase.LoadAssetAtPath<LevelsData>(m_leftSidebar.LEVELS_DATA_ASSET_PATH);
-            
-            
+            leftSplitLine = new LeftSplitLine();
+            content = new Content();
+            content.Construct(this);
+            leftSidebar = new LeftSidebar();
+            rightSpitLine = new RightSplitLine();
+            rightSpitLine.Construct(this);
+            rightSidebar = new RightSidebar();
+            rightSidebar.Construct(this);
+            infinityData = AssetDatabase.LoadAssetAtPath<InfinityData>(leftSidebar.INFINITY_DATA_ASSET_PATH);
+            levelsData = AssetDatabase.LoadAssetAtPath<LevelsData>(leftSidebar.LEVELS_DATA_ASSET_PATH);
         }
 
         private void OnGUI()
         {
-            EditorGUI.BeginChangeCheck();
-            
-            m_splitLine.Draw();
-            m_leftSidebar.Draw();
-            m_content.Draw();
-            m_topBar.Draw();
-            m_topBarSplitLine.Draw();
-            
-            if (EditorGUI.EndChangeCheck())
-            {
-                EditorUtility.SetDirty(infinityData);
-                EditorUtility.SetDirty(levelsData);
-                
-                foreach (var setData in infinityData.patternSets) EditorUtility.SetDirty(setData);
-                foreach (var levelData in levelsData.leves) EditorUtility.SetDirty(levelData);
+            leftSplitLine.Draw();
+            leftSidebar.Draw();
+            content.Draw();
+            rightSpitLine.Draw();
+            rightSidebar.Draw();
+        }
 
-                AssetDatabase.SaveAssets();
-            }
+        public void SetRightPanelState(RightPanelState rightPanelState)
+        {
+            this.currentRightPanelState = rightPanelState;
+        }
+
+        public void SetCurrentRandomPatternData(PatternData patternData)
+        {
+            this.currentRandomPatternData = patternData;
+        }
+
+        public void SetCurrentRandomSetData(SetData setData)
+        {
+            this.currentSetData = setData;
         }
     }
 }

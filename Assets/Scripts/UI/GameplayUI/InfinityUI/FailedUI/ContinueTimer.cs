@@ -17,6 +17,9 @@ namespace UI
         [SerializeField] private ProgressController progressController;
         [SerializeField] private KeySpender keySpender;
         [SerializeField] private Text buttonKeysText;
+
+        private Coroutine timerCoroutine;
+        private Coroutine numberCoroutine;
         
         private int currentBestScore;
         public void StartTimer()
@@ -26,8 +29,10 @@ namespace UI
             timer.fillAmount = 1;
             timerValue = 5;
             timerText.text = timerValue.ToString();
-            StartCoroutine(Timer());
-            StartCoroutine(NumberTimer());
+            if (timerCoroutine != null) StopCoroutine(timerCoroutine);
+            if (numberCoroutine != null) StopCoroutine(numberCoroutine);
+            timerCoroutine = StartCoroutine(Timer());
+            numberCoroutine = StartCoroutine(NumberTimer());
         }
         
         public void ShowNextUI()

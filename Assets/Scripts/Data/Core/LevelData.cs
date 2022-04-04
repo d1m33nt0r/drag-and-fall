@@ -8,5 +8,8 @@ namespace Data.Core
     {
         public int levelIndex;
         public List<PatternData> patterns = new List<PatternData>();
+        public int bestScore;
+        public int middleScore;
+        public int bottomScore;
     }
 }

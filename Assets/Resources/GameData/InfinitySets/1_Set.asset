@@ -12,316 +12,574 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09d77c3811e4596942c73ed357f4c40, type: 3}
   m_Name: 1_Set
   m_EditorClassIdentifier: 
+  isRandom: 1
+  minPlatformsCount: 100
+  maxPlatformsCount: 100
+  maxLetAmount: 2
+  minLetAmount: 0
+  maxHoleAmount: 8
+  minHoleAmount: 5
+  attemptsOfShieldInstantiate: 5
+  shieldPositions: 0a0000001e00000032000000460000005a000000
+  spawnShieldOnLet: 0
+  spawnShieldOnGround: 1
+  spawnShieldOnHole: 0
+  spawnShieldChance: 65
+  attemptsOfKeyInstantiate: 1
+  keyPositions: 62000000
+  spawnKeyOnLet: 0
+  spawnKeyOnGround: 1
+  spawnKeyOnHole: 0
+  spawnKeyChance: 40
+  attemptsOfMagnetInstantiate: 5
+  magnetPositions: 10000000260000003b0000004900000059000000
+  spawnMagnetOnLet: 0
+  spawnMagnetOnGround: 1
+  spawnMagnetOnHole: 0
+  spawnMagnetChance: 65
+  attemptsOfMultiplierInstantiate: 5
+  multiplierPositions: 0e00000022000000360000004a0000005e000000
+  spawnMultiplierOnLet: 0
+  spawnMultiplierOnGround: 1
+  spawnMultiplierOnHole: 0
+  spawnMultiplierChance: 65
+  attemptsOfAccelerationInstantiate: 5
+  accelerationPositions: 0c0000002000000034000000480000005c000000
+  spawnAccelerationOnLet: 0
+  spawnAccelerationOnGround: 1
+  spawnAccelerationOnHole: 0
+  spawnAccelerationChance: 65
+  currencyRandomSettings:
+  - spawnOnLet: 0
+    spawnOnGround: 1
+    spawnOnHole: 1
+    spawnChance: 20
+    currencyType: 0
+    rangeStart: 2
+    rangeEnd: 99
+    accuracyLevel: 0
+  - spawnOnLet: 1
+    spawnOnGround: 1
+    spawnOnHole: 0
+    spawnChance: 10
+    currencyType: 1
+    rangeStart: 23
+    rangeEnd: 57
+    accuracyLevel: 1
   patterns:
-  - isLast: 0
+  - isRandom: 0
+    maxLetAmount: 3
+    minLetAmount: 3
+    maxHoleAmount: 1
+    minHoleAmount: 1
+    isLast: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-  - isLast: 0
+  - isRandom: 1
+    maxLetAmount: 3
+    minLetAmount: 3
+    maxHoleAmount: 2
+    minHoleAmount: 1
+    isLast: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 1
+    - positionIndex: 0
+      segmentType: 1
       segmentContent: 3
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-  - isLast: 0
+  - isRandom: 1
+    maxLetAmount: 0
+    minLetAmount: 0
+    maxHoleAmount: 6
+    minHoleAmount: 0
+    isLast: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 1
+    - positionIndex: 0
+      segmentType: 1
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 1
+    - positionIndex: 0
+      segmentType: 1
       segmentContent: 0
-    - segmentType: 1
+    - positionIndex: 0
+      segmentType: 1
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-  - isLast: 0
+  - isRandom: 1
+    maxLetAmount: 3
+    minLetAmount: 3
+    maxHoleAmount: 1
+    minHoleAmount: 1
+    isLast: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 1
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-  - isLast: 0
+  - isRandom: 1
+    maxLetAmount: 3
+    minLetAmount: 3
+    maxHoleAmount: 1
+    minHoleAmount: 1
+    isLast: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 4
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-  - isLast: 0
+  - isRandom: 1
+    maxLetAmount: 3
+    minLetAmount: 3
+    maxHoleAmount: 1
+    minHoleAmount: 1
+    isLast: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 2
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-  - isLast: 0
+  - isRandom: 1
+    maxLetAmount: 6
+    minLetAmount: 3
+    maxHoleAmount: 1
+    minHoleAmount: 1
+    isLast: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 1
+    - positionIndex: 0
+      segmentType: 1
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-  - isLast: 0
+  - isRandom: 1
+    maxLetAmount: 5
+    minLetAmount: 4
+    maxHoleAmount: 5
+    minHoleAmount: 2
+    isLast: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 1
+    - positionIndex: 0
+      segmentType: 1
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 6
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 7
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 6
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-  - isLast: 0
+  - isRandom: 1
+    maxLetAmount: 6
+    minLetAmount: 3
+    maxHoleAmount: 3
+    minHoleAmount: 1
+    isLast: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 1
+    - positionIndex: 0
+      segmentType: 1
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 6
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 6
+    - positionIndex: 0
+      segmentType: 1
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+  - isRandom: 1
+    maxLetAmount: 5
+    minLetAmount: 2
+    maxHoleAmount: 4
+    minHoleAmount: 2
+    isLast: 0
+    segmentsData:
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 1
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+  - isRandom: 1
+    maxLetAmount: 4
+    minLetAmount: 1
+    maxHoleAmount: 6
+    minHoleAmount: 1
+    isLast: 0
+    segmentsData:
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 1
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 5
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 5
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 1
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-  - isLast: 0
+  - isRandom: 1
+    maxLetAmount: 5
+    minLetAmount: 2
+    maxHoleAmount: 4
+    minHoleAmount: 1
+    isLast: 1
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 1
+    - positionIndex: 0
+      segmentType: 1
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-  - isLast: 0
-    segmentsData:
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 1
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 2
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 2
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-  - isLast: 1
-    segmentsData:
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 2
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 2
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 1
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
-      segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0

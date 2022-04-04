@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Common;
 using Core.Bonuses;
@@ -12,14 +13,16 @@ namespace Core
 {
     public class PlatformMover : MonoBehaviour
     {
+        private bool isFirstPlatform = true;
+        [SerializeField] private CameraController cameraController;
         [SerializeField] private SegmentContentPool segmentContentPool;
         [SerializeField] private GainScore gainScore;
         [SerializeField] private Player player;
         [SerializeField] private GameObject platformPrefab;
-        [SerializeField] private GameObject tubePrefab;
+        [SerializeField] private TubeMover tubeMover;
         [SerializeField] private int countPlatforms;
-        [SerializeField] private int countTubeParts;
-        [SerializeField] private float distanceBetweenTubeParts;
+        
+        
         [SerializeField] private float distanceBetweenPlatforms;
         [SerializeField] public float platformMovementSpeed;
         [SerializeField] private DragController dragController;
@@ -29,9 +32,8 @@ namespace Core
         public LevelsData levelsData;
         [SerializeField] private BonusController bonusController;
         [SerializeField] private LevelProgress levelProgress;
-        [SerializeField] private MainPool mainPool;
+
         
-        public bool tubeIsInitialized;
         public bool platformsIsInitialized;
         public bool isLevelMode;
         private Vector3 startEulerAngles;
@@ -40,10 +42,12 @@ namespace Core
         
         private PatternData currentPatternData;
         public Platform[] platforms;
-        public TubePart[] tubeParts;
+        
         private Vector3[] localPositionsOfPlatforms;
-        private Vector3[] localPositionsOfTubeParts;
+       
         private bool destroyTubeNeeded = true;
+        private Coroutine movingCoroutine;
+       
         
         private void Awake()
         {
@@ -56,45 +60,62 @@ namespace Core
         public void SetMovementSpeed(float speed)
         {
             platformMovementSpeed = speed;
+            cameraController.ChangeFieldView(speed);
+            if (platformMovementSpeed == 6)
+            {
+                player.SetActiveFireEffect(true);
+                player.IncreaseFireEffect6();
+            }
+            else if (platformMovementSpeed == 5)
+            {
+                player.SetActiveFireEffect(true);
+                player.IncreaseFireEffect5();
+            }
+            else if (platformMovementSpeed == 4)
+            {
+                player.SetActiveFireEffect(true);
+                player.IncreaseFireEffect4();
+            }
+            else if (platformMovementSpeed == 3)
+            {
+                player.SetActiveFireEffect(false);
+            }
         }
         
         public void FinishLevel(LevelData _levelData)
         {
+            SetMovementSpeed(3f);
             gameManager.FinishLevel(_levelData);
         }
         
         public void Failed()
         {
+            SetMovementSpeed(3f);
             if (isLevelMode) gameManager.FailedLevel();
             else gameManager.FailedGame();
         }
 
         public void IncreaseSpeed(float value)
         {
-            platformMovementSpeed += value;
+            SetMovementSpeed(platformMovementSpeed += value);
         }
 
         public void ResetDefaultSpeed()
         {
-            platformMovementSpeed = 2.25f;
+            SetMovementSpeed(3f);
+            player.SetActiveFireEffect(false);
         }
         
         private void Initialize()
         {
-            InitializeTubePoints();
             InitializePlatformPoints();
             InitializePlatforms();
-            InitializeTube();
             ChangeTheme();
         }
 
         public void TryOnSkin(EnvironmentSkinData _environmentSkinData)
         {
-            foreach (var tubePart in tubeParts)
-            {
-                tubePart.TryOnSkin(_environmentSkinData);
-            }
-            
+            tubeMover.TryOnSkin(_environmentSkinData);
             foreach (var platform in platforms)
             {
                 for (var i = 0; i < Constants.Platform.COUNT_SEGMENTS; i++)
@@ -104,11 +125,7 @@ namespace Core
         
         public void ChangeTheme()
         {
-            foreach (var tubePart in tubeParts)
-            {
-                tubePart.ChangeTheme();
-            }
-            
+            tubeMover.ChangeTheme();
             foreach (var platform in platforms)
             {
                 for (var i = 0; i < Constants.Platform.COUNT_SEGMENTS; i++)
@@ -146,10 +163,11 @@ namespace Core
         public void MovePlatforms()
         {
             startTime = Time.time;
-            StartCoroutine(Moving());
+            if (movingCoroutine != null) StopCoroutine(movingCoroutine);
+            movingCoroutine = StartCoroutine(Moving(platformMovementSpeed));
         }
 
-        private IEnumerator Moving()
+        private IEnumerator Moving(float speed)
         {
             destroyTubeNeeded = !destroyTubeNeeded;
             for (var i = 1; i < countPlatforms; i++)
@@ -166,64 +184,31 @@ namespace Core
                 CreateNewPlatform(countPlatforms - 1, new PatternData(12), true);
             else
                 CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
-
-            var targetPositions = new Vector3[countTubeParts];
-            var currentPositions = new Vector3[countTubeParts];
-
-            for (var i = 0; i < countTubeParts; i++)
-            {
-                currentPositions[i] = tubeParts[i].transform.position;
-                targetPositions[i] = currentPositions[i] + Vector3.up;
-            }
-
-            float distCovered = (Time.time - startTime) * platformMovementSpeed;
-            float fractionOfJourney = distCovered / journeyLength;
+            
+            var distCovered = (Time.time - startTime) * speed;
+            var fractionOfJourney = distCovered / journeyLength;
             
             while (distCovered / journeyLength != 1)
             {
                 for (var i = 1; i < countPlatforms; i++)
                 {
-                    distCovered = (Time.time - startTime) * platformMovementSpeed;
-                    fractionOfJourney = distCovered / journeyLength;
-                    platforms[i - 1].transform.position = Vector3.Lerp(localPositionsOfPlatforms[i], localPositionsOfPlatforms[i - 1], fractionOfJourney);
+                    try
+                    {
+                        distCovered = (Time.time - startTime) * speed;
+                        fractionOfJourney = distCovered / journeyLength;
+                        platforms[i - 1].transform.position = Vector3.Lerp(localPositionsOfPlatforms[i], localPositionsOfPlatforms[i - 1], fractionOfJourney);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
                 }
 
                 yield return null;
             }
         }
-
-        public IEnumerator MovingTube()
-        {
-            float distCovered = (Time.time - startTime) * platformMovementSpeed;
-            float fractionOfJourney = distCovered / journeyLength;
-            while (distCovered / journeyLength != 1)
-            {
-                for (var i = 0; i < countTubeParts; i++)
-                {
-                    distCovered = (Time.time - startTime) * platformMovementSpeed;
-                    fractionOfJourney = distCovered / journeyLength;
-                    //tubeParts[i].transform.position = Vector3.Lerp(currentPositions[i], targetPositions[i], fractionOfJourney);
-                }
-
-                yield return null;
-            }
-            
-        }
-
-        public void CreateNewTubePart()
-        {
-            for (var i = 1; i < countTubeParts; i++)
-                tubeParts[i - 1] = tubeParts[i];
-            
-            var tubePartInstance = Instantiate(tubePrefab, 
-                tubeParts[tubeParts.Length - 2].transform.position - Vector3.down * 2, 
-                Quaternion.Euler(transform.rotation.eulerAngles), transform);
-                
-            tubePartInstance.GetComponent<TubePart>().Initialize(this);
-            tubeParts[tubeParts.Length - 1] = tubePartInstance.GetComponent<TubePart>();
-            AlignRotation(tubePartInstance);
-        }
-
+        
         private void InitializePlatformPoints()
         {
             localPositionsOfPlatforms = new Vector3[countPlatforms];
@@ -231,18 +216,6 @@ namespace Core
             for (var i = 0; i < countPlatforms; i++)
             {
                 localPositionsOfPlatforms[i] = new Vector3(transform.position.x, transform.localPosition.y - distanceBetweenPlatforms * i, transform.position.z);
-            }
-        }
-        
-        private void InitializeTubePoints()
-        {
-            localPositionsOfTubeParts = new Vector3[countTubeParts];
-            
-            var j = 4;
-            for (var i = 0; i < countTubeParts; i++)
-            {
-                localPositionsOfTubeParts[i] = new Vector3(transform.position.x, transform.localPosition.y + j, transform.position.z);
-                j -= 2;
             }
         }
         
@@ -254,8 +227,10 @@ namespace Core
                 gameManager.gameMode.levelMode.ResetPointer();
                 for (var i = 0; i < countPlatforms; i++)
                 {
-                    Destroy(platforms[i].gameObject);
+                    platforms[i].DestroyPlatform(false);
                 }
+
+                isFirstPlatform = true;
             }
             
             platforms = new Platform[countPlatforms];
@@ -263,70 +238,53 @@ namespace Core
             for (var i = 0; i < countPlatforms; i++)
             {
                 if (!isLevelMode)
-                    currentPatternData = gameManager.gameMode.infinityMode.GetPatternData();
+                {
+                    if (isFirstPlatform)
+                    {
+                        currentPatternData = new PatternData(12);
+                        isFirstPlatform = false;
+                    }
+                    else
+                    {
+                        currentPatternData = gameManager.gameMode.infinityMode.GetPatternData();
+                    }
+                }
                 else
-                    currentPatternData = gameManager.gameMode.levelMode.GetPatternData();
+                {
+                    currentPatternData = gameManager.gameMode.levelMode.GetPatternData(); 
+                }
                 
                 CreateNewPlatform(i, currentPatternData, false);
             }
 
             platformsIsInitialized = true;
         }
-
-        public void InitializeTube()
-        {
-            if (tubeIsInitialized)
-            {
-                for (var i = 0; i < countTubeParts; i++)
-                {
-                    Destroy(tubeParts[i].gameObject);
-                }
-            }
-            
-            tubeParts = new TubePart[countTubeParts];
-
-            for (var i = 0; i < countTubeParts; i++)
-            {
-                var tubePartInstance = Instantiate(tubePrefab, localPositionsOfTubeParts[i], Quaternion.Euler(transform.rotation.eulerAngles),
-                    transform);
-                tubePartInstance.GetComponent<TubePart>().Initialize(this);
-                tubeParts[i] = tubePartInstance.GetComponent<TubePart>();
-                AlignRotation(tubePartInstance);
-            }
-
-            tubeIsInitialized = true;
-        }
-
+        
         private void CreateNewPlatform(int _platformIndex, PatternData patternData, bool hide)
         {
-            var platformInstance = mainPool.GetCleanPlatformInstance();
-            //Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.Euler(transform.rotation.eulerAngles), transform);
-            platformInstance.transform.SetParent(transform);
-            platformInstance.transform.position = localPositionsOfPlatforms[_platformIndex];
-            platformInstance.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles);
+            var platformInstance = Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.Euler(transform.rotation.eulerAngles), transform);
             var platform = platformInstance.GetComponent<Platform>();
-            platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, player, bonusController, gainScore, segmentContentPool, mainPool);
-            platform.increaseConcentraion += IncreaseConcentration;
-            platform.resetConcentraion += ResetConcentration;
-            platform.increaseConcentraion += LevelStep;
+            platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, 
+                player, bonusController, gainScore, segmentContentPool, tubeMover);
             
-            AlignRotation(platformInstance);
+            
+            //AlignRotation(platformInstance);
             platforms[_platformIndex] = platform;
             
             if (hide) platforms[_platformIndex].gameObject.SetActive(false);
         }
 
-        private void LevelStep()
+        public void LevelStep()
         {
             levelProgress.Step();
         }
         
-        private void IncreaseConcentration()
+        public void IncreaseConcentration()
         {
             concentration.IncreaseConcentration();   
         }
 
-        private void ResetConcentration()
+        public void ResetConcentration()
         {
             concentration.Reset();
         }
@@ -361,9 +319,9 @@ namespace Core
                 platforms[i].gameObject.SetActive(false);
         }
 
-        public void DestroyPlatform()
+        public void DestroyPlatform(bool platformsIsMoving)
         {
-            platforms[0].DestroyPlatform();
+            platforms[0].DestroyPlatform(platformsIsMoving);
         }
 
         public void SetShopState()
