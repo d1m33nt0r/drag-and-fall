@@ -124,7 +124,7 @@ namespace Core
             platformMover.SetLevelMode(false);
             platformMover.SetDefaultState();
             uiManager.SetActiveUpgradeMenu(false);
-            uiManager.SetActiveMainMenu(true);
+            uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveShopMenu(false);
             uiManager.SetActiveLevelUI(false);
             uiManager.SetActiveGameMenu(false);

@@ -24,6 +24,11 @@ namespace Core
             SetActiveScorePanel(false);
         }
 
+        public void SetActiveCommonPanel(bool value)
+        {
+            commonPanel.SetActive(value);
+        }
+        
         public void SetActiveUpgradeMenu(bool value) => upgradeMenu.SetActive(value);
         public void SetActiveScorePanel(bool value) => scorePanel.SetActiveCounterPanel(value);
         public void UpdateLevelsStatus() => levelUIController.InitializeLevels();
@@ -42,8 +47,8 @@ namespace Core
         public void SetActiveFailedLevelPanel(bool value) => failedLevelPanel.SetActive(value);
         public void SetActiveLevelsMenu(bool value)
         {
-            commonPanel.SetActive(!value);
             levelsMenu.SetActive(value);
+            SetActiveCommonPanel(!value);
         }
     }
 }
