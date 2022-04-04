@@ -136,44 +136,31 @@ namespace Core
 
         public void FinishLevel(LevelData levelsData)
         {
-            if (scorePanel.GetPoints() >= levelsData.bestScore)
-            {
-                finishLevelUI.ShowThreeStars();
-                if (progressController.levelsProgress.levelsProgresses[levelsData.levelIndex].countStars < 3)
-                    progressController.levelsProgress.levelsProgresses[levelsData.levelIndex].countStars = 3;
-                    
-            }
-            else if (scorePanel.GetPoints() >= levelsData.middleScore)
-            {
-                finishLevelUI.ShowTwoStars();
-                if (progressController.levelsProgress.levelsProgresses[levelsData.levelIndex].countStars < 2)
-                    progressController.levelsProgress.levelsProgresses[levelsData.levelIndex].countStars = 2;
-            }
-            else
-            {
-                finishLevelUI.ShowOneStar();
-                if (progressController.levelsProgress.levelsProgresses[levelsData.levelIndex].countStars < 1)
-                    progressController.levelsProgress.levelsProgresses[levelsData.levelIndex].countStars = 1;
-            }
+            uiManager.SetActiveFinishLevel(true);
+            finishLevelUI.SetLevelData(levelsData);
+            finishLevelUI.SetMaxValue();
+            finishLevelUI.SetText(scorePanel.GetPoints(), levelsData.levelIndex + 1);
+            finishLevelUI.PlayShowAnimation();
 
             bonusController.DeactivateAllBonuses();
-            finishLevelUI.SetText(scorePanel.GetPoints(), levelsData.levelIndex + 1);
             gameStarted = false;
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveLevelsMenu(false);
-            progressController.levelsProgress.levelsProgresses[levelsData.levelIndex].isCompleted = true;
             
+            progressController.levelsProgress.levelsProgresses[levelsData.levelIndex].isCompleted = true;
             if (levelsData.levelIndex + 1 < progressController.levelsProgress.levelsProgresses.Count)
                 progressController.levelsProgress.levelsProgresses[levelsData.levelIndex + 1].isUnlocked = true;
+            
             progressController.SaveLevelsProgress(progressController.levelsProgress);
+            
             coinPanel.SaveProgress();
             crystalPanel.SaveProgress();
-            uiManager.UpdateLevelsStatus();
+            
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveShopMenu(false);
             uiManager.SetActiveLevelUI(false);
             uiManager.SetActiveGameMenu(false);
-            uiManager.SetActiveFinishLevel(true);
+            
             uiManager.SetActiveFailedInfinityPanel(false);
             uiManager.SetActiveFailedLevelPanel(false);
         }

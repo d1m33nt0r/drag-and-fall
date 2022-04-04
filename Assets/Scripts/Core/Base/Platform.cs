@@ -80,8 +80,6 @@ namespace Core
                 segments[i].GetComponent<Segment>().ChangeColor(3);
             }
             
-            if (platformMover.isLevelMode && patternData.isLast) platformMover.FinishLevel(platformMover.gameManager.gameMode.levelMode.level);
-
             if (platformsIsMoving)
             {
                 tubeMover.MoveTube();
@@ -92,6 +90,9 @@ namespace Core
                 platformMover.IncreaseConcentration();
                 platformMover.LevelStep();
             }
+            
+            if (platformMover.isLevelMode && patternData.isLast) 
+                platformMover.FinishLevel(platformMover.gameManager.gameMode.levelMode.level);
 
             for (var i = 0; i < segments.Length; i++)
             {

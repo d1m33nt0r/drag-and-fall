@@ -1089,6 +1089,6 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 2
       segmentContent: 0
-  bestScore: 32
+  bestScore: 34
   middleScore: 28
   bottomScore: 19

@@ -1,40 +1,171 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using Core;
+using Data.Core;
+using Progress;
+using UI.FinishLevel;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI
 {
     public class FinishLevelUI : MonoBehaviour
     {
+        [SerializeField] private GameManager gameManager;
+        [SerializeField] private ProgressController progressController;
+        [SerializeField] private UIManager uIManager;
         [SerializeField] private Text score;
+        [SerializeField] private Slider scoreSlider;
         [SerializeField] private Text level;
-        [SerializeField] private GameObject oneStar;
-        [SerializeField] private GameObject twoStar;
-        [SerializeField] private GameObject threeStar;
         [SerializeField] private Animator animator;
+
+        [SerializeField] private Animator firstStarAnimator;
+        [SerializeField] private Animator secondStarAnimator;
+        [SerializeField] private Animator thirdStarAnimator;
+        [SerializeField] private Animator firstSlotAnimator;
+        [SerializeField] private Animator secondSlotAnimator;
+        [SerializeField] private Animator thirdSlotAnimator;
+
+        [SerializeField] private FirstRewardSlot firstRewardSlot;
+        [SerializeField] private SecondRewardSlot secondRewardSlot;
+        [SerializeField] private ThirdRewardSlot thirdRewardSlot;
+
+        private Coroutine scoreCoroutine;
+        private int actualScoreValue;
+        private int currentScoreValue;
+        private LevelData levelData;
+
+        private bool firstStarIsActive;
+        private bool secondStarIsActive;
+        private bool thirdStarIsActive;
+      
         
         public void SetText(int score, int level)
         {
             this.level.text = "Level " + level;
-            this.score.text = score.ToString();
+            actualScoreValue = score;
         }
 
-        public void ShowThreeStars()
+        public void SetLevelData(LevelData levelData)
         {
-            oneStar.SetActive(false);
-            twoStar.SetActive(false);
-            threeStar.SetActive(true);
+            this.levelData = levelData;
+            firstRewardSlot.SetLevelData(levelData);
+            secondRewardSlot.SetLevelData(levelData);
+            thirdRewardSlot.SetLevelData(levelData);
         }
-        public void ShowTwoStars()
+
+        public void PlayShowAnimation()
         {
-            oneStar.SetActive(false);
-            twoStar.SetActive(true);
-            threeStar.SetActive(false);
+            animator.Play("Show");
         }
-        public void ShowOneStar()
+
+        public void PlayHideAnimation()
         {
-            oneStar.SetActive(true);
-            twoStar.SetActive(false);
-            threeStar.SetActive(false);
+            animator.Play("Hide");
+        }
+
+        public void ShowLevels()
+        {
+            ResetDefaultState();
+            gameManager.ShowLevels();
+        }
+        
+        public void ResetDefaultState()
+        {
+            scoreSlider.value = 0;
+            score.text = "0";
+            firstStarIsActive = false;
+            secondStarIsActive = false;
+            thirdStarIsActive = false;
+            firstStarAnimator.transform.GetChild(0).localScale = Vector3.zero;
+            secondStarAnimator.transform.GetChild(0).localScale = Vector3.zero;
+            thirdStarAnimator.transform.GetChild(0).localScale = Vector3.zero;
+            firstSlotAnimator.GetComponent<FirstRewardSlot>().SetDefaultState();
+            secondSlotAnimator.GetComponent<SecondRewardSlot>().SetDefaultState();
+            thirdSlotAnimator.GetComponent<ThirdRewardSlot>().SetDefaultState();
+        }
+        
+        public void AnimateScore()
+        {
+            if (scoreCoroutine != null) StopCoroutine(scoreCoroutine);
+            scoreCoroutine = StartCoroutine(ScoreAnimation());
+        }
+
+        public void SetMaxValue()
+        {
+            scoreSlider.maxValue = levelData.bestScore;
+        }
+
+        private IEnumerator ScoreAnimation()
+        {
+            var isFinish = false;
+            var t = 0f;
+            yield return new WaitForSeconds(0.5f);
+            while (true)
+            {
+                var value = (int) Mathf.Lerp(currentScoreValue, actualScoreValue, t);
+                
+                if (value >= levelData.bottomScore && !firstStarIsActive)
+                {
+                    firstStarAnimator.Play("Show");
+                    firstStarIsActive = true;
+                    if (isFinish) break;
+                }
+                
+                if (value >= levelData.middleScore && !secondStarIsActive)
+                {
+                    secondStarAnimator.Play("Show");
+                    secondStarIsActive = true;
+                    if (isFinish) break;
+                }
+                
+                if (value >= levelData.bestScore && !thirdStarIsActive)
+                {
+                    thirdStarAnimator.Play("Show");
+                    thirdStarIsActive = true;
+                    if (isFinish) break;
+                }
+
+                score.text = value.ToString();
+                scoreSlider.value = Mathf.Lerp(currentScoreValue, actualScoreValue, t);
+                if (isFinish) break;
+                t += 0.5f * Time.deltaTime;
+                if (t > 1.0f) isFinish = true;
+                yield return null;
+            }
+
+            if (firstStarIsActive && secondStarIsActive && thirdStarIsActive)
+            {
+                if (progressController.levelsProgress.levelsProgresses[levelData.levelIndex].countStars < 3)
+                {
+                    progressController.levelsProgress.levelsProgresses[levelData.levelIndex].countStars = 3;
+                    uIManager.UpdateLevelsStatus();
+                }
+            }
+            
+            if (firstStarIsActive && secondStarIsActive && !thirdStarIsActive)
+            {
+                if (progressController.levelsProgress.levelsProgresses[levelData.levelIndex].countStars < 2)
+                {
+                    progressController.levelsProgress.levelsProgresses[levelData.levelIndex].countStars = 2;
+                    uIManager.UpdateLevelsStatus();
+                }
+            }
+            
+            if (firstStarIsActive && !secondStarIsActive && !thirdStarIsActive)
+            {
+                if (progressController.levelsProgress.levelsProgresses[levelData.levelIndex].countStars < 1)
+                {
+                    progressController.levelsProgress.levelsProgresses[levelData.levelIndex].countStars = 1;
+                    uIManager.UpdateLevelsStatus();
+                }
+            }
+
+            yield return new WaitForSeconds(1f);
+            if (firstStarIsActive) firstSlotAnimator.Play("Show");
+            yield return new WaitForSeconds(0.75f);
+            if (secondStarIsActive) secondSlotAnimator.Play("Show");
+            yield return new WaitForSeconds(0.75f);
+            if (thirdStarIsActive) thirdSlotAnimator.Play("Show");
         }
     }
 }

@@ -9,7 +9,6 @@ namespace Data.Progress
         public bool isUnlocked;
         public int countStars;
         public int countPoints;
-        public int[] rewardIsIssued = new int[3];
-        
+        public bool[] rewardIsIssued = new bool[3];
     }
 }
