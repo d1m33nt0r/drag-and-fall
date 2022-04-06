@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Common
 {
@@ -8,7 +7,7 @@ namespace Common
         [SerializeField, Range(-1, 1)] private int direction;
         [SerializeField] private float speed;
         [SerializeField] private Axis axis;
-
+        
         private void Update()
         {
             switch (axis)

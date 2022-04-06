@@ -1,4 +1,5 @@
-﻿using Data.Core;
+﻿using Core;
+using Data.Core;
 using Progress;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,12 +12,15 @@ namespace UI.FinishLevel
         [SerializeField] private Image rewardImage;
         [SerializeField] private Text rewardSizeText;
         [SerializeField] private ProgressController progressController;
+        [SerializeField] private GameObject starsEffect;
+        [SerializeField] private CrystalPanel crystalPanel;
         
         private LevelData levelData;
         
         public void SetLevelData(LevelData levelData)
         {
             this.levelData = levelData;
+            starsEffect.SetActive(false);
         }
         
         public void ShowReward()
@@ -31,6 +35,8 @@ namespace UI.FinishLevel
                 rewardSizeText.text = randCoinsCount.ToString();
                 IssueReward(randCoinsCount);
             }
+            
+            starsEffect.SetActive(true);
         }
         
         public void SetDefaultState()
@@ -42,6 +48,7 @@ namespace UI.FinishLevel
         
         private void IssueReward(int count)
         {
+            crystalPanel.AddCrystals(count);
             progressController.currentState.currenciesProgress.crystals += count;
             progressController.levelsProgress.levelsProgresses[levelData.levelIndex].rewardIsIssued[1] = true;
             progressController.SaveCurrentState(progressController.currentState);

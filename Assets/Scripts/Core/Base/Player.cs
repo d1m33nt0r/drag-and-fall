@@ -33,6 +33,7 @@ namespace Core
         [SerializeField] private FreeSpeedIncrease freeSpeedIncrease;
         [SerializeField] private GameObject fireEffect;
         [SerializeField] private GameObject sled;
+        [SerializeField] private GameObject fireBacklight;
         
         private bool triggerStay;
 
@@ -42,6 +43,7 @@ namespace Core
         public void SetActiveFireEffect(bool value)
         {
             fireEffect.SetActive(value);
+            fireBacklight.SetActive(value);
         }
         
         public void RandomRotate()
@@ -90,6 +92,10 @@ namespace Core
             var main = fireParticle.main;
             main.startColor = new ParticleSystem.MinMaxGradient(new Color(1, 1, 1, 1f), new Color(1, 1, 1, 0.5f));
             main.startSpeed = -3;
+            var backlightParticle = fireBacklight.GetComponent<ParticleSystem>();
+            var backlightMain = backlightParticle.main;
+            backlightMain.startColor = new ParticleSystem.MinMaxGradient(new Color(backlightMain.startColor.color.r,
+                backlightMain.startColor.color.g, backlightMain.startColor.color.b, 0.25f));
 
         }
 
@@ -99,6 +105,10 @@ namespace Core
             var main = fireParticle.main;
             main.startColor = new ParticleSystem.MinMaxGradient(new Color(1, 1, 1, 0.25f), new Color(1, 1, 1, 0.2f));
             main.startSpeed = -2.5f;
+            var backlightParticle = fireBacklight.GetComponent<ParticleSystem>();
+            var backlightMain = backlightParticle.main;
+            backlightMain.startColor = new ParticleSystem.MinMaxGradient(new Color(backlightMain.startColor.color.r,
+                backlightMain.startColor.color.g, backlightMain.startColor.color.b, 0f));
         }
         
         public void IncreaseFireEffect4()
@@ -107,6 +117,10 @@ namespace Core
             var main = fireParticle.main;
             main.startColor = new ParticleSystem.MinMaxGradient(new Color(1, 1, 1, 0), new Color(1, 1, 1, 0.2f));
             main.startSpeed = -2f;
+            var backlightParticle = fireBacklight.GetComponent<ParticleSystem>();
+            var backlightMain = backlightParticle.main;
+            backlightMain.startColor = new ParticleSystem.MinMaxGradient(new Color(backlightMain.startColor.color.r,
+                backlightMain.startColor.color.g, backlightMain.startColor.color.b, 0f));
         }
 
         private void Awake()
@@ -129,7 +143,7 @@ namespace Core
             Destroy(fallingTrail);
             
             trail = Instantiate(visualController.GetTrail(), transform.position, Quaternion.identity, transform);
-            fallingTrail = Instantiate(visualController.GetFallingTrail(), transform.position, Quaternion.identity,
+            fallingTrail = Instantiate(visualController.GetFallingTrail(), new Vector3(0, 0.15f, -0.7f), Quaternion.identity,
                 transform.parent);
         }
 
@@ -148,7 +162,7 @@ namespace Core
         public void TryOnFallingTrailSkin(GameObject _fallingTrail)
         {
             Destroy(fallingTrail);
-            fallingTrail = Instantiate(_fallingTrail, transform.position, Quaternion.identity,
+            fallingTrail = Instantiate(_fallingTrail, new Vector3(0, 0.15f, -0.7f), Quaternion.identity,
                 transform);
         }
         
@@ -207,7 +221,7 @@ namespace Core
             
             if (Physics.Raycast(centerRay, out var centerHit, 0.105f))
             {
-                if (!centerHit.transform.CompareTag("Segment")) return;
+                if (centerHit.transform.tag != "Segment") return;
                 
                 var segment = centerHit.collider.GetComponent<Segment>();
                 
@@ -238,7 +252,7 @@ namespace Core
                             SetDefaultState();
                             if (gameManager.gameStarted) segment.IncreasePlatformTouchCounter();
                             freeSpeedIncrease.ResetSpeed();
-                            var instance = Instantiate(sled, new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z), Quaternion.Euler(-90, 0, 0), segment.transform);//effectsPool.GetTouchEffect();
+                            var instance = Instantiate(sled, new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z), Quaternion.Euler(-90, 0, 0), segment.transform.parent);//effectsPool.GetTouchEffect();
                             //instance.gameObject.SetActive(true);
                             //instance.transform.position = new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z);
                             //instance.transform.rotation = Quaternion.Euler(-90, 0, 0);

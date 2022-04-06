@@ -12,7 +12,7 @@ namespace Core
 
         public delegate void OnSwipeInput(SwipeType type, float delta);
 
-        public event OnSwipeInput SwipeEvent;
+        public static event OnSwipeInput SwipeEvent;
 
         public enum SwipeType
         {

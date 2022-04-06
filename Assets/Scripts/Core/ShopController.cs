@@ -46,6 +46,7 @@ namespace Core
             SetPriceText(progressController.shopProgress.environmentSkins[currentEnvironmentSkinIndex].isBought, 
                 shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].priceCoins,
                 shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].priceCrystals);
+            shopState = ShopState.EnvironmentSkin;
         }
         
         private void SetPriceText(bool _isBought, float _priceCoins, float priceCrystals)
@@ -347,25 +348,6 @@ namespace Core
                     SetPriceText(progressController.shopProgress.fallingTrailSkins[currentFallingTrailSkinIndex].isBought, 
                         shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].priceCoins, 
                         shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].priceCrystals);
-                    player.TryOnFallingTrailSkin(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].skin);
-                    break;
-            }
-        }
-
-        public void BuyOrSelectSkin()
-        {
-            switch (shopState)
-            {
-                case ShopState.EnvironmentSkin:
-                    platformMover.TryOnSkin(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex]);
-                    break;
-                case ShopState.PlayerSkin:
-                    player.TryOnPlayerSkin(shopData.PlayerSkinData[currentPlayerSkinIndex].mesh, shopData.PlayerSkinData[currentPlayerSkinIndex].material);
-                    break;
-                case ShopState.TrailSkin:
-                    player.TryOnTrailSkin(shopData.TrailSkinData[currentTrailSkinIndex].skin);
-                    break;
-                case ShopState.FallingTrailSkin:
                     player.TryOnFallingTrailSkin(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].skin);
                     break;
             }
