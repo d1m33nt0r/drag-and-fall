@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 456566f5776b74145bb9e42b56caf6f2, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: de9462a98f64fb34f96fb00dca85efd8, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.46638525, g: 0.47429454, b: 0.7302575, a: 1}
+  m_IndirectSpecularColor: {r: 0.25459665, g: 0.22946814, b: 0.27828142, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -83033,6 +83033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88a4d7a9ff00436ab5d1f18096f7b7d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleSystem: {fileID: 0}
   tubePool: {fileID: 1461066058}
   tubePrefab: {fileID: 6258718019660764072, guid: 74d06b32c97d0044897d396e3131e7df, type: 3}
   countTubeParts: 11
@@ -91084,7 +91085,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.067301646, y: 0.31073508}
   m_AnchorMax: {x: 0.9443809, y: 0.4591304}
-  m_AnchoredPosition: {x: -5.5343018, y: -253.06}
+  m_AnchoredPosition: {x: -5.5343018, y: -253.05997}
   m_SizeDelta: {x: 116.47, y: 149.61}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2030362053

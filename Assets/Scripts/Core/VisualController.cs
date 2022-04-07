@@ -31,6 +31,16 @@ namespace Core
             }
         }
 
+        public GameObject GetBackgroundParticleSystem()
+        {
+            var particles = Instantiate(shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index]
+                .backgroundParticleSystem);
+            particles.transform.position = shopData
+                .EnvironmentSkinData[progressController.currentState.environmentSkin.index]
+                .particleSystemPosition;
+            return particles;
+        }
+        
         public Material GetSegmentMaterial(SegmentType _segmentType)
         {
             switch (_segmentType)
