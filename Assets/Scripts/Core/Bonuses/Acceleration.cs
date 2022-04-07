@@ -13,7 +13,7 @@ namespace Core.Bonuses
         private Transform startMarker;
         public Transform endMarker;
 
-        public float speed = 1.0F;
+        public float speed = 2F;
         private float startTime;
         private float journeyLength;
         private bool ismove = true;

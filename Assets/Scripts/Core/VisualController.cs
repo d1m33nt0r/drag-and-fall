@@ -35,9 +35,7 @@ namespace Core
         {
             var particles = Instantiate(shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index]
                 .backgroundParticleSystem);
-            particles.transform.position = shopData
-                .EnvironmentSkinData[progressController.currentState.environmentSkin.index]
-                .particleSystemPosition;
+            
             return particles;
         }
         

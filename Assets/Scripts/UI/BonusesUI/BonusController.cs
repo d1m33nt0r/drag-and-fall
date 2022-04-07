@@ -191,6 +191,9 @@ namespace Core.Bonuses
                             emptyView.SetUp(GetBonusViewByType(BonusType.Multiplier));
                         }
                     }
+                    
+                    //TODO fix multiplier increase
+                    
                     multiplier++;
                     multiplierIsActive = true;
                     break;

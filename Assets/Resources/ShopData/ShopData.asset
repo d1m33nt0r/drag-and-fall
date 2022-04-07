@@ -56,9 +56,9 @@ MonoBehaviour:
     tube: {fileID: 3077753223514399051, guid: 0110f3aecfa193240957a29499f44225, type: 3}
     platformColors:
     - {r: 1, g: 1, b: 1, a: 0}
-    - {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
-    - {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
-    - {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
+    - {r: 0.28635636, g: 0.6132076, b: 0.3783552, a: 1}
+    - {r: 0.31746176, g: 0.7735849, b: 0.4438573, a: 1}
+    - {r: 0.24528302, g: 0.9811321, b: 0.449193, a: 1}
     backgroundParticleSystem: {fileID: 258380641518628445, guid: 20d2a9f2bc1a66a4f8d089f82076d077, type: 3}
     particleSystemPosition: {x: 3.7, y: 101.3, z: 84.1}
   PlayerSkinData:
@@ -72,7 +72,7 @@ MonoBehaviour:
     priceCrystals: 0
     mesh: {fileID: 6840333135571099348, guid: 1b19154ba0e913d44bf62ea327207638, type: 3}
     material: {fileID: 2100000, guid: 82c92c4c2a35f254e9a7a53439dcda88, type: 2}
-  - isBought: 0
+  - isBought: 1
     priceCoins: 2000
     priceCrystals: 125
     mesh: {fileID: 5592276042613824943, guid: e579588297b2df14cbbc8fbe0f0662f4, type: 3}

@@ -16,6 +16,7 @@ namespace Core
         [SerializeField] private LevelUIController levelUIController;
         [SerializeField] private GameObject upgradeMenu;
         [SerializeField] private GameObject commonPanel;
+        [SerializeField] private UpgradeUI upgradeUI;
         
         public ScorePanel scorePanel;
 
@@ -29,7 +30,12 @@ namespace Core
             commonPanel.SetActive(value);
         }
         
-        public void SetActiveUpgradeMenu(bool value) => upgradeMenu.SetActive(value);
+        public void SetActiveUpgradeMenu(bool value)
+        {
+            upgradeMenu.SetActive(value);
+            if (value) upgradeUI.ShowUpgradeUI();
+        }
+
         public void SetActiveScorePanel(bool value) => scorePanel.SetActiveCounterPanel(value);
         public void UpdateLevelsStatus() => levelUIController.InitializeLevels();
         public void SetActiveMainMenu(bool _value) => mainMenu.enabled = _value;
