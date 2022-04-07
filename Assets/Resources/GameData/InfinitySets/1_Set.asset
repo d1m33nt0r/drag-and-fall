@@ -57,7 +57,7 @@ MonoBehaviour:
     currencyType: 0
     rangeStart: 2
     rangeEnd: 99
-    accuracyLevel: 0
+    accuracyLevel: 1
   - spawnOnLet: 1
     spawnOnGround: 1
     spawnOnHole: 0

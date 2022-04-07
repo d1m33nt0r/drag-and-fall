@@ -67,6 +67,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SpecularColor1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _StylizedThreshold:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -136,5 +140,5 @@ Material:
     - _TCP2_AMBIENT_FRONT: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_LEFT: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_RIGHT: {r: 0, g: 0, b: 0, a: 1}
-    - _TCP2_AMBIENT_TOP: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+    - _TCP2_AMBIENT_TOP: {r: 0.2627451, g: 0.2627451, b: 0.2627451, a: 1}
   m_BuildTextureStacks: []
