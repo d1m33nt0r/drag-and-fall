@@ -26,14 +26,16 @@ namespace UI
             if (!platformMover.isLevelMode)
             {
                 var concentrationMultiplier = concentration.isActive ? concentration.currentConcentrationMultiplier : 1;
-                var upgradedPoint = (countPoints + bonusController.multiplier) * concentrationMultiplier;
+                var bonusMultiplier = bonusController.multiplierIsActive ? bonusController.multiplier : 1;
+                var upgradedPoint = (countPoints * bonusMultiplier) * concentrationMultiplier;
                 text.text = "+" + Convert.ToString(upgradedPoint);
                 scorePanel.AddPoints(upgradedPoint);
             }
             else
             {
                 var concentrationMultiplier = concentration.isActive ? 2 : 1;
-                var upgradedPoint = (countPoints + bonusController.multiplier) * concentrationMultiplier;
+                var bonusMultiplier = bonusController.multiplierIsActive ? bonusController.multiplier : 1;
+                var upgradedPoint = (countPoints * bonusMultiplier) * concentrationMultiplier;
                 text.text = "+" + Convert.ToString(upgradedPoint);
                 scorePanel.AddPoints(upgradedPoint);
             }

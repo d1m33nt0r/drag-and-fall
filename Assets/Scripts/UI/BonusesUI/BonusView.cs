@@ -44,7 +44,11 @@ namespace UI.Bonuses
         {
             if (coroutine != null) StopCoroutine(coroutine);
             transform.GetChild(0).GetComponent<Image>().sprite = null;
-            if (bonusType == BonusType.Multiplier) bonusController.multiplier = 0;
+            if (bonusType == BonusType.Multiplier)
+            {
+                bonusController.multiplier = 0;
+                bonusController.multiplierIsActive = false;
+            }
             timer.value = defaultTimerValue;
             if (bonusType == BonusType.Magnet) player.SetActiveMagnet(false);
             if (transform.parent.GetComponent<BonusSlot>())

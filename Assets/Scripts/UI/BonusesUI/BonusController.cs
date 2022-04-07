@@ -25,10 +25,10 @@ namespace Core.Bonuses
         public int currentMagnetLevel;
         public int currentAccelerationLevel;
         
-        public bool shieldIsActive { get; private set; }
-        public bool accelerationIsActive { get; private set; }
-        public bool multiplierIsActive { get; private set; }
-        public bool magnetIsActive { get; private set; }
+        public bool shieldIsActive { get; set; }
+        public bool accelerationIsActive { get; set; }
+        public bool multiplierIsActive { get; set; }
+        public bool magnetIsActive { get; set; }
         
         public TimerBonus[] bonusParams;
         public BonusView[] bonusViews;
@@ -193,8 +193,15 @@ namespace Core.Bonuses
                     }
                     
                     //TODO fix multiplier increase
+                    if (multiplier == 0)
+                    {
+                        multiplier = 2;
+                    }
+                    else
+                    {
+                        multiplier = multiplier * 2;
+                    }
                     
-                    multiplier++;
                     multiplierIsActive = true;
                     break;
                 case BonusType.Shield:
