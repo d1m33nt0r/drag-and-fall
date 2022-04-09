@@ -8,6 +8,7 @@ namespace Core
     public class Concentration : MonoBehaviour
     {
         [SerializeField] private ProgressController progressController;
+        [SerializeField] private ConcentrationViewController concentrationViewController;
         
         public int currentConcentrationLevel = 1;
         public int currentConcentrationMultiplier
@@ -46,7 +47,7 @@ namespace Core
             }
         }
 
-        private void Start()
+        private void Awake()
         {
             UpdateLevel();
         }
@@ -60,6 +61,7 @@ namespace Core
             }
 
             slider.maxValue = 16 - currentConcentrationPlatformsUpgrade;
+            concentrationViewController.UpdateMultiplierText(currentConcentrationMultiplier);
         }
 
         public bool isActive => platformCounter > 16 - currentConcentrationPlatformsUpgrade;
