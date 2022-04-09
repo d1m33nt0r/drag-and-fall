@@ -15,9 +15,11 @@ namespace UI.InfinityUI
         [SerializeField] private ScorePanel scorePanel;
         [SerializeField] private SessionData sessionData;
         [SerializeField] private Text bestScoreText;
+
+        private const string leaderBoard = "CgkI1oSBxbsCEAIQAQ";
         
         private Coroutine newBestScoreCoroutine;
-        
+
         public void ShowNewBestScoreUI()
         {
             newBestScoreUI.SetActive(true);
@@ -26,6 +28,7 @@ namespace UI.InfinityUI
             finishUI.SetActive(false);
             if (newBestScoreCoroutine != null) StopCoroutine(newBestScoreCoroutine);
             newBestScoreCoroutine = StartCoroutine(AnimateScore(scorePanel.GetPoints()));
+            Social.ReportScore(scorePanel.GetPoints(), leaderBoard, (bool success) => { });
         }
 
         private IEnumerator AnimateScore(int maximum)

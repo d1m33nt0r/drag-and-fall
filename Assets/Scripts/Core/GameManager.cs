@@ -1,7 +1,9 @@
-﻿using Ads;
+﻿using System;
+using Ads;
 using Core.Bonuses;
 using Data;
 using Data.Core;
+using GooglePlayGames;
 using Progress;
 using UI;
 using UI.InfinityUI;
@@ -33,9 +35,12 @@ namespace Core
         [SerializeField] private Concentration concentration;
         
         public bool gameStarted { get; private set; }
-
+        
         private void Start()
         {
+            PlayGamesPlatform.DebugLogEnabled = true;
+            PlayGamesPlatform.Activate();
+            Social.localUser.Authenticate(success => { });
             platformMover.SetDefaultState();
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveMainMenu(true);
@@ -82,6 +87,11 @@ namespace Core
             uiManager.SetActiveFailedInfinityPanel(false);
             uiManager.SetActiveFailedLevelPanel(false);
             uiManager.SetActiveLevelsMenu(false);
+        }
+        
+        public void OpenLeaderboard()
+        {
+            PlayGamesPlatform.Instance.ShowLeaderboardUI();
         }
 
         public void CloseShop()
