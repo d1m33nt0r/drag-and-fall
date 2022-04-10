@@ -8,6 +8,8 @@ namespace UI.Bonuses
 {
     public class BonusView : MonoBehaviour
     {
+        [SerializeField] private Text timerText;
+        
         public Player player;
         public BonusController bonusController;
         public Slider timer;
@@ -15,25 +17,35 @@ namespace UI.Bonuses
         public BonusType bonusType;
         public Coroutine coroutine;
         private float defaultTimerValue;
+        [SerializeField] private Text multiplierText;
+        
         [SerializeField] private GameObject shieldPlayerEffect;
         public void Construct()
         {
             isActive = true;
             defaultTimerValue = bonusController.GetUpgradedTimer(bonusType);
+            if (bonusType == BonusType.Multiplier) multiplierText.text = "x" + bonusController.multiplier;
             timer.maxValue = defaultTimerValue;
             timer.value = defaultTimerValue;
             SetActive(true);
+            if (coroutine != null) StopCoroutine(coroutine);
             coroutine = StartCoroutine(Timer(0.1f));
         }
 
-        public void ResetTimer() =>
+        public void ResetTimer()
+        {
             timer.value = defaultTimerValue;
-
+            if (bonusType == BonusType.Multiplier) multiplierText.text = "x" + bonusController.multiplier;
+        }
+            
+        
         private IEnumerator Timer(float interval)
         {
             while (timer.value > 0)
             {
-                SetTimerValue(timer.value -= interval); ;
+                SetTimerValue(timer.value -= interval);
+                var timerValue = (int) timer.value;
+                timerText.text = timerValue.ToString();
                 yield return new WaitForSeconds(interval);
             }
             

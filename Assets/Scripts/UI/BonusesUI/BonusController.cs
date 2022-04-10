@@ -182,26 +182,18 @@ namespace Core.Bonuses
                 case BonusType.Multiplier:
                     if (TryGetActivatedBonus(bonusType, out var bonusView2))
                     {
+                        if (multiplier < 32) multiplier = multiplier * 2;
                         bonusView2.ResetTimer();
                     }
                     else
                     {
                         if (FindEmptyBonusSlot(out var emptyView))
                         {
+                            multiplier = 2;
                             emptyView.SetUp(GetBonusViewByType(BonusType.Multiplier));
                         }
                     }
-                    
-                    //TODO fix multiplier increase
-                    if (multiplier == 0)
-                    {
-                        multiplier = 2;
-                    }
-                    else
-                    {
-                        multiplier = multiplier * 2;
-                    }
-                    
+
                     multiplierIsActive = true;
                     break;
                 case BonusType.Shield:
