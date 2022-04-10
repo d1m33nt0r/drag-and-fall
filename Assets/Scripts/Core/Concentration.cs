@@ -1,5 +1,4 @@
-﻿using Common;
-using Progress;
+﻿using Progress;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +8,7 @@ namespace Core
     {
         [SerializeField] private ProgressController progressController;
         [SerializeField] private ConcentrationViewController concentrationViewController;
+        [SerializeField] private TutorialUI tutorialUI;
         
         public int currentConcentrationLevel = 1;
         public int currentConcentrationMultiplier
@@ -71,7 +71,14 @@ namespace Core
         public void IncreaseConcentration()
         {
             platformCounter++;
-            if (isActive) return;
+            if (isActive)
+            {
+                if (!tutorialUI.thirdStepComplete)
+                {
+                    tutorialUI.ShowThirdStep();
+                }
+                return;
+            }
             slider.value = platformCounter;
         }
 

@@ -15,7 +15,8 @@ namespace Core
     {
         private bool destroy;
         public int countTouches = 0;
-
+        private TutorialUI tutorialUI;
+        
         public PatternData patternData;
         private Player player;
         private PlatformMover platformMover;
@@ -26,19 +27,20 @@ namespace Core
         
         public void Initialize(int _segmentsCount, PatternData patternData, PlatformMover platformMover, 
             Player _player, BonusController _bonusController, GainScore gainScore, SegmentContentPool segmentContentPool,
-            TubeMover _tubeMover)
+            TubeMover _tubeMover, TutorialUI tutorialUI)
         {
-            InitializeHandMadePlatform(patternData, platformMover, _player, _bonusController, gainScore, segmentContentPool, _tubeMover);
+            InitializeHandMadePlatform(patternData, platformMover, _player, _bonusController, gainScore, segmentContentPool, _tubeMover, tutorialUI);
         }
         
         private void InitializeHandMadePlatform(PatternData patternData, PlatformMover platformMover, Player _player,
-            BonusController _bonusController, GainScore gainScore, SegmentContentPool segmentContentPool, TubeMover _tubeMover)
+            BonusController _bonusController, GainScore gainScore, SegmentContentPool segmentContentPool, TubeMover _tubeMover, TutorialUI tutorialUI)
         {
             this.segmentContentPool = segmentContentPool;
             this.platformMover = platformMover;
             this.gainScore = gainScore;
             this.patternData = patternData;
             this.tubeMover = _tubeMover;
+            this.tutorialUI = tutorialUI;
             
             for (var i = 1; i <= patternData.segmentsData.Length; i++)
                 segments[i - 1].Initialize(patternData.segmentsData[i - 1], platformMover, this, _bonusController,
@@ -75,6 +77,9 @@ namespace Core
         
         public void DestroyPlatform(bool platformsIsMoving)
         {
+            if (!tutorialUI.secondStepComplete) 
+                tutorialUI.ShowSecondStep();
+            
             for (var i = 0; i < 12; i++)
             {
                 segments[i].GetComponent<Segment>().ChangeColor(3);
