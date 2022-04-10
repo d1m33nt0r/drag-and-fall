@@ -102,6 +102,7 @@ public class TutorialUI : MonoBehaviour
         thirdStep.SetActive(false);
         fourthStep.SetActive(true);
         tutorialProgress.tutorialSteps[3] = true;
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("Finished 1 stage of tutorial");
     }
 
     public void RewriteTutorialProgressData()
