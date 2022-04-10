@@ -1,7 +1,9 @@
-﻿using Core;
+﻿using System.Collections;
+using Core;
 using Data;
 using UI.GameplayUI.InfinityUI.FailedUI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.InfinityUI
 {
@@ -12,22 +14,44 @@ namespace UI.InfinityUI
         [SerializeField] private GameObject finishUI;
         [SerializeField] private ScorePanel scorePanel;
         [SerializeField] private SessionData sessionData;
-       
+        [SerializeField] private Text bestScoreText;
+
+        private const string leaderBoard = "CgkI1oSBxbsCEAIQAQ";
+        
+        private Coroutine newBestScoreCoroutine;
+
         public void ShowNewBestScoreUI()
         {
             newBestScoreUI.SetActive(true);
-            newBestScoreUI.GetComponent<BestScoreUI>().SetBestScoreText(scorePanel.GetPoints());
+            //newBestScoreUI.GetComponent<BestScoreUI>().SetBestScoreText(scorePanel.GetPoints());
             continueUI.SetActive(false);
             finishUI.SetActive(false);
+            if (newBestScoreCoroutine != null) StopCoroutine(newBestScoreCoroutine);
+            newBestScoreCoroutine = StartCoroutine(AnimateScore(scorePanel.GetPoints()));
+            Social.ReportScore(scorePanel.GetPoints(), leaderBoard, (bool success) => { });
         }
 
+        private IEnumerator AnimateScore(int maximum)
+        {
+            var t = 0f;
+            yield return new WaitForSeconds(0.5f);
+            while (true)
+            {
+                var sad = (int) Mathf.Lerp(0, maximum, t);
+                bestScoreText.text = sad.ToString();
+                t += 0.5f * Time.deltaTime;
+                if (t > 1.0f) break;
+                yield return null;
+            }
+        }
+        
         public void ShowStatisticsUI()
         {
-            finishUI.GetComponent<FinishInfinityUI>().SetCurrencies(sessionData.coins, sessionData.crystals, sessionData.keys);
-            finishUI.GetComponent<FinishInfinityUI>().SetScore(scorePanel.GetPoints());
             newBestScoreUI.SetActive(false);
             continueUI.SetActive(false);
             finishUI.SetActive(true);
+            finishUI.GetComponent<FinishInfinityUI>().SetCurrencies(sessionData.coins, sessionData.crystals, sessionData.keys);
+            finishUI.GetComponent<FinishInfinityUI>().SetScore(scorePanel.GetPoints());
         }
 
         public void ShowContinueUI()
@@ -37,8 +61,7 @@ namespace UI.InfinityUI
             continueUI.GetComponent<ContinueTimer>().StartTimer();
             finishUI.SetActive(false);
         }
-
-
+        
         public void HideAllUI()
         {
             newBestScoreUI.SetActive(false);

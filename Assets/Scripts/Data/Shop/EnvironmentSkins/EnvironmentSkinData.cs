@@ -16,5 +16,7 @@ namespace Data.Shop.TubeSkins
         public Mesh segment;
         public Mesh tube;
         public Color[] platformColors;
+        public GameObject backgroundParticleSystem;
+        public Vector3 particleSystemPosition;
     }
 }

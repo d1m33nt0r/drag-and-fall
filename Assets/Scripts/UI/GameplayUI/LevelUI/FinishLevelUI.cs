@@ -10,6 +10,9 @@ namespace UI
 {
     public class FinishLevelUI : MonoBehaviour
     {
+        [SerializeField] private TutorialUI tutorialUI;
+        [SerializeField] private Transform tryAgainButtonTransform;
+        [SerializeField] private Transform closeButtonTransform;
         [SerializeField] private GameManager gameManager;
         [SerializeField] private ProgressController progressController;
         [SerializeField] private UIManager uIManager;
@@ -58,15 +61,36 @@ namespace UI
             animator.Play("Show");
         }
 
+        public void ShowTutorialUI()
+        {
+            if (!tutorialUI.fourthStepComplete)
+                tutorialUI.ShowFourthStep();
+        }
+        
         public void PlayHideAnimation()
         {
-            animator.Play("Hide");
+            if (tutorialUI.firstGeneralStepComplete)
+                animator.Play("Hide");
+            else
+            {
+                tutorialUI.transform.GetChild(3).gameObject.SetActive(false);
+                animator.Play("TutorialHide");
+            }
+
+            tutorialUI.firstGeneralStepComplete = true;
+            tutorialUI.RewriteTutorialProgressData();
         }
 
         public void ShowLevels()
         {
             ResetDefaultState();
             gameManager.ShowLevels();
+        }
+        
+        public void ShowMainMenu()
+        {
+            ResetDefaultState();
+            gameManager.ShowMainMenu();
         }
         
         public void ResetDefaultState()
@@ -79,6 +103,8 @@ namespace UI
             firstStarAnimator.transform.GetChild(0).localScale = Vector3.zero;
             secondStarAnimator.transform.GetChild(0).localScale = Vector3.zero;
             thirdStarAnimator.transform.GetChild(0).localScale = Vector3.zero;
+            tryAgainButtonTransform.transform.localScale = Vector3.zero;
+            closeButtonTransform.transform.localScale = Vector3.zero;
             firstSlotAnimator.GetComponent<FirstRewardSlot>().SetDefaultState();
             secondSlotAnimator.GetComponent<SecondRewardSlot>().SetDefaultState();
             thirdSlotAnimator.GetComponent<ThirdRewardSlot>().SetDefaultState();
@@ -166,6 +192,9 @@ namespace UI
             if (secondStarIsActive) secondSlotAnimator.Play("Show");
             yield return new WaitForSeconds(0.75f);
             if (thirdStarIsActive) thirdSlotAnimator.Play("Show");
+
+            yield return new WaitForSeconds(0.75f);
+            animator.Play("ShowButtons");
         }
     }
 }

@@ -6,7 +6,11 @@
     "CustomOutputPath": "Shaders/DragAndFall",
     "LastImplementationExportImportPath": "C:/Users/fallentorch/Desktop/drag-and-fall/Assets",
     "OpenedFoldouts": [
-        "LIGHTING"
+        "LIGHTING",
+        "OPTIONS",
+        "SHADER STATES",
+        "STYLIZATION",
+        "SURFACE"
     ],
     "UseCustomFont": true,
     "CustomFont": {

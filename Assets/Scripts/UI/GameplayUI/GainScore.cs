@@ -13,6 +13,7 @@ namespace UI
         public BonusController bonusController;
         public Concentration concentration;
         [SerializeField] private ScorePanel scorePanel;
+        [SerializeField] private PlatformMover platformMover;
         
         private void Start()
         {
@@ -22,10 +23,22 @@ namespace UI
 
         public void SetText(int countPoints)
         {
-            var concentrationMultiplier = concentration.isActive ? concentration.currentConcentrationMultiplier : 1;
-            var upgradedPoint = (countPoints + bonusController.multiplier) * concentrationMultiplier;
-            text.text = "+" + Convert.ToString(upgradedPoint);
-            scorePanel.AddPoints(upgradedPoint);
+            if (!platformMover.isLevelMode)
+            {
+                var concentrationMultiplier = concentration.isActive ? concentration.currentConcentrationMultiplier : 1;
+                var bonusMultiplier = bonusController.multiplierIsActive ? bonusController.multiplier : 1;
+                var upgradedPoint = (countPoints * bonusMultiplier) * concentrationMultiplier;
+                text.text = "+" + Convert.ToString(upgradedPoint);
+                scorePanel.AddPoints(upgradedPoint);
+            }
+            else
+            {
+                var concentrationMultiplier = concentration.isActive ? 2 : 1;
+                var bonusMultiplier = bonusController.multiplierIsActive ? bonusController.multiplier : 1;
+                var upgradedPoint = (countPoints * bonusMultiplier) * concentrationMultiplier;
+                text.text = "+" + Convert.ToString(upgradedPoint);
+                scorePanel.AddPoints(upgradedPoint);
+            }
         }
         
         public void Animate()

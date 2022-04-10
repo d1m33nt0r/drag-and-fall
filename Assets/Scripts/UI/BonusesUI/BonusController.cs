@@ -25,10 +25,10 @@ namespace Core.Bonuses
         public int currentMagnetLevel;
         public int currentAccelerationLevel;
         
-        public bool shieldIsActive { get; private set; }
-        public bool accelerationIsActive { get; private set; }
-        public bool multiplierIsActive { get; private set; }
-        public bool magnetIsActive { get; private set; }
+        public bool shieldIsActive { get; set; }
+        public bool accelerationIsActive { get; set; }
+        public bool multiplierIsActive { get; set; }
+        public bool magnetIsActive { get; set; }
         
         public TimerBonus[] bonusParams;
         public BonusView[] bonusViews;
@@ -182,16 +182,18 @@ namespace Core.Bonuses
                 case BonusType.Multiplier:
                     if (TryGetActivatedBonus(bonusType, out var bonusView2))
                     {
+                        if (multiplier < 32) multiplier = multiplier * 2;
                         bonusView2.ResetTimer();
                     }
                     else
                     {
                         if (FindEmptyBonusSlot(out var emptyView))
                         {
+                            multiplier = 2;
                             emptyView.SetUp(GetBonusViewByType(BonusType.Multiplier));
                         }
                     }
-                    multiplier++;
+
                     multiplierIsActive = true;
                     break;
                 case BonusType.Shield:

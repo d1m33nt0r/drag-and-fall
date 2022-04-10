@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections;
+using Data;
 using Data.Shop.TubeSkins;
 using ObjectPool;
+using Progress;
 using UnityEngine;
 
 namespace Core
 {
     public class TubeMover : MonoBehaviour
     {
+        [SerializeField] private GameObject particleSystem;
         [SerializeField] private TubePool tubePool;
-        
         [SerializeField] private GameObject tubePrefab;
         [SerializeField] private int countTubeParts;
+
         public TubePart[] tubeParts;
         public PlatformMover platformMover;
         public bool tubeIsInitialized;
@@ -28,6 +31,8 @@ namespace Core
 
         private void Initialize()
         {
+            if (particleSystem != null) Destroy(particleSystem);
+            particleSystem = platformMover.visualController.GetBackgroundParticleSystem();
             InitializeTubePoints();
             InitializeTube();
         }
@@ -72,6 +77,10 @@ namespace Core
 
         public void TryOnSkin(EnvironmentSkinData _environmentSkinData)
         {
+            if (particleSystem != null) Destroy(particleSystem);
+            particleSystem = Instantiate(_environmentSkinData.backgroundParticleSystem);
+            //particleSystem.transform.position = _environmentSkinData.particleSystemPosition;
+            
             foreach (var tubePart in tubeParts)
             {
                 tubePart.TryOnSkin(_environmentSkinData);
@@ -80,10 +89,14 @@ namespace Core
 
         public void ChangeTheme()
         {
+            if (particleSystem != null) Destroy(particleSystem);
+            particleSystem = platformMover.visualController.GetBackgroundParticleSystem();
+            
             foreach (var tubePart in tubeParts)
             {
                 tubePart.ChangeTheme();
             }
+            
             tubePool.ChangeTheme();
         }
 

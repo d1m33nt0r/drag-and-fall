@@ -1,7 +1,9 @@
-﻿using Ads;
+﻿using System;
+using Ads;
 using Core.Bonuses;
 using Data;
 using Data.Core;
+using GooglePlayGames;
 using Progress;
 using UI;
 using UI.InfinityUI;
@@ -31,12 +33,42 @@ namespace Core
         [SerializeField] private FailedInfinityUI failedInfinityUI;
         [SerializeField] private SessionData sessionData;
         [SerializeField] private Concentration concentration;
+        [SerializeField] private TutorialUI tutorialUI;
+        public bool gameStarted { get; set; }
         
-        public bool gameStarted { get; private set; }
-
         private void Start()
         {
+            PlayGamesPlatform.DebugLogEnabled = true;
+            PlayGamesPlatform.Activate();
+            Social.localUser.Authenticate(success => { });
             platformMover.SetDefaultState();
+            if (tutorialUI.tutorialIsFinished)
+                ShowMainMenuStart();
+            else
+            {
+                ShowTutorialUI();
+                if (!tutorialUI.firstStepComplete)
+                    tutorialUI.ShowFirstStep();
+            }
+        }
+        
+        private void ShowTutorialUI()
+        {
+            uiManager.SetActiveUpgradeMenu(false);
+            uiManager.SetActiveMainMenu(false);
+            uiManager.SetActiveFinishLevel(false);
+            uiManager.SetActiveFailedInfinityPanel(false);
+            uiManager.SetActiveFailedLevelPanel(false);
+            uiManager.SetActiveLevelUI(false);
+            uiManager.SetActiveShopMenu(false);
+            uiManager.SetActiveGameMenu(false);
+            uiManager.SetActiveLevelsMenu(false);
+            uiManager.SetActiveTutorialUI(true);
+        }
+        
+        private void ShowMainMenuStart()
+        {
+            uiManager.SetActiveTutorialUI(false);
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveMainMenu(true);
             uiManager.SetActiveFinishLevel(false);
@@ -50,6 +82,7 @@ namespace Core
 
         public void StartGame()
         {
+            uiManager.SetActiveTutorialUI(false);
             concentration.Reset();
             bonusController.DeactivateAllBonuses();
             uiManager.SetActiveScorePanel(true);
@@ -70,6 +103,7 @@ namespace Core
 
         public void OpenShop()
         {
+            uiManager.SetActiveTutorialUI(false);
             cameraAnimator.Play("OpenShop");
             platformMover.SetShopState();
             uiManager.SetActiveUpgradeMenu(false);
@@ -83,9 +117,15 @@ namespace Core
             uiManager.SetActiveFailedLevelPanel(false);
             uiManager.SetActiveLevelsMenu(false);
         }
+        
+        public void OpenLeaderboard()
+        {
+            PlayGamesPlatform.Instance.ShowLeaderboardUI();
+        }
 
         public void CloseShop()
         {
+            uiManager.SetActiveTutorialUI(false);
             cameraAnimator.Play("CloseShop");
             platformMover.SetDefaultState();
             uiManager.SetActiveUpgradeMenu(false);
@@ -120,6 +160,7 @@ namespace Core
 
         public void ShowLevels()
         {
+            uiManager.SetActiveTutorialUI(false);
             uiManager.SetActiveScorePanel(false);
             platformMover.SetLevelMode(false);
             platformMover.SetDefaultState();
@@ -136,6 +177,7 @@ namespace Core
 
         public void FinishLevel(LevelData levelsData)
         {
+            uiManager.SetActiveTutorialUI(false);
             uiManager.SetActiveFinishLevel(true);
             finishLevelUI.SetLevelData(levelsData);
             finishLevelUI.SetMaxValue();
@@ -167,6 +209,7 @@ namespace Core
 
         public void ShowMainMenu()
         {
+            uiManager.SetActiveTutorialUI(false);
             bonusController.DeactivateAllBonuses();
             concentration.Reset();
             uiManager.SetActiveScorePanel(false);
@@ -219,6 +262,7 @@ namespace Core
         
         public void StartNextLevel()
         {
+            uiManager.SetActiveTutorialUI(false);
             platformMover.transform.rotation = Quaternion.Euler(0, 0, 0);
             concentration.Reset();
             uiManager.scorePanel.ResetCounter();
@@ -243,6 +287,7 @@ namespace Core
 
         public void FailedGame()
         {
+            uiManager.SetActiveTutorialUI(false);
             interstitialAds.TryShowInterstitialAd();
            
             gameStarted = false;
@@ -265,6 +310,7 @@ namespace Core
 
         public void FailedLevel()
         {
+            uiManager.SetActiveTutorialUI(false);
             platformMover.transform.rotation = Quaternion.Euler(0, 0, 0);
             interstitialAds.TryShowInterstitialAd();
             gameStarted = false;
@@ -282,6 +328,7 @@ namespace Core
 
         public void StartedLevel()
         {
+            uiManager.SetActiveTutorialUI(false);
             platformMover.transform.rotation = Quaternion.Euler(0, 0, 0);
             bonusController.DeactivateAllBonuses();
             concentration.Reset();
@@ -307,6 +354,7 @@ namespace Core
 
         public void ShowUpgradeMenu()
         {
+            uiManager.SetActiveTutorialUI(false);
             //platformMover.SetLevelMode(false);
             gameStarted = false;
             uiManager.SetActiveUpgradeMenu(true);
