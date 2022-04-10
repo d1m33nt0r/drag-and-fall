@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Core;
 using Data;
+using Progress;
 using UI.GameplayUI.InfinityUI.FailedUI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +16,9 @@ namespace UI.InfinityUI
         [SerializeField] private ScorePanel scorePanel;
         [SerializeField] private SessionData sessionData;
         [SerializeField] private Text bestScoreText;
-
+        [SerializeField] private ProgressController progressController;
+        [SerializeField] private Text mainMenuBestText;
+        
         private const string leaderBoard = "CgkI1oSBxbsCEAIQAQ";
         
         private Coroutine newBestScoreCoroutine;
@@ -23,11 +26,14 @@ namespace UI.InfinityUI
         public void ShowNewBestScoreUI()
         {
             newBestScoreUI.SetActive(true);
-            //newBestScoreUI.GetComponent<BestScoreUI>().SetBestScoreText(scorePanel.GetPoints());
+            newBestScoreUI.GetComponent<BestScoreUI>().ResetBestScore();
             continueUI.SetActive(false);
             finishUI.SetActive(false);
             if (newBestScoreCoroutine != null) StopCoroutine(newBestScoreCoroutine);
             newBestScoreCoroutine = StartCoroutine(AnimateScore(scorePanel.GetPoints()));
+            progressController.currentState.bestScore = scorePanel.GetPoints();
+            progressController.SaveCurrentState(progressController.currentState);
+            mainMenuBestText.text = scorePanel.GetPoints().ToString();
             Social.ReportScore(scorePanel.GetPoints(), leaderBoard, (bool success) => { });
         }
 
