@@ -3,6 +3,7 @@ using System.Collections;
 using Common;
 using Core.Bonuses;
 using Data.Core;
+using Data.Core.Segments;
 using Data.Shop.TubeSkins;
 using DG.Tweening;
 using ObjectPool;
@@ -13,6 +14,8 @@ namespace Core
 {
     public class PlatformMover : MonoBehaviour
     {
+        [SerializeField] private TutorialUI tutorialUI;
+        
         private bool isFirstPlatform = true;
         [SerializeField] private CameraController cameraController;
         [SerializeField] private SegmentContentPool segmentContentPool;
@@ -190,6 +193,12 @@ namespace Core
             
             while (distCovered / journeyLength != 1)
             {
+                if (!gameManager.gameStarted)
+                {
+                    yield return null;
+                    continue;
+                }
+                
                 for (var i = 1; i < countPlatforms; i++)
                 {
                     try
@@ -235,6 +244,26 @@ namespace Core
             
             platforms = new Platform[countPlatforms];
 
+            if (tutorialUI.firstStepComplete) 
+                StandardInit();
+            else
+                TutorialInit();
+            
+        }
+
+        private void TutorialInit()
+        {
+            for (var i = 0; i < countPlatforms; i++)
+            {
+                currentPatternData = new PatternData(12);
+                CreateNewPlatform(i, currentPatternData, false);
+            }
+
+            platformsIsInitialized = true;
+        }
+        
+        private void StandardInit()
+        {
             for (var i = 0; i < countPlatforms; i++)
             {
                 if (!isLevelMode)
@@ -251,21 +280,21 @@ namespace Core
                 }
                 else
                 {
-                    currentPatternData = gameManager.gameMode.levelMode.GetPatternData(); 
+                    currentPatternData = gameManager.gameMode.levelMode.GetPatternData();
                 }
-                
+
                 CreateNewPlatform(i, currentPatternData, false);
             }
 
             platformsIsInitialized = true;
         }
-        
+
         private void CreateNewPlatform(int _platformIndex, PatternData patternData, bool hide)
         {
             var platformInstance = Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.Euler(transform.rotation.eulerAngles), transform);
             var platform = platformInstance.GetComponent<Platform>();
             platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, 
-                player, bonusController, gainScore, segmentContentPool, tubeMover);
+                player, bonusController, gainScore, segmentContentPool, tubeMover, tutorialUI);
             
             
             //AlignRotation(platformInstance);
