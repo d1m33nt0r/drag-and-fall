@@ -11,19 +11,22 @@ public class TutorialUI : MonoBehaviour
     [SerializeField] private GameObject firstStep;
     [SerializeField] private GameObject secondStep;
     [SerializeField] private GameObject thirdStep;
+    [SerializeField] private GameObject fourthStep;
     
     public bool tutorialIsFinished => firstStepComplete && secondStepComplete && thirdStepComplete;
-    
+
+    public bool firstGeneralStepComplete;
     public bool firstStepComplete;
     public bool secondStepComplete;
     public bool thirdStepComplete;
-
+    public bool fourthStepComplete;
+    
     private int currentStep;
 
     private void Awake()
     {
         tutorialProgress = new TutorialProgress();
-        tutorialProgress.tutorialSteps = new bool[3];
+        tutorialProgress.tutorialSteps = new bool[4];
         
         var json= JsonUtility.ToJson(tutorialProgress);
         path = Path.Combine(Application.dataPath, "tutorialProgress.json");
@@ -32,7 +35,8 @@ public class TutorialUI : MonoBehaviour
         firstStepComplete = tutorialProgress.tutorialSteps[0];
         secondStepComplete = tutorialProgress.tutorialSteps[1];
         thirdStepComplete = tutorialProgress.tutorialSteps[2];
-
+        fourthStepComplete = tutorialProgress.tutorialSteps[3];
+        
         if (!firstStepComplete)
         {
             currentStep = 0;
@@ -48,6 +52,11 @@ public class TutorialUI : MonoBehaviour
         if (!thirdStepComplete)
         {
             currentStep = 2;
+            return;
+        }
+        if (!fourthStepComplete)
+        {
+            currentStep = 3;
         }
     }
 
@@ -56,7 +65,9 @@ public class TutorialUI : MonoBehaviour
         firstStep.SetActive(true);
         secondStep.SetActive(false);
         thirdStep.SetActive(false);
+        fourthStep.SetActive(false);
         firstStepComplete = true;
+        tutorialProgress.tutorialSteps[0] = true;
     }
 
     public void ShowSecondStep()
@@ -64,17 +75,39 @@ public class TutorialUI : MonoBehaviour
         gameObject.SetActive(true);
         firstStep.SetActive(false);
         secondStep.SetActive(true);
+        fourthStep.SetActive(false);
         thirdStep.SetActive(false);
         secondStepComplete = true;
         gameManager.gameStarted = false;
+        tutorialProgress.tutorialSteps[1] = true;
     }
 
     public void ShowThirdStep()
     {
+        gameObject.SetActive(true);
         firstStep.SetActive(false);
         secondStep.SetActive(false);
         thirdStep.SetActive(true);
+        fourthStep.SetActive(false);
         thirdStepComplete = true;
         gameManager.gameStarted = false;
+        tutorialProgress.tutorialSteps[2] = true;
+    }
+
+    public void ShowFourthStep()
+    {
+        gameObject.SetActive(true);
+        firstStep.SetActive(false);
+        secondStep.SetActive(false);
+        thirdStep.SetActive(false);
+        fourthStep.SetActive(true);
+        tutorialProgress.tutorialSteps[3] = true;
+    }
+
+    public void RewriteTutorialProgressData()
+    {
+        var json= JsonUtility.ToJson(tutorialProgress);
+        path = Path.Combine(Application.dataPath, "tutorialProgress.json");
+        File.WriteAllText(path, json);
     }
 }

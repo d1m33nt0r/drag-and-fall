@@ -10,6 +10,7 @@ namespace UI
 {
     public class FinishLevelUI : MonoBehaviour
     {
+        [SerializeField] private TutorialUI tutorialUI;
         [SerializeField] private Transform tryAgainButtonTransform;
         [SerializeField] private Transform closeButtonTransform;
         [SerializeField] private GameManager gameManager;
@@ -60,15 +61,36 @@ namespace UI
             animator.Play("Show");
         }
 
+        public void ShowTutorialUI()
+        {
+            if (!tutorialUI.fourthStepComplete)
+                tutorialUI.ShowFourthStep();
+        }
+        
         public void PlayHideAnimation()
         {
-            animator.Play("Hide");
+            if (tutorialUI.firstGeneralStepComplete)
+                animator.Play("Hide");
+            else
+            {
+                tutorialUI.transform.GetChild(3).gameObject.SetActive(false);
+                animator.Play("TutorialHide");
+            }
+
+            tutorialUI.firstGeneralStepComplete = true;
+            tutorialUI.RewriteTutorialProgressData();
         }
 
         public void ShowLevels()
         {
             ResetDefaultState();
             gameManager.ShowLevels();
+        }
+        
+        public void ShowMainMenu()
+        {
+            ResetDefaultState();
+            gameManager.ShowMainMenu();
         }
         
         public void ResetDefaultState()

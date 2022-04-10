@@ -5,6 +5,6 @@ namespace Data.Progress
     [Serializable]
     public class TutorialProgress
     {
-        public bool[] tutorialSteps = new bool[3];
+        public bool[] tutorialSteps;
     }
 }

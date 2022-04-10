@@ -4,6 +4,7 @@ using Common;
 using Core.Bonuses;
 using Data.Core;
 using Data.Core.Segments;
+using Data.Core.Segments.Content;
 using Data.Shop.TubeSkins;
 using DG.Tweening;
 using ObjectPool;
@@ -175,47 +176,96 @@ namespace Core
             destroyTubeNeeded = !destroyTubeNeeded;
             for (var i = 1; i < countPlatforms; i++)
                 platforms[i - 1] = platforms[i];
-            
-            if (!isLevelMode)
-                currentPatternData = gameManager.gameMode.infinityMode.GetPatternData();
-            else
-                currentPatternData = gameManager.gameMode.levelMode.GetPatternData();
-            
-            if (isLevelMode && currentPatternData != null)
-                CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
-            else if(isLevelMode && currentPatternData == null)
-                CreateNewPlatform(countPlatforms - 1, new PatternData(12), true);
-            else
-                CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
-            
-            var distCovered = (Time.time - startTime) * speed;
-            var fractionOfJourney = distCovered / journeyLength;
-            
-            while (distCovered / journeyLength != 1)
-            {
-                if (!gameManager.gameStarted)
-                {
-                    yield return null;
-                    continue;
-                }
-                
-                for (var i = 1; i < countPlatforms; i++)
-                {
-                    try
-                    {
-                        distCovered = (Time.time - startTime) * speed;
-                        fractionOfJourney = distCovered / journeyLength;
-                        platforms[i - 1].transform.position = Vector3.Lerp(localPositionsOfPlatforms[i], localPositionsOfPlatforms[i - 1], fractionOfJourney);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                        throw;
-                    }
-                }
 
-                yield return null;
+            if (tutorialUI.firstGeneralStepComplete)
+            {
+                if (!isLevelMode)
+                    currentPatternData = gameManager.gameMode.infinityMode.GetPatternData();
+                else
+                    currentPatternData = gameManager.gameMode.levelMode.GetPatternData();
+            
+                if (isLevelMode && currentPatternData != null)
+                    CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
+                else if(isLevelMode && currentPatternData == null)
+                    CreateNewPlatform(countPlatforms - 1, new PatternData(12), true);
+                else
+                    CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
+            
+                var distCovered = (Time.time - startTime) * speed;
+                var fractionOfJourney = distCovered / journeyLength;
+                while (distCovered / journeyLength != 1)
+                {
+                    if (!gameManager.gameStarted)
+                    {
+                        yield return null;
+                        continue;
+                    }
+                
+                    for (var i = 1; i < countPlatforms; i++)
+                    {
+                        try
+                        {
+                            distCovered = (Time.time - startTime) * speed;
+                            fractionOfJourney = distCovered / journeyLength;
+                            platforms[i - 1].transform.position = Vector3.Lerp(localPositionsOfPlatforms[i], localPositionsOfPlatforms[i - 1], fractionOfJourney);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                            throw;
+                        }
+                    }
+
+                    yield return null;
+                }
             }
+            else
+            {
+                if (!concentration.isActive)
+                {
+                    GenerateStartTutorialPlatform();
+                    CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
+                }
+                else
+                {
+                    isLevelMode = true;
+                    gameManager.gameMode.levelMode.level = levelsData.leves[0];
+                    currentPatternData = gameManager.gameMode.levelMode.GetPatternData();
+                    if (isLevelMode && currentPatternData != null)
+                        CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
+                    else if(isLevelMode && currentPatternData == null)
+                        CreateNewPlatform(countPlatforms - 1, new PatternData(12), true);
+                }
+            
+                var distCovered = (Time.time - startTime) * speed;
+                var fractionOfJourney = distCovered / journeyLength;
+                while (distCovered / journeyLength != 1)
+                {
+                    if (!gameManager.gameStarted)
+                    {
+                        yield return null;
+                        continue;
+                    }
+                
+                    for (var i = 1; i < countPlatforms; i++)
+                    {
+                        try
+                        {
+                            distCovered = (Time.time - startTime) * speed;
+                            fractionOfJourney = distCovered / journeyLength;
+                            platforms[i - 1].transform.position = Vector3.Lerp(localPositionsOfPlatforms[i], localPositionsOfPlatforms[i - 1], fractionOfJourney);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                            throw;
+                        }
+                    }
+
+                    yield return null;
+                }
+            }
+            
         }
         
         private void InitializePlatformPoints()
@@ -255,13 +305,41 @@ namespace Core
         {
             for (var i = 0; i < countPlatforms; i++)
             {
-                currentPatternData = new PatternData(12);
+                if (i == 0)
+                {
+                    currentPatternData = new PatternData(12);
+                }
+                else
+                {
+                    GenerateStartTutorialPlatform();
+                }
+                    
                 CreateNewPlatform(i, currentPatternData, false);
             }
 
             platformsIsInitialized = true;
         }
-        
+
+        private void GenerateStartTutorialPlatform()
+        {
+            currentPatternData = new PatternData(12);
+            currentPatternData.segmentsData = new[]
+            {
+                new SegmentData {positionIndex = 0, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                new SegmentData {positionIndex = 1, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                new SegmentData {positionIndex = 2, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                new SegmentData {positionIndex = 3, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                new SegmentData {positionIndex = 4, segmentContent = SegmentContent.None, segmentType = SegmentType.Hole},
+                new SegmentData {positionIndex = 5, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                new SegmentData {positionIndex = 6, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                new SegmentData {positionIndex = 7, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                new SegmentData {positionIndex = 8, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                new SegmentData {positionIndex = 9, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                new SegmentData {positionIndex = 10, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                new SegmentData {positionIndex = 11, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+            };
+        }
+
         private void StandardInit()
         {
             for (var i = 0; i < countPlatforms; i++)
@@ -295,7 +373,6 @@ namespace Core
             var platform = platformInstance.GetComponent<Platform>();
             platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, 
                 player, bonusController, gainScore, segmentContentPool, tubeMover, tutorialUI);
-            
             
             //AlignRotation(platformInstance);
             platforms[_platformIndex] = platform;
