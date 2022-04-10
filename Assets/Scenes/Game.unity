@@ -66500,6 +66500,8 @@ MonoBehaviour:
   scorePanel: {fileID: 1111169226}
   sessionData: {fileID: 1357667550}
   bestScoreText: {fileID: 2068345585}
+  progressController: {fileID: 386115021}
+  mainMenuBestText: {fileID: 652740101}
 --- !u!1 &1391276265
 GameObject:
   m_ObjectHideFlags: 0

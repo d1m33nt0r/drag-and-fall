@@ -11,6 +11,11 @@ namespace UI.InfinityUI
         [SerializeField] private Text bestScoreText;
         [SerializeField] private ProgressController progressController;
         [SerializeField] private BestScoreMainText bestScoreMainText;
+
+        public void ResetBestScore()
+        {
+            bestScoreText.text = "0";
+        }
         
         public void SetBestScoreText(int score)
         {
