@@ -67,6 +67,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SpecularColor1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _StylizedThreshold:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -91,16 +95,16 @@ Material:
     - _Parallax: 0.02
     - _RampSmoothing: 1
     - _RampSmoothingOtherLights: 1
-    - _RampThreshold: 0.83
+    - _RampThreshold: 0.423
     - _RampThresholdOtherLights: 1
-    - _RimMax: 1.82
+    - _RimMax: 1
     - _RimMin: 0.42
     - _Shadow_HSV_H: 0
     - _Shadow_HSV_S: 0
     - _Shadow_HSV_V: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SpecularRoughnessPBR: 0.5
+    - _SpecularRoughnessPBR: 0.487
     - _SpecularSmoothness: 0.2
     - _SpecularToonSize: 0.783
     - _SpecularToonSmoothness: 0.313
@@ -123,7 +127,7 @@ Material:
     - _EmissionMask_SC: {r: 0, g: 0, b: 0, a: 0}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 0.5}
-    - _RimDir: {r: -1.8, g: 0.44, b: 1, a: 1}
+    - _RimDir: {r: 0, g: 0, b: 1, a: 1}
     - _SColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _TCP2_AMBIENT_BACK: {r: 0, g: 0, b: 0, a: 1}

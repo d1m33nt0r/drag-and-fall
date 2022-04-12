@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: TubeHaker
   m_Shader: {fileID: 4800000, guid: cabbd11a2419d0e48ba1723153f2081c, type: 3}
-  m_ShaderKeywords: _NORMALMAP
+  m_ShaderKeywords: TCP2_RIM_LIGHTING _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -71,6 +71,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 7feac7fa3033f044dbbb9db1df31be6e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SpecularColor1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _StylizedThreshold:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -107,9 +111,9 @@ Material:
     - _Parallax: 0.02
     - _RampSmoothing: 1
     - _RampSmoothingOtherLights: 1
-    - _RampThreshold: 0.01
+    - _RampThreshold: 0.22
     - _RampThresholdOtherLights: 1
-    - _RimMax: 1
+    - _RimMax: 1.22
     - _RimMin: 0.5
     - _Shadow_HSV_H: 0
     - _Shadow_HSV_S: 0.32
@@ -124,7 +128,7 @@ Material:
     - _UVSec: 0
     - _UseAmbient: 0
     - _UseNormalMap: 1
-    - _UseRim: 0
+    - _UseRim: 1
     - _UseSpecular: 0
     - _UseTexturedThreshold: 0
     - _ZWrite: 1
@@ -133,14 +137,14 @@ Material:
     - __dummy__: 0
     - _scrollTex_Mip: 5.36
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.764151, g: 0.764151, b: 0.764151, a: 1}
     - _DiffuseTint: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
     - _Emission: {r: 0.028431373, g: 0, b: 0.03137255, a: 1}
     - _EmissionColor: {r: 0.14663072, g: 0.6415094, b: 0, a: 1}
     - _EmissionMask_SC: {r: 0, g: -1, b: 0, a: 0}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 0.5}
-    - _RimDir: {r: 0.09, g: -0.12, b: 1, a: 1}
+    - _RimColor: {r: 0.09785414, g: 0.122641504, b: 0.08041117, a: 0.5}
+    - _RimDir: {r: 0, g: 0, b: 1, a: 1}
     - _SColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
     - _ScrollingTexture_SC: {r: 1, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

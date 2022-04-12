@@ -16,7 +16,7 @@ namespace Core
     public class PlatformMover : MonoBehaviour
     {
         [SerializeField] private TutorialUI tutorialUI;
-        
+    
         private bool isFirstPlatform = true;
         [SerializeField] private CameraController cameraController;
         [SerializeField] private SegmentContentPool segmentContentPool;
@@ -32,7 +32,7 @@ namespace Core
         [SerializeField] private DragController dragController;
         [SerializeField] public VisualController visualController;
         public GameManager gameManager;
-        [SerializeField] private Concentration concentration;
+        public Concentration concentration;
         public LevelsData levelsData;
         [SerializeField] private BonusController bonusController;
         [SerializeField] private LevelProgress levelProgress;

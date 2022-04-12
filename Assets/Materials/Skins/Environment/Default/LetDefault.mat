@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LetDefault
-  m_Shader: {fileID: 4800000, guid: 27814869e043c2243b0d6606a7afce5f, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: cabbd11a2419d0e48ba1723153f2081c, type: 3}
+  m_ShaderKeywords: TCP2_AMBIENT TCP2_RIM_LIGHTING
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -67,6 +67,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SpecularColor1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _StylizedThreshold:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -86,14 +90,14 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LightWrapFactor: 0.48
+    - _LightWrapFactor: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _RampSmoothing: 1
     - _RampSmoothingOtherLights: 0.5
-    - _RampThreshold: 0.763
+    - _RampThreshold: 0.337
     - _RampThresholdOtherLights: 0.5
     - _ReflectionSmoothness: 0.5
     - _RimMax: 1
@@ -103,34 +107,34 @@ Material:
     - _Shadow_HSV_V: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SpecularRoughnessPBR: 0.5
+    - _SpecularRoughnessPBR: 0.16
     - _SpecularSmoothness: 0.2
     - _SrcBlend: 1
     - _UVSec: 0
-    - _UseAmbient: 0
+    - _UseAmbient: 1
     - _UseNormalMap: 0
     - _UseReflections: 0
-    - _UseRim: 0
+    - _UseRim: 1
     - _UseSpecular: 0
     - _ZWrite: 1
-    - __BeginGroup_ShadowHSV: 0
+    - __BeginGroup_ShadowHSV: 1
     - __EndGroup: 0
     - __dummy__: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.42356953, b: 0, a: 1}
+    - _Color: {r: 0.754717, g: 0.23673907, b: 0.23139909, a: 1}
     - _DiffuseTint: {r: 1, g: 0.5, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionMask_SC: {r: 1, g: 1, b: 0, a: 0}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.5}
+    - _RimColor: {r: 1, g: 0, b: 0.627451, a: 0.5}
     - _RimDir: {r: 0, g: 0, b: 1, a: 1}
-    - _SColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _SColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
+    - _SpecularColor: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 1}
     - _TCP2_AMBIENT_BACK: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_BOTTOM: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_FRONT: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_LEFT: {r: 0, g: 0, b: 0, a: 1}
     - _TCP2_AMBIENT_RIGHT: {r: 0, g: 0, b: 0, a: 1}
-    - _TCP2_AMBIENT_TOP: {r: 0, g: 0, b: 0, a: 1}
+    - _TCP2_AMBIENT_TOP: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
   m_BuildTextureStacks: []

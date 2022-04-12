@@ -77,7 +77,7 @@ namespace UI
                 animator.Play("TutorialHide");
             }
 
-            tutorialUI.firstGeneralStepComplete = true;
+            //tutorialUI.firstGeneralStepComplete = true;
             tutorialUI.RewriteTutorialProgressData();
         }
 

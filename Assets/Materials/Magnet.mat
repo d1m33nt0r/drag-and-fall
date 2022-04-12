@@ -99,7 +99,7 @@ Material:
     - _Parallax: 0.02
     - _RampSmoothing: 0.767
     - _RampSmoothingOtherLights: 0.5
-    - _RampThreshold: 0.602
+    - _RampThreshold: 0.22
     - _RampThresholdOtherLights: 0.5
     - _RimMax: 2
     - _RimMin: 0
@@ -124,10 +124,10 @@ Material:
     - __EndGroup: 0
     - __dummy__: 0
     m_Colors:
-    - _Color: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    - _Color: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
     - _DiffuseTint: {r: 0, g: 0, b: 0, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0.08897665, g: 0.020247415, b: 0.122641504, a: 1}
     - _EmissionMask_SC: {r: 1, g: 1, b: 0, a: 0}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 0.5}

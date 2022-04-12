@@ -15,7 +15,7 @@ public class TutorialUI : MonoBehaviour
     
     public bool tutorialIsFinished => firstStepComplete && secondStepComplete && thirdStepComplete;
 
-    public bool firstGeneralStepComplete;
+    public bool firstGeneralStepComplete => fourthStepComplete;
     public bool firstStepComplete;
     public bool secondStepComplete;
     public bool thirdStepComplete;
@@ -108,7 +108,11 @@ public class TutorialUI : MonoBehaviour
     public void RewriteTutorialProgressData()
     {
         var json= JsonUtility.ToJson(tutorialProgress);
+#if UNITY_EDITOR
         path = Path.Combine(Application.dataPath, "tutorialProgress.json");
+#elif UNITY_ANDROID
+        path = Path.Combine(Application.persistentDataPath, "tutorialProgress.json");
+#endif
         File.WriteAllText(path, json);
     }
 }

@@ -103,7 +103,7 @@ Material:
     - _RimMax: 1
     - _RimMin: 0.5
     - _Shadow_HSV_H: 0
-    - _Shadow_HSV_S: 0
+    - _Shadow_HSV_S: -0.2
     - _Shadow_HSV_V: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -127,11 +127,11 @@ Material:
     - _Color: {r: 0.21568628, g: 0.21568628, b: 0.21568628, a: 1}
     - _DiffuseTint: {r: 0, g: 0, b: 0, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissionColor: {r: 1825.2128, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 5798, g: 0, b: 0, a: 1}
     - _EmissionMask_SC: {r: 0, g: 0, b: 0, a: 0}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 0.5}
+    - _RimColor: {r: 1, g: 0.3726415, b: 0.47417498, a: 0.5}
     - _RimDir: {r: 0, g: 0, b: 1, a: 1}
     - _SColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

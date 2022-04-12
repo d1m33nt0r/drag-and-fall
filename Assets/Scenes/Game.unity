@@ -15292,7 +15292,6 @@ MonoBehaviour:
   secondStep: {fileID: 396190337}
   thirdStep: {fileID: 1739996989}
   fourthStep: {fileID: 60729342}
-  firstGeneralStepComplete: 0
   firstStepComplete: 0
   secondStepComplete: 0
   thirdStepComplete: 0
@@ -20503,6 +20502,8 @@ MonoBehaviour:
     - index: 1
       isBought: 0
     - index: 2
+      isBought: 0
+    - index: 3
       isBought: 0
     playerSkins:
     - index: 0
