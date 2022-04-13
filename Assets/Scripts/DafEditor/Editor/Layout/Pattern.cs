@@ -17,7 +17,7 @@ namespace DafEditor.Editor.Layout
         private int segmentIndex;
         private int index;
         private Vector2 drag;
-        private Vector2 otstup => new Vector2(0, 66 * index);
+        private Vector2 otstup => new Vector2(0, 50 * index);
         Vector2 centerCoordinate => GameEditorWindow.instance.centerPoint.GetFirstPositionCoordinate();
         Vector2 position => new Vector2(centerCoordinate.x - PATTERN_WIDTH / 2 + otstup.x + drag.x, centerCoordinate.y - PATTERN_HEIGHT / 2 + otstup.y + drag.y);
         Rect rect => new Rect(position, new Vector2(PATTERN_WIDTH, PATTERN_HEIGHT));
@@ -55,6 +55,7 @@ namespace DafEditor.Editor.Layout
             
             DrawBonusLine();
             DrawSegmentLine();
+            
             GUILayout.EndVertical();
 
             GUILayout.EndArea();
@@ -73,15 +74,15 @@ namespace DafEditor.Editor.Layout
                 switch (patternData.segmentsData[i].segmentType)
                 {
                     case SegmentType.Ground:
-                        if (GUILayout.Button("G", GUILayout.Width(30)))
+                        if (GUILayout.Button("G", EditorStyles.GroundButtonStyle()))
                             patternData.segmentsData[i].segmentType = SegmentType.Hole;
                         break;
                     case SegmentType.Hole:
-                        if (GUILayout.Button("H", GUILayout.Width(30)))
+                        if (GUILayout.Button("H", EditorStyles.HoleButtonStyle()))
                             patternData.segmentsData[i].segmentType = SegmentType.Let;
                         break;
                     case SegmentType.Let:
-                        if (GUILayout.Button("L", GUILayout.Width(30)))
+                        if (GUILayout.Button("L", EditorStyles.LetButtonStyle()))
                             patternData.segmentsData[i].segmentType = SegmentType.Ground;
                         break;
                 }
@@ -94,8 +95,8 @@ namespace DafEditor.Editor.Layout
                     patternData.isRandom = !patternData.isRandom;
                     if (!patternData.isRandom)
                     {
-                        GameEditorWindow.instance.SetRightPanelState(RightPanelState.Empty);
-                        GameEditorWindow.instance.SetCurrentRandomPatternData(null);
+                        GameEditorWindow.instance.SetRightPanelState(RightPanelState.PlatformRandomSettings);
+                        GameEditorWindow.instance.SetCurrentRandomPatternData(patternData);
                         GameEditorWindow.instance.SetCurrentRandomSetData(null);
                         patternData.isRandom = false;
                     }
@@ -117,9 +118,9 @@ namespace DafEditor.Editor.Layout
                     }
                     else
                     {
-                        GameEditorWindow.instance.SetCurrentRandomPatternData(null);
+                        GameEditorWindow.instance.SetCurrentRandomPatternData(patternData);
                         GameEditorWindow.instance.SetCurrentRandomSetData(null);
-                        GameEditorWindow.instance.SetRightPanelState(RightPanelState.Empty);
+                        GameEditorWindow.instance.SetRightPanelState(RightPanelState.PlatformRandomSettings);
                     }
                 }
             }

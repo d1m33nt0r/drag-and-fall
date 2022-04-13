@@ -6,8 +6,8 @@ namespace DafEditor.Editor.Common
     {
         public static GUIStyle LeftSidebarStyle()
         {
-            var style = new GUIStyle();
-            
+            var style = new GUIStyle(GUI.skin.button);
+            GUI.backgroundColor = new Color(0.9f, 0.9f, 0.9f, 1);
             var texture = new Texture2D(1,1);
             texture.SetPixel(1,1, new Color(0.2f,0.2f,0.2f,1));
             texture.Apply();
@@ -34,26 +34,26 @@ namespace DafEditor.Editor.Common
         
         public static GUIStyle PatternSegmentContentStyle()
         {
-            var style = new GUIStyle();
+            var style = new GUIStyle(GUI.skin.box);
+            GUI.backgroundColor = new Color(0.2f, 0.2f, 0.2f, 1);
+            //var texture = new Texture2D(1,1);
+            //texture.SetPixel(1,1, new Color(0.2f,0.5f,0.5f,0.7f));
+            //texture.Apply();
             
-            var texture = new Texture2D(1,1);
-            texture.SetPixel(1,1, new Color(0.2f,0.2f,0.0f,0.7f));
-            texture.Apply();
-            
-            style.normal.background = texture;
+            //style.normal.background = texture;
 
             return style;
         }
         
         public static GUIStyle PatternSegmentStyle()
         {
-            var style = new GUIStyle();
+            var style = new GUIStyle(GUI.skin.box);
             
-            var texture = new Texture2D(1,1);
-            texture.SetPixel(1,1, new Color(0.0f,0.2f,0.2f,0.7f));
-            texture.Apply();
+            // var texture = new Texture2D(1,1);
+            //texture.SetPixel(1,1, new Color(0.5f,0.5f,0.5f,1f));
+            //texture.Apply();
             
-            style.normal.background = texture;
+            //style.normal.background = texture;
 
             return style;
         }
@@ -194,6 +194,48 @@ namespace DafEditor.Editor.Common
             texture.Apply();
 
             style.normal.background = texture;
+
+            return style;
+        }
+        
+        public static GUIStyle LetButtonStyle()
+        {
+            var style = new GUIStyle(GUI.skin.button);
+            GUI.backgroundColor = new Color(0.9f, 0.2f, 0, 1);
+            style.fixedWidth = 30;
+            return style;
+        }
+        
+        public static GUIStyle GroundButtonStyle()
+        {
+            var style = new GUIStyle(GUI.skin.button);
+            GUI.backgroundColor = new Color(0.75f, 0.75f, 0.75f, 1);
+            style.fixedWidth = 30;
+            //var texture = new Texture2D(1,1);
+            //texture.SetPixel(1,1, new Color(0.4f,0.43f,0.5f,1));
+            //texture.Apply();
+            /*style.alignment = TextAnchor.MiddleCenter;
+            style.margin = new RectOffset(2, 2, 2, 2);
+            style.fixedWidth = 30;
+            style.fixedHeight = 20;*/
+            //style.normal.background = texture;
+
+            return style;
+        }
+        
+        public static GUIStyle HoleButtonStyle()
+        {
+            var style = new GUIStyle(GUI.skin.button);
+            GUI.backgroundColor = Color.green;
+            style.fixedWidth = 30;
+            /*var texture = new Texture2D(1,1);
+            texture.SetPixel(1,1, new Color(0.2f,0.7f,0.2f,1));
+            texture.Apply();
+            style.alignment = TextAnchor.MiddleCenter;
+            style.margin = new RectOffset(2, 2, 2, 2);
+            style.fixedWidth = 30;
+            style.fixedHeight = 20;
+            style.normal.background = texture;*/
 
             return style;
         }

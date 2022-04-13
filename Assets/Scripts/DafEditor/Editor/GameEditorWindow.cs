@@ -12,7 +12,9 @@ namespace DafEditor.Editor
 
         public LevelsData levelsData;
         public InfinityData infinityData;
-
+        public LevelData currentLevelData;
+        
+        public EditorState state;
         public List<PatternData> currentPatternsData;
         
         public LeftSplitLine leftSplitLine;
@@ -51,9 +53,9 @@ namespace DafEditor.Editor
 
         private void OnGUI()
         {
+            content.Draw();
             leftSplitLine.Draw();
             leftSidebar.Draw();
-            content.Draw();
             rightSpitLine.Draw();
             rightSidebar.Draw();
         }

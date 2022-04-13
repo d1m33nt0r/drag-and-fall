@@ -13,6 +13,7 @@ namespace Data.Core
         public int maxHoleAmount;
         public int minHoleAmount;
         public bool isLast;
+        public float segmentRotationBias;
         public SegmentData[] segmentsData;
         
         public PatternData(int _segmentsAmount)

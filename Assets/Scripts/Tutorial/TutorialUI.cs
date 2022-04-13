@@ -29,7 +29,11 @@ public class TutorialUI : MonoBehaviour
         tutorialProgress.tutorialSteps = new bool[4];
         
         var json= JsonUtility.ToJson(tutorialProgress);
+#if UNITY_EDITOR
         path = Path.Combine(Application.dataPath, "tutorialProgress.json");
+#elif UNITY_ANDROID
+        path = Path.Combine(Application.persistentDataPath, "tutorialProgress.json");
+#endif
         if (!File.Exists(path)) File.WriteAllText(path, json);
         tutorialProgress = JsonUtility.FromJson<TutorialProgress>(File.ReadAllText(path));
         firstStepComplete = tutorialProgress.tutorialSteps[0];
@@ -101,7 +105,9 @@ public class TutorialUI : MonoBehaviour
         secondStep.SetActive(false);
         thirdStep.SetActive(false);
         fourthStep.SetActive(true);
+        fourthStepComplete = true;
         tutorialProgress.tutorialSteps[3] = true;
+        RewriteTutorialProgressData();
         Firebase.Analytics.FirebaseAnalytics.LogEvent("Finished 1 stage of tutorial");
     }
 

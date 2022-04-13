@@ -20,30 +20,43 @@ MonoBehaviour:
     maxHoleAmount: 0
     minHoleAmount: 0
     isLast: 0
+    segmentRotationBias: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
   - isRandom: 0
     maxLetAmount: 0
@@ -51,30 +64,87 @@ MonoBehaviour:
     maxHoleAmount: 0
     minHoleAmount: 0
     isLast: 0
+    segmentRotationBias: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 1
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+  - isRandom: 1
+    maxLetAmount: 0
+    minLetAmount: 0
+    maxHoleAmount: 0
+    minHoleAmount: 0
+    isLast: 0
+    segmentRotationBias: -15
+    segmentsData:
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
   - isRandom: 0
     maxLetAmount: 0
@@ -82,30 +152,87 @@ MonoBehaviour:
     maxHoleAmount: 0
     minHoleAmount: 0
     isLast: 0
+    segmentRotationBias: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 1
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 1
-      segmentContent: 6
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+  - isRandom: 1
+    maxLetAmount: 0
+    minLetAmount: 0
+    maxHoleAmount: 0
+    minHoleAmount: 0
+    isLast: 0
+    segmentRotationBias: 15
+    segmentsData:
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
   - isRandom: 0
     maxLetAmount: 0
@@ -113,30 +240,43 @@ MonoBehaviour:
     maxHoleAmount: 0
     minHoleAmount: 0
     isLast: 0
+    segmentRotationBias: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
   - isRandom: 0
     maxLetAmount: 0
@@ -144,30 +284,43 @@ MonoBehaviour:
     maxHoleAmount: 0
     minHoleAmount: 0
     isLast: 0
+    segmentRotationBias: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 1
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
-      segmentContent: 6
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
   - isRandom: 0
     maxLetAmount: 0
@@ -175,30 +328,43 @@ MonoBehaviour:
     maxHoleAmount: 0
     minHoleAmount: 0
     isLast: 0
+    segmentRotationBias: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
-      segmentContent: 6
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
   - isRandom: 0
     maxLetAmount: 0
@@ -206,30 +372,43 @@ MonoBehaviour:
     maxHoleAmount: 0
     minHoleAmount: 0
     isLast: 0
+    segmentRotationBias: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 1
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 1
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
   - isRandom: 0
     maxLetAmount: 0
@@ -237,30 +416,43 @@ MonoBehaviour:
     maxHoleAmount: 0
     minHoleAmount: 0
     isLast: 0
+    segmentRotationBias: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 1
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
   - isRandom: 0
     maxLetAmount: 0
@@ -268,30 +460,43 @@ MonoBehaviour:
     maxHoleAmount: 0
     minHoleAmount: 0
     isLast: 0
+    segmentRotationBias: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
-      segmentContent: 6
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
   - isRandom: 0
     maxLetAmount: 0
@@ -299,30 +504,571 @@ MonoBehaviour:
     maxHoleAmount: 0
     minHoleAmount: 0
     isLast: 0
+    segmentRotationBias: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+  - isRandom: 1
+    maxLetAmount: 0
+    minLetAmount: 0
+    maxHoleAmount: 0
+    minHoleAmount: 0
+    isLast: 0
+    segmentRotationBias: 20
+    segmentsData:
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+  - isRandom: 1
+    maxLetAmount: 0
+    minLetAmount: 0
+    maxHoleAmount: 0
+    minHoleAmount: 0
+    isLast: 0
+    segmentRotationBias: -20
+    segmentsData:
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+  - isRandom: 0
+    maxLetAmount: 0
+    minLetAmount: 0
+    maxHoleAmount: 0
+    minHoleAmount: 0
+    isLast: 0
+    segmentRotationBias: 0
+    segmentsData:
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 1
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+  - isRandom: 0
+    maxLetAmount: 0
+    minLetAmount: 0
+    maxHoleAmount: 0
+    minHoleAmount: 0
+    isLast: 0
+    segmentRotationBias: 0
+    segmentsData:
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 1
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+  - isRandom: 0
+    maxLetAmount: 0
+    minLetAmount: 0
+    maxHoleAmount: 0
+    minHoleAmount: 0
+    isLast: 0
+    segmentRotationBias: 0
+    segmentsData:
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 1
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+  - isRandom: 0
+    maxLetAmount: 0
+    minLetAmount: 0
+    maxHoleAmount: 0
+    minHoleAmount: 0
+    isLast: 0
+    segmentRotationBias: 0
+    segmentsData:
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 1
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+  - isRandom: 0
+    maxLetAmount: 0
+    minLetAmount: 0
+    maxHoleAmount: 0
+    minHoleAmount: 0
+    isLast: 0
+    segmentRotationBias: 0
+    segmentsData:
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 1
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+  - isRandom: 0
+    maxLetAmount: 0
+    minLetAmount: 0
+    maxHoleAmount: 0
+    minHoleAmount: 0
+    isLast: 0
+    segmentRotationBias: 0
+    segmentsData:
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 1
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+  - isRandom: 0
+    maxLetAmount: 0
+    minLetAmount: 0
+    maxHoleAmount: 0
+    minHoleAmount: 0
+    isLast: 0
+    segmentRotationBias: 0
+    segmentsData:
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 1
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+  - isRandom: 0
+    maxLetAmount: 0
+    minLetAmount: 0
+    maxHoleAmount: 0
+    minHoleAmount: 0
+    isLast: 0
+    segmentRotationBias: 0
+    segmentsData:
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 1
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 1
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+  - isRandom: 0
+    maxLetAmount: 0
+    minLetAmount: 0
+    maxHoleAmount: 0
+    minHoleAmount: 0
+    isLast: 0
+    segmentRotationBias: 0
+    segmentsData:
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 1
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 1
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+  - isRandom: 0
+    maxLetAmount: 0
+    minLetAmount: 0
+    maxHoleAmount: 0
+    minHoleAmount: 0
+    isLast: 0
+    segmentRotationBias: 0
+    segmentsData:
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 2
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
   - isRandom: 0
     maxLetAmount: 0
@@ -330,31 +1076,44 @@ MonoBehaviour:
     maxHoleAmount: 0
     minHoleAmount: 0
     isLast: 1
+    segmentRotationBias: 0
     segmentsData:
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 2
-      segmentContent: 5
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 2
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-    - segmentType: 0
+    - positionIndex: 0
+      segmentType: 0
       segmentContent: 0
-  bestScore: 0
-  middleScore: 0
-  bottomScore: 0
+    - positionIndex: 0
+      segmentType: 0
+      segmentContent: 0
+  bestScore: 34
+  middleScore: 31
+  bottomScore: 27

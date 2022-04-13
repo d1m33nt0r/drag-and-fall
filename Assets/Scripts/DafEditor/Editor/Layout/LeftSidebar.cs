@@ -33,9 +33,15 @@ namespace DafEditor.Editor.Layout
             GUILayout.Space(5f);
 
             if (currentToolbarOption == 0)
+            {
+                GameEditorWindow.instance.state = EditorState.Infinity;
                 DrawInfinityMode();
+            }
             else
+            {
+                GameEditorWindow.instance.state = EditorState.Levels;
                 DrawLevels();
+            }
 
             GUILayout.EndArea();
         }
@@ -43,7 +49,7 @@ namespace DafEditor.Editor.Layout
         private void DrawLevels()
         {
             GameEditorWindow.instance.SetRightPanelState(RightPanelState.Empty);
-            GameEditorWindow.instance.SetCurrentRandomPatternData(null);
+            
             GameEditorWindow.instance.SetCurrentRandomSetData(null);
             var levelsData = AssetDatabase.LoadAssetAtPath<LevelsData>(LEVELS_DATA_ASSET_PATH);
             
@@ -54,6 +60,7 @@ namespace DafEditor.Editor.Layout
                 levelData.patterns = new List<PatternData>();
                 var count = levelsData.leves.Count + 1;
                 AssetDatabase.CreateAsset(levelData, LEVELS_DATA_PATH + "Level_" +  count + ".asset");
+                EditorUtility.SetDirty(levelsData);
                 levelsData.leves.Add(levelData);
             }
             
@@ -66,6 +73,7 @@ namespace DafEditor.Editor.Layout
                 {
                     GameEditorWindow.instance.currentPatternsData = levelsData.leves[i].patterns;
                     GameEditorWindow.instance.content.SetPatterns(GameEditorWindow.instance.currentPatternsData, levelsData.leves[i].name);
+                    GameEditorWindow.instance.currentLevelData = levelsData.leves[i];
                 }
                 GUILayout.Button("X", EditorStyles.RedButtonStyle(22), GUILayout.Width(25));
                 GUILayout.EndHorizontal();

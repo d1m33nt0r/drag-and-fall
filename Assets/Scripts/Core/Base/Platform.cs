@@ -43,14 +43,13 @@ namespace Core
             this.tutorialUI = tutorialUI;
             
             for (var i = 1; i <= patternData.segmentsData.Length; i++)
-                segments[i - 1].Initialize(patternData.segmentsData[i - 1], platformMover, this, _bonusController,
-                    segmentContentPool);
-            
+            {
+                segments[i - 1].Initialize(patternData.segmentsData[i - 1], platformMover, this, _bonusController, segmentContentPool);
+            }
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + patternData.segmentRotationBias, transform.rotation.eulerAngles.z);
             player = _player;
         }
         
-        
-
         public void IncreaseTouchCounter()
         {
             countTouches++;

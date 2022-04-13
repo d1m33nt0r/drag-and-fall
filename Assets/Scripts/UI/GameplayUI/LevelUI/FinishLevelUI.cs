@@ -78,7 +78,7 @@ namespace UI
             }
 
             //tutorialUI.firstGeneralStepComplete = true;
-            tutorialUI.RewriteTutorialProgressData();
+            
         }
 
         public void ShowLevels()

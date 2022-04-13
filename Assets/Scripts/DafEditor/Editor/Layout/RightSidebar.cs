@@ -14,77 +14,113 @@ namespace DafEditor.Editor.Layout
         public void Draw()
         {
             if (!isInitialized) return;
+
+            if (GameEditorWindow.instance.state == EditorState.Infinity)
+                DrawRandomMode();
+            else
+                DrawLevelMode();
+        }
+
+        private void DrawLevelMode()
+        {
+            GUILayout.BeginArea(new Rect(new Vector2(gameEditorWindow.position.size.x - 300, 0),
+                new Vector2(300,
+                    gameEditorWindow.position.height)), Common.EditorStyles.LeftSidebarStyle());
+            scrollPos =
+                EditorGUILayout.BeginScrollView(scrollPos, GUIStyle.none, GUI.skin.verticalScrollbar, GUILayout.Width(300),
+                    GUILayout.Height(gameEditorWindow.position.height - 30));
+
+
+            if (gameEditorWindow.currentRandomPatternData != null)
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
+                GUILayout.Label("Rotation bias");
+                GUILayout.EndHorizontal();
+                gameEditorWindow.currentRandomPatternData.segmentRotationBias =
+                    EditorGUILayout.FloatField(gameEditorWindow.currentRandomPatternData.segmentRotationBias);
+                GUILayout.EndHorizontal();
+            }
             
+            
+            EditorGUILayout.EndScrollView();
+            GUILayout.EndArea();
+        }
+
+        private void DrawRandomMode()
+        {
             GUILayout.BeginArea(new Rect(new Vector2(gameEditorWindow.position.size.x - 300, 0),
                 new Vector2(300,
                     gameEditorWindow.position.height)), Common.EditorStyles.LeftSidebarStyle());
 
             GUILayout.Label("Random settings", Common.EditorStyles.HeaderOfBlockInLeftSideBar());
             scrollPos =
-                EditorGUILayout.BeginScrollView(scrollPos, GUIStyle.none, GUI.skin.verticalScrollbar, GUILayout.Width(300), GUILayout.Height(gameEditorWindow.position.height - 30));
+                EditorGUILayout.BeginScrollView(scrollPos, GUIStyle.none, GUI.skin.verticalScrollbar, GUILayout.Width(300),
+                    GUILayout.Height(gameEditorWindow.position.height - 30));
             switch (gameEditorWindow.currentRightPanelState)
             {
                 case RightPanelState.BonusRandomSettings:
                     GUILayout.Label("Bonus random settings", Common.EditorStyles.HeaderOfBlockInRightSideBar());
-                    
+
                     break;
                 case RightPanelState.PlatformRandomSettings:
                     GUILayout.Label("Platform random settings", Common.EditorStyles.HeaderOfBlockInRightSideBar());
                     GUILayout.BeginVertical();
-                    
+
                     EditorGUI.BeginChangeCheck();
-                    
+
                     GUILayout.BeginHorizontal();
-                    GUILayout.BeginHorizontal(new GUIStyle{fixedWidth = 100});
+                    GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
                     GUILayout.Label("Min hole amount");
                     GUILayout.EndHorizontal();
-                    gameEditorWindow.currentRandomPatternData.minHoleAmount = 
+                    gameEditorWindow.currentRandomPatternData.minHoleAmount =
                         EditorGUILayout.IntSlider(gameEditorWindow.currentRandomPatternData.minHoleAmount, 0, 12);
                     GUILayout.EndHorizontal();
-                    
+
                     GUILayout.BeginHorizontal();
-                    GUILayout.BeginHorizontal(new GUIStyle{fixedWidth = 100});
+                    GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
                     GUILayout.Label("Max hole amount");
                     GUILayout.EndHorizontal();
-                    gameEditorWindow.currentRandomPatternData.maxHoleAmount = 
+                    gameEditorWindow.currentRandomPatternData.maxHoleAmount =
                         EditorGUILayout.IntSlider(gameEditorWindow.currentRandomPatternData.maxHoleAmount, 0, 12);
                     GUILayout.EndHorizontal();
-                    
+
                     GUILayout.BeginHorizontal();
-                    GUILayout.BeginHorizontal(new GUIStyle{fixedWidth = 100});
+                    GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
                     GUILayout.Label("Min let amount");
                     GUILayout.EndHorizontal();
-                    gameEditorWindow.currentRandomPatternData.minLetAmount = 
-                        EditorGUILayout.IntSlider( gameEditorWindow.currentRandomPatternData.minLetAmount, 0, 12);
+                    gameEditorWindow.currentRandomPatternData.minLetAmount =
+                        EditorGUILayout.IntSlider(gameEditorWindow.currentRandomPatternData.minLetAmount, 0, 12);
                     GUILayout.EndHorizontal();
-                    
+
                     GUILayout.BeginHorizontal();
-                    GUILayout.BeginHorizontal(new GUIStyle{fixedWidth = 100});
+                    GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
                     GUILayout.Label("Max hole amount");
                     GUILayout.EndHorizontal();
-                    gameEditorWindow.currentRandomPatternData.maxLetAmount = 
+                    gameEditorWindow.currentRandomPatternData.maxLetAmount =
                         EditorGUILayout.IntSlider(gameEditorWindow.currentRandomPatternData.maxLetAmount, 0, 12);
                     GUILayout.EndHorizontal();
-                    
+
                     if (EditorGUI.EndChangeCheck())
                     {
                         EditorUtility.SetDirty(gameEditorWindow.infinityData.patternSets[0]);
                     }
+
                     GUILayout.EndVertical();
                     break;
                 case RightPanelState.SegmentRandomSettings:
                     GUILayout.Label("Segment random settings", Common.EditorStyles.HeaderOfBlockInRightSideBar());
                     break;
                 case RightPanelState.SetRandomSettings:
-                    
+
                     GUILayout.Label("Set random settings", Common.EditorStyles.HeaderOfBlockInRightSideBar2());
-                    
+
                     EditorGUI.BeginChangeCheck();
-                    
+
                     DrawSetRandomSettings();
 
                     GUILayout.Label("Power ups random settings", Common.EditorStyles.HeaderOfBlockInRightSideBar2());
-                    
+
                     DrawShieldRandomSettings();
 
                     DrawAccelerationRandomSettings();
@@ -106,9 +142,9 @@ namespace DafEditor.Editor.Layout
                         for (var i = 0; i < gameEditorWindow.currentSetData.currencyRandomSettings.Length; i++)
                         {
                             DrawCoinRandomSettings(i);
-                        } 
+                        }
                     }
-                    
+
                     if (GUILayout.Button("Add currency profile"))
                     {
                         if (gameEditorWindow.currentSetData.currencyRandomSettings == null)
@@ -119,7 +155,7 @@ namespace DafEditor.Editor.Layout
                         {
                             var list = gameEditorWindow.currentSetData.currencyRandomSettings.ToList();
                             list.Add(new CurrencyRandomSettings());
-                            gameEditorWindow.currentSetData.currencyRandomSettings = list.ToArray(); 
+                            gameEditorWindow.currentSetData.currencyRandomSettings = list.ToArray();
                         }
                     }
 
@@ -127,9 +163,10 @@ namespace DafEditor.Editor.Layout
                     {
                         EditorUtility.SetDirty(gameEditorWindow.currentSetData);
                     }
-                    
+
                     break;
             }
+
             EditorGUILayout.EndScrollView();
             GUILayout.EndArea();
         }
