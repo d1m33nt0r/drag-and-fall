@@ -51,6 +51,11 @@ namespace Core
                     tutorialUI.ShowFirstStep();
             }
         }
+
+        public void SetActiveGame()
+        {
+            gameStarted = true;
+        }
         
         private void ShowTutorialUI()
         {

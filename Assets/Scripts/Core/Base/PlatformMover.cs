@@ -186,8 +186,11 @@ namespace Core
             
                 if (isLevelMode && currentPatternData != null)
                     CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
-                else if(isLevelMode && currentPatternData == null)
-                    CreateNewPlatform(countPlatforms - 1, new PatternData(12), true);
+                else if (isLevelMode && currentPatternData == null)
+                {
+                    currentPatternData = new PatternData(12);
+                    CreateNewPlatform(countPlatforms - 1, currentPatternData, true);
+                }
                 else
                     CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
             
