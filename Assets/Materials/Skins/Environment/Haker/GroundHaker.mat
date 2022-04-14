@@ -123,7 +123,7 @@ Material:
     - _Color: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 1}
     - _DiffuseTint: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissionColor: {r: 1, g: 0.45463714, b: 0.1372549, a: 1}
+    - _EmissionColor: {r: 0.3139252, g: 0.7169812, b: 0.15218942, a: 1}
     - _EmissionMask_SC: {r: 0, g: 0, b: 0, a: 0}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 0.5}

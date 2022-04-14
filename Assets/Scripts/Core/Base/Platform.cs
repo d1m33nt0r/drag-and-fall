@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core.Bonuses;
+using Core.Effects;
 using Data.Core;
 using Data.Core.Segments;
 using Data.Core.Segments.Content;
@@ -16,7 +17,7 @@ namespace Core
         private bool destroy;
         public int countTouches = 0;
         private TutorialUI tutorialUI;
-        
+        [HideInInspector] public TouchEffect touchEffect;
         public PatternData patternData;
         private Player player;
         private PlatformMover platformMover;
@@ -44,9 +45,14 @@ namespace Core
             
             for (var i = 1; i <= patternData.segmentsData.Length; i++)
             {
-                segments[i - 1].Initialize(patternData.segmentsData[i - 1], platformMover, this, _bonusController, segmentContentPool);
+                segments[i - 1].Initialize(patternData.segmentsData[i - 1], platformMover, 
+                    this, _bonusController, segmentContentPool);
             }
-            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + patternData.segmentRotationBias, transform.rotation.eulerAngles.z);
+            
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 
+                transform.rotation.eulerAngles.y + patternData.segmentRotationBias, 
+                transform.rotation.eulerAngles.z);
+            
             player = _player;
         }
         
@@ -115,6 +121,11 @@ namespace Core
 
         public void DestroyAfterBreakAnimation()
         {
+            if (touchEffect != null)
+            {
+                touchEffect.transform.SetParent(null);
+            }
+            
             Destroy(gameObject);
         }
 

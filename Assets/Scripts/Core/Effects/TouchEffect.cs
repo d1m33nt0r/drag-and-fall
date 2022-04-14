@@ -13,9 +13,9 @@ namespace Core.Effects
         }
         
         public void ReturnToPool()
-        {
-            Destroy(gameObject);
-            //effectsPool.ReturnObjectToPool(this);
+        { 
+            //Destroy(gameObject);
+            effectsPool.ReturnObjectToPool(this);
         }
     }
 }

@@ -97,7 +97,7 @@ Material:
     - _Parallax: 0.02
     - _RampSmoothing: 1
     - _RampSmoothingOtherLights: 0.5
-    - _RampThreshold: 0.308
+    - _RampThreshold: 0.01
     - _RampThresholdOtherLights: 0.5
     - _ReflectionSmoothness: 0.5
     - _RimMax: 1.05
@@ -107,7 +107,7 @@ Material:
     - _Shadow_HSV_V: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SpecularRoughnessPBR: 0.147
+    - _SpecularRoughnessPBR: 0.6
     - _SpecularSmoothness: 2.56
     - _SpecularToonSize: 0.302
     - _SpecularToonSmoothness: 0.5
@@ -124,10 +124,10 @@ Material:
     - __EndGroup: 0
     - __dummy__: 0
     m_Colors:
-    - _Color: {r: 0.7075472, g: 0.4227729, b: 0, a: 1}
+    - _Color: {r: 1, g: 0.90574455, b: 0, a: 1}
     - _DiffuseTint: {r: 1, g: 0.5, b: 0, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissionColor: {r: 0.27749187, g: 0.3584906, b: 0, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionMask_SC: {r: 1, g: 1, b: 0, a: 0}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}

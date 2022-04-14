@@ -252,13 +252,13 @@ namespace Core
                             SetDefaultState();
                             if (gameManager.gameStarted) segment.IncreasePlatformTouchCounter();
                             freeSpeedIncrease.ResetSpeed();
-                            var instance = Instantiate(sled, new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z), Quaternion.Euler(-90, 0, 0), segment.transform.parent);//effectsPool.GetTouchEffect();
-                            //instance.gameObject.SetActive(true);
-                            //instance.transform.position = new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z);
-                            //instance.transform.rotation = Quaternion.Euler(-90, 0, 0);
-                            //instance.transform.SetParent(segment.transform);
-                                //Instantiate(sled, new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z), Quaternion.Euler(-90, 0, 0), segment.transform);
-                            instance.GetComponent<Animator>().Play("Touch");
+                            var instance = effectsPool.GetTouchEffect();
+                            centerHit.collider.transform.parent.GetComponent<Platform>().touchEffect = instance;
+                            //Instantiate(sled, new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z), Quaternion.Euler(-90, 0, 0), segment.transform);
+                            instance.transform.position = new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z);
+                            instance.transform.rotation = Quaternion.Euler(-90, 0, 0);
+                            instance.transform.SetParent(segment.transform.parent);
+                            //instance.GetComponent<Animator>().Play("Touch");
                         }
                         break;
                     case SegmentType.Hole:

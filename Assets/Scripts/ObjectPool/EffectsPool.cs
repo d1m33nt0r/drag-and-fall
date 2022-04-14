@@ -32,6 +32,7 @@ namespace ObjectPool
             for (var i = 0; i < touchPoolSize; i++)
             {
                 var instance = Instantiate(touchEffect, transform);
+                instance.gameObject.SetActive(false);
                 instance.Construct(this);
                 touchPool.Enqueue(instance);
             }
@@ -163,7 +164,12 @@ namespace ObjectPool
         
         public TouchEffect GetTouchEffect()
         {
-            if (touchPool.Count > 0) return touchPool.Dequeue();
+            if (touchPool.Count > 0)
+            {
+                var temp = touchPool.Dequeue();
+                temp.gameObject.SetActive(true);
+                return temp;
+            }
             
             var instance = Instantiate(touchEffect, transform);
             instance.Construct(this);

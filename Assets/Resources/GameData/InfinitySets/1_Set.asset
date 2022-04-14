@@ -24,7 +24,7 @@ MonoBehaviour:
   spawnShieldOnLet: 0
   spawnShieldOnGround: 1
   spawnShieldOnHole: 0
-  spawnShieldChance: 65
+  spawnShieldChance: 68
   attemptsOfKeyInstantiate: 1
   keyPositions: 62000000
   spawnKeyOnLet: 0
