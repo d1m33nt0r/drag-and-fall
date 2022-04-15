@@ -8,6 +8,7 @@ using Data.Core.Segments.Content;
 using Data.Shop.TubeSkins;
 using DG.Tweening;
 using ObjectPool;
+using Sound;
 using UI;
 using UnityEngine;
 
@@ -16,7 +17,8 @@ namespace Core
     public class PlatformMover : MonoBehaviour
     {
         [SerializeField] private TutorialUI tutorialUI;
-    
+        [SerializeField] private PlatformSoundManager platformSoundManager;
+        
         private bool isFirstPlatform = true;
         [SerializeField] private CameraController cameraController;
         [SerializeField] private SegmentContentPool segmentContentPool;
@@ -65,6 +67,7 @@ namespace Core
         {
             platformMovementSpeed = speed;
             cameraController.ChangeFieldView(speed);
+            
             if (platformMovementSpeed == 6)
             {
                 player.SetActiveFireEffect(true);
@@ -375,7 +378,7 @@ namespace Core
             var platformInstance = Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.Euler(transform.rotation.eulerAngles), transform);
             var platform = platformInstance.GetComponent<Platform>();
             platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, 
-                player, bonusController, gainScore, segmentContentPool, tubeMover, tutorialUI);
+                player, bonusController, gainScore, segmentContentPool, tubeMover, tutorialUI, platformSoundManager);
             
             //AlignRotation(platformInstance);
             platforms[_platformIndex] = platform;

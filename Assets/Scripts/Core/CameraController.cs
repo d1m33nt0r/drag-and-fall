@@ -44,6 +44,16 @@ namespace Core
                     //if (fieldOfViewCoroutine != null) StopCoroutine(fieldOfViewCoroutine);
                     //fieldOfViewCoroutine = StartCoroutine(AnimateFieldOfView(75));
                     break;
+                case 7:
+                    camera.DOFieldOfView(78, 0.35f);
+                    //if (fieldOfViewCoroutine != null) StopCoroutine(fieldOfViewCoroutine);
+                    //fieldOfViewCoroutine = StartCoroutine(AnimateFieldOfView(75));
+                    break;
+                case 8:
+                    camera.DOFieldOfView(80, 0.35f);
+                    //if (fieldOfViewCoroutine != null) StopCoroutine(fieldOfViewCoroutine);
+                    //fieldOfViewCoroutine = StartCoroutine(AnimateFieldOfView(75));
+                    break;
             }
         }
 

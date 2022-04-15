@@ -19,6 +19,7 @@ namespace Core.Bonuses
         [SerializeField] private PlatformMover platformMover;
         [SerializeField] private Player player;
         [SerializeField] private FreeSpeedIncrease freeSpeedIncrease;
+        [SerializeField] private AudioSource fireAudioSource;
         
         public int currentShieldLevel;
         public int currentMultiplierLevel;
@@ -175,7 +176,13 @@ namespace Core.Bonuses
             switch (bonusType)
             {
                 case BonusType.Acceleration:
-                    platformMover.SetMovementSpeed(6f);
+                    if (platformMover.platformMovementSpeed < 6)
+                    {
+                        player.SetActiveFireEffect(true);
+                        player.MaximumFire();
+                    }
+                    platformMover.SetMovementSpeed(8f);
+                    if (!fireAudioSource.isPlaying) fireAudioSource.Play();
                     workCountPlatformsAcceleration = countPlatformsForAcceleration;
                     accelerationIsActive = true;
                     break;

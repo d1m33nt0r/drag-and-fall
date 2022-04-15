@@ -5,7 +5,7 @@ namespace Core
     public class FreeSpeedIncrease : MonoBehaviour
     {
         [SerializeField] private PlatformMover platformMover;
-        private float threshold = 6f;
+        private float threshold = 8f;
         private int platformsThreshold = 3;
         public int currentPlatforms = 0;
         private float coefficientSglazhivanija = 0;

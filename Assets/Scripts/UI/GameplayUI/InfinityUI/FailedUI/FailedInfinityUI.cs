@@ -2,6 +2,7 @@
 using Core;
 using Data;
 using Progress;
+using Sound;
 using UI.GameplayUI.InfinityUI.FailedUI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,9 @@ namespace UI.InfinityUI
 {
     public class FailedInfinityUI : MonoBehaviour
     {
+        [SerializeField] private FailSounds failSounds;
+        [SerializeField] private AudioSource mainThemeAudioSource;
+        
         [SerializeField] private GameObject newBestScoreUI;
         [SerializeField] private GameObject continueUI;
         [SerializeField] private GameObject finishUI;
@@ -62,6 +66,8 @@ namespace UI.InfinityUI
 
         public void ShowContinueUI()
         {
+            mainThemeAudioSource.Stop();
+            failSounds.PlayFailSound();
             newBestScoreUI.SetActive(false);
             continueUI.SetActive(true);
             continueUI.GetComponent<ContinueTimer>().StartTimer();

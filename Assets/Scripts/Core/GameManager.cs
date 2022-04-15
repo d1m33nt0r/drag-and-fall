@@ -13,6 +13,7 @@ namespace Core
 {
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] private AudioSource mainThemeAudioSource;
         [SerializeField] private RewardAds rewardAds;
         [SerializeField] private InterstitialAds interstitialAds;
         [SerializeField] private LevelProgress levelProgress;
@@ -87,6 +88,7 @@ namespace Core
 
         public void StartGame()
         {
+            mainThemeAudioSource.Play();
             uiManager.SetActiveTutorialUI(false);
             concentration.Reset();
             bonusController.DeactivateAllBonuses();
@@ -333,6 +335,7 @@ namespace Core
 
         public void StartedLevel()
         {
+            mainThemeAudioSource.Play();
             uiManager.SetActiveTutorialUI(false);
             platformMover.transform.rotation = Quaternion.Euler(0, 0, 0);
             bonusController.DeactivateAllBonuses();

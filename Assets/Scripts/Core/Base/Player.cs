@@ -4,6 +4,7 @@ using Data;
 using Data.Core.Segments;
 using DG.Tweening;
 using ObjectPool;
+using Sound;
 using UI.InfinityUI;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -13,7 +14,8 @@ namespace Core
     public class Player : MonoBehaviour
     {
         public event Action failed;
-
+        [SerializeField] private SoundManager soundManager;
+        [SerializeField] private PlatformSoundManager platformSoundManager;
         [SerializeField] private TubeMover tubeMover;
         [SerializeField] private EffectsPool effectsPool;
         [SerializeField] private GameObject shieldEffect;
@@ -44,6 +46,20 @@ namespace Core
         {
             fireEffect.SetActive(value);
             fireBacklight.SetActive(value);
+            if (!value) soundManager.StopFireSound();
+        }
+
+        public void MaximumFire()
+        {
+            soundManager.PlayFireSound();
+            var fireParticle = fireEffect.GetComponent<ParticleSystem>();
+            var main = fireParticle.main;
+            main.startColor = new ParticleSystem.MinMaxGradient(new Color(1, 1, 1, 1f), new Color(1, 1, 1, 0.5f));
+            main.startSpeed = -3;
+            var backlightParticle = fireBacklight.GetComponent<ParticleSystem>();
+            var backlightMain = backlightParticle.main;
+            backlightMain.startColor = new ParticleSystem.MinMaxGradient(new Color(backlightMain.startColor.color.r,
+                backlightMain.startColor.color.g, backlightMain.startColor.color.b, 0.25f));
         }
         
         public void RandomRotate()
@@ -85,9 +101,10 @@ namespace Core
             effect.transform.position = transform.position;
             effect.GetComponent<ParticleSystem>().Play();
         }
-        
+
         public void IncreaseFireEffect6()
         {
+            soundManager.PlayFireSound();
             var fireParticle = fireEffect.GetComponent<ParticleSystem>();
             var main = fireParticle.main;
             main.startColor = new ParticleSystem.MinMaxGradient(new Color(1, 1, 1, 1f), new Color(1, 1, 1, 0.5f));
@@ -225,7 +242,7 @@ namespace Core
                 
                 var segment = centerHit.collider.GetComponent<Segment>();
                 
-                if (platformMover.platformMovementSpeed == 6 && segment.segmentData.segmentType != SegmentType.Hole && !bonusController.accelerationIsActive)
+                /*if (platformMover.platformMovementSpeed >= 6 && segment.segmentData.segmentType != SegmentType.Hole && !bonusController.accelerationIsActive)
                 {
                     //GetComponent<Animator>().Play("SpecialBounce");
                     SetTriggerStay(true);
@@ -235,7 +252,7 @@ namespace Core
                     
                     freeSpeedIncrease.ResetSpeed();
                     return;
-                }
+                }*/
                 
                 switch (segment.segmentData.segmentType)
                 {
@@ -254,11 +271,11 @@ namespace Core
                             freeSpeedIncrease.ResetSpeed();
                             var instance = effectsPool.GetTouchEffect();
                             centerHit.collider.transform.parent.GetComponent<Platform>().touchEffect = instance;
-                            //Instantiate(sled, new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z), Quaternion.Euler(-90, 0, 0), segment.transform);
                             instance.transform.position = new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z);
                             instance.transform.rotation = Quaternion.Euler(-90, 0, 0);
                             instance.transform.SetParent(segment.transform.parent);
-                            //instance.GetComponent<Animator>().Play("Touch");
+                            soundManager.PlayTouchSound();
+                            platformSoundManager.ResetPitch();
                         }
                         break;
                     case SegmentType.Hole:
@@ -293,6 +310,7 @@ namespace Core
                             SetDefaultState();
                             return;
                         }
+                        platformSoundManager.ResetPitch();
                         freeSpeedIncrease.ResetSpeed();
                         platformMover.Failed();
                         SetTriggerStay(true);

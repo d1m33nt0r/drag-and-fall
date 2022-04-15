@@ -2,6 +2,7 @@
 using System.Collections;
 using Data.Core.Segments.Content;
 using ObjectPool;
+using Sound;
 using UnityEngine;
 
 namespace Core.Bonuses
@@ -19,6 +20,12 @@ namespace Core.Bonuses
         private float journeyLength;
         private bool ismove = true;
         private Coroutine coroutine;
+        private BonusSoundManager bonusSoundManager;
+        
+        public void BindAudio(BonusSoundManager bonusSoundManager)
+        {
+            this.bonusSoundManager = bonusSoundManager;
+        }
         
         public void Construct(BonusController _bonusController, SegmentContentPool segmentContentPool)
         {
@@ -31,6 +38,7 @@ namespace Core.Bonuses
             if (!other.CompareTag("Player")) return;
             other.GetComponent<Player>().SpawnBonusCollectingEffect();
             bonusController.ActivateBonus(BonusType.Shield);
+            bonusSoundManager.PlayShieldSound();
             segmentContentPool.ReturnObjectToPool(SegmentContent.Shield, gameObject);
         }
         

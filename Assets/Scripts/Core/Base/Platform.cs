@@ -6,6 +6,7 @@ using Data.Core;
 using Data.Core.Segments;
 using Data.Core.Segments.Content;
 using ObjectPool;
+using Sound;
 using UI;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -25,12 +26,15 @@ namespace Core
         private GainScore gainScore;
         private SegmentContentPool segmentContentPool;
         private TubeMover tubeMover;
-        
-        public void Initialize(int _segmentsCount, PatternData patternData, PlatformMover platformMover, 
-            Player _player, BonusController _bonusController, GainScore gainScore, SegmentContentPool segmentContentPool,
-            TubeMover _tubeMover, TutorialUI tutorialUI)
+        private PlatformSoundManager audioSource;
+
+        public void Initialize(int _segmentsCount, PatternData patternData, PlatformMover platformMover,
+            Player _player, BonusController _bonusController, GainScore gainScore,
+            SegmentContentPool segmentContentPool,
+            TubeMover _tubeMover, TutorialUI tutorialUI, PlatformSoundManager audioSource)
         {
             InitializeHandMadePlatform(patternData, platformMover, _player, _bonusController, gainScore, segmentContentPool, _tubeMover, tutorialUI);
+            this.audioSource = audioSource;
         }
         
         private void InitializeHandMadePlatform(PatternData patternData, PlatformMover platformMover, Player _player,
@@ -84,7 +88,7 @@ namespace Core
         {
             if (!tutorialUI.secondStepComplete && platformMover.concentration.slider.value >= 4) 
                 tutorialUI.ShowSecondStep();
-            
+
             for (var i = 0; i < 12; i++)
             {
                 segments[i].GetComponent<Segment>().ChangeColor(3);
@@ -92,6 +96,7 @@ namespace Core
             
             if (platformsIsMoving)
             {
+                audioSource.PlayDestroySound();
                 tubeMover.MoveTube();
                 platformMover.MovePlatforms();
                 gainScore.SetText(1);

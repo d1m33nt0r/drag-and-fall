@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
+using Core.Bonuses;
 using Data.Core.Segments.Content;
+using Sound;
 using UnityEngine;
 
 namespace ObjectPool
 {
     public class SegmentContentPool : MonoBehaviour
     {
+        [SerializeField] private BonusSoundManager bonusSoundManager;
+        
         [SerializeField] private GameObject coinPrefab;
         [SerializeField] private GameObject crystalPrefab;
         [SerializeField] private GameObject multiplier;
@@ -56,6 +60,7 @@ namespace ObjectPool
             for (var i = 0; i < magnetPoolSize; i++)
             {
                 var instance = Instantiate(magnet, Vector3.zero, Quaternion.identity, transform);
+                instance.GetComponent<Magnet>().BindAudio(bonusSoundManager);
                 pool[SegmentContent.Magnet].Enqueue(instance);
                 instance.gameObject.SetActive(false);
             }
@@ -66,6 +71,7 @@ namespace ObjectPool
             for (var i = 0; i < accelerationPoolSize; i++)
             {
                 var instance = Instantiate(acceleration, Vector3.zero, Quaternion.identity, transform);
+                instance.GetComponent<Acceleration>().BindAudio(bonusSoundManager);
                 pool[SegmentContent.Acceleration].Enqueue(instance);
                 instance.gameObject.SetActive(false);
             }
@@ -76,6 +82,7 @@ namespace ObjectPool
             for (var i = 0; i < shieldPoolSize; i++)
             {
                 var instance = Instantiate(shield, Vector3.zero, Quaternion.identity, transform);
+                instance.GetComponent<Shield>().BindAudio(bonusSoundManager);
                 pool[SegmentContent.Shield].Enqueue(instance);
                 instance.gameObject.SetActive(false);
             }
@@ -86,6 +93,7 @@ namespace ObjectPool
             for (var i = 0; i < multiplierPoolSize; i++)
             {
                 var instance = Instantiate(multiplier, Vector3.zero, Quaternion.identity, transform);
+                instance.GetComponent<Multiplier>().BindAudio(bonusSoundManager);
                 pool[SegmentContent.Multiplier].Enqueue(instance);
                 instance.gameObject.SetActive(false);
             }
