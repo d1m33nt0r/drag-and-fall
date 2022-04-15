@@ -2,7 +2,7 @@
 
 namespace Sound
 {
-    public class PlatformSoundManager : MonoBehaviour
+    public class PlatformSound : MonoBehaviour
     {
         [SerializeField] private AudioSource audioSource;
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Data.Core.Segments.Content;
 using ObjectPool;
+using Sound;
 using UnityEngine;
 
 namespace Core
@@ -18,6 +19,12 @@ namespace Core
         private bool ismove = true;
         private SegmentContentPool segmentContentPool;
         private Coroutine coroutine;
+        private CoinSound coinSound;
+
+        public void BindAudio(CoinSound coinSound)
+        {
+            this.coinSound = coinSound;
+        }
         
         public void Construct(SegmentContentPool segmentContentPool)
         {
@@ -30,6 +37,7 @@ namespace Core
             {
                 other.GetComponent<Player>().SpawnCoinCollectingEffect();
                 other.GetComponent<Player>().CollectCoin(count);
+                coinSound.Play();
                 segmentContentPool.ReturnObjectToPool(SegmentContent.Coin, gameObject);
             }
         }

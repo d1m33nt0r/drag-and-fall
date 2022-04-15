@@ -14,8 +14,8 @@ namespace Core
     public class Player : MonoBehaviour
     {
         public event Action failed;
-        [SerializeField] private SoundManager soundManager;
-        [SerializeField] private PlatformSoundManager platformSoundManager;
+        [SerializeField] private PlayerSounds playerSounds;
+        [SerializeField] private PlatformSound platformSound;
         [SerializeField] private TubeMover tubeMover;
         [SerializeField] private EffectsPool effectsPool;
         [SerializeField] private GameObject shieldEffect;
@@ -46,12 +46,12 @@ namespace Core
         {
             fireEffect.SetActive(value);
             fireBacklight.SetActive(value);
-            if (!value) soundManager.StopFireSound();
+            if (!value) playerSounds.StopFireSound();
         }
 
         public void MaximumFire()
         {
-            soundManager.PlayFireSound();
+            playerSounds.PlayFireSound();
             var fireParticle = fireEffect.GetComponent<ParticleSystem>();
             var main = fireParticle.main;
             main.startColor = new ParticleSystem.MinMaxGradient(new Color(1, 1, 1, 1f), new Color(1, 1, 1, 0.5f));
@@ -104,7 +104,7 @@ namespace Core
 
         public void IncreaseFireEffect6()
         {
-            soundManager.PlayFireSound();
+            playerSounds.PlayFireSound();
             var fireParticle = fireEffect.GetComponent<ParticleSystem>();
             var main = fireParticle.main;
             main.startColor = new ParticleSystem.MinMaxGradient(new Color(1, 1, 1, 1f), new Color(1, 1, 1, 0.5f));
@@ -274,8 +274,8 @@ namespace Core
                             instance.transform.position = new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z);
                             instance.transform.rotation = Quaternion.Euler(-90, 0, 0);
                             instance.transform.SetParent(segment.transform.parent);
-                            soundManager.PlayTouchSound();
-                            platformSoundManager.ResetPitch();
+                            playerSounds.PlayTouchSound();
+                            platformSound.ResetPitch();
                         }
                         break;
                     case SegmentType.Hole:
@@ -310,7 +310,7 @@ namespace Core
                             SetDefaultState();
                             return;
                         }
-                        platformSoundManager.ResetPitch();
+                        platformSound.ResetPitch();
                         freeSpeedIncrease.ResetSpeed();
                         platformMover.Failed();
                         SetTriggerStay(true);

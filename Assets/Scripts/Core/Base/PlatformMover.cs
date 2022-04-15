@@ -17,7 +17,7 @@ namespace Core
     public class PlatformMover : MonoBehaviour
     {
         [SerializeField] private TutorialUI tutorialUI;
-        [SerializeField] private PlatformSoundManager platformSoundManager;
+        [SerializeField] private PlatformSound platformSound;
         
         private bool isFirstPlatform = true;
         [SerializeField] private CameraController cameraController;
@@ -378,7 +378,7 @@ namespace Core
             var platformInstance = Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.Euler(transform.rotation.eulerAngles), transform);
             var platform = platformInstance.GetComponent<Platform>();
             platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, 
-                player, bonusController, gainScore, segmentContentPool, tubeMover, tutorialUI, platformSoundManager);
+                player, bonusController, gainScore, segmentContentPool, tubeMover, tutorialUI, platformSound);
             
             //AlignRotation(platformInstance);
             platforms[_platformIndex] = platform;

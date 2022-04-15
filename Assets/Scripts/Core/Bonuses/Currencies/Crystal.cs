@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Data.Core.Segments.Content;
 using ObjectPool;
+using Sound;
 using UnityEngine;
 
 namespace Core
@@ -18,6 +19,13 @@ namespace Core
         private bool ismove = true;
         private SegmentContentPool segmentContentPool;
         private Coroutine coroutine;
+
+        private CrystalSound crystalSound;
+        
+        public void BindAudio(CrystalSound crystalSound)
+        {
+            this.crystalSound = crystalSound;
+        }
         
         public void Construct(SegmentContentPool segmentContentPool)
         {
@@ -30,6 +38,7 @@ namespace Core
             {
                 other.GetComponent<Player>().CollectCrystal(count);
                 other.GetComponent<Player>().SpawnCrystalCollectingEffect();
+                crystalSound.Play();
                 segmentContentPool.ReturnObjectToPool(SegmentContent.Crystal, gameObject);
             }
         }

@@ -26,12 +26,12 @@ namespace Core
         private GainScore gainScore;
         private SegmentContentPool segmentContentPool;
         private TubeMover tubeMover;
-        private PlatformSoundManager audioSource;
+        private PlatformSound audioSource;
 
         public void Initialize(int _segmentsCount, PatternData patternData, PlatformMover platformMover,
             Player _player, BonusController _bonusController, GainScore gainScore,
             SegmentContentPool segmentContentPool,
-            TubeMover _tubeMover, TutorialUI tutorialUI, PlatformSoundManager audioSource)
+            TubeMover _tubeMover, TutorialUI tutorialUI, PlatformSound audioSource)
         {
             InitializeHandMadePlatform(patternData, platformMover, _player, _bonusController, gainScore, segmentContentPool, _tubeMover, tutorialUI);
             this.audioSource = audioSource;

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Core;
 using Core.Bonuses;
 using Data.Core.Segments.Content;
 using Sound;
@@ -9,6 +10,8 @@ namespace ObjectPool
     public class SegmentContentPool : MonoBehaviour
     {
         [SerializeField] private BonusSoundManager bonusSoundManager;
+        [SerializeField] private CoinSound coinSound;
+        [SerializeField] private CrystalSound crystalSound;
         
         [SerializeField] private GameObject coinPrefab;
         [SerializeField] private GameObject crystalPrefab;
@@ -104,6 +107,7 @@ namespace ObjectPool
             for (var i = 0; i < crystalPoolSize; i++)
             {
                 var instance = Instantiate(crystalPrefab, Vector3.zero, Quaternion.identity, transform);
+                instance.GetComponent<Crystal>().BindAudio(crystalSound);
                 pool[SegmentContent.Crystal].Enqueue(instance);
                 instance.gameObject.SetActive(false);
             }
@@ -114,6 +118,7 @@ namespace ObjectPool
             for (var i = 0; i < coinPoolSize; i++)
             {
                 var instance = Instantiate(coinPrefab, Vector3.zero, Quaternion.identity, transform);
+                instance.GetComponent<Coin>().BindAudio(coinSound);
                 pool[SegmentContent.Coin].Enqueue(instance);
                 instance.gameObject.SetActive(false);
             }

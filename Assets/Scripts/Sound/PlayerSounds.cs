@@ -2,13 +2,11 @@
 
 namespace Sound
 {
-    public class SoundManager : MonoBehaviour
+    public class PlayerSounds : MonoBehaviour
     {
         [SerializeField] private AudioSource playerAudioSource;
         [SerializeField] private AudioSource touchAudioSource;
-        [SerializeField] private AudioClip playerSound;
-        [SerializeField] private AudioClip touchSound;
-        
+
         public bool enabled;
 
         public void EnableSound()
