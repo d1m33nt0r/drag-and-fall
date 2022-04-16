@@ -19,6 +19,7 @@ namespace Core
         public int countTouches = 0;
         private TutorialUI tutorialUI;
         [HideInInspector] public TouchEffect touchEffect;
+        [HideInInspector] public PlayerParticles playerParticles;
         public PatternData patternData;
         private Player player;
         private PlatformMover platformMover;
@@ -126,10 +127,8 @@ namespace Core
 
         public void DestroyAfterBreakAnimation()
         {
-            if (touchEffect != null)
-            {
-                touchEffect.transform.SetParent(null);
-            }
+            if (touchEffect != null) touchEffect.transform.SetParent(null);
+            if (playerParticles != null) playerParticles.transform.SetParent(null);
             
             Destroy(gameObject);
         }

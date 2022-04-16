@@ -89230,6 +89230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b975d66b9612402d85edd1d09b66d943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleSystem: {fileID: 8642328274412715628, guid: 682809ce7cb665642b6ce5478cfa209a, type: 3}
   playerSounds: {fileID: 1183476589}
   platformSound: {fileID: 62086648}
   tubeMover: {fileID: 0}
@@ -96905,6 +96906,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14dc5dc43e214356a9181922ce8fd059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerParticles: {fileID: -4385819845389587, guid: 682809ce7cb665642b6ce5478cfa209a, type: 3}
+  particlesPoolSize: 3
   touchEffect: {fileID: 8513849329434092675, guid: 6e5257dcf4407a5498de1613dfbb9fde, type: 3}
   touchPoolSize: 3
   bonusCollectingEffect: {fileID: 3186564956786796830, guid: a1684f5904ebdf643a12c6b49a520022, type: 3}

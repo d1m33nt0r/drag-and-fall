@@ -14,6 +14,7 @@ namespace Core
     public class Player : MonoBehaviour
     {
         public event Action failed;
+        [SerializeField] private ParticleSystem particleSystem;
         [SerializeField] private PlayerSounds playerSounds;
         [SerializeField] private PlatformSound platformSound;
         [SerializeField] private TubeMover tubeMover;
@@ -273,8 +274,18 @@ namespace Core
                             centerHit.collider.transform.parent.GetComponent<Platform>().touchEffect = instance;
                             instance.transform.position = new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z);
                             instance.transform.rotation = Quaternion.Euler(-90, 0, 0);
-                            instance.transform.SetParent(segment.transform.parent);
+                            instance.transform.SetParent(segment.transform);
                             playerSounds.PlayTouchSound();
+                            
+                            var particleSystems = effectsPool.GetPlayerParticles();
+                            centerHit.collider.transform.parent.GetComponent<Platform>().playerParticles = particleSystems;
+                            particleSystems.transform.position = new Vector3(centerHit.point.x,
+                                centerHit.point.y + 0.01f, centerHit.point.z);
+                            particleSystems.transform.rotation = Quaternion.identity;
+                            particleSystems.transform.SetParent(segment.transform);
+                                //Instantiate(particleSystem,
+                                //new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z),
+                                //Quaternion.identity, segment.transform);
                             platformSound.ResetPitch();
                         }
                         break;

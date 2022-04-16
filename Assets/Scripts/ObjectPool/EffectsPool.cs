@@ -6,6 +6,10 @@ namespace ObjectPool
 {
     public class EffectsPool : MonoBehaviour
     {
+
+        [SerializeField] private PlayerParticles playerParticles;
+        [SerializeField] private int particlesPoolSize;
+        
         [SerializeField] private TouchEffect touchEffect;
         [SerializeField] private int touchPoolSize;
 
@@ -21,6 +25,7 @@ namespace ObjectPool
         [SerializeField] private KeyCollectingEffect keyCollectingEffect;
         [SerializeField] private int keyEffectPoolSize;
         
+        private Queue<PlayerParticles> particlesPool = new Queue<PlayerParticles>();
         private Queue<TouchEffect> touchPool = new Queue<TouchEffect>();
         private Queue<BonusCollectingEffect> bonusEffectPool = new Queue<BonusCollectingEffect>();
         private Queue<CoinCollectingEffect> coinEffectPool = new Queue<CoinCollectingEffect>();
@@ -29,6 +34,14 @@ namespace ObjectPool
         
         private void Awake()
         {
+            for (var i = 0; i < particlesPoolSize; i++)
+            {
+                var instance = Instantiate(playerParticles, transform);
+                instance.gameObject.SetActive(false);
+                instance.Construct(this);
+                particlesPool.Enqueue(instance);
+            }
+            
             for (var i = 0; i < touchPoolSize; i++)
             {
                 var instance = Instantiate(touchEffect, transform);
@@ -182,6 +195,28 @@ namespace ObjectPool
             touchEffect.transform.SetParent(transform);
             touchPool.Enqueue(touchEffect);
             touchEffect.gameObject.SetActive(false);
+        }
+
+        public PlayerParticles GetPlayerParticles()
+        {
+            if (particlesPool.Count > 0)
+            {
+                var temp = particlesPool.Dequeue();
+                temp.gameObject.SetActive(true);
+                return temp;
+            }
+            
+            var instance = Instantiate(playerParticles, transform);
+            instance.Construct(this);
+            instance.gameObject.SetActive(true);
+            return instance;
+        }
+        
+        public void ReturnParticlesToPool(PlayerParticles playerParticles)
+        {
+            playerParticles.transform.SetParent(transform);
+            particlesPool.Enqueue(playerParticles);
+            playerParticles.gameObject.SetActive(false);
         }
     }
 }
