@@ -5,6 +5,7 @@ using Data;
 using Data.Core;
 using GooglePlayGames;
 using Progress;
+using Sound;
 using UI;
 using UI.InfinityUI;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace Core
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private AudioSource mainThemeAudioSource;
+        [SerializeField] private MainThemeSound mainThemeAudioSource;
         [SerializeField] private RewardAds rewardAds;
         [SerializeField] private InterstitialAds interstitialAds;
         [SerializeField] private LevelProgress levelProgress;

@@ -9,7 +9,8 @@ namespace Sound
         [SerializeField] private AudioClip magnetSound;
         [SerializeField] private AudioClip accelerationSound;
         [SerializeField] private AudioClip shieldSound;
-
+        [SerializeField] private AudioClip deactivateSound;
+        
         public void PlayMagnetSound()
         {
             bonusSoundManager.clip = magnetSound;
@@ -31,6 +32,12 @@ namespace Sound
         public void PlayShieldSound()
         {
             bonusSoundManager.clip = shieldSound;
+            bonusSoundManager.Play();
+        }
+
+        public void DeactivateBonusSound()
+        {
+            bonusSoundManager.clip = deactivateSound;
             bonusSoundManager.Play();
         }
     }

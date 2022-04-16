@@ -12,7 +12,7 @@ namespace UI.InfinityUI
     public class FailedInfinityUI : MonoBehaviour
     {
         [SerializeField] private FailSounds failSounds;
-        [SerializeField] private AudioSource mainThemeAudioSource;
+        [SerializeField] private MainThemeSound mainThemeAudioSource;
         
         [SerializeField] private GameObject newBestScoreUI;
         [SerializeField] private GameObject continueUI;

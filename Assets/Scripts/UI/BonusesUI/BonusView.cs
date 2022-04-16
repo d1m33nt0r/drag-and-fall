@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Core;
 using Core.Bonuses;
+using Sound;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ namespace UI.Bonuses
     public class BonusView : MonoBehaviour
     {
         [SerializeField] private Text timerText;
+        [SerializeField] private BonusSoundManager bonusSoundManager;
         
         public Player player;
         public BonusController bonusController;
@@ -55,6 +57,7 @@ namespace UI.Bonuses
         public void Deactivate()
         {
             if (coroutine != null) StopCoroutine(coroutine);
+            if (isActive) bonusSoundManager.DeactivateBonusSound();
             transform.GetChild(0).GetComponent<Image>().sprite = null;
             if (bonusType == BonusType.Multiplier)
             {

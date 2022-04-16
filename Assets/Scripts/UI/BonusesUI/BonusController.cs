@@ -1,5 +1,6 @@
 ﻿using System;
 using Progress;
+using Sound;
 using UI.Bonuses;
 using UnityEngine;
 
@@ -15,6 +16,8 @@ namespace Core.Bonuses
 
     public class BonusController : MonoBehaviour
     {
+        [SerializeField] private BonusSoundManager bonusSoundManager;
+        
         [SerializeField] private ProgressController progressController;
         [SerializeField] private PlatformMover platformMover;
         [SerializeField] private Player player;
@@ -292,15 +295,19 @@ namespace Core.Bonuses
             {
                 case BonusType.Acceleration:
                     accelerationIsActive = false;
+                    bonusSoundManager.DeactivateBonusSound();
                     break;
                 case BonusType.Multiplier:
                     multiplierIsActive = false;
+                    bonusSoundManager.DeactivateBonusSound();
                     break;
                 case BonusType.Shield:
                     shieldIsActive = false;
+                    bonusSoundManager.DeactivateBonusSound();
                     break;
                 case BonusType.Magnet:
                     magnetIsActive = false;
+                    bonusSoundManager.DeactivateBonusSound();
                     break;
             }
         }

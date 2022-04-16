@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Data.Core.Segments.Content;
 using ObjectPool;
+using Sound;
 using UnityEngine;
 
 namespace Core.Bonuses
@@ -18,6 +19,12 @@ namespace Core.Bonuses
         private float journeyLength;
         private bool ismove = true;
         private Coroutine coroutine;
+        private KeySound keySound;
+
+        public void BindAudio(KeySound keySound)
+        {
+            this.keySound = keySound;
+        }
         
         public void Construct(BonusController _bonusController, SegmentContentPool segmentContentPool)
         {
@@ -31,6 +38,7 @@ namespace Core.Bonuses
             {
                 other.GetComponent<Player>().CollectKey(1);
                 other.GetComponent<Player>().SpawnKeyCollectingEffect();
+                keySound.Play();
                 segmentContentPool.ReturnObjectToPool(SegmentContent.Key, gameObject);
             }
         }

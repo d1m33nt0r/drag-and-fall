@@ -26,11 +26,11 @@ MonoBehaviour:
   spawnShieldOnHole: 0
   spawnShieldChance: 68
   attemptsOfKeyInstantiate: 1
-  keyPositions: 62000000
+  keyPositions: 03000000
   spawnKeyOnLet: 0
   spawnKeyOnGround: 1
   spawnKeyOnHole: 0
-  spawnKeyChance: 40
+  spawnKeyChance: 100
   attemptsOfMagnetInstantiate: 5
   magnetPositions: 10000000260000003b0000004900000059000000
   spawnMagnetOnLet: 0

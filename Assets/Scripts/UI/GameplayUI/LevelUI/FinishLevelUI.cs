@@ -2,6 +2,8 @@
 using Core;
 using Data.Core;
 using Progress;
+using Sound;
+using Sound.UI;
 using UI.FinishLevel;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +12,9 @@ namespace UI
 {
     public class FinishLevelUI : MonoBehaviour
     {
+        [SerializeField] private FinishLevelSounds finishLevelSounds;
+        [SerializeField] private MainThemeSound mainThemeSound;
+        
         [SerializeField] private TutorialUI tutorialUI;
         [SerializeField] private Transform tryAgainButtonTransform;
         [SerializeField] private Transform closeButtonTransform;
@@ -123,9 +128,11 @@ namespace UI
 
         private IEnumerator ScoreAnimation()
         {
+            mainThemeSound.Stop();
             var isFinish = false;
             var t = 0f;
             yield return new WaitForSeconds(0.5f);
+            finishLevelSounds.PlayPointCounter();
             while (true)
             {
                 var value = (int) Mathf.Lerp(currentScoreValue, actualScoreValue, t);
@@ -133,6 +140,7 @@ namespace UI
                 if (value >= levelData.bottomScore && !firstStarIsActive)
                 {
                     firstStarAnimator.Play("Show");
+                    finishLevelSounds.PlayStarSound();
                     firstStarIsActive = true;
                     if (isFinish) break;
                 }
@@ -140,6 +148,7 @@ namespace UI
                 if (value >= levelData.middleScore && !secondStarIsActive)
                 {
                     secondStarAnimator.Play("Show");
+                    finishLevelSounds.PlayStarSound();
                     secondStarIsActive = true;
                     if (isFinish) break;
                 }
@@ -147,6 +156,7 @@ namespace UI
                 if (value >= levelData.bestScore && !thirdStarIsActive)
                 {
                     thirdStarAnimator.Play("Show");
+                    finishLevelSounds.PlayStarSound();
                     thirdStarIsActive = true;
                     if (isFinish) break;
                 }
@@ -186,12 +196,26 @@ namespace UI
                 }
             }
 
+            finishLevelSounds.StopPointCounter();
+
             yield return new WaitForSeconds(1f);
-            if (firstStarIsActive) firstSlotAnimator.Play("Show");
+            if (firstStarIsActive)
+            {
+                finishLevelSounds.PlayLevelBonusSound();
+                firstSlotAnimator.Play("Show");
+            }
             yield return new WaitForSeconds(0.75f);
-            if (secondStarIsActive) secondSlotAnimator.Play("Show");
+            if (secondStarIsActive)
+            {
+                finishLevelSounds.PlayLevelBonusSound();
+                secondSlotAnimator.Play("Show");
+            }
             yield return new WaitForSeconds(0.75f);
-            if (thirdStarIsActive) thirdSlotAnimator.Play("Show");
+            if (thirdStarIsActive)
+            {
+                finishLevelSounds.PlayLevelBonusSound();
+                thirdSlotAnimator.Play("Show");
+            }
 
             yield return new WaitForSeconds(0.75f);
             animator.Play("ShowButtons");

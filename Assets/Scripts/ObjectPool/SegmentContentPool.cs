@@ -12,6 +12,7 @@ namespace ObjectPool
         [SerializeField] private BonusSoundManager bonusSoundManager;
         [SerializeField] private CoinSound coinSound;
         [SerializeField] private CrystalSound crystalSound;
+        [SerializeField] private KeySound keySound;
         
         [SerializeField] private GameObject coinPrefab;
         [SerializeField] private GameObject crystalPrefab;
@@ -53,6 +54,7 @@ namespace ObjectPool
             for (var i = 0; i < keyPoolSize; i++)
             {
                 var instance = Instantiate(key, Vector3.zero, Quaternion.identity, transform);
+                instance.GetComponent<Key>().BindAudio(keySound);
                 pool[SegmentContent.Key].Enqueue(instance);
                 instance.gameObject.SetActive(false);
             }
