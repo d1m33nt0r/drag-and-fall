@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
 using Core.Effects;
+using UI;
 using UnityEngine;
 
 namespace ObjectPool
 {
     public class EffectsPool : MonoBehaviour
     {
+
+        /*[SerializeField] private GainScore gainScore;
+        [SerializeField] private int gainScorePoolSize;*/
 
         [SerializeField] private PlayerParticles playerParticles;
         [SerializeField] private int particlesPoolSize;
@@ -25,6 +29,7 @@ namespace ObjectPool
         [SerializeField] private KeyCollectingEffect keyCollectingEffect;
         [SerializeField] private int keyEffectPoolSize;
         
+        private Queue<GainScore> gainScorePool = new Queue<GainScore>();
         private Queue<PlayerParticles> particlesPool = new Queue<PlayerParticles>();
         private Queue<TouchEffect> touchPool = new Queue<TouchEffect>();
         private Queue<BonusCollectingEffect> bonusEffectPool = new Queue<BonusCollectingEffect>();
@@ -34,6 +39,14 @@ namespace ObjectPool
         
         private void Awake()
         {
+            /*for (var i = 0; i < gainScorePoolSize; i++)
+            {
+                var instance = Instantiate(gainScore, transform);
+                instance.gameObject.SetActive(false);
+                instance.Construct(this);
+                gainScorePool.Enqueue(gainScore);
+            }*/
+            
             for (var i = 0; i < particlesPoolSize; i++)
             {
                 var instance = Instantiate(playerParticles, transform);
@@ -218,5 +231,27 @@ namespace ObjectPool
             particlesPool.Enqueue(playerParticles);
             playerParticles.gameObject.SetActive(false);
         }
+        
+        /*public GainScore GetGainScoreEffect()
+        {
+            if (gainScorePool.Count > 0)
+            {
+                var temp = gainScorePool.Dequeue();
+                temp.gameObject.SetActive(true);
+                return temp;
+            }
+            
+            var instance = Instantiate(gainScore, transform);
+            instance.Construct(this);
+            instance.gameObject.SetActive(true);
+            return instance;
+        }
+        
+        public void ReturnGainScoreToPool(GainScore gainScore)
+        {
+            gainScore.transform.SetParent(transform);
+            gainScorePool.Enqueue(gainScore);
+            gainScore.gameObject.SetActive(false);
+        }*/
     }
 }

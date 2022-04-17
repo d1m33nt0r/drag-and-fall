@@ -18,6 +18,7 @@ namespace Core
     {
         [SerializeField] private TutorialUI tutorialUI;
         [SerializeField] private PlatformSound platformSound;
+        [SerializeField] private EffectsPool effectsPool;
         
         private bool isFirstPlatform = true;
         [SerializeField] private CameraController cameraController;

@@ -100,6 +100,7 @@ namespace Core
                 audioSource.PlayDestroySound();
                 tubeMover.MoveTube();
                 platformMover.MovePlatforms();
+                //var gainScore = effectsPool.GetGainScoreEffect();
                 gainScore.SetText(1);
                 gainScore.Animate();
                 player.SetFallingTrailState();

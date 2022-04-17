@@ -157,10 +157,10 @@ namespace Core
             meshFilter.mesh = visualController.GetPlayerMesh();
             meshRenderer.material = visualController.GetPlayerMaterial();
             
-            Destroy(trail);
+            //Destroy(trail);
             Destroy(fallingTrail);
             
-            trail = Instantiate(visualController.GetTrail(), transform.position, Quaternion.identity, transform);
+            //trail = Instantiate(visualController.GetTrail(), transform.position, Quaternion.identity, transform);
             fallingTrail = Instantiate(visualController.GetFallingTrail(), new Vector3(0, 0.15f, -0.7f), Quaternion.identity,
                 transform.parent);
         }
