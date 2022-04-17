@@ -101,7 +101,7 @@ Material:
     - _RampThresholdOtherLights: 0.5
     - _ReflectionSmoothness: 0.5
     - _RimMax: 1
-    - _RimMin: 0.5
+    - _RimMin: 0.87
     - _Shadow_HSV_H: 0
     - _Shadow_HSV_S: -0.2
     - _Shadow_HSV_V: 0

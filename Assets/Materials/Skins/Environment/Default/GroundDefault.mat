@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: efdcc874f29dd6442821b118bdab18c0, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -101,7 +101,7 @@ Material:
     - _RampThresholdOtherLights: 0.5
     - _ReflectionSmoothness: 0.5
     - _RimMax: 1
-    - _RimMin: 0.42
+    - _RimMin: 0.5
     - _Shadow_HSV_H: 15
     - _Shadow_HSV_S: 1
     - _Shadow_HSV_V: 0
@@ -124,14 +124,14 @@ Material:
     - __EndGroup: 0
     - __dummy__: 0
     m_Colors:
-    - _Color: {r: 0.36418653, g: 0.7896668, b: 0.8301887, a: 1}
+    - _Color: {r: 0.30137047, g: 0.5471698, b: 0.28132787, a: 1}
     - _DiffuseTint: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionMask_SC: {r: 1, g: 1, b: 0, a: 0}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor: {r: 0, g: 0.3005611, b: 0.3301887, a: 0.5}
+    - _RimColor: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 0.5}
     - _RimDir: {r: 0, g: 0, b: 1, a: 1}
     - _SColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
