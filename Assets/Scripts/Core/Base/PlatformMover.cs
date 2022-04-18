@@ -19,7 +19,7 @@ namespace Core
         [SerializeField] private TutorialUI tutorialUI;
         [SerializeField] private PlatformSound platformSound;
         [SerializeField] private EffectsPool effectsPool;
-        
+        [SerializeField] private PlatformPool platformPool;
         private bool isFirstPlatform = true;
         [SerializeField] private CameraController cameraController;
         [SerializeField] private SegmentContentPool segmentContentPool;
@@ -376,10 +376,13 @@ namespace Core
 
         private void CreateNewPlatform(int _platformIndex, PatternData patternData, bool hide)
         {
-            var platformInstance = Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.Euler(transform.rotation.eulerAngles), transform);
+            var platformInstance = platformPool.GetPlatform();
+            platformInstance.transform.position = localPositionsOfPlatforms[_platformIndex];
+            platformInstance.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles);
+            platformInstance.transform.SetParent(transform);
+                //Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.Euler(transform.rotation.eulerAngles), transform);
             var platform = platformInstance.GetComponent<Platform>();
-            platform.Initialize(Constants.Platform.COUNT_SEGMENTS, patternData, this, 
-                player, bonusController, gainScore, segmentContentPool, tubeMover, tutorialUI, platformSound);
+            platform.Initialize(patternData);
             
             //AlignRotation(platformInstance);
             platforms[_platformIndex] = platform;

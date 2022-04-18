@@ -17,14 +17,18 @@ namespace Core
         private BonusController bonusController;
         private SegmentContentPool segmentContentPool;
 
-        public void Initialize(SegmentData _segmentData, PlatformMover platformMover, Platform _platform, 
-            BonusController _bonusController, SegmentContentPool segmentContentPool)
+        public void Construct(PlatformMover platformMover, Platform platform, 
+            BonusController bonusController, SegmentContentPool segmentContentPool)
         {
             this.segmentContentPool = segmentContentPool;
-            platform = _platform;
-            segmentData = _segmentData;
+            this.platform = platform;
             this.platformMover = platformMover;
-            bonusController = _bonusController;
+            this.bonusController = bonusController;
+        }
+        
+        public void Initialize(SegmentData _segmentData)
+        {
+            segmentData = _segmentData;
             SpawnContent();
             ChangeTheme();
         }

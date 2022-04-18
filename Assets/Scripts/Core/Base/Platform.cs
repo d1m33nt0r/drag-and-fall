@@ -29,36 +29,42 @@ namespace Core
         private TubeMover tubeMover;
         private PlatformSound audioSource;
 
-        public void Initialize(int _segmentsCount, PatternData patternData, PlatformMover platformMover,
-            Player _player, BonusController _bonusController, GainScore gainScore,
+        public void Construct(PlatformMover platformMover,
+            Player player, BonusController bonusController, GainScore gainScore,
             SegmentContentPool segmentContentPool,
-            TubeMover _tubeMover, TutorialUI tutorialUI, PlatformSound audioSource)
-        {
-            InitializeHandMadePlatform(patternData, platformMover, _player, _bonusController, gainScore, segmentContentPool, _tubeMover, tutorialUI);
-            this.audioSource = audioSource;
-        }
-        
-        private void InitializeHandMadePlatform(PatternData patternData, PlatformMover platformMover, Player _player,
-            BonusController _bonusController, GainScore gainScore, SegmentContentPool segmentContentPool, TubeMover _tubeMover, TutorialUI tutorialUI)
+            TubeMover tubeMover, TutorialUI tutorialUI, PlatformSound audioSource)
         {
             this.segmentContentPool = segmentContentPool;
             this.platformMover = platformMover;
             this.gainScore = gainScore;
-            this.patternData = patternData;
-            this.tubeMover = _tubeMover;
+            this.tubeMover = tubeMover;
             this.tutorialUI = tutorialUI;
+            this.audioSource = audioSource;
+            this.player = player;
             
             for (var i = 1; i <= patternData.segmentsData.Length; i++)
             {
-                segments[i - 1].Initialize(patternData.segmentsData[i - 1], platformMover, 
-                    this, _bonusController, segmentContentPool);
+                segments[i - 1].Construct(platformMover, 
+                    this, bonusController, segmentContentPool);
             }
+        }
+        
+        public void Initialize(PatternData patternData)
+        {
+            InitializeHandMadePlatform(patternData);
+            
+        }
+        
+        private void InitializeHandMadePlatform(PatternData patternData)
+        {
+            for (var i = 1; i <= patternData.segmentsData.Length; i++)
+                segments[i - 1].Initialize(patternData.segmentsData[i - 1]);
             
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 
                 transform.rotation.eulerAngles.y + patternData.segmentRotationBias, 
                 transform.rotation.eulerAngles.z);
             
-            player = _player;
+            
         }
         
         public void IncreaseTouchCounter()
