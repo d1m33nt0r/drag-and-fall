@@ -9,24 +9,40 @@ namespace UI.Bonuses
 {
     public class BonusView : MonoBehaviour
     {
-        [SerializeField] private Text timerText;
-        [SerializeField] private BonusSoundManager bonusSoundManager;
         
+        [SerializeField] private BonusSoundManager bonusSoundManager;
         public Player player;
         public BonusController bonusController;
-        public Slider timer;
+        
         public bool isActive { get; private set; }
         public BonusType bonusType;
         public Coroutine coroutine;
         private float defaultTimerValue;
         [SerializeField] private Text multiplierText;
-        
         [SerializeField] private GameObject shieldPlayerEffect;
+
+        public RectTransform bonusIconPanel;
+        public RectTransform bonusIcon;
+        public Slider timer;
+        public RectTransform fillArea;
+        public Text timerText;
+        
         public void Construct()
         {
+            bonusIconPanel.gameObject.SetActive(true);
+            if (bonusIcon != null) bonusIcon.gameObject.SetActive(true);
+            timer.gameObject.SetActive(true);
+            fillArea.gameObject.SetActive(true);
+            timerText.gameObject.SetActive(true);
+            
+            
             isActive = true;
             defaultTimerValue = bonusController.GetUpgradedTimer(bonusType);
-            if (bonusType == BonusType.Multiplier) multiplierText.text = "x" + bonusController.multiplier;
+            if (bonusType == BonusType.Multiplier)
+            {
+                multiplierText.gameObject.SetActive(true);
+                multiplierText.text = "x" + bonusController.multiplier;
+            }
             timer.maxValue = defaultTimerValue;
             timer.value = defaultTimerValue;
             SetActive(true);
@@ -56,13 +72,20 @@ namespace UI.Bonuses
 
         public void Deactivate()
         {
+            bonusIconPanel.gameObject.SetActive(false);
+            if (bonusIcon != null) bonusIcon.gameObject.SetActive(false);
+            timer.gameObject.SetActive(false);
+            fillArea.gameObject.SetActive(false);
+            timerText.gameObject.SetActive(false);
+
             if (coroutine != null) StopCoroutine(coroutine);
             if (isActive) bonusSoundManager.DeactivateBonusSound();
-            transform.GetChild(0).GetComponent<Image>().sprite = null;
+            //transform.GetChild(0).GetComponent<Image>().sprite = null;
             if (bonusType == BonusType.Multiplier)
             {
                 bonusController.multiplier = 0;
                 bonusController.multiplierIsActive = false;
+                multiplierText.gameObject.SetActive(false);
             }
             timer.value = defaultTimerValue;
             if (bonusType == BonusType.Magnet) player.SetActiveMagnet(false);
