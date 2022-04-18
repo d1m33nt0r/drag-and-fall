@@ -17,9 +17,9 @@ MonoBehaviour:
     priceCoins: 0
     priceCrystals: 0
     skybox: {fileID: 2100000, guid: 3e7499319482c054596e856e2377929c, type: 2}
-    tubeMaterial: {fileID: 2100000, guid: e3dad7234d39bf348ab2702865544d1d, type: 2}
-    letSegmentMaterial: {fileID: 2100000, guid: 75e4ac386d5f6bb4b9b43e5076405669, type: 2}
-    groundSegmentMaterial: {fileID: 2100000, guid: a46e7ac6201b9bb4ca243d7c6a278452, type: 2}
+    tubeMaterial: {fileID: 2100000, guid: 55c431bb163b7a646a8f0b1a80744a9d, type: 2}
+    letSegmentMaterial: {fileID: 2100000, guid: 2a78a7f3418a0a74c8fc162f75670d9e, type: 2}
+    groundSegmentMaterial: {fileID: 2100000, guid: ffb1c1b0a25dbe34fbeacec68c04f2b5, type: 2}
     segment: {fileID: 7188848276043003615, guid: 0110f3aecfa193240957a29499f44225, type: 3}
     tube: {fileID: 1308720478661719387, guid: 0110f3aecfa193240957a29499f44225, type: 3}
     platformColors:

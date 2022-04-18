@@ -8,6 +8,7 @@ namespace Core
     {
         [SerializeField] private Text counter;
         [SerializeField] private GameObject counterPanel;
+        [SerializeField] private Text score;
         
         private void Start()
         {
@@ -29,6 +30,8 @@ namespace Core
         public void SetActiveCounterPanel(bool _value)
         {
             counterPanel.SetActive(_value);
+            score.gameObject.SetActive(_value);
+            counter.gameObject.SetActive(_value);
         }
         
         public void ResetCounter()

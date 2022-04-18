@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Main
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 548f14ac7a401824a93d52604ca19ebb, type: 3}
+    - {fileID: 2800000, guid: 4f7a4d8554cf00c4c8b3163c09f7c4bb, type: 3}
+    - {fileID: 2800000, guid: d25acb55b1dda3141a10e59da3cf982a, type: 3}
+    - {fileID: 2800000, guid: 50dc26cbf1f2d504a811af2849b583aa, type: 3}
+    - {fileID: 2800000, guid: 66d424c6beabff44e81e69aab773cf50, type: 3}
+    - {fileID: 2800000, guid: 69c1e6db14a0fa34cbf7f2ebeba07d0a, type: 3}
+    - {fileID: 2800000, guid: 729f1f55600c0f9428a6cdd4f6a47145, type: 3}
+    - {fileID: 2800000, guid: c8e66de29eb6f384887b0ce3ee3b8933, type: 3}
+    - {fileID: 2800000, guid: b5c85817fb1ddd84c9550a6bfd5bbc36, type: 3}
+    - {fileID: 2800000, guid: a718afaf391f31245a8e6f17aae0e4f5, type: 3}
+    totalSpriteSurfaceArea: 1153929
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: c8e66de29eb6f384887b0ce3ee3b8933, type: 3}
+  - {fileID: 21300000, guid: d25acb55b1dda3141a10e59da3cf982a, type: 3}
+  - {fileID: 21300000, guid: 729f1f55600c0f9428a6cdd4f6a47145, type: 3}
+  - {fileID: 21300000, guid: 4f7a4d8554cf00c4c8b3163c09f7c4bb, type: 3}
+  - {fileID: 21300000, guid: 66d424c6beabff44e81e69aab773cf50, type: 3}
+  - {fileID: 21300000, guid: b5c85817fb1ddd84c9550a6bfd5bbc36, type: 3}
+  - {fileID: 21300000, guid: 50dc26cbf1f2d504a811af2849b583aa, type: 3}
+  - {fileID: 21300000, guid: 69c1e6db14a0fa34cbf7f2ebeba07d0a, type: 3}
+  - {fileID: 21300000, guid: 548f14ac7a401824a93d52604ca19ebb, type: 3}
+  - {fileID: 21300000, guid: a718afaf391f31245a8e6f17aae0e4f5, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - score_panel
+  - magnet_icon
+  - background
+  - crystal
+  - shield_icon
+  - coinIcon
+  - multiplier_icon
+  - KeyIcon
+  - concentration-6-764956
+  - GreyButton
+  m_RenderDataMap: {}
+  m_Tag: Main
+  m_IsVariant: 0
