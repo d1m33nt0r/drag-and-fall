@@ -62,7 +62,7 @@ namespace Core
         {
             countTouches++;
             
-            if (countTouches == 1)
+            /*if (countTouches == 1)
             {
                 for (var i = 0; i < 12; i++)
                     segments[i].GetComponent<Segment>().ChangeColor(1);
@@ -72,7 +72,7 @@ namespace Core
             {
                 for (var i = 0; i < 12; i++)
                     segments[i].GetComponent<Segment>().ChangeColor(2);
-            }
+            }*/
             
             if (countTouches == 2) platformMover.ResetConcentration();
             if (countTouches == 3) DestroyPlatform(true);
@@ -83,8 +83,8 @@ namespace Core
             if (!tutorialUI.secondStepComplete && platformMover.concentration.slider.value >= 4) 
                 tutorialUI.ShowSecondStep();
 
-            for (var i = 0; i < 12; i++)
-                segments[i].GetComponent<Segment>().ChangeColor(3);
+            /*for (var i = 0; i < 12; i++)
+                segments[i].GetComponent<Segment>().ChangeColor(3);*/
             
             
             if (platformsIsMoving)
