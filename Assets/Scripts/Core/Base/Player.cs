@@ -126,7 +126,7 @@ namespace Core
             var backlightParticle = fireBacklight.GetComponent<ParticleSystem>();
             var backlightMain = backlightParticle.main;
             backlightMain.startColor = new ParticleSystem.MinMaxGradient(new Color(backlightMain.startColor.color.r,
-                backlightMain.startColor.color.g, backlightMain.startColor.color.b, 0f));
+                backlightMain.startColor.color.g, backlightMain.startColor.color.b, 0.1f));
         }
         
         public void IncreaseFireEffect4()
@@ -138,7 +138,7 @@ namespace Core
             var backlightParticle = fireBacklight.GetComponent<ParticleSystem>();
             var backlightMain = backlightParticle.main;
             backlightMain.startColor = new ParticleSystem.MinMaxGradient(new Color(backlightMain.startColor.color.r,
-                backlightMain.startColor.color.g, backlightMain.startColor.color.b, 0f));
+                backlightMain.startColor.color.g, backlightMain.startColor.color.b, 0.05f));
         }
 
         private void Awake()

@@ -48,11 +48,10 @@ namespace Core
 
         public void Initialize(PatternData patternData)
         {
+            this.patternData = patternData;
+            
             for (var i = 1; i <= patternData.segmentsData.Length; i++)
-            {
                 segments[i - 1].Initialize(patternData.segmentsData[i - 1]);
-                
-            }
             
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 
                 transform.rotation.eulerAngles.y + patternData.segmentRotationBias, 
@@ -100,9 +99,12 @@ namespace Core
                 platformMover.IncreaseConcentration();
                 platformMover.LevelStep();
             }
-            
-            if (platformMover.isLevelMode && patternData.isLast) 
+
+            if (platformMover.isLevelMode && patternData.isLast)
+            {
+                Debug.Log("Finish");
                 platformMover.FinishLevel(platformMover.gameManager.gameMode.levelMode.level);
+            }
 
             for (var i = 0; i < segments.Length; i++)
             {
