@@ -376,12 +376,11 @@ namespace Core
 
         private void CreateNewPlatform(int _platformIndex, PatternData patternData, bool hide)
         {
-            var platformInstance = platformPool.GetPlatform();
-            platformInstance.transform.position = localPositionsOfPlatforms[_platformIndex];
-            platformInstance.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles);
-            platformInstance.transform.SetParent(transform);
+            var platform = platformPool.GetPlatform();
+            platform.transform.position = localPositionsOfPlatforms[_platformIndex];
+            platform.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles);
+            platform.transform.SetParent(transform);
                 //Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.Euler(transform.rotation.eulerAngles), transform);
-            var platform = platformInstance.GetComponent<Platform>();
             platform.Initialize(patternData);
             
             //AlignRotation(platformInstance);

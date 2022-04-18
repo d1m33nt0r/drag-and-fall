@@ -20985,7 +20985,7 @@ MonoBehaviour:
   tutorialUI: {fileID: 185887002}
   platformSound: {fileID: 62086648}
   platformPrefab: {fileID: 5488090507667545413, guid: 1aa3279ae3c1a884b8bbe2b0b130ecb4, type: 3}
-  poolSize: 0
+  poolSize: 15
 --- !u!4 &381136002
 Transform:
   m_ObjectHideFlags: 0
@@ -20994,7 +20994,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381136000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.453012, y: -7.7869616, z: 4.148595}
+  m_LocalPosition: {x: -18.64, y: -7.7869616, z: 2.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

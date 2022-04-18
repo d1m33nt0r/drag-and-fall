@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Core.Bonuses;
+﻿using Core.Bonuses;
 using Core.Effects;
 using Data.Core;
-using Data.Core.Segments;
-using Data.Core.Segments.Content;
 using ObjectPool;
 using Sound;
 using UI;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Core
 {
@@ -23,17 +18,19 @@ namespace Core
         public PatternData patternData;
         private Player player;
         private PlatformMover platformMover;
-        [SerializeField] private Segment[] segments;
+        public Segment[] segments;
         private GainScore gainScore;
         private SegmentContentPool segmentContentPool;
         private TubeMover tubeMover;
         private PlatformSound audioSource;
-
-        public void Construct(PlatformMover platformMover,
+        private PlatformPool platformPool;
+        
+        public void Construct(PlatformPool platformPool, PlatformMover platformMover,
             Player player, BonusController bonusController, GainScore gainScore,
             SegmentContentPool segmentContentPool,
             TubeMover tubeMover, TutorialUI tutorialUI, PlatformSound audioSource)
         {
+            this.platformPool = platformPool;
             this.segmentContentPool = segmentContentPool;
             this.platformMover = platformMover;
             this.gainScore = gainScore;
@@ -48,25 +45,20 @@ namespace Core
                     this, bonusController, segmentContentPool);
             }
         }
-        
+
         public void Initialize(PatternData patternData)
         {
-            InitializeHandMadePlatform(patternData);
-            
-        }
-        
-        private void InitializeHandMadePlatform(PatternData patternData)
-        {
             for (var i = 1; i <= patternData.segmentsData.Length; i++)
+            {
                 segments[i - 1].Initialize(patternData.segmentsData[i - 1]);
+                
+            }
             
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 
                 transform.rotation.eulerAngles.y + patternData.segmentRotationBias, 
                 transform.rotation.eulerAngles.z);
-            
-            
         }
-        
+
         public void IncreaseTouchCounter()
         {
             countTouches++;
@@ -74,17 +66,13 @@ namespace Core
             if (countTouches == 1)
             {
                 for (var i = 0; i < 12; i++)
-                {
                     segments[i].GetComponent<Segment>().ChangeColor(1);
-                }
             }
 
             if (countTouches == 2)
             {
                 for (var i = 0; i < 12; i++)
-                {
                     segments[i].GetComponent<Segment>().ChangeColor(2);
-                }
             }
             
             if (countTouches == 2) platformMover.ResetConcentration();
@@ -97,9 +85,8 @@ namespace Core
                 tutorialUI.ShowSecondStep();
 
             for (var i = 0; i < 12; i++)
-            {
                 segments[i].GetComponent<Segment>().ChangeColor(3);
-            }
+            
             
             if (platformsIsMoving)
             {
@@ -137,7 +124,11 @@ namespace Core
             if (touchEffect != null) touchEffect.transform.SetParent(null);
             if (playerParticles != null) playerParticles.transform.SetParent(null);
             
-            Destroy(gameObject);
+            transform.position = platformPool.transform.position;
+
+            platformPool.ReturnToPool(this);
+            
+            //Destroy(gameObject);
         }
 
         private void BreakDownPlatform()
