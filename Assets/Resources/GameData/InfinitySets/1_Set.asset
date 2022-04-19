@@ -24,7 +24,7 @@ MonoBehaviour:
   spawnShieldOnLet: 0
   spawnShieldOnGround: 1
   spawnShieldOnHole: 0
-  spawnShieldChance: 68
+  spawnShieldChance: 59
   attemptsOfKeyInstantiate: 1
   keyPositions: 03000000
   spawnKeyOnLet: 0
@@ -36,19 +36,19 @@ MonoBehaviour:
   spawnMagnetOnLet: 0
   spawnMagnetOnGround: 1
   spawnMagnetOnHole: 0
-  spawnMagnetChance: 65
+  spawnMagnetChance: 59
   attemptsOfMultiplierInstantiate: 5
   multiplierPositions: 0e00000022000000360000004a0000005e000000
   spawnMultiplierOnLet: 0
   spawnMultiplierOnGround: 1
   spawnMultiplierOnHole: 0
-  spawnMultiplierChance: 65
+  spawnMultiplierChance: 59
   attemptsOfAccelerationInstantiate: 5
   accelerationPositions: 0c0000002000000034000000480000005c000000
   spawnAccelerationOnLet: 0
   spawnAccelerationOnGround: 1
   spawnAccelerationOnHole: 0
-  spawnAccelerationChance: 65
+  spawnAccelerationChance: 59
   currencyRandomSettings:
   - spawnOnLet: 0
     spawnOnGround: 1

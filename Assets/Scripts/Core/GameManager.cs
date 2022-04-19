@@ -350,7 +350,8 @@ namespace Core
             uiManager.SetActiveUpgradeMenu(false);
             platformMover.gameManager.gameMode.levelMode.ResetPointer();
             platformMover.InitializePlatforms();
-
+            
+            
             uiManager.SetActiveMainMenu(false);
             uiManager.SetActiveShopMenu(false);
             uiManager.SetActiveLevelUI(true);
