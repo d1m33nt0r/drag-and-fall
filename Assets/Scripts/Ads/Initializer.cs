@@ -16,7 +16,7 @@ namespace Ads
 
         private void Start()
         {
-            bannerAds.RequestBanner();
+            //bannerAds.RequestBanner();
             rewardAds.RequestReward();
             interstitialAds.RequestInterstitial();
         }

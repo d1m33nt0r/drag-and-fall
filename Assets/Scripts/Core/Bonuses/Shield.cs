@@ -15,6 +15,7 @@ namespace Core.Bonuses
         private Transform startMarker;
         public Transform endMarker;
 
+        private bool isMoving;
         public float speed = 1.0F;
         private float startTime;
         private float journeyLength;
@@ -25,6 +26,11 @@ namespace Core.Bonuses
         public void BindAudio(BonusSoundManager bonusSoundManager)
         {
             this.bonusSoundManager = bonusSoundManager;
+        }
+        
+        public void SetMovingFalse()
+        {
+            isMoving = false;
         }
         
         public void Construct(BonusController _bonusController, SegmentContentPool segmentContentPool)
@@ -48,19 +54,16 @@ namespace Core.Bonuses
             endMarker = _transform;
             startTime = Time.time;
             journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
-            if (coroutine != null) StopCoroutine(coroutine);
-            coroutine = StartCoroutine(Move());
+            isMoving = true;
         }
     
-        private IEnumerator Move()
+        private void FixedUpdate()
         {
-            while (startMarker.position != endMarker.position) 
-            {
-                var distCovered = (Time.time - startTime) * speed;
-                var fractionOfJourney = distCovered / journeyLength;
-                startMarker.position = Vector3.Lerp(startMarker.position, endMarker.position, fractionOfJourney);
-                yield return null;
-            }
+            if (!isMoving) return;
+            
+            var distCovered = (Time.time - startTime) * speed;
+            var fractionOfJourney = distCovered / journeyLength;
+            startMarker.position = Vector3.Lerp(startMarker.position, endMarker.position, fractionOfJourney);
         }
     }
 }

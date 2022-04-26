@@ -16,6 +16,12 @@ namespace Core
 {
     public class PlatformMover : MonoBehaviour
     {
+        private float speed;
+        private float fractionOfJourney;
+        private float distCovered;
+        
+        
+        private bool isMoving;
         [SerializeField] private TutorialUI tutorialUI;
         [SerializeField] private PlatformSound platformSound;
         [SerializeField] private EffectsPool effectsPool;
@@ -51,11 +57,8 @@ namespace Core
         public Platform[] platforms;
         
         private Vector3[] localPositionsOfPlatforms;
-       
-        private bool destroyTubeNeeded = true;
-        private Coroutine movingCoroutine;
-       
-        
+
+
         private void Awake()
         {
             DragController.SwipeEvent += RotateTube;
@@ -64,10 +67,10 @@ namespace Core
             journeyLength = Vector3.Distance(localPositionsOfPlatforms[0], localPositionsOfPlatforms[1]);
         }
 
-        public void SetMovementSpeed(float speed)
+        public void SetMovementSpeed(float _speed)
         {
-            platformMovementSpeed = speed;
-            cameraController.ChangeFieldView(speed);
+            platformMovementSpeed = _speed;
+            cameraController.ChangeFieldView(_speed);
             
             if (platformMovementSpeed == 6)
             {
@@ -170,61 +173,29 @@ namespace Core
         
         public void MovePlatforms()
         {
+            this.speed = platformMovementSpeed;
             startTime = Time.time;
-            if (movingCoroutine != null) StopCoroutine(movingCoroutine);
-            movingCoroutine = StartCoroutine(Moving(platformMovementSpeed));
-        }
+            isMoving = true;
 
-        private IEnumerator Moving(float speed)
-        {
-            destroyTubeNeeded = !destroyTubeNeeded;
             for (var i = 1; i < countPlatforms; i++)
                 platforms[i - 1] = platforms[i];
-
+            
             if (tutorialUI.firstGeneralStepComplete)
             {
                 if (!isLevelMode)
                     currentPatternData = gameManager.gameMode.infinityMode.GetPatternData();
                 else
                     currentPatternData = gameManager.gameMode.levelMode.GetPatternData();
-            
-                if (isLevelMode && currentPatternData != null)
+
+                if (isLevelMode && currentPatternData.initialized)
                     CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
-                else if (isLevelMode && currentPatternData == null)
+                else if (isLevelMode && !currentPatternData.initialized)
                 {
                     currentPatternData = new PatternData(12);
                     CreateNewPlatform(countPlatforms - 1, currentPatternData, true);
                 }
                 else
                     CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
-            
-                var distCovered = (Time.time - startTime) * speed;
-                var fractionOfJourney = distCovered / journeyLength;
-                while (distCovered / journeyLength != 1)
-                {
-                    if (!gameManager.gameStarted)
-                    {
-                        yield return null;
-                        continue;
-                    }
-                
-                    for (var i = 1; i < countPlatforms; i++)
-                    {
-                        try
-                        {
-                            distCovered = (Time.time - startTime) * speed;
-                            fractionOfJourney = distCovered / journeyLength;
-                            platforms[i - 1].transform.position = Vector3.Lerp(localPositionsOfPlatforms[i], localPositionsOfPlatforms[i - 1], fractionOfJourney);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e);
-                            throw;
-                        }
-                    }
-
-                    yield return null;
-                }
             }
             else
             {
@@ -238,41 +209,25 @@ namespace Core
                     isLevelMode = true;
                     gameManager.gameMode.levelMode.level = levelsData.leves[0];
                     currentPatternData = gameManager.gameMode.levelMode.GetPatternData();
-                    if (isLevelMode && currentPatternData != null)
+                    if (isLevelMode && currentPatternData.initialized)
                         CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
-                    else if(isLevelMode && currentPatternData == null)
+                    else if (isLevelMode && !currentPatternData.initialized)
                         CreateNewPlatform(countPlatforms - 1, new PatternData(12), true);
                 }
-            
-                var distCovered = (Time.time - startTime) * speed;
-                var fractionOfJourney = distCovered / journeyLength;
-                while (distCovered / journeyLength != 1)
-                {
-                    if (!gameManager.gameStarted)
-                    {
-                        yield return null;
-                        continue;
-                    }
-                
-                    for (var i = 1; i < countPlatforms; i++)
-                    {
-                        try
-                        {
-                            distCovered = (Time.time - startTime) * speed;
-                            fractionOfJourney = distCovered / journeyLength;
-                            platforms[i - 1].transform.position = Vector3.Lerp(localPositionsOfPlatforms[i], localPositionsOfPlatforms[i - 1], fractionOfJourney);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e);
-                            throw;
-                        }
-                    }
-
-                    yield return null;
-                }
             }
+        }
+
+        private void Update()
+        {
+            if (!gameManager.gameStarted) return;
+            if (!isMoving) return;
             
+            for (var i = 1; i < countPlatforms; i++)
+            {
+                distCovered = (Time.time - startTime) * this.speed;
+                fractionOfJourney = distCovered / journeyLength;
+                platforms[i - 1].transform.position = Vector3.Lerp(localPositionsOfPlatforms[i], localPositionsOfPlatforms[i - 1], fractionOfJourney);
+            }
         }
         
         private void InitializePlatformPoints()

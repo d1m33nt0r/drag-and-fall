@@ -25,6 +25,7 @@ namespace Core
             if (level.patterns.Count > patternPointer + 1)
             {
                 var patternData = level.patterns[patternPointer];
+                patternData.initialized = true;
                 patternPointer++;
                 return patternData;
             }
@@ -32,12 +33,13 @@ namespace Core
             if (level.patterns.Count == patternPointer + 1)
             {
                 var patternData = level.patterns[patternPointer];
+                patternData.initialized = true;
                 patternPointer++;
                 return patternData;
             }
             
             //ResetPointer();
-            return null;
+            return new PatternData(12);
         }
     }
 }

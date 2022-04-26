@@ -111,6 +111,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 1
     maxLetAmount: 3
     minLetAmount: 3
@@ -155,6 +156,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 1
     maxLetAmount: 0
     minLetAmount: 0
@@ -199,6 +201,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 1
     maxLetAmount: 3
     minLetAmount: 3
@@ -243,6 +246,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 1
     maxLetAmount: 3
     minLetAmount: 3
@@ -287,6 +291,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 1
     maxLetAmount: 3
     minLetAmount: 3
@@ -331,6 +336,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 1
     maxLetAmount: 6
     minLetAmount: 3
@@ -375,6 +381,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 1
     maxLetAmount: 5
     minLetAmount: 4
@@ -419,6 +426,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 1
     maxLetAmount: 6
     minLetAmount: 3
@@ -463,6 +471,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 1
     maxLetAmount: 5
     minLetAmount: 2
@@ -507,6 +516,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 1
     maxLetAmount: 4
     minLetAmount: 1
@@ -551,6 +561,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 1
     maxLetAmount: 5
     minLetAmount: 2
@@ -595,6 +606,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 0
     maxLetAmount: 0
     minLetAmount: 0
@@ -639,6 +651,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 0
     maxLetAmount: 0
     minLetAmount: 0
@@ -683,6 +696,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 0
     maxLetAmount: 0
     minLetAmount: 0
@@ -727,6 +741,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 0
     maxLetAmount: 0
     minLetAmount: 0
@@ -771,6 +786,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 0
     maxLetAmount: 0
     minLetAmount: 0
@@ -815,6 +831,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 0
     maxLetAmount: 0
     minLetAmount: 0
@@ -859,6 +876,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 0
     maxLetAmount: 0
     minLetAmount: 0
@@ -903,6 +921,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 0
     maxLetAmount: 0
     minLetAmount: 0
@@ -947,6 +966,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 0
     maxLetAmount: 0
     minLetAmount: 0
@@ -991,6 +1011,7 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0
   - isRandom: 0
     maxLetAmount: 0
     minLetAmount: 0
@@ -1035,3 +1056,4 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
+    initialized: 0

@@ -10,6 +10,8 @@ namespace Core
 {
     public class Platform : MonoBehaviour
     {
+        private const string BREAK_ANIMATION_IDENTIFIER = "Break";
+        
         private bool destroy;
         public int countTouches = 0;
         private TutorialUI tutorialUI;
@@ -24,12 +26,15 @@ namespace Core
         private TubeMover tubeMover;
         private PlatformSound audioSource;
         private PlatformPool platformPool;
+        private MeshCollider[] meshColliders;
+        private Animator animator;
         
         public void Construct(PlatformPool platformPool, PlatformMover platformMover,
             Player player, BonusController bonusController, GainScore gainScore,
             SegmentContentPool segmentContentPool,
             TubeMover tubeMover, TutorialUI tutorialUI, PlatformSound audioSource)
         {
+            meshColliders = new MeshCollider[12];
             this.platformPool = platformPool;
             this.segmentContentPool = segmentContentPool;
             this.platformMover = platformMover;
@@ -43,7 +48,10 @@ namespace Core
             {
                 segments[i - 1].Construct(platformMover, 
                     this, bonusController, segmentContentPool);
+                meshColliders[i - 1] = segments[i - 1].GetComponent<MeshCollider>();
             }
+            
+            animator = GetComponent<Animator>();
         }
 
         public void Initialize(PatternData patternData)
@@ -90,7 +98,7 @@ namespace Core
             if (platformsIsMoving)
             {
                 audioSource.PlayDestroySound();
-                tubeMover.MoveTube();
+                tubeMover.MoveTube(platformMover.platformMovementSpeed);
                 platformMover.MovePlatforms();
                 //var gainScore = effectsPool.GetGainScoreEffect();
                 gainScore.SetText(1);
@@ -102,7 +110,6 @@ namespace Core
 
             if (platformMover.isLevelMode && patternData.isLast)
             {
-                Debug.Log("Finish");
                 platformMover.FinishLevel(platformMover.gameManager.gameMode.levelMode.level);
             }
 
@@ -121,6 +128,12 @@ namespace Core
             
         }
 
+        public void SetEnableMeshColliders(bool value)
+        {
+            for (var i = 0; i < meshColliders.Length; i++)
+                meshColliders[i].enabled = value;
+        }
+
         public void DestroyAfterBreakAnimation()
         {
             if (touchEffect != null) touchEffect.transform.SetParent(null);
@@ -129,16 +142,12 @@ namespace Core
             transform.position = platformPool.transform.position;
 
             platformPool.ReturnToPool(this);
-            
-            //Destroy(gameObject);
         }
 
         private void BreakDownPlatform()
         {
-            for (var i = 0; i < segments.Length; i++)
-                segments[i].gameObject.GetComponent<MeshCollider>().enabled = false;
-            
-            GetComponent<Animator>().Play("Break");
+            SetEnableMeshColliders(false);
+            animator.Play(BREAK_ANIMATION_IDENTIFIER);
         }
     }
 }

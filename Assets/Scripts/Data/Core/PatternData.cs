@@ -5,7 +5,7 @@ using Data.Core.Segments.Content;
 namespace Data.Core
 {
     [Serializable]
-    public class PatternData
+    public struct PatternData
     {
         public bool isRandom;
         public int maxLetAmount;
@@ -15,6 +15,7 @@ namespace Data.Core
         public bool isLast;
         public float segmentRotationBias;
         public SegmentData[] segmentsData;
+        public bool initialized;
         
         public PatternData(int _segmentsAmount)
         {
@@ -28,6 +29,15 @@ namespace Data.Core
                     segmentType = SegmentType.Ground
                 };
             }
+
+            isRandom = default;
+            maxHoleAmount = default;
+            minHoleAmount = default;
+            maxLetAmount = default;
+            minLetAmount = default;
+            isLast = default;
+            segmentRotationBias = default;
+            initialized = false;
         }
     }
 }

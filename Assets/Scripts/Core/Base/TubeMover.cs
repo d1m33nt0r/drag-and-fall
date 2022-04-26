@@ -10,6 +10,10 @@ namespace Core
 {
     public class TubeMover : MonoBehaviour
     {
+        private float distCovered;
+        private float fractionOfJourney;
+        private float speed;
+        private bool isMoving;
         [SerializeField] private GameObject particleSystem;
         [SerializeField] private TubePool tubePool;
         [SerializeField] private GameObject tubePrefab;
@@ -115,36 +119,29 @@ namespace Core
             tubeParts[countTubeParts - 1] = tubePartInstance.GetComponent<TubePart>();
         }
 
-        public void MoveTube()
+        public void MoveTube(float speed)
         {
             startTime = Time.time;
-            if (tubePartCoroutine != null)
-            {
-                StopCoroutine(tubePartCoroutine);
-            }
-            
+            distCovered = (Time.time - startTime) * speed;
+            fractionOfJourney = distCovered / journeyLength;
+            this.speed = speed;
+            isMoving = true;
             CreateNewTubePart();
-            
-            tubePartCoroutine = StartCoroutine(MovingTube(platformMover.platformMovementSpeed));
         }
         
-        public IEnumerator MovingTube(float speed)
+        public void Update()
         {
-            var distCovered = (Time.time - startTime) * speed;
-            var fractionOfJourney = distCovered / journeyLength;
+            if (!isMoving) return;
             
-            while (distCovered / journeyLength != 1)
+           
+            for (var i = 0; i < countTubeParts - 1; i++)
             {
-                for (var i = 0; i < countTubeParts - 1; i++)
-                {
-                    distCovered = (Time.time - startTime) * speed;
-                    fractionOfJourney = distCovered / journeyLength;
-                    tubeParts[i].transform.position =
-                        Vector3.Lerp(localPositionsOfTubeParts[i + 1], localPositionsOfTubeParts[i], fractionOfJourney);
-                }
-
-                yield return null;
+                distCovered = (Time.time - startTime) * this.speed;
+                fractionOfJourney = distCovered / journeyLength;
+                tubeParts[i].transform.position =
+                    Vector3.Lerp(localPositionsOfTubeParts[i + 1], localPositionsOfTubeParts[i], fractionOfJourney);
             }
+            
         }
     }
 }

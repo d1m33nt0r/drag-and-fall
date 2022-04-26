@@ -128,6 +128,31 @@ namespace ObjectPool
 
         public void ReturnObjectToPool(SegmentContent segmentContent, GameObject gameObject)
         {
+            switch (segmentContent)
+            {
+                case SegmentContent.Acceleration:
+                    gameObject.GetComponent<Acceleration>().SetMovingFalse();
+                    break;
+                case SegmentContent.Coin:
+                    gameObject.GetComponent<Coin>().SetMovingFalse();
+                    break;
+                case SegmentContent.Crystal:
+                    gameObject.GetComponent<Crystal>().SetMovingFalse();
+                    break;
+                case SegmentContent.Key:
+                    gameObject.GetComponent<Key>().SetMovingFalse();
+                    break;
+                case SegmentContent.Magnet:
+                    gameObject.GetComponent<Magnet>().SetMovingFalse();
+                    break;
+                case SegmentContent.Multiplier:
+                    gameObject.GetComponent<Multiplier>().SetMovingFalse();
+                    break;
+                case SegmentContent.Shield:
+                    gameObject.GetComponent<Shield>().SetMovingFalse();
+                    break;
+            }
+            
             gameObject.transform.SetParent(transform);
             pool[segmentContent].Enqueue(gameObject);
             gameObject.SetActive(false);

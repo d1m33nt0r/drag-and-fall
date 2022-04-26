@@ -56,20 +56,5 @@ namespace Core
                     break;
             }
         }
-
-        private IEnumerator AnimateFieldOfView(float targetFieldOfView)
-        {
-            var distCovered = (Time.time - startTime) * speed;
-            var fractionOfJourney = distCovered / journeyLength;
-            var currentFieldOfView = camera.fieldOfView;
-            
-            while (distCovered / journeyLength != 1)
-            {
-                distCovered = (Time.time - startTime) * speed;
-                fractionOfJourney = distCovered / journeyLength;
-                camera.fieldOfView = Mathf.Lerp(currentFieldOfView, targetFieldOfView, fractionOfJourney);
-                yield return null;
-            }
-        }
     }
 }

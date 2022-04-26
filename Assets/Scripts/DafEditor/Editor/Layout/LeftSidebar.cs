@@ -110,14 +110,14 @@ namespace DafEditor.Editor.Layout
                         if (!infinityData.patternSets[i].isRandom)
                         {
                             GameEditorWindow.instance.SetRightPanelState(RightPanelState.Empty);
-                            GameEditorWindow.instance.SetCurrentRandomPatternData(null);
+                            GameEditorWindow.instance.SetCurrentRandomPatternData(default);
                             GameEditorWindow.instance.SetCurrentRandomSetData(null);
                             infinityData.patternSets[i].isRandom = false;
                         }
                         else
                         {
                             GameEditorWindow.instance.SetRightPanelState(RightPanelState.SetRandomSettings);
-                            GameEditorWindow.instance.SetCurrentRandomPatternData(null);
+                            GameEditorWindow.instance.SetCurrentRandomPatternData(default);
                             GameEditorWindow.instance.SetCurrentRandomSetData(infinityData.patternSets[i]);
                             infinityData.patternSets[i].isRandom = true;
                         }
@@ -127,12 +127,12 @@ namespace DafEditor.Editor.Layout
                         if (infinityData.patternSets[i].isRandom)
                         {
                             GameEditorWindow.instance.SetRightPanelState(RightPanelState.SetRandomSettings);
-                            GameEditorWindow.instance.SetCurrentRandomPatternData(null);
+                            GameEditorWindow.instance.SetCurrentRandomPatternData(default);
                             GameEditorWindow.instance.SetCurrentRandomSetData(infinityData.patternSets[i]);
                         }
                         else
                         {
-                            GameEditorWindow.instance.SetCurrentRandomPatternData(null);
+                            GameEditorWindow.instance.SetCurrentRandomPatternData(default);
                             GameEditorWindow.instance.SetCurrentRandomSetData(null);
                             GameEditorWindow.instance.SetRightPanelState(RightPanelState.Empty);
                         }

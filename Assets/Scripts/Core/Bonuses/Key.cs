@@ -14,6 +14,7 @@ namespace Core.Bonuses
         private Transform startMarker;
         public Transform endMarker;
 
+        private bool isMoving;
         public float speed = 1.0F;
         private float startTime;
         private float journeyLength;
@@ -25,13 +26,13 @@ namespace Core.Bonuses
         {
             this.keySound = keySound;
         }
-        
+
         public void Construct(BonusController _bonusController, SegmentContentPool segmentContentPool)
         {
             bonusController = _bonusController;
             this.segmentContentPool = segmentContentPool;
         }
-        
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -42,6 +43,12 @@ namespace Core.Bonuses
                 segmentContentPool.ReturnObjectToPool(SegmentContent.Key, gameObject);
             }
         }
+
+        
+        public void SetMovingFalse()
+        {
+            isMoving = false;
+        }
         
         public void MoveToTargetTransform(Transform _transform)
         {
@@ -49,19 +56,15 @@ namespace Core.Bonuses
             endMarker = _transform;
             startTime = Time.time;
             journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
-            if (coroutine != null) StopCoroutine(coroutine);
-            coroutine = StartCoroutine(Move());
+            isMoving = true;
         }
-    
-        private IEnumerator Move()
+
+        private void FixedUpdate()
         {
-            while (startMarker.position != endMarker.position) 
-            {
-                var distCovered = (Time.time - startTime) * speed;
-                var fractionOfJourney = distCovered / journeyLength;
-                startMarker.position = Vector3.Lerp(startMarker.position, endMarker.position, fractionOfJourney);
-                yield return null;
-            }
+            if (!isMoving) return;
+            var distCovered = (Time.time - startTime) * speed;
+            var fractionOfJourney = distCovered / journeyLength;
+            startMarker.position = Vector3.Lerp(startMarker.position, endMarker.position, fractionOfJourney);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
+using System.Threading.Tasks;
 using Core;
 using Core.Bonuses;
+using Cysharp.Threading.Tasks;
 using Sound;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +28,8 @@ namespace UI.Bonuses
         public Slider timer;
         public RectTransform fillArea;
         public Text timerText;
+
+        private WaitForSeconds waitForSeconds;
         
         public void Construct()
         {
@@ -46,8 +50,10 @@ namespace UI.Bonuses
             timer.maxValue = defaultTimerValue;
             timer.value = defaultTimerValue;
             SetActive(true);
-            if (coroutine != null) StopCoroutine(coroutine);
-            coroutine = StartCoroutine(Timer(0.1f));
+            //if (coroutine != null) StopCoroutine(coroutine);
+            //coroutine = StartCoroutine(Timer(0.1f));
+            //AsyncTimer(100);
+            UniTimer(100);
         }
 
         public void ResetTimer()
@@ -59,12 +65,37 @@ namespace UI.Bonuses
         
         private IEnumerator Timer(float interval)
         {
+            if (waitForSeconds == null) waitForSeconds = new WaitForSeconds(interval);
             while (timer.value > 0)
             {
                 SetTimerValue(timer.value -= interval);
                 var timerValue = (int) timer.value;
                 timerText.text = timerValue.ToString();
-                yield return new WaitForSeconds(interval);
+                yield return waitForSeconds;
+            }
+            
+            Deactivate();
+        }
+
+        private async UniTask UniTimer(int interval)
+        {
+            while (timer.value > 0)
+            {
+                SetTimerValue(timer.value -= interval * 0.001f);
+                var timerValue = (int) timer.value;
+                timerText.text = timerValue.ToString();
+                await UniTask.Delay(interval);
+            }
+        }
+        
+        private async void AsyncTimer(int interval)
+        {
+            while (timer.value > 0)
+            {
+                SetTimerValue(timer.value -= interval * 0.001f);
+                var timerValue = (int) timer.value;
+                timerText.text = timerValue.ToString();
+                await Task.Delay(interval);
             }
             
             Deactivate();
@@ -78,7 +109,7 @@ namespace UI.Bonuses
             fillArea.gameObject.SetActive(false);
             timerText.gameObject.SetActive(false);
 
-            if (coroutine != null) StopCoroutine(coroutine);
+            //if (coroutine != null) StopCoroutine(coroutine);
             if (isActive) bonusSoundManager.DeactivateBonusSound();
             //transform.GetChild(0).GetComponent<Image>().sprite = null;
             if (bonusType == BonusType.Multiplier)

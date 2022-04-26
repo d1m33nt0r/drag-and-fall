@@ -2,6 +2,7 @@
 using DafEditor.Editor.Common;
 using DafEditor.Editor.Intefraces;
 using Data;
+using Data.Core;
 using UnityEditor;
 using UnityEngine;
 
@@ -31,7 +32,7 @@ namespace DafEditor.Editor.Layout
                     GUILayout.Height(gameEditorWindow.position.height - 30));
 
 
-            if (gameEditorWindow.currentRandomPatternData != null)
+            /*if (gameEditorWindow.currentRandomPatternData)
             {
                 GUILayout.BeginHorizontal();
                 GUILayout.BeginHorizontal(new GUIStyle {fixedWidth = 100});
@@ -40,7 +41,7 @@ namespace DafEditor.Editor.Layout
                 gameEditorWindow.currentRandomPatternData.segmentRotationBias =
                     EditorGUILayout.FloatField(gameEditorWindow.currentRandomPatternData.segmentRotationBias);
                 GUILayout.EndHorizontal();
-            }
+            }*/
             
             
             EditorGUILayout.EndScrollView();

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Common;
 using Data;
 using Data.Core;
 using Data.Core.Segments;
@@ -56,7 +57,7 @@ namespace Core
                     patternData1.minLetAmount = infinityData.patternSets[setPointer].minLetAmount;
                     patternData1.maxLetAmount = infinityData.patternSets[setPointer].maxLetAmount;
                     var availablePositions = PrepareAvailablePositionsForSegments();
-                    PlaceSegments(ref availablePositions, patternData1);
+                    PlaceSegments(availablePositions, patternData1);
                     TryPlacePowerUps(patternData1);
                     TryPlaceCurrencies(patternData1, infinityData.patternSets[setPointer].currencyRandomSettings);
                     patternPointer++;
@@ -73,7 +74,7 @@ namespace Core
                     patternData2.maxLetAmount = infinityData.patternSets[setPointer].maxLetAmount;
                     patternData2.isLast = true;
                     var availablePositions = PrepareAvailablePositionsForSegments();
-                    PlaceSegments(ref availablePositions, patternData2);
+                    PlaceSegments(availablePositions, patternData2);
                     TryPlacePowerUps(patternData2);
                     TryPlaceCurrencies(patternData2, infinityData.patternSets[setPointer].currencyRandomSettings);
                     randIsInitialized = false;
@@ -91,7 +92,7 @@ namespace Core
                     patternData3.maxLetAmount = infinityData.patternSets[setPointer].maxLetAmount;
                     patternData3.isLast = true;
                     var availablePositions2 = PrepareAvailablePositionsForSegments();
-                    PlaceSegments(ref availablePositions2, patternData3);
+                    PlaceSegments(availablePositions2, patternData3);
                     TryPlacePowerUps(patternData3);
                     TryPlaceCurrencies(patternData3, infinityData.patternSets[setPointer].currencyRandomSettings);
                     randIsInitialized = false;
@@ -140,7 +141,7 @@ namespace Core
                             var availablePositionsForCurrencies =
                                 PrepareAvailablePositionsForCurrencies(patternData.segmentsData, currencyRandomSettings[i].spawnOnLet, currencyRandomSettings[i].spawnOnGround, 
                                     currencyRandomSettings[i].spawnOnHole);
-                            var position = Random.Range(0, availablePositionsForCurrencies.Count);
+                            var position = Random.Range(0, availablePositionsForCurrencies.Length);
                             if (currencyRandomSettings[i].currencyType == CurrencyType.Coin) 
                                patternData.segmentsData[position].segmentContent = SegmentContent.Coin;
                             else 
@@ -159,7 +160,7 @@ namespace Core
                                 var availablePositionsForCurrencies =
                                     PrepareAvailablePositionsForCurrencies(patternData.segmentsData, currencyRandomSettings[i].spawnOnLet, currencyRandomSettings[i].spawnOnGround, 
                                         currencyRandomSettings[i].spawnOnHole);
-                                var position = Random.Range(0, availablePositionsForCurrencies.Count);
+                                var position = Random.Range(0, availablePositionsForCurrencies.Length);
                            
                                 if (currencyRandomSettings[i].currencyType == CurrencyType.Coin) 
                                     patternData.segmentsData[position].segmentContent = SegmentContent.Coin;
@@ -180,7 +181,7 @@ namespace Core
                                 var availablePositionsForCurrencies =
                                     PrepareAvailablePositionsForCurrencies(patternData.segmentsData, currencyRandomSettings[i].spawnOnLet, currencyRandomSettings[i].spawnOnGround, 
                                         currencyRandomSettings[i].spawnOnHole);
-                                var position = Random.Range(0, availablePositionsForCurrencies.Count);
+                                var position = Random.Range(0, availablePositionsForCurrencies.Length);
                            
                                 if (currencyRandomSettings[i].currencyType == CurrencyType.Coin) 
                                     patternData.segmentsData[position].segmentContent = SegmentContent.Coin;
@@ -202,7 +203,7 @@ namespace Core
                                 var availablePositionsForCurrencies =
                                     PrepareAvailablePositionsForCurrencies(patternData.segmentsData, currencyRandomSettings[i].spawnOnLet, currencyRandomSettings[i].spawnOnGround, 
                                         currencyRandomSettings[i].spawnOnHole);
-                                var position = Random.Range(0, availablePositionsForCurrencies.Count);
+                                var position = Random.Range(0, availablePositionsForCurrencies.Length);
                            
                                 if (currencyRandomSettings[i].currencyType == CurrencyType.Coin) 
                                     patternData.segmentsData[position].segmentContent = SegmentContent.Coin;
@@ -247,9 +248,9 @@ namespace Core
         }
         */
 
-        private List<int> PrepareAvailablePositionsForCurrencies(SegmentData[] segmentDatas, bool spawnOnLet, bool spawnOnGround, bool spawnOnHole)
+        private CustomList<int> PrepareAvailablePositionsForCurrencies(SegmentData[] segmentDatas, bool spawnOnLet, bool spawnOnGround, bool spawnOnHole)
         {
-            var availablePositions = new List<int>();
+            var availablePositions = new CustomList<int>(0);
 
             for (var i = 0; i < 12; i++)
             {
@@ -285,7 +286,7 @@ namespace Core
                     infinityData.patternSets[setPointer].spawnShieldOnLet,
                     infinityData.patternSets[setPointer].spawnShieldOnGround,
                     infinityData.patternSets[setPointer].spawnShieldOnHole);
-                TryPlacePowerUp(ref powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Shield, infinityData.patternSets[setPointer].spawnShieldChance);
+                TryPlacePowerUp(powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Shield, infinityData.patternSets[setPointer].spawnShieldChance);
             }
 
             for (var i = 0; i < magnetPositions.Length; i++)
@@ -295,7 +296,7 @@ namespace Core
                     infinityData.patternSets[setPointer].spawnMagnetOnLet,
                     infinityData.patternSets[setPointer].spawnMagnetOnGround,
                     infinityData.patternSets[setPointer].spawnMagnetOnHole);
-                TryPlacePowerUp(ref powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Magnet, infinityData.patternSets[setPointer].spawnMagnetChance);
+                TryPlacePowerUp(powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Magnet, infinityData.patternSets[setPointer].spawnMagnetChance);
             }
 
             for (var i = 0; i < multiplierPositions.Length; i++)
@@ -305,7 +306,7 @@ namespace Core
                     infinityData.patternSets[setPointer].spawnMultiplierOnLet,
                     infinityData.patternSets[setPointer].spawnMultiplierOnGround,
                     infinityData.patternSets[setPointer].spawnMultiplierOnHole);
-                TryPlacePowerUp(ref powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Multiplier, infinityData.patternSets[setPointer].spawnMultiplierChance);
+                TryPlacePowerUp(powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Multiplier, infinityData.patternSets[setPointer].spawnMultiplierChance);
             }
 
             for (var i = 0; i < accelerationPositions.Length; i++)
@@ -315,7 +316,7 @@ namespace Core
                     infinityData.patternSets[setPointer].spawnAccelerationOnLet,
                     infinityData.patternSets[setPointer].spawnAccelerationOnGround,
                     infinityData.patternSets[setPointer].spawnAccelerationOnHole);
-                TryPlacePowerUp(ref powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Acceleration, infinityData.patternSets[setPointer].spawnAccelerationChance);
+                TryPlacePowerUp(powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Acceleration, infinityData.patternSets[setPointer].spawnAccelerationChance);
             }
 
             for (var i = 0; i < keyPositions.Length; i++)
@@ -325,13 +326,13 @@ namespace Core
                     infinityData.patternSets[setPointer].spawnKeyOnLet, 
                     infinityData.patternSets[setPointer].spawnKeyOnGround,
                     infinityData.patternSets[setPointer].spawnKeyOnHole);
-                TryPlacePowerUp(ref powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Key, infinityData.patternSets[setPointer].spawnKeyChance);
+                TryPlacePowerUp(powerApsAvailablePositions, patternData1.segmentsData, SegmentContent.Key, infinityData.patternSets[setPointer].spawnKeyChance);
             }
         }
 
-        private List<int> PrepareAvailablePositionsForSegments()
+        private CustomList<int> PrepareAvailablePositionsForSegments()
         {
-            var availablePositions = new List<int>();
+            var availablePositions = new CustomList<int>(0);
 
             for (var i = 0; i < 12; i++)
                 availablePositions.Add(i);
@@ -339,9 +340,9 @@ namespace Core
             return availablePositions;
         }
         
-        private List<int> PrepareAvailablePositionsForBonuses(SegmentData[] segmentDatas, bool letIsAvailable, bool groundIsAvailable, bool holeIsAvailable)
+        private CustomList<int> PrepareAvailablePositionsForBonuses(SegmentData[] segmentDatas, bool letIsAvailable, bool groundIsAvailable, bool holeIsAvailable)
         {
-            var availablePositions = new List<int>();
+            var availablePositions = new CustomList<int>(0);
 
             for (var i = 0; i < 12; i++)
             {
@@ -366,26 +367,26 @@ namespace Core
             return availablePositions;
         }
 
-        public void TryPlacePowerUp(ref List<int> availablePositions, SegmentData[] segmentDatas, SegmentContent segmentContent, int chance)
+        public void TryPlacePowerUp(CustomList<int> availablePositions, SegmentData[] segmentDatas, SegmentContent segmentContent, int chance)
         {
             var randomChance = Random.Range(0, 100);
             if (randomChance >= chance) return;
             
-            var randPositionIndex = Random.Range(0, availablePositions.Count);
+            var randPositionIndex = Random.Range(0, availablePositions.Length);
             segmentDatas[availablePositions[randPositionIndex]].segmentContent = segmentContent;
         }
 
-        public void PlaceSegments(ref List<int> availablePositions, PatternData patternData)
+        public void PlaceSegments(CustomList<int> availablePositions, PatternData patternData)
         {
-            PlaceHoleSegments(ref availablePositions, patternData);
-            PlaceLetSegments(ref availablePositions, patternData);
-            PlaceGroundSegments(ref availablePositions, patternData);
+            var positions = PlaceHoleSegments(availablePositions, patternData);
+            positions = PlaceLetSegments(positions, patternData);
+            PlaceGroundSegments(positions, patternData);
         }
         
-        private void PlaceGroundSegments(ref List<int> availablePositions, PatternData patternData)
+        private void PlaceGroundSegments(CustomList<int> availablePositions, PatternData patternData)
         {
             
-            for (var j = 0; j < availablePositions.Count; j++)
+            for (var j = 0; j < availablePositions.Length; j++)
             {
                 var segmentData = new SegmentData
                 {
@@ -398,13 +399,13 @@ namespace Core
             }
         }
 
-        private void PlaceLetSegments(ref List<int> availablePositions, PatternData patternData)
+        private CustomList<int> PlaceLetSegments(CustomList<int> availablePositions, PatternData patternData)
         {
             var randomAmount = Random.Range(patternData.minLetAmount, patternData.maxLetAmount);
 
             for (var j = 0; j < randomAmount; j++)
             {
-                var randomPosition = Random.Range(0, availablePositions.Count);
+                var randomPosition = Random.Range(0, availablePositions.Length);
                 var segmentData = new SegmentData
                 {
                     positionIndex = availablePositions[randomPosition],
@@ -412,17 +413,19 @@ namespace Core
                     segmentType = SegmentType.Let
                 };
                 patternData.segmentsData[availablePositions[randomPosition]] = segmentData;
-                availablePositions.Remove(availablePositions[randomPosition]);
+                availablePositions.RemoveAt(randomPosition);
             }
+
+            return availablePositions;
         }
 
-        private void PlaceHoleSegments(ref List<int> availablePositions, PatternData patternData)
+        private CustomList<int> PlaceHoleSegments(CustomList<int> availablePositions, PatternData patternData)
         {
             var randomAmount = Random.Range(patternData.minHoleAmount, patternData.maxHoleAmount);
 
             for (var j = 0; j < randomAmount; j++)
             {
-                var randomPosition = Random.Range(0, availablePositions.Count);
+                var randomPosition = Random.Range(0, availablePositions.Length);
                 var segmentData = new SegmentData
                 {
                     positionIndex = availablePositions[randomPosition],
@@ -430,8 +433,10 @@ namespace Core
                     segmentType = SegmentType.Hole
                 };
                 patternData.segmentsData[availablePositions[randomPosition]] = segmentData;
-                availablePositions.Remove(availablePositions[randomPosition]);
+                availablePositions.RemoveAt(randomPosition);
             }
+
+            return availablePositions;
         }
     }
 }

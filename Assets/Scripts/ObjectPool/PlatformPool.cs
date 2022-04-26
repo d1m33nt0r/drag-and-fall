@@ -39,10 +39,7 @@ namespace ObjectPool
             if (platformPool.Count > 0)
             {
                 var platform = platformPool.Dequeue();
-                for (var i = 0; i < 12; i++)
-                {
-                    platform.segments[i].GetComponent<MeshCollider>().enabled = true;
-                }
+                platform.SetEnableMeshColliders(true);
                 return platform;
             }
             

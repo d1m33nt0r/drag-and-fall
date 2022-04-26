@@ -1,5 +1,6 @@
 ﻿using System;
 using Core.Bonuses;
+using Core.Effects;
 using Data;
 using Data.Core.Segments;
 using DG.Tweening;
@@ -13,6 +14,16 @@ namespace Core
 {
     public class Player : MonoBehaviour
     {
+        private const string IDLE_ANIMATION_IDENTIFIER = "Idle";
+        private const string BOUNCE_ANIMATION_IDENTIFIER = "Bounce";
+        private const string SEGMENT_TAG = "Segment";
+        private const string BOUNCE_TRIGGER_TAG = "BounceTrigger";
+
+        private Segment triggeredSegment;
+        private TouchEffect touchEffect;
+        private PlayerParticles playerParticles;
+        private Platform platform;
+        
         public event Action failed;
         [SerializeField] private ParticleSystem particleSystem;
         [SerializeField] private PlayerSounds playerSounds;
@@ -186,7 +197,7 @@ namespace Core
         
         public void PlayIdleAnim()
         {
-            animator.Play("Idle");
+            animator.Play(IDLE_ANIMATION_IDENTIFIER);
         }
 
         public void DisableTrail()
@@ -201,7 +212,7 @@ namespace Core
 
         public void PlayBounceAnim()
         {
-            animator.Play("Bounce");
+            animator.Play(BOUNCE_ANIMATION_IDENTIFIER);
         }
 
         public void EnableFallingTrail()
@@ -226,7 +237,7 @@ namespace Core
 
         public void MovePlatforms()
         {
-            tubeMover.MoveTube();
+            tubeMover.MoveTube(platformMover.platformMovementSpeed);
             platformMover.MovePlatforms();
         }
         
@@ -239,10 +250,10 @@ namespace Core
             
             if (Physics.Raycast(centerRay, out var centerHit, 0.105f))
             {
-                if (centerHit.transform.tag != "Segment") return;
+                if (centerHit.transform.tag != SEGMENT_TAG) return;
                 
-                var segment = centerHit.collider.GetComponent<Segment>();
-                
+                triggeredSegment = centerHit.collider.GetComponent<Segment>();
+                platform = triggeredSegment.transform.parent.GetComponent<Platform>();
                 /*if (platformMover.platformMovementSpeed >= 6 && segment.segmentData.segmentType != SegmentType.Hole && !bonusController.accelerationIsActive)
                 {
                     //GetComponent<Animator>().Play("SpecialBounce");
@@ -255,7 +266,7 @@ namespace Core
                     return;
                 }*/
                 
-                switch (segment.segmentData.segmentType)
+                switch (triggeredSegment.segmentData.segmentType)
                 {
                     case SegmentType.Ground:
                         if (bonusController.accelerationIsActive)
@@ -268,24 +279,21 @@ namespace Core
                         {
                             SetTriggerStay(true);
                             SetDefaultState();
-                            if (gameManager.gameStarted) segment.IncreasePlatformTouchCounter();
+                            if (gameManager.gameStarted) triggeredSegment.IncreasePlatformTouchCounter();
                             freeSpeedIncrease.ResetSpeed();
-                            var instance = effectsPool.GetTouchEffect();
-                            centerHit.collider.transform.parent.GetComponent<Platform>().touchEffect = instance;
-                            instance.transform.position = new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z);
-                            instance.transform.rotation = Quaternion.Euler(-90, 0, 0);
-                            instance.transform.SetParent(segment.transform);
+                            touchEffect = effectsPool.GetTouchEffect();
+                            platform.touchEffect = touchEffect;
+                            touchEffect.transform.position = new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z);
+                            touchEffect.transform.rotation = Quaternion.Euler(-90, 0, 0);
+                            touchEffect.transform.SetParent(triggeredSegment.transform);
                             playerSounds.PlayTouchSound();
                             
-                            var particleSystems = effectsPool.GetPlayerParticles();
-                            centerHit.collider.transform.parent.GetComponent<Platform>().playerParticles = particleSystems;
-                            particleSystems.transform.position = new Vector3(centerHit.point.x,
+                            playerParticles = effectsPool.GetPlayerParticles();
+                            platform.playerParticles = playerParticles;
+                            playerParticles.transform.position = new Vector3(centerHit.point.x,
                                 centerHit.point.y + 0.01f, centerHit.point.z);
-                            particleSystems.transform.rotation = Quaternion.identity;
-                            particleSystems.transform.SetParent(segment.transform);
-                                //Instantiate(particleSystem,
-                                //new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z),
-                                //Quaternion.identity, segment.transform);
+                            playerParticles.transform.rotation = Quaternion.identity;
+                            playerParticles.transform.SetParent(triggeredSegment.transform);
                             platformSound.ResetPitch();
                         }
                         break;
@@ -333,7 +341,7 @@ namespace Core
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("BounceTrigger")) SetTriggerStay(false);
+            if (other.CompareTag(BOUNCE_TRIGGER_TAG)) SetTriggerStay(false);
         }
 
         public void SetFailedState()
