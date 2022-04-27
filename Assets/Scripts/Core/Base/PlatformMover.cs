@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using Common;
 using Core.Bonuses;
+using Cysharp.Threading.Tasks;
 using Data.Core;
 using Data.Core.Segments;
 using Data.Core.Segments.Content;
@@ -163,12 +165,54 @@ namespace Core
             switch (type)
             {
                 case DragController.SwipeType.LEFT:
-                    transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y - delta, eulerAngles.z), 0.1f);
+                    transform.rotation =
+                        Quaternion.Euler(new Vector3(eulerAngles.x, eulerAngles.y - delta, eulerAngles.z));
                     break;
                 case DragController.SwipeType.RIGHT:
-                    transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y + delta, eulerAngles.z), 0.1f);
+                    transform.rotation =
+                        Quaternion.Euler(new Vector3(eulerAngles.x, eulerAngles.y + delta, eulerAngles.z));
                     break;
             }
+        }
+        
+        private void RotateTubeOptimized(DragController.SwipeType type, float delta)
+        {
+            TubeRotation(type, delta, Time.deltaTime);
+        }
+
+        private async UniTask TubeRotation(DragController.SwipeType type, float delta, float time)
+        {
+            var startTime = Time.time;         
+            var fraction = 0f;
+            var eulerAngles = transform.rotation.eulerAngles;
+
+            switch (type)
+            {
+                case DragController.SwipeType.LEFT:
+                    
+                    while (fraction < 1f)
+                    {
+                        fraction = Mathf.Clamp01((Time.time - startTime) / time);             
+                        transform.rotation = Quaternion.Euler(
+                            Vector3.Lerp(eulerAngles, 
+                                new Vector3(eulerAngles.x, eulerAngles.y - delta, eulerAngles.z), fraction)); 
+                        
+                        await Task.Yield();
+                    }
+                    break;
+                case DragController.SwipeType.RIGHT:
+                    while (fraction < 1)
+                    {
+                        fraction = Mathf.Clamp01((Time.time - startTime) / time);             
+                        transform.rotation = Quaternion.Euler(
+                            Vector3.Lerp(eulerAngles, 
+                                new Vector3(eulerAngles.x, eulerAngles.y + delta, eulerAngles.z), fraction)); 
+                        
+                        await Task.Yield();
+                    }
+                    break;
+            }
+            
         }
         
         public void MovePlatforms()
@@ -332,9 +376,10 @@ namespace Core
         private void CreateNewPlatform(int _platformIndex, PatternData patternData, bool hide)
         {
             var platform = platformPool.GetPlatform();
-            platform.transform.position = localPositionsOfPlatforms[_platformIndex];
-            platform.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles);
-            platform.transform.SetParent(transform);
+            platform.SetTransformParams(transform, localPositionsOfPlatforms[_platformIndex]);
+            //platform.transform.position = localPositionsOfPlatforms[_platformIndex];
+            //platform.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles);
+            //platform.transform.SetParent(transform);
                 //Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.Euler(transform.rotation.eulerAngles), transform);
             platform.Initialize(patternData);
             

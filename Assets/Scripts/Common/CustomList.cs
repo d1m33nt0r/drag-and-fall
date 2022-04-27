@@ -2,7 +2,7 @@
 
 namespace Common
 {
-    public struct CustomList<T> 
+    public struct CustomList<T> where T : struct
     {
         private T[] list;
 

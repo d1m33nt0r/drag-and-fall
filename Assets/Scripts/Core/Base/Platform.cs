@@ -28,12 +28,17 @@ namespace Core
         private PlatformPool platformPool;
         private MeshCollider[] meshColliders;
         private Animator animator;
+        private Transform transform;
+        private Quaternion rotation;
         
         public void Construct(PlatformPool platformPool, PlatformMover platformMover,
             Player player, BonusController bonusController, GainScore gainScore,
             SegmentContentPool segmentContentPool,
             TubeMover tubeMover, TutorialUI tutorialUI, PlatformSound audioSource)
         {
+            transform = GetComponent<Transform>();
+            rotation = transform.rotation;
+            
             meshColliders = new MeshCollider[12];
             this.platformPool = platformPool;
             this.segmentContentPool = segmentContentPool;
@@ -61,11 +66,18 @@ namespace Core
             for (var i = 1; i <= patternData.segmentsData.Length; i++)
                 segments[i - 1].Initialize(patternData.segmentsData[i - 1]);
             
-            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 
-                transform.rotation.eulerAngles.y + patternData.segmentRotationBias, 
-                transform.rotation.eulerAngles.z);
+            rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 
+                rotation.eulerAngles.y + patternData.segmentRotationBias, 
+                rotation.eulerAngles.z);
         }
 
+        public void SetTransformParams(Transform _transform, Vector3 localPositionOfPlatform)
+        {
+            transform.position = localPositionOfPlatform;
+            rotation = Quaternion.Euler(rotation.eulerAngles);
+            transform.SetParent(_transform);
+        }
+        
         public void IncreaseTouchCounter()
         {
             countTouches++;
@@ -122,7 +134,7 @@ namespace Core
             if (platformsIsMoving)
                 BreakDownPlatform();
             else
-                DestroyAfterBreakAnimation();
+                ReturnToPoolArterBreakAnimation();
             
             player.SetTriggerStay(false);
             
@@ -134,7 +146,7 @@ namespace Core
                 meshColliders[i].enabled = value;
         }
 
-        public void DestroyAfterBreakAnimation()
+        public void ReturnToPoolArterBreakAnimation()
         {
             if (touchEffect != null) touchEffect.transform.SetParent(null);
             if (playerParticles != null) playerParticles.transform.SetParent(null);

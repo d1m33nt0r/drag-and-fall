@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using DG.Tweening;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Core
 {
@@ -9,10 +7,11 @@ namespace Core
         private Camera camera;
         private float startTime;
         private float journeyLength;
-
-        private Coroutine fieldOfViewCoroutine;
+        private float fieldOfView;
+        private float endValue;
+        private bool isMoving;
         
-        [SerializeField] private float speed;
+        private float speed = 80;
         
         private void Awake()
         {
@@ -21,40 +20,45 @@ namespace Core
 
         public void ChangeFieldView(float speedValue)
         {
-            startTime = Time.time;
             switch (speedValue)
             {
                 case 3:
-                    camera.DOFieldOfView(60, 0.35f);
-                    //if (fieldOfViewCoroutine != null) StopCoroutine(fieldOfViewCoroutine);
-                    //fieldOfViewCoroutine = StartCoroutine(AnimateFieldOfView(60));
+                    DoFieldOfView(60);
                     break;
                 case 4:
-                    camera.DOFieldOfView(65, 0.35f);
-                    //if (fieldOfViewCoroutine != null) StopCoroutine(fieldOfViewCoroutine);
-                    //fieldOfViewCoroutine = StartCoroutine(AnimateFieldOfView(65));
+                    DoFieldOfView(65);
                     break;
                 case 5:
-                    camera.DOFieldOfView(70, 0.35f);
-                    //if (fieldOfViewCoroutine != null) StopCoroutine(fieldOfViewCoroutine);
-                    //fieldOfViewCoroutine = StartCoroutine(AnimateFieldOfView(70));
+                    DoFieldOfView(70);
                     break;
                 case 6:
-                    camera.DOFieldOfView(75, 0.35f);
-                    //if (fieldOfViewCoroutine != null) StopCoroutine(fieldOfViewCoroutine);
-                    //fieldOfViewCoroutine = StartCoroutine(AnimateFieldOfView(75));
+                    DoFieldOfView(75);
                     break;
                 case 7:
-                    camera.DOFieldOfView(78, 0.35f);
-                    //if (fieldOfViewCoroutine != null) StopCoroutine(fieldOfViewCoroutine);
-                    //fieldOfViewCoroutine = StartCoroutine(AnimateFieldOfView(75));
+                    DoFieldOfView(78);
                     break;
                 case 8:
-                    camera.DOFieldOfView(80, 0.35f);
-                    //if (fieldOfViewCoroutine != null) StopCoroutine(fieldOfViewCoroutine);
-                    //fieldOfViewCoroutine = StartCoroutine(AnimateFieldOfView(75));
+                    DoFieldOfView(80);
                     break;
             }
+        }
+
+        private void DoFieldOfView(float endValue)
+        {
+            isMoving = true;
+            startTime = Time.time;
+            this.endValue = endValue;
+            fieldOfView = camera.fieldOfView;
+            journeyLength = Mathf.Abs(endValue - fieldOfView);
+        }
+
+        private void Update()
+        {
+            if (!isMoving) return;
+            var distCovered = (Time.time - startTime) * speed;
+            var fractionOfJourney = distCovered / journeyLength;
+            camera.fieldOfView = Mathf.Lerp(fieldOfView, endValue, fractionOfJourney);
+            if (fractionOfJourney >= 1) isMoving = false;
         }
     }
 }
