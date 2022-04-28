@@ -7,6 +7,8 @@ using Data.Core.Segments;
 using Data.Core.Segments.Content;
 using Data.Shop.TubeSkins;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using ObjectPool;
 using Sound;
 using UI;
@@ -40,6 +42,8 @@ namespace Core
         [SerializeField] private BonusController bonusController;
         [SerializeField] private LevelProgress levelProgress;
 
+
+        private TweenerCore<Quaternion, Vector3, QuaternionOptions> rotationTweenerCore;
         
         public bool platformsIsInitialized;
         public bool isLevelMode;
@@ -160,10 +164,14 @@ namespace Core
             switch (type)
             {
                 case DragController.SwipeType.LEFT:
-                    transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y - delta, eulerAngles.z), 0.1f);
+                    //LeanTween.rotateY(gameObject, transform.rotation.eulerAngles.y - delta, 0.1f);
+                    transform.rotation = Quaternion.Euler(eulerAngles.x, eulerAngles.y - delta / 2, eulerAngles.z);
+                    //rotationTweenerCore = transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y - delta, eulerAngles.z), 0.1f);
                     break;
                 case DragController.SwipeType.RIGHT:
-                    transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y + delta, eulerAngles.z), 0.1f);
+                    //LeanTween.rotateY(gameObject, transform.rotation.eulerAngles.y + delta, 0.1f);
+                    transform.rotation = Quaternion.Euler(eulerAngles.x, eulerAngles.y + delta / 2, eulerAngles.z);
+                    //rotationTweenerCore = transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y + delta, eulerAngles.z), 0.1f);
                     break;
             }
         }
