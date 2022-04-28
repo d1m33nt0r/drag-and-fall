@@ -86,6 +86,8 @@ namespace UI.Bonuses
                 timerText.text = timerValue.ToString();
                 await UniTask.Delay(interval);
             }
+            
+            Deactivate();
         }
         
         private async void AsyncTimer(int interval)

@@ -79,7 +79,7 @@ namespace Core
                 }
                 return;
             }
-            slider.value = platformCounter;
+            slider.SetValueWithoutNotify(platformCounter);
         }
 
         public void Reset()

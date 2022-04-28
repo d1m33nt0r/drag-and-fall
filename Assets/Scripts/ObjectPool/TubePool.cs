@@ -7,27 +7,27 @@ namespace ObjectPool
 {
     public class TubePool : MonoBehaviour
     {
-        [SerializeField] private GameObject tubePrefab;
+        [SerializeField] private Transform tubePrefab;
         [SerializeField] private int poolSize;
         [SerializeField] private TubeMover tubeMover;
         
-        private Queue<GameObject> tubePool = new Queue<GameObject>();
+        private Queue<Transform> tubePool = new Queue<Transform>();
         
         public void Start()
         {
             for (var i = 0; i < poolSize; i++)
-                tubePool.Enqueue(InstantiateNewPrefab());
+                tubePool.Enqueue(InstantiateNewPrefab(true));
         }
 
-        private GameObject InstantiateNewPrefab()
+        private Transform InstantiateNewPrefab(bool isActivate)
         {
             var instance = Instantiate(tubePrefab, transform);
             instance.GetComponent<TubePart>().Initialize(tubeMover, this);
-            instance.SetActive(false);
+            instance.gameObject.SetActive(isActivate);
             return instance;
         }
 
-        public GameObject GetTubePart()
+        public Transform GetTubePart()
         {
             if (tubePool.Count > 0)
             {
@@ -36,9 +36,8 @@ namespace ObjectPool
                 return instance;
             }
 
-            var instance2 = InstantiateNewPrefab();
-            instance2.SetActive(true);
-            return instance2;
+            var instance2 = InstantiateNewPrefab(true);
+            return instance2.transform;
         }
 
         public void ChangeTheme()
@@ -49,11 +48,11 @@ namespace ObjectPool
             }
         }
 
-        public void ReturnToPool(GameObject obj)
+        public void ReturnToPool(Transform obj)
         {
             tubePool.Enqueue(obj);
-            obj.transform.SetParent(transform);
-            obj.SetActive(false);
+            obj.SetParent(transform);
+            obj.gameObject.SetActive(false);
         }
     }
 }

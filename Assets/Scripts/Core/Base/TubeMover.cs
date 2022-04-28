@@ -3,7 +3,6 @@ using System.Collections;
 using Data;
 using Data.Shop.TubeSkins;
 using ObjectPool;
-using Progress;
 using UnityEngine;
 
 namespace Core
@@ -112,9 +111,9 @@ namespace Core
                 tubeParts[i - 1] = tubeParts[i];
 
             var tubePartInstance = tubePool.GetTubePart();
-            tubePartInstance.transform.position = localPositionsOfTubeParts[localPositionsOfTubeParts.Length - 1];
-            tubePartInstance.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles);
-            tubePartInstance.transform.SetParent(transform);
+            tubePartInstance.position = localPositionsOfTubeParts[localPositionsOfTubeParts.Length - 1];
+            tubePartInstance.rotation = Quaternion.Euler(transform.rotation.eulerAngles);
+            tubePartInstance.SetParent(transform);
             
             tubeParts[countTubeParts - 1] = tubePartInstance.GetComponent<TubePart>();
         }

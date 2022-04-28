@@ -1,6 +1,7 @@
 ﻿using System;
 using Core.Bonuses;
 using Core.Effects;
+using Cysharp.Threading.Tasks;
 using Data;
 using Data.Core.Segments;
 using DG.Tweening;
@@ -79,7 +80,25 @@ namespace Core
             var randomX = Random.Range(-35, 35);
             var randomY = Random.Range(-35, 60);
             var randomZ = Random.Range(0, 35);
-            transform.DORotate(new Vector3(randomX, randomY, randomZ), 0.5f);
+            DoRotate(new Vector3(randomX, randomY, randomZ), 300);
+            //transform.DORotate(new Vector3(randomX, randomY, randomZ), 0.5f);
+        }
+
+        private async UniTask DoRotate(Vector3 endValue, float speed)
+        {
+            var startTime = Time.time;
+            var startValue = transform.rotation.eulerAngles;
+            var journeyLength = Vector3.Distance(startValue, endValue);
+            var fractionOfJourney = 0f;
+            var distCovered = 0f;
+            
+            while (distCovered < journeyLength)
+            { 
+                distCovered = (Time.time - startTime) * speed;
+                fractionOfJourney = distCovered / journeyLength;
+                transform.rotation = Quaternion.Euler(Vector3.Lerp(startValue, endValue, fractionOfJourney));
+                await UniTask.Yield();
+            }
         }
 
         public void SpawnBonusCollectingEffect()

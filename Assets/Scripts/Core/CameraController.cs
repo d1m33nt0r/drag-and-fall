@@ -11,7 +11,7 @@ namespace Core
         private float endValue;
         private bool isMoving;
         
-        private float speed = 80;
+        private float speed = 50;
         
         private void Awake()
         {
@@ -58,7 +58,7 @@ namespace Core
             var distCovered = (Time.time - startTime) * speed;
             var fractionOfJourney = distCovered / journeyLength;
             camera.fieldOfView = Mathf.Lerp(fieldOfView, endValue, fractionOfJourney);
-            if (fractionOfJourney >= 1) isMoving = false;
+            //if (camera.fieldOfView == endValue) isMoving = false;
         }
     }
 }

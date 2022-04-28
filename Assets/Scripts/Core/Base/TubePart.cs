@@ -32,7 +32,7 @@ namespace Core
 
         public void ReturnToPool()
         {
-            tubePool.ReturnToPool(gameObject);
+            tubePool.ReturnToPool(transform);
         }
     }
 }

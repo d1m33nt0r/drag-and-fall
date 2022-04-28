@@ -9,6 +9,8 @@ namespace Core
         [SerializeField] private Text counter;
         [SerializeField] private GameObject counterPanel;
         [SerializeField] private Text score;
+
+        private const string nul = "0";
         
         private void Start()
         {
@@ -36,7 +38,7 @@ namespace Core
         
         public void ResetCounter()
         {
-            counter.text = "0";
+            counter.text = nul;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Text;
 using Core;
 using Core.Bonuses;
 using ObjectPool;
@@ -17,6 +18,8 @@ namespace UI
         [SerializeField] private ScorePanel scorePanel;
         [SerializeField] private PlatformMover platformMover;
         
+        private const string plus = "+";
+        
         private void Start()
         {
             rectTransform = GetComponent<RectTransform>();
@@ -30,7 +33,8 @@ namespace UI
                 var concentrationMultiplier = concentration.isActive ? concentration.currentConcentrationMultiplier : 1;
                 var bonusMultiplier = bonusController.multiplierIsActive ? bonusController.multiplier : 1;
                 var upgradedPoint = (countPoints * bonusMultiplier) * concentrationMultiplier;
-                text.text = "+" + Convert.ToString(upgradedPoint);
+                
+                text.text = plus + Convert.ToString(upgradedPoint);
                 scorePanel.AddPoints(upgradedPoint);
             }
             else
@@ -38,7 +42,7 @@ namespace UI
                 var concentrationMultiplier = concentration.isActive ? 2 : 1;
                 var bonusMultiplier = bonusController.multiplierIsActive ? bonusController.multiplier : 1;
                 var upgradedPoint = (countPoints * bonusMultiplier) * concentrationMultiplier;
-                text.text = "+" + Convert.ToString(upgradedPoint);
+                text.text = plus + Convert.ToString(upgradedPoint);
                 scorePanel.AddPoints(upgradedPoint);
             }
         }

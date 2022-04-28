@@ -50031,7 +50031,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3044d9d89d847348386ca4ec663dc91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
 --- !u!1 &964865525
 GameObject:
   m_ObjectHideFlags: 0
@@ -70478,7 +70477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aaa77b191a44aa2926449ddccaed8e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tubePrefab: {fileID: 6258718019660764072, guid: 74d06b32c97d0044897d396e3131e7df, type: 3}
+  tubePrefab: {fileID: 6258718019660764087, guid: 74d06b32c97d0044897d396e3131e7df, type: 3}
   poolSize: 15
   tubeMover: {fileID: 1755819901}
 --- !u!4 &1461066059
