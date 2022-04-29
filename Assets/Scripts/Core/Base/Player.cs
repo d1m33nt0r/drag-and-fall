@@ -13,6 +13,11 @@ namespace Core
 {
     public class Player : MonoBehaviour
     {
+        private const string SEGMENT = "Segment";
+        private const string IDLE = "Idle";
+        private const string BOUNCE = "Bounce";
+        private const string BOUNCE_TRIGGER = "BounceTrigger";
+        
         public event Action failed;
         [SerializeField] private ParticleSystem particleSystem;
         [SerializeField] private PlayerSounds playerSounds;
@@ -186,7 +191,7 @@ namespace Core
         
         public void PlayIdleAnim()
         {
-            animator.Play("Idle");
+            animator.Play(IDLE);
         }
 
         public void DisableTrail()
@@ -201,7 +206,7 @@ namespace Core
 
         public void PlayBounceAnim()
         {
-            animator.Play("Bounce");
+            animator.Play(BOUNCE);
         }
 
         public void EnableFallingTrail()
@@ -239,7 +244,7 @@ namespace Core
             
             if (Physics.Raycast(centerRay, out var centerHit, 0.105f))
             {
-                if (centerHit.transform.tag != "Segment") return;
+                if (centerHit.transform.tag != SEGMENT) return;
                 
                 var segment = centerHit.collider.GetComponent<Segment>();
                 
@@ -333,7 +338,7 @@ namespace Core
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("BounceTrigger")) SetTriggerStay(false);
+            if (other.CompareTag(BOUNCE_TRIGGER)) SetTriggerStay(false);
         }
 
         public void SetFailedState()
