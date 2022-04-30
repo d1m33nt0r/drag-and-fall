@@ -17,5 +17,10 @@ namespace Core.Effects
             //Destroy(gameObject);
             effectsPool.ReturnObjectToPool(this);
         }
+        
+        void OnParticleSystemStopped()
+        {
+            ReturnToPool();
+        }
     }
 }

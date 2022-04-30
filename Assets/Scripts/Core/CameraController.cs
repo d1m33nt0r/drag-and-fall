@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Threading.Tasks;
+using DG.Tweening;
+using MEC;
+using UnityEngine;
 
 namespace Core
 {
     public class CameraController : MonoBehaviour
     {
-        private Camera camera;
+        /*private Camera camera;
         private float startTime;
         private float journeyLength;
         private float fieldOfView;
@@ -51,7 +55,7 @@ namespace Core
             fieldOfView = camera.fieldOfView;
             journeyLength = Mathf.Abs(endValue - fieldOfView);
         }
-
+        
         private void Update()
         {
             if (!isMoving) return;
@@ -59,9 +63,9 @@ namespace Core
             var fractionOfJourney = distCovered / journeyLength;
             camera.fieldOfView = Mathf.Lerp(fieldOfView, endValue, fractionOfJourney);
             //if (camera.fieldOfView == endValue) isMoving = false;
-        }
+        }*/
         
-        /*private Camera camera;
+        private Camera camera;
         private float startTime;
         private float journeyLength;
 
@@ -102,12 +106,12 @@ namespace Core
                 case 7:
                     camera.DOFieldOfView(78, 0.35f);
                     //if (fieldOfViewCoroutine != null) StopCoroutine(fieldOfViewCoroutine);
-                    //fieldOfViewCoroutine = StartCoroutine(AnimateFieldOfView(75));
+                    //fieldOfViewCoroutine = StartCoroutine(AnimateFieldOfView(78));
                     break;
                 case 8:
                     camera.DOFieldOfView(80, 0.35f);
                     //if (fieldOfViewCoroutine != null) StopCoroutine(fieldOfViewCoroutine);
-                    //fieldOfViewCoroutine = StartCoroutine(AnimateFieldOfView(75));
+                    //fieldOfViewCoroutine = StartCoroutine(AnimateFieldOfView(80));
                     break;
             }
         }
@@ -123,8 +127,8 @@ namespace Core
                 distCovered = (Time.time - startTime) * speed;
                 fractionOfJourney = distCovered / journeyLength;
                 camera.fieldOfView = Mathf.Lerp(currentFieldOfView, targetFieldOfView, fractionOfJourney);
-                yield return null;
+                yield return Timing.WaitForOneFrame;
             }
-        }*/
+        }
     }
 }

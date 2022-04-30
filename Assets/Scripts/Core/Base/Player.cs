@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections;
 using Core.Bonuses;
 using Data;
 using Data.Core.Segments;
 using DG.Tweening;
 using ObjectPool;
 using Sound;
+using TMPro;
 using UI.InfinityUI;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Core
@@ -163,11 +166,11 @@ namespace Core
             meshRenderer.material = visualController.GetPlayerMaterial();
             
             //Destroy(trail);
-            Destroy(fallingTrail);
+           // Destroy(fallingTrail);
             
             //trail = Instantiate(visualController.GetTrail(), transform.position, Quaternion.identity, transform);
-            fallingTrail = Instantiate(visualController.GetFallingTrail(), new Vector3(0, 0.15f, -0.7f), Quaternion.identity,
-                transform.parent);
+           // fallingTrail = Instantiate(visualController.GetFallingTrail(), new Vector3(0, 0.15f, -0.7f), Quaternion.identity,
+             //   transform.parent);
         }
 
         public void TryOnPlayerSkin(Mesh _mesh, Material _material)
@@ -234,7 +237,7 @@ namespace Core
             tubeMover.MoveTube();
             platformMover.MovePlatforms();
         }
-        
+
         private void Update()
         {
             if (triggerStay) return;
@@ -344,14 +347,14 @@ namespace Core
         public void SetFailedState()
         {
             PlayIdleAnim();
-            DisableFallingTrail();
+          //  DisableFallingTrail();
             DisableTrail();
         }
 
         public void SetFallingTrailState()
         {
             PlayIdleAnim();
-            EnableFallingTrail();
+          //  EnableFallingTrail();
             DisableTrail();
         }
 
@@ -359,7 +362,7 @@ namespace Core
         {
             PlayBounceAnim();
             EnableTrail();
-            DisableFallingTrail();
+           // DisableFallingTrail();
         }
 
         public void CollectCrystal(int count)

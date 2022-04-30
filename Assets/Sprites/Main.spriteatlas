@@ -41,12 +41,14 @@ SpriteAtlas:
     - {fileID: 2800000, guid: c8e66de29eb6f384887b0ce3ee3b8933, type: 3}
     - {fileID: 2800000, guid: b5c85817fb1ddd84c9550a6bfd5bbc36, type: 3}
     - {fileID: 2800000, guid: a718afaf391f31245a8e6f17aae0e4f5, type: 3}
+    - {fileID: 2800000, guid: acb933b2181f51f4eaaa0f0d4fe27233, type: 3}
     totalSpriteSurfaceArea: 1153929
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: acb933b2181f51f4eaaa0f0d4fe27233, type: 3}
   - {fileID: 21300000, guid: c8e66de29eb6f384887b0ce3ee3b8933, type: 3}
   - {fileID: 21300000, guid: d25acb55b1dda3141a10e59da3cf982a, type: 3}
   - {fileID: 21300000, guid: 729f1f55600c0f9428a6cdd4f6a47145, type: 3}
@@ -58,6 +60,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 548f14ac7a401824a93d52604ca19ebb, type: 3}
   - {fileID: 21300000, guid: a718afaf391f31245a8e6f17aae0e4f5, type: 3}
   m_PackedSpriteNamesToIndex:
+  - RightRoundedBackground
   - score_panel
   - magnet_icon
   - background
