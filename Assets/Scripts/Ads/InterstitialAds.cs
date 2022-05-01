@@ -6,6 +6,7 @@ namespace Ads
 {
     public class InterstitialAds : MonoBehaviour
     {
+        private const string adUnitID = "ca-app-pub-3940256099942544/1033173712";
         private InterstitialAd interstitial;
 
         public void RequestInterstitial()
@@ -15,8 +16,7 @@ namespace Ads
                 interstitial.Destroy();
             }
             
-            var adUnitId = "ca-app-pub-3940256099942544/1033173712";
-            interstitial = new InterstitialAd(adUnitId);
+            interstitial = new InterstitialAd(adUnitID);
             
             interstitial.OnAdLoaded += HandleOnAdLoaded;
             interstitial.OnAdFailedToLoad += HandleOnAdFailedToLoad;
@@ -30,27 +30,23 @@ namespace Ads
 
         public void HandleOnAdLoaded(object sender, EventArgs args)
         {
-            MonoBehaviour.print("HandleAdLoaded event received");
+       
         }
 
         public void HandleOnAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
         {
-            MonoBehaviour.print("HandleFailedToReceiveAd event received with message: "
-                                + args.LoadAdError);
+
         }
 
         public void HandleOnAdOpened(object sender, EventArgs args)
         {
-            Time.timeScale = 0;
-            MonoBehaviour.print("HandleAdOpened event received");
+            
         }
 
         public void HandleOnAdClosed(object sender, EventArgs args)
         {
             interstitial.Destroy();
             RequestInterstitial();
-            MonoBehaviour.print("HandleAdClosed event received");
-            Time.timeScale = 1;
         }
         
         public bool TryShowInterstitialAd()

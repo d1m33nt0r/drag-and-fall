@@ -165,13 +165,13 @@ namespace Core
             {
                 case DragController.SwipeType.LEFT:
                     //LeanTween.rotateY(gameObject, transform.rotation.eulerAngles.y - delta, 0.1f);
-                    transform.rotation = Quaternion.Euler(eulerAngles.x, eulerAngles.y - delta / 2, eulerAngles.z);
-                    //rotationTweenerCore = transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y - delta, eulerAngles.z), 0.1f);
+                    //transform.rotation = Quaternion.Euler(eulerAngles.x, eulerAngles.y - delta / 2, eulerAngles.z);
+                    transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y - delta, eulerAngles.z), 0.1f);
                     break;
                 case DragController.SwipeType.RIGHT:
                     //LeanTween.rotateY(gameObject, transform.rotation.eulerAngles.y + delta, 0.1f);
-                    transform.rotation = Quaternion.Euler(eulerAngles.x, eulerAngles.y + delta / 2, eulerAngles.z);
-                    //rotationTweenerCore = transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y + delta, eulerAngles.z), 0.1f);
+                    //transform.rotation = Quaternion.Euler(eulerAngles.x, eulerAngles.y + delta / 2, eulerAngles.z);
+                    transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y + delta, eulerAngles.z), 0.1f);
                     break;
             }
         }

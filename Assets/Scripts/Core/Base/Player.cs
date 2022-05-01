@@ -247,7 +247,7 @@ namespace Core
             
             if (Physics.Raycast(centerRay, out var centerHit, 0.105f))
             {
-                if (centerHit.transform.tag != SEGMENT) return;
+                if (!centerHit.transform.CompareTag(SEGMENT)) return;
                 
                 var segment = centerHit.collider.GetComponent<Segment>();
                 
@@ -279,21 +279,20 @@ namespace Core
                             if (gameManager.gameStarted) segment.IncreasePlatformTouchCounter();
                             freeSpeedIncrease.ResetSpeed();
                             var instance = effectsPool.GetTouchEffect();
-                            centerHit.collider.transform.parent.GetComponent<Platform>().touchEffect = instance;
+                            var parent = centerHit.collider.transform.parent;
+                            parent.GetComponent<Platform>().touchEffect = instance;
                             instance.transform.position = new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z);
                             instance.transform.rotation = Quaternion.Euler(-90, 0, 0);
                             instance.transform.SetParent(segment.transform);
                             playerSounds.PlayTouchSound();
                             
                             var particleSystems = effectsPool.GetPlayerParticles();
-                            centerHit.collider.transform.parent.GetComponent<Platform>().playerParticles = particleSystems;
-                            particleSystems.transform.position = new Vector3(centerHit.point.x,
+                            parent.GetComponent<Platform>().playerParticles = particleSystems;
+                            var transform1 = particleSystems.transform;
+                            transform1.position = new Vector3(centerHit.point.x,
                                 centerHit.point.y + 0.01f, centerHit.point.z);
-                            particleSystems.transform.rotation = Quaternion.identity;
+                            transform1.rotation = Quaternion.identity;
                             particleSystems.transform.SetParent(segment.transform);
-                                //Instantiate(particleSystem,
-                                //new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z),
-                                //Quaternion.identity, segment.transform);
                             platformSound.ResetPitch();
                         }
                         break;

@@ -44,7 +44,7 @@ namespace Core
             else
             {
                 transform.GetComponent<MeshRenderer>().material = platformMover.visualController.GetSegmentMaterial(segmentData.segmentType);
-                transform.GetComponent<MeshFilter>().mesh = platformMover.visualController.GetSegmentMesh();
+                transform.GetComponent<MeshFilter>().mesh = platformMover.visualController.GetSegmentMesh(segmentData.segmentType);
             }
         }
 
@@ -52,7 +52,9 @@ namespace Core
         {
             if (segmentData.segmentType == SegmentType.Hole) return;
             if (segmentData.segmentType == SegmentType.Let && countTouches <= 2) return;
-            transform.GetComponent<MeshRenderer>().material.color = platformMover.visualController.GetPlatformColors()[countTouches];
+            //transform.GetComponent<MeshRenderer>().material.color = platformMover.visualController.GetPlatformColors()[countTouches];
+            transform.GetComponent<MeshFilter>().mesh =
+                platformMover.visualController.GetPlatformColors()[countTouches - 1];
         }
         
         public void TryOnTheme(EnvironmentSkinData _environmentSkinData)
