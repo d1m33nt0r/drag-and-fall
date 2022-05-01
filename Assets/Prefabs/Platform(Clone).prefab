@@ -57,6 +57,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countTouches: 0
+  touchEffect: {fileID: 0}
+  playerParticles: {fileID: 0}
   patternData:
     isRandom: 0
     maxLetAmount: 0
@@ -64,6 +66,7 @@ MonoBehaviour:
     maxHoleAmount: 0
     minHoleAmount: 0
     isLast: 0
+    segmentRotationBias: 0
     segmentsData:
     - positionIndex: 0
       segmentType: 0
@@ -236,7 +239,6 @@ GameObject:
   - component: {fileID: 4126737269022512906}
   - component: {fileID: 2471945873309684624}
   - component: {fileID: 5990928800777001193}
-  - component: {fileID: 1624003581724380853}
   m_Layer: 0
   m_Name: PlatformSegment6
   m_TagString: Segment
@@ -339,22 +341,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1858771020813769209, guid: 0110f3aecfa193240957a29499f44225, type: 3}
---- !u!54 &1624003581724380853
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2234933177701835292}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &2416057297131217788
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +384,6 @@ GameObject:
   - component: {fileID: 7264047784284187440}
   - component: {fileID: 6355255710792748476}
   - component: {fileID: 2803401481118822476}
-  - component: {fileID: 1091699574809721935}
   m_Layer: 0
   m_Name: PlatformSegment10
   m_TagString: Segment
@@ -501,22 +486,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1858771020813769209, guid: 0110f3aecfa193240957a29499f44225, type: 3}
---- !u!54 &1091699574809721935
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2572120576951005994}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &2866743515591866809
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,7 +499,6 @@ GameObject:
   - component: {fileID: 689962017082380813}
   - component: {fileID: 4370785705625119426}
   - component: {fileID: 992692933591535161}
-  - component: {fileID: 5775213819451292514}
   m_Layer: 0
   m_Name: PlatformSegment11
   m_TagString: Segment
@@ -633,22 +601,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1858771020813769209, guid: 0110f3aecfa193240957a29499f44225, type: 3}
---- !u!54 &5775213819451292514
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2866743515591866809}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &2960828364704123694
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,7 +644,6 @@ GameObject:
   - component: {fileID: 142991223000311123}
   - component: {fileID: 8153850909501468645}
   - component: {fileID: 7297903685521811834}
-  - component: {fileID: 6877059358966582912}
   m_Layer: 0
   m_Name: PlatformSegment1
   m_TagString: Segment
@@ -795,22 +746,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1858771020813769209, guid: 0110f3aecfa193240957a29499f44225, type: 3}
---- !u!54 &6877059358966582912
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3008112792654950101}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &3319068815431153574
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,7 +759,6 @@ GameObject:
   - component: {fileID: 5726845208354562144}
   - component: {fileID: 2142511320701819941}
   - component: {fileID: 6119735349234048061}
-  - component: {fileID: 1932409214470218490}
   m_Layer: 0
   m_Name: PlatformSegment5
   m_TagString: Segment
@@ -927,22 +861,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1858771020813769209, guid: 0110f3aecfa193240957a29499f44225, type: 3}
---- !u!54 &1932409214470218490
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3319068815431153574}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &3584823800835817118
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,7 +874,6 @@ GameObject:
   - component: {fileID: 6966819510578720604}
   - component: {fileID: 4215286818457575706}
   - component: {fileID: 4093996398549872769}
-  - component: {fileID: 5826383457526798290}
   m_Layer: 0
   m_Name: PlatformSegment9
   m_TagString: Segment
@@ -1059,22 +976,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1858771020813769209, guid: 0110f3aecfa193240957a29499f44225, type: 3}
---- !u!54 &5826383457526798290
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3584823800835817118}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &3741863836036527375
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,7 +1049,6 @@ GameObject:
   - component: {fileID: 9027759353925287194}
   - component: {fileID: 4419071571212811149}
   - component: {fileID: 8218158126461920752}
-  - component: {fileID: 1955303738776650846}
   m_Layer: 0
   m_Name: PlatformSegment4
   m_TagString: Segment
@@ -1251,22 +1151,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1858771020813769209, guid: 0110f3aecfa193240957a29499f44225, type: 3}
---- !u!54 &1955303738776650846
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3990717932225813203}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &4414122613924152815
 GameObject:
   m_ObjectHideFlags: 0
@@ -1340,7 +1224,6 @@ GameObject:
   - component: {fileID: 4767427896903177176}
   - component: {fileID: 160059567501231678}
   - component: {fileID: 1693944633223865808}
-  - component: {fileID: 264016991731695091}
   m_Layer: 0
   m_Name: PlatformSegment8
   m_TagString: Segment
@@ -1443,22 +1326,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1858771020813769209, guid: 0110f3aecfa193240957a29499f44225, type: 3}
---- !u!54 &264016991731695091
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5316833805857903538}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &5461631114469456075
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,7 +1339,6 @@ GameObject:
   - component: {fileID: 7098859946306221694}
   - component: {fileID: 3740483664601832606}
   - component: {fileID: 8630380867363433068}
-  - component: {fileID: 2768374880829693110}
   m_Layer: 0
   m_Name: PlatformSegment12
   m_TagString: Segment
@@ -1575,22 +1441,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1858771020813769209, guid: 0110f3aecfa193240957a29499f44225, type: 3}
---- !u!54 &2768374880829693110
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5461631114469456075}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &5820856996209016707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1604,7 +1454,6 @@ GameObject:
   - component: {fileID: 1689117600791756660}
   - component: {fileID: 1314432943058116138}
   - component: {fileID: 4391243602418662143}
-  - component: {fileID: 1761197816954648767}
   m_Layer: 0
   m_Name: PlatformSegment3
   m_TagString: Segment
@@ -1707,22 +1556,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1858771020813769209, guid: 0110f3aecfa193240957a29499f44225, type: 3}
---- !u!54 &1761197816954648767
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5820856996209016707}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &6672264947156756526
 GameObject:
   m_ObjectHideFlags: 0
@@ -1736,7 +1569,6 @@ GameObject:
   - component: {fileID: 4521619490067172725}
   - component: {fileID: 5197910335890039962}
   - component: {fileID: 1717985300591370605}
-  - component: {fileID: 1051538843777474109}
   m_Layer: 0
   m_Name: PlatformSegment7
   m_TagString: Segment
@@ -1839,22 +1671,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1858771020813769209, guid: 0110f3aecfa193240957a29499f44225, type: 3}
---- !u!54 &1051538843777474109
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6672264947156756526}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &7505988378743027281
 GameObject:
   m_ObjectHideFlags: 0
@@ -1928,7 +1744,6 @@ GameObject:
   - component: {fileID: 5390031588075746072}
   - component: {fileID: 6329699069698868004}
   - component: {fileID: 3135300812642930273}
-  - component: {fileID: 3058494092016738021}
   m_Layer: 0
   m_Name: PlatformSegment2
   m_TagString: Segment
@@ -2031,22 +1846,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1858771020813769209, guid: 0110f3aecfa193240957a29499f44225, type: 3}
---- !u!54 &3058494092016738021
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8204818361047643984}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &8757809524418406153
 GameObject:
   m_ObjectHideFlags: 0

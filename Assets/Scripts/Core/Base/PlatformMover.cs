@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Common;
 using Core.Bonuses;
+using Cysharp.Threading.Tasks;
 using Data.Core;
 using Data.Core.Segments;
 using Data.Core.Segments.Content;
@@ -165,25 +166,42 @@ namespace Core
             {
                 case DragController.SwipeType.LEFT:
                     //LeanTween.rotateY(gameObject, transform.rotation.eulerAngles.y - delta, 0.1f);
-                    //transform.rotation = Quaternion.Euler(eulerAngles.x, eulerAngles.y - delta / 2, eulerAngles.z);
-                    transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y - delta, eulerAngles.z), 0.1f);
+                    transform.rotation = Quaternion.Euler(eulerAngles.x, eulerAngles.y - delta * 40 * Time.deltaTime, eulerAngles.z);
+                    //transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y - delta, eulerAngles.z), 0.1f);
+                    //DoRotate(new Vector3(eulerAngles.x, eulerAngles.y - delta, eulerAngles.z), 2);
                     break;
                 case DragController.SwipeType.RIGHT:
                     //LeanTween.rotateY(gameObject, transform.rotation.eulerAngles.y + delta, 0.1f);
-                    //transform.rotation = Quaternion.Euler(eulerAngles.x, eulerAngles.y + delta / 2, eulerAngles.z);
-                    transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y + delta, eulerAngles.z), 0.1f);
+                    transform.rotation = Quaternion.Euler(eulerAngles.x, eulerAngles.y + delta * 40 * Time.deltaTime, eulerAngles.z);
+                    //transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y + delta, eulerAngles.z), 0.1f);
+                    //DoRotate(new Vector3(eulerAngles.x, eulerAngles.y + delta, eulerAngles.z), 2);
                     break;
+            }
+        }
+
+        private async UniTask DoRotate(Vector3 endValue, float speed)
+        {
+            journeyLength = Vector3.Distance(endValue, transform.rotation.eulerAngles);
+            var distCovered = (Time.time - startTime) * speed;
+            var fractionOfJourney = distCovered / journeyLength;
+            var currentRotation = transform.rotation.eulerAngles;
+
+            while (fractionOfJourney < 1)
+            {
+                distCovered = (Time.time - startTime) * speed;
+                fractionOfJourney = distCovered / journeyLength;
+                transform.rotation = Quaternion.Euler(Vector3.Lerp(currentRotation, endValue, fractionOfJourney));
+                await UniTask.Yield();
             }
         }
         
         public void MovePlatforms()
         {
             startTime = Time.time;
-            if (movingCoroutine != null) StopCoroutine(movingCoroutine);
-            movingCoroutine = StartCoroutine(Moving(platformMovementSpeed));
+            Moving(platformMovementSpeed);
         }
 
-        private IEnumerator Moving(float speed)
+        private async UniTask Moving(float speed)
         {
             destroyTubeNeeded = !destroyTubeNeeded;
             for (var i = 1; i < countPlatforms; i++)
@@ -212,7 +230,7 @@ namespace Core
                 {
                     if (!gameManager.gameStarted)
                     {
-                        yield return null;
+                        await UniTask.Yield();
                         continue;
                     }
                 
@@ -231,7 +249,7 @@ namespace Core
                         }
                     }
 
-                    yield return null;
+                    await UniTask.Yield();
                 }
             }
             else
@@ -258,7 +276,7 @@ namespace Core
                 {
                     if (!gameManager.gameStarted)
                     {
-                        yield return null;
+                        await UniTask.Yield();
                         continue;
                     }
                 
@@ -277,7 +295,7 @@ namespace Core
                         }
                     }
 
-                    yield return null;
+                    await UniTask.Yield();
                 }
             }
             
