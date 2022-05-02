@@ -9,7 +9,7 @@ namespace Core
 {
     public class CameraController : MonoBehaviour
     {
-        /*private Camera camera;
+        private Camera camera;
         private float startTime;
         private float journeyLength;
         private float fieldOfView;
@@ -62,14 +62,15 @@ namespace Core
         
         private void Update()
         {
+            if (journeyLength == 0) return;
             if (!isMoving) return;
             var distCovered = (Time.time - startTime) * speed;
             var fractionOfJourney = distCovered / journeyLength;
             camera.fieldOfView = Mathf.Lerp(fieldOfView, endValue, fractionOfJourney);
             if (fractionOfJourney >= 1) isMoving = false;
-        }*/
+        }
         
-        private Camera camera;
+        /*private Camera camera;
         private float startTime;
         private float journeyLength;
 
@@ -128,7 +129,7 @@ namespace Core
                 camera.fieldOfView = Mathf.Lerp(currentFieldOfView, targetFieldOfView, fractionOfJourney);
                 await UniTask.Yield();
             }
-        }
+        }*/
         
         
         /*private Camera camera;

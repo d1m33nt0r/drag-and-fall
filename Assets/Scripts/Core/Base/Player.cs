@@ -21,6 +21,12 @@ namespace Core
         private const string IDLE = "Idle";
         private const string BOUNCE = "Bounce";
         private const string BOUNCE_TRIGGER = "BounceTrigger";
+
+        private bool isRotation;
+        private float startTime;
+        private Quaternion target;
+        private float speedRotation = 0.2f;
+        private float timeCount;
         
         public event Action failed;
         [SerializeField] private ParticleSystem particleSystem;
@@ -77,9 +83,29 @@ namespace Core
             var randomX = Random.Range(-35, 35);
             var randomY = Random.Range(-35, 60);
             var randomZ = Random.Range(0, 35);
-            transform.DORotate(new Vector3(randomX, randomY, randomZ), 0.5f);
+            isRotation = true;
+            target = Quaternion.Euler(new Vector3(randomX, randomY, randomZ));
+            startTime = Time.time;
+            timeCount = 0;
+            //transform.DORotate(new Vector3(randomX, randomY, randomZ), 0.5f);
         }
 
+        private void Update()
+        {
+            Rotation();
+            ProcessPlatformCollisions();
+        }
+
+        private void Rotation()
+        {
+            if (!isRotation) return;
+            //var distCovered = (Time.time - startTime) * 30;
+            //var fractionOfJourney = distCovered / journeyLength;
+            transform.rotation = Quaternion.Lerp(transform.rotation, target, timeCount * speedRotation);
+            timeCount = timeCount + Time.deltaTime;
+            //if (fractionOfJourney >= 1) isRotation = false;
+        }
+        
         public void SpawnBonusCollectingEffect()
         {
             var effect = effectsPool.GetBonusCollectingEffect();
@@ -213,16 +239,6 @@ namespace Core
             animator.Play(BOUNCE);
         }
 
-        public void EnableFallingTrail()
-        {
-            fallingTrail.SetActive(true);
-        }
-
-        public void DisableFallingTrail()
-        {
-            fallingTrail.SetActive(false);
-        }
-
         public void SetTriggerStay(bool _value)
         {
             triggerStay = _value;
@@ -239,19 +255,21 @@ namespace Core
             platformMover.MovePlatforms();
         }
 
-        private void Update()
+        
+
+        private void ProcessPlatformCollisions()
         {
             if (triggerStay) return;
-            
+
             var position = transform.position;
             var centerRay = new Ray(position, Vector3.down);
-            
+
             if (Physics.Raycast(centerRay, out var centerHit, 0.105f))
             {
                 if (!centerHit.transform.CompareTag(SEGMENT)) return;
-                
+
                 var segment = centerHit.collider.GetComponent<Segment>();
-                
+
                 /*if (platformMover.platformMovementSpeed >= 6 && segment.segmentData.segmentType != SegmentType.Hole && !bonusController.accelerationIsActive)
                 {
                     //GetComponent<Animator>().Play("SpecialBounce");
@@ -263,7 +281,7 @@ namespace Core
                     freeSpeedIncrease.ResetSpeed();
                     return;
                 }*/
-                
+
                 switch (segment.segmentData.segmentType)
                 {
                     case SegmentType.Ground:
@@ -282,11 +300,12 @@ namespace Core
                             var instance = effectsPool.GetTouchEffect();
                             var parent = centerHit.collider.transform.parent;
                             parent.GetComponent<Platform>().touchEffect = instance;
-                            instance.transform.position = new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z);
+                            instance.transform.position =
+                                new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z);
                             instance.transform.rotation = Quaternion.Euler(-90, 0, 0);
                             instance.transform.SetParent(segment.transform);
                             playerSounds.PlayTouchSound();
-                            
+
                             var particleSystems = effectsPool.GetPlayerParticles();
                             parent.GetComponent<Platform>().playerParticles = particleSystems;
                             var transform1 = particleSystems.transform;
@@ -296,6 +315,7 @@ namespace Core
                             particleSystems.transform.SetParent(segment.transform);
                             platformSound.ResetPitch();
                         }
+
                         break;
                     case SegmentType.Hole:
                         if (!gameManager.gameStarted) return;
@@ -311,6 +331,7 @@ namespace Core
                             SetTriggerStay(true);
                             platformMover.DestroyPlatform(true);
                         }
+
                         break;
                     case SegmentType.Let:
                         if (!gameManager.gameStarted) return;
@@ -321,6 +342,7 @@ namespace Core
                             bonusController.StepAcceleration();
                             return;
                         }
+
                         if (bonusController.shieldIsActive)
                         {
                             bonusController.DeactivateBonus(BonusType.Shield);
@@ -329,6 +351,7 @@ namespace Core
                             SetDefaultState();
                             return;
                         }
+
                         platformSound.ResetPitch();
                         freeSpeedIncrease.ResetSpeed();
                         platformMover.Failed();
