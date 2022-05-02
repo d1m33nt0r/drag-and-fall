@@ -17,6 +17,7 @@ namespace Core.Bonuses
         private Transform startMarker;
         public Transform endMarker;
 
+        private bool isMoving;
         public float speed = 1.0F;
         private float startTime;
         private float journeyLength;
@@ -29,6 +30,11 @@ namespace Core.Bonuses
             this.bonusSoundManager = bonusSoundManager;
         }
         
+        private void SetMovingFalse()
+        {
+            isMoving = false;
+        }
+        
         public void Construct(BonusController _bonusController, SegmentContentPool segmentContentPool)
         {
             this.segmentContentPool = segmentContentPool;
@@ -37,10 +43,11 @@ namespace Core.Bonuses
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag(Constants.TAGS.PLAYER)) return;
+            if (!other.CompareTag(Constants.Tags.PLAYER)) return;
             other.GetComponent<Player>().SpawnBonusCollectingEffect();
             bonusController.ActivateBonus(BonusType.Shield);
             bonusSoundManager.PlayShieldSound();
+            SetMovingFalse();
             segmentContentPool.ReturnObjectToPool(SegmentContent.Shield, gameObject);
         }
         
@@ -50,18 +57,16 @@ namespace Core.Bonuses
             endMarker = _transform;
             startTime = Time.time;
             journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
-            Move();
+            isMoving = true;
         }
     
-        private async UniTask Move()
+        private void Update()
         {
-            while (startMarker.position != endMarker.position) 
-            {
-                var distCovered = (Time.time - startTime) * speed;
-                var fractionOfJourney = distCovered / journeyLength;
-                startMarker.position = Vector3.Lerp(startMarker.position, endMarker.position, fractionOfJourney);
-                await UniTask.Yield();
-            }
+            if (!isMoving) return;
+            
+            var distCovered = (Time.time - startTime) * speed;
+            var fractionOfJourney = distCovered / journeyLength;
+            startMarker.position = Vector3.Lerp(startMarker.position, endMarker.position, fractionOfJourney);
         }
     }
 }

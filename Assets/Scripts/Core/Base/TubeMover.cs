@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using Data;
-using Data.Shop.TubeSkins;
+﻿using Data.Shop.TubeSkins;
 using ObjectPool;
-using Progress;
 using UnityEngine;
 
 namespace Core
@@ -19,7 +15,6 @@ namespace Core
         public TubePart[] tubeParts;
         public PlatformMover platformMover;
         public bool tubeIsInitialized;
-        private Coroutine tubePartCoroutine;
         private Vector3[] localPositionsOfTubeParts;
         private float startTime;
         private float journeyLength;
@@ -55,9 +50,7 @@ namespace Core
             if (tubeIsInitialized)
             {
                 for (var i = 0; i < countTubeParts; i++)
-                {
                     tubeParts[i].GetComponent<TubePart>().ReturnToPool();
-                }
             }
 
             tubeParts = new TubePart[countTubeParts];
@@ -80,24 +73,18 @@ namespace Core
         {
             if (particleSystem != null) Destroy(particleSystem);
             particleSystem = Instantiate(_environmentSkinData.backgroundParticleSystem);
-            //particleSystem.transform.position = _environmentSkinData.particleSystemPosition;
-            
-            foreach (var tubePart in tubeParts)
-            {
-                tubePart.TryOnSkin(_environmentSkinData);
-            }
+            foreach (var tubePart in tubeParts) tubePart.TryOnSkin(_environmentSkinData);
         }
 
         public void ChangeTheme()
         {
             if (particleSystem != null) Destroy(particleSystem);
+            
             particleSystem = platformMover.visualController.GetBackgroundParticleSystem();
             
             foreach (var tubePart in tubeParts)
-            {
                 tubePart.ChangeTheme();
-            }
-            
+
             tubePool.ChangeTheme();
         }
 
@@ -119,13 +106,7 @@ namespace Core
         public void MoveTube()
         {
             startTime = Time.time;
-            if (tubePartCoroutine != null)
-            {
-                StopCoroutine(tubePartCoroutine);
-            }
-            
             CreateNewTubePart();
-
             isMoving = true;
         }
 
@@ -144,25 +125,6 @@ namespace Core
             }
 
             if (fractionOfJourney >= 1) isMoving = false;
-        }
-
-        public IEnumerator MovingTube(float speed)
-        {
-            var distCovered = (Time.time - startTime) * speed;
-            var fractionOfJourney = distCovered / journeyLength;
-            
-            while (distCovered / journeyLength != 1)
-            {
-                for (var i = 0; i < countTubeParts - 1; i++)
-                {
-                    distCovered = (Time.time - startTime) * speed;
-                    fractionOfJourney = distCovered / journeyLength;
-                    tubeParts[i].transform.position =
-                        Vector3.Lerp(localPositionsOfTubeParts[i + 1], localPositionsOfTubeParts[i], fractionOfJourney);
-                }
-
-                yield return null;
-            }
         }
     }
 }

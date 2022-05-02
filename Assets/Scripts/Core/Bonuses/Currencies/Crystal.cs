@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using Common;
-using Cysharp.Threading.Tasks;
+﻿using Common;
 using Data.Core.Segments.Content;
 using ObjectPool;
 using Sound;
@@ -15,6 +13,7 @@ namespace Core
         private Transform startMarker;
         public Transform endMarker;
 
+        private bool isMoving;
         public float speed = 1.0F;
         private float startTime;
         private float journeyLength;
@@ -28,6 +27,10 @@ namespace Core
         {
             this.crystalSound = crystalSound;
         }
+        private void SetMovingFalse()
+        {
+            isMoving = false;
+        }
         
         public void Construct(SegmentContentPool segmentContentPool)
         {
@@ -36,11 +39,12 @@ namespace Core
         
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(Constants.TAGS.PLAYER))
+            if (other.CompareTag(Constants.Tags.PLAYER))
             {
                 other.GetComponent<Player>().CollectCrystal(count);
                 other.GetComponent<Player>().SpawnCrystalCollectingEffect();
                 crystalSound.Play();
+                SetMovingFalse();
                 segmentContentPool.ReturnObjectToPool(SegmentContent.Crystal, gameObject);
             }
         }
@@ -51,18 +55,16 @@ namespace Core
             endMarker = _transform;
             startTime = Time.time;
             journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
-            Move();
+            isMoving = true;
         }
     
-        private async UniTask Move()
+        private void Update()
         {
-            while (startMarker.position != endMarker.position) 
-            {
-                var distCovered = (Time.time - startTime) * speed;
-                var fractionOfJourney = distCovered / journeyLength;
-                startMarker.position = Vector3.Lerp(startMarker.position, endMarker.position, fractionOfJourney);
-                await UniTask.Yield();
-            }
+            if (!isMoving) return;
+            
+            var distCovered = (Time.time - startTime) * speed;
+            var fractionOfJourney = distCovered / journeyLength;
+            startMarker.position = Vector3.Lerp(startMarker.position, endMarker.position, fractionOfJourney);
         }
     }
 }

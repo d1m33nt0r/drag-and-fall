@@ -12,7 +12,7 @@
             public const int CONCENTRATION_THRESHOLD = 10;
         }
 
-        public class TAGS
+        public class Tags
         {
             public const string PLAYER = "Player";
         }
