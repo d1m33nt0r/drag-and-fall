@@ -5,9 +5,11 @@ namespace Core
 {
     public class MagnetPlayer : MonoBehaviour
     {
+        private const string SEGMENT_CONTENT = "SegmentContent";
+
         public void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("SegmentContent")) return;
+            if (!other.CompareTag(SEGMENT_CONTENT)) return;
 
             if (other.TryGetComponent<Coin>(out var coin))
             {

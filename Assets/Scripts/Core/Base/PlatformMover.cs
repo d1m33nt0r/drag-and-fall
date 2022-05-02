@@ -300,7 +300,7 @@ namespace Core
             }
             
         }
-        
+
         private void InitializePlatformPoints()
         {
             localPositionsOfPlatforms = new Vector3[countPlatforms];

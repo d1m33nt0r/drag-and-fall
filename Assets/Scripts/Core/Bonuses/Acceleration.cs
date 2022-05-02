@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using Common;
+using Cysharp.Threading.Tasks;
 using Data.Core.Segments.Content;
 using ObjectPool;
 using Sound;
@@ -34,7 +36,7 @@ namespace Core.Bonuses
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("Player")) return;
+            if (!other.CompareTag(Constants.TAGS.PLAYER)) return;
 
             other.GetComponent<Player>().SpawnBonusCollectingEffect();
             bonusController.ActivateBonus(BonusType.Acceleration);
@@ -48,18 +50,17 @@ namespace Core.Bonuses
             endMarker = _transform;
             startTime = Time.time;
             journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
-            if (coroutine != null) StopCoroutine(coroutine);
-            coroutine = StartCoroutine(Move());
+            Move();
         }
     
-        private IEnumerator Move()
+        private async UniTask Move()
         {
             while (startMarker.position != endMarker.position) 
             {
                 var distCovered = (Time.time - startTime) * speed;
                 var fractionOfJourney = distCovered / journeyLength;
                 startMarker.position = Vector3.Lerp(startMarker.position, endMarker.position, fractionOfJourney);
-                yield return null;
+                await UniTask.Yield();
             }
         }
     }

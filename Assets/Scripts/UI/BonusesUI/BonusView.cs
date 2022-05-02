@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using Common;
 using Core;
 using Core.Bonuses;
+using Cysharp.Threading.Tasks;
 using Sound;
 using UnityEngine;
 using UnityEngine.UI;
@@ -46,8 +49,7 @@ namespace UI.Bonuses
             timer.maxValue = defaultTimerValue;
             timer.value = defaultTimerValue;
             SetActive(true);
-            if (coroutine != null) StopCoroutine(coroutine);
-            coroutine = StartCoroutine(Timer(0.1f));
+            Timer(0.1f);
         }
 
         public void ResetTimer()
@@ -57,14 +59,14 @@ namespace UI.Bonuses
         }
             
         
-        private IEnumerator Timer(float interval)
+        private async UniTask Timer(float interval)
         {
             while (timer.value > 0)
             {
                 SetTimerValue(timer.value -= interval);
                 var timerValue = (int) timer.value;
-                timerText.text = timerValue.ToString();
-                yield return new WaitForSeconds(interval);
+                timerText.text = Constants.TimerValues.values[timerValue];
+                await UniTask.Delay(TimeSpan.FromSeconds(interval));
             }
             
             Deactivate();
