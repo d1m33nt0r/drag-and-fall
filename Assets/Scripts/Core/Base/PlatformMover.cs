@@ -19,6 +19,13 @@ namespace Core
 {
     public class PlatformMover : MonoBehaviour
     {
+        private float speed;
+        private float fractionOfJourney;
+        private float distCovered;
+        
+        
+        private bool isMoving;
+        
         [SerializeField] private TutorialUI tutorialUI;
         [SerializeField] private PlatformSound platformSound;
         [SerializeField] private EffectsPool effectsPool;
@@ -58,9 +65,8 @@ namespace Core
         private Vector3[] localPositionsOfPlatforms;
        
         private bool destroyTubeNeeded = true;
-        private Coroutine movingCoroutine;
-       
-        
+
+
         private void Awake()
         {
             DragController.SwipeEvent += RotateTube;
@@ -165,55 +171,30 @@ namespace Core
             switch (type)
             {
                 case DragController.SwipeType.LEFT:
-                    //LeanTween.rotateY(gameObject, transform.rotation.eulerAngles.y - delta, 0.1f);
                     transform.rotation = Quaternion.Euler(eulerAngles.x, eulerAngles.y - delta * 40 * Time.deltaTime, eulerAngles.z);
-                    //transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y - delta, eulerAngles.z), 0.1f);
-                    //DoRotate(new Vector3(eulerAngles.x, eulerAngles.y - delta, eulerAngles.z), 2);
                     break;
                 case DragController.SwipeType.RIGHT:
-                    //LeanTween.rotateY(gameObject, transform.rotation.eulerAngles.y + delta, 0.1f);
                     transform.rotation = Quaternion.Euler(eulerAngles.x, eulerAngles.y + delta * 40 * Time.deltaTime, eulerAngles.z);
-                    //transform.DORotate(new Vector3(eulerAngles.x, eulerAngles.y + delta, eulerAngles.z), 0.1f);
-                    //DoRotate(new Vector3(eulerAngles.x, eulerAngles.y + delta, eulerAngles.z), 2);
                     break;
             }
         }
 
-        private async UniTask DoRotate(Vector3 endValue, float speed)
-        {
-            journeyLength = Vector3.Distance(endValue, transform.rotation.eulerAngles);
-            var distCovered = (Time.time - startTime) * speed;
-            var fractionOfJourney = distCovered / journeyLength;
-            var currentRotation = transform.rotation.eulerAngles;
-
-            while (fractionOfJourney < 1)
-            {
-                distCovered = (Time.time - startTime) * speed;
-                fractionOfJourney = distCovered / journeyLength;
-                transform.rotation = Quaternion.Euler(Vector3.Lerp(currentRotation, endValue, fractionOfJourney));
-                await UniTask.Yield();
-            }
-        }
-        
         public void MovePlatforms()
         {
+            speed = platformMovementSpeed;
             startTime = Time.time;
-            Moving(platformMovementSpeed);
-        }
+            isMoving = true;
 
-        private async UniTask Moving(float speed)
-        {
-            destroyTubeNeeded = !destroyTubeNeeded;
             for (var i = 1; i < countPlatforms; i++)
                 platforms[i - 1] = platforms[i];
-
+            
             if (tutorialUI.firstGeneralStepComplete)
             {
                 if (!isLevelMode)
                     currentPatternData = gameManager.gameMode.infinityMode.GetPatternData();
                 else
                     currentPatternData = gameManager.gameMode.levelMode.GetPatternData();
-            
+
                 if (isLevelMode && currentPatternData != null)
                     CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
                 else if (isLevelMode && currentPatternData == null)
@@ -223,34 +204,6 @@ namespace Core
                 }
                 else
                     CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
-            
-                var distCovered = (Time.time - startTime) * speed;
-                var fractionOfJourney = distCovered / journeyLength;
-                while (distCovered / journeyLength != 1)
-                {
-                    if (!gameManager.gameStarted)
-                    {
-                        await UniTask.Yield();
-                        continue;
-                    }
-                
-                    for (var i = 1; i < countPlatforms; i++)
-                    {
-                        try
-                        {
-                            distCovered = (Time.time - startTime) * speed;
-                            fractionOfJourney = distCovered / journeyLength;
-                            platforms[i - 1].transform.position = Vector3.Lerp(localPositionsOfPlatforms[i], localPositionsOfPlatforms[i - 1], fractionOfJourney);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e);
-                            throw;
-                        }
-                    }
-
-                    await UniTask.Yield();
-                }
             }
             else
             {
@@ -266,39 +219,23 @@ namespace Core
                     currentPatternData = gameManager.gameMode.levelMode.GetPatternData();
                     if (isLevelMode && currentPatternData != null)
                         CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
-                    else if(isLevelMode && currentPatternData == null)
+                    else if (isLevelMode && currentPatternData == null)
                         CreateNewPlatform(countPlatforms - 1, new PatternData(12), true);
                 }
-            
-                var distCovered = (Time.time - startTime) * speed;
-                var fractionOfJourney = distCovered / journeyLength;
-                while (distCovered / journeyLength != 1)
-                {
-                    if (!gameManager.gameStarted)
-                    {
-                        await UniTask.Yield();
-                        continue;
-                    }
-                
-                    for (var i = 1; i < countPlatforms; i++)
-                    {
-                        try
-                        {
-                            distCovered = (Time.time - startTime) * speed;
-                            fractionOfJourney = distCovered / journeyLength;
-                            platforms[i - 1].transform.position = Vector3.Lerp(localPositionsOfPlatforms[i], localPositionsOfPlatforms[i - 1], fractionOfJourney);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e);
-                            throw;
-                        }
-                    }
-
-                    await UniTask.Yield();
-                }
             }
+        }
+
+        private void Update()
+        {
+            if (!gameManager.gameStarted) return;
+            if (!isMoving) return;
             
+            for (var i = 1; i < countPlatforms; i++)
+            {
+                distCovered = (Time.time - startTime) * speed;
+                fractionOfJourney = distCovered / journeyLength;
+                platforms[i - 1].transform.position = Vector3.Lerp(localPositionsOfPlatforms[i], localPositionsOfPlatforms[i - 1], fractionOfJourney);
+            }
         }
 
         private void InitializePlatformPoints()

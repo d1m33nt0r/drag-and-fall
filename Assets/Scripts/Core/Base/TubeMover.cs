@@ -15,6 +15,7 @@ namespace Core
         [SerializeField] private GameObject tubePrefab;
         [SerializeField] private int countTubeParts;
 
+        private bool isMoving;
         public TubePart[] tubeParts;
         public PlatformMover platformMover;
         public bool tubeIsInitialized;
@@ -124,10 +125,27 @@ namespace Core
             }
             
             CreateNewTubePart();
-            
-            tubePartCoroutine = StartCoroutine(MovingTube(platformMover.platformMovementSpeed));
+
+            isMoving = true;
         }
-        
+
+        private void Update()
+        {
+            var distCovered = (Time.time - startTime) * platformMover.platformMovementSpeed;
+            if (!isMoving) return;
+            float fractionOfJourney = default;
+
+            for (var i = 0; i < countTubeParts - 1; i++)
+            {
+                distCovered = (Time.time - startTime) * platformMover.platformMovementSpeed;
+                fractionOfJourney = distCovered / journeyLength;
+                tubeParts[i].transform.position =
+                    Vector3.Lerp(localPositionsOfTubeParts[i + 1], localPositionsOfTubeParts[i], fractionOfJourney);
+            }
+
+            if (fractionOfJourney >= 1) isMoving = false;
+        }
+
         public IEnumerator MovingTube(float speed)
         {
             var distCovered = (Time.time - startTime) * speed;
