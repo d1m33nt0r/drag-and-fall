@@ -24,22 +24,13 @@ Shader "DragAndFall/CustomShader"
 		_BandsSmoothing ("Bands Smoothing", Range(0.001,1)) = 0.1
 		_LightWrapFactor ("Light Wrap Factor", Range(0,2)) = 0.5
 		[TCP2Separator]
-
-		[TCP2HeaderHelp(Emission)]
-		[TCP2ColorNoAlpha] [HDR] _EmissionColor ("Emission Color", Color) = (0,0,0,1)
-		 [NoScaleOffset] _Emission ("Emission Texture", 2D) = "white" {}
-		 _EmissionMask ("Emission Mask", 2D) = "white" {}
-		[TCP2UVScrolling] _EmissionMask_SC ("Emission Mask UV Scrolling", Vector) = (1,1,0,0)
-		[TCP2Separator]
 		
 		[TCP2HeaderHelp(Rim Lighting)]
-		[Toggle(TCP2_RIM_LIGHTING)] _UseRim ("Enable Rim Lighting", Float) = 0
 		[TCP2ColorNoAlpha] _RimColor ("Rim Color", Color) = (0.8,0.8,0.8,0.5)
 		_RimMin ("Rim Min", Range(0,2)) = 0.5
 		_RimMax ("Rim Max", Range(0,2)) = 1
 		[TCP2Separator]
 		[TCP2HeaderHelp(Ambient Lighting)]
-		[Toggle(TCP2_AMBIENT)] _UseAmbient ("Enable Ambient/Indirect Diffuse", Float) = 0
 		_TCP2_AMBIENT_RIGHT ("+X (Right)", Color) = (0,0,0,1)
 		_TCP2_AMBIENT_LEFT ("-X (Left)", Color) = (0,0,0,1)
 		_TCP2_AMBIENT_TOP ("+Y (Top)", Color) = (0,0,0,1)
@@ -66,14 +57,9 @@ Shader "DragAndFall/CustomShader"
 
 		// Shader Properties
 		sampler2D _Albedo;
-		sampler2D _Emission;
-		sampler2D _EmissionMask;
 		
 		// Shader Properties
 		fixed4 _Color;
-		half4 _EmissionColor;
-		float4 _EmissionMask_ST;
-		half4 _EmissionMask_SC;
 		float _LightWrapFactor;
 		float _RampThreshold;
 		float _RampSmoothing;
@@ -152,14 +138,8 @@ Shader "DragAndFall/CustomShader"
 
 		CGPROGRAM
 
-		#pragma surface surf ToonyColorsCustom vertex:vertex_surface exclude_path:deferred exclude_path:prepass keepalpha noforwardadd interpolateview halfasview nolightmap nofog nolppv
+		#pragma surface surf ToonyColorsCustom vertex:vertex_surface exclude_path:deferred exclude_path:prepass keepalpha noforwardadd interpolateview halfasview noshadow nolightmap nofog nolppv
 		#pragma target 2.5
-
-		//================================================================
-		// SHADER KEYWORDS
-
-		#pragma shader_feature TCP2_RIM_LIGHTING
-		#pragma shader_feature TCP2_AMBIENT
 
 		//================================================================
 		// STRUCTS
@@ -194,9 +174,6 @@ Shader "DragAndFall/CustomShader"
 
 			// Texture Coordinates
 			output.texcoord0 = v.texcoord0.xy;
-
-			#if defined(TCP2_RIM_LIGHTING)
-			#endif
 
 		}
 
@@ -245,7 +222,6 @@ Shader "DragAndFall/CustomShader"
 			float4 __albedo = ( tex2D(_Albedo, input.texcoord0.xy).rgba );
 			float4 __mainColor = ( _Color.rgba );
 			float __alpha = ( __albedo.a * __mainColor.a );
-			float3 __emission = ( _EmissionColor.rgb * tex2D(_Emission, input.texcoord0.xy).rgb * tex2D(_EmissionMask, input.texcoord0.xy * _EmissionMask_ST.xy + frac(_Time.yy * _EmissionMask_SC.xy) + _EmissionMask_ST.zw).rrr );
 			output.__lightWrapFactor = ( _LightWrapFactor );
 			output.__rampThreshold = ( _RampThreshold );
 			output.__rampSmoothing = ( _RampSmoothing );
@@ -276,7 +252,6 @@ Shader "DragAndFall/CustomShader"
 			output.Alpha = __alpha;
 			
 			output.Albedo *= __mainColor.rgb;
-			output.Emission += __emission;
 		}
 
 		//================================================================
@@ -336,7 +311,6 @@ Shader "DragAndFall/CustomShader"
 			// Apply indirect lighting (ambient)
 			half occlusion = 1;
 			#ifdef UNITY_LIGHT_FUNCTION_APPLY_INDIRECT
-			#if defined(TCP2_AMBIENT)
 				half3 ambient = gi.indirect.diffuse;
 				
 				//Directional Ambient
@@ -345,10 +319,8 @@ Shader "DragAndFall/CustomShader"
 
 				color.rgb += ambient;
 			#endif
-			#endif
 
 			// Rim Lighting
-			#if defined(TCP2_RIM_LIGHTING)
 			#if !defined(UNITY_PASS_FORWARDADD)
 			half rim = 1 - surface.ndvRaw;
 			rim = ( rim );
@@ -358,7 +330,6 @@ Shader "DragAndFall/CustomShader"
 			half3 rimColor = surface.__rimColor;
 			half rimStrength = surface.__rimStrength;
 			color.rgb += rim * rimColor * rimStrength;
-			#endif
 			#endif
 
 			return color;
@@ -384,5 +355,5 @@ Shader "DragAndFall/CustomShader"
 	CustomEditor "ToonyColorsPro.ShaderGenerator.MaterialInspector_SG2"
 }
 
-/* TCP_DATA u config(unity:"2020.3.12f1";ver:"2.7.4";tmplt:"SG2_Template_Default";features:list["UNITY_5_4","UNITY_5_5","UNITY_5_6","UNITY_2017_1","UNITY_2018_1","UNITY_2018_2","UNITY_2018_3","UNITY_2019_1","UNITY_2019_2","UNITY_2019_3","UNITY_2020_1","WRAPPED_LIGHTING_CUSTOM","SPECULAR_SHADER_FEATURE","EMISSION","RIM","AMBIENT_SHADER_FEATURE","DIRAMBIENT","RAMP_BANDS","BUMP_SHADER_FEATURE","WRAPPED_LIGHTING_MAIN_LIGHT","SHADOW_HSV","RIM_SHADER_FEATURE"];flags:list["noforwardadd","interpolateview","halfasview"];flags_extra:dict[pragma_gpu_instancing=list[]];keywords:dict[RENDER_TYPE="Opaque",RampTextureDrawer="[TCP2Gradient]",RampTextureLabel="Ramp Texture",SHADER_TARGET="2.5",RIM_LABEL="Rim Lighting"];shaderProperties:list[sp(name:"Albedo";imps:list[imp_mp_texture(uto:False;tov:"";tov_lbl:"";gto:False;sbt:False;scr:False;scv:"";scv_lbl:"";gsc:False;roff:False;goff:False;sin_anm:False;sin_anmv:"";sin_anmv_lbl:"";gsin:False;notile:False;triplanar_local:False;def:"white";locked_uv:False;uv:0;cc:4;chan:"RGBA";mip:-1;mipprop:False;ssuv_vert:False;ssuv_obj:False;uv_type:Texcoord;uv_chan:"XZ";uv_shaderproperty:__NULL__;prop:"_Albedo";md:"";gbv:False;custom:False;refs:"";guid:"971ced18-2182-4590-93fa-3248b5624a62";op:Multiply;lbl:"Albedo";gpu_inst:False;locked:False;impl_index:-1)];layers:list[];unlocked:list[];clones:dict[];isClone:False),,,,,,,,,,,,,,,,,,,sp(name:"Emission";imps:list[imp_mp_color(def:RGBA(0, 0, 0, 1);hdr:True;cc:3;chan:"RGB";prop:"_EmissionColor";md:"";gbv:False;custom:False;refs:"";guid:"da9e78ec-5d23-4a69-b79c-4d4fae2a85f2";op:Multiply;lbl:"Emission Color";gpu_inst:False;locked:False;impl_index:0),imp_mp_texture(uto:False;tov:"";tov_lbl:"";gto:False;sbt:False;scr:False;scv:"";scv_lbl:"";gsc:False;roff:False;goff:False;sin_anm:False;sin_anmv:"";sin_anmv_lbl:"";gsin:False;notile:False;triplanar_local:False;def:"white";locked_uv:False;uv:0;cc:3;chan:"RGB";mip:-1;mipprop:False;ssuv_vert:False;ssuv_obj:False;uv_type:Texcoord;uv_chan:"XZ";uv_shaderproperty:__NULL__;prop:"_Emission";md:"";gbv:False;custom:False;refs:"";guid:"96994744-78fc-4454-8823-fc560109da08";op:Multiply;lbl:"Emission Texture";gpu_inst:False;locked:False;impl_index:-1),imp_mp_texture(uto:True;tov:"";tov_lbl:"";gto:False;sbt:False;scr:True;scv:"";scv_lbl:"";gsc:False;roff:False;goff:False;sin_anm:False;sin_anmv:"";sin_anmv_lbl:"";gsin:False;notile:False;triplanar_local:False;def:"white";locked_uv:False;uv:0;cc:3;chan:"RRR";mip:-1;mipprop:False;ssuv_vert:False;ssuv_obj:False;uv_type:Texcoord;uv_chan:"XZ";uv_shaderproperty:__NULL__;prop:"_EmissionMask";md:"";gbv:False;custom:False;refs:"";guid:"0ab33566-7063-482c-87c1-4f5076b414e0";op:Multiply;lbl:"Emission Mask";gpu_inst:False;locked:False;impl_index:-1)];layers:list[];unlocked:list[];clones:dict[];isClone:False),sp(name:"Depth Test";imps:list[imp_enum(value_type:0;value:5;enum_type:"ToonyColorsPro.ShaderGenerator.CompareFunction";guid:"aa9709dc-cc23-4f91-959d-56806bff9ece";op:Multiply;lbl:"Depth Test";gpu_inst:False;locked:False;impl_index:0)];layers:list[];unlocked:list[];clones:dict[];isClone:False),,,,,,,,,,,,,sp(name:"Depth Write";imps:list[imp_enum(value_type:0;value:1;enum_type:"ToonyColorsPro.ShaderGenerator.DepthWrite";guid:"f881c80a-b537-4fa5-984f-6ec3c387b79e";op:Multiply;lbl:"Depth Write";gpu_inst:False;locked:False;impl_index:0)];layers:list[];unlocked:list[];clones:dict[];isClone:False),sp(name:"Specular Color";imps:list[imp_mp_color(def:RGBA(0.5, 0.5, 0.5, 1);hdr:False;cc:3;chan:"RGB";prop:"_SpecularColor";md:"";gbv:False;custom:False;refs:"";guid:"93dde9a9-305f-490e-876c-22fc86e8962c";op:Multiply;lbl:"Specular Color";gpu_inst:False;locked:False;impl_index:0),imp_mp_texture(uto:False;tov:"";tov_lbl:"";gto:False;sbt:False;scr:False;scv:"";scv_lbl:"";gsc:False;roff:False;goff:False;sin_anm:False;sin_anmv:"";sin_anmv_lbl:"";gsin:False;notile:False;triplanar_local:False;def:"white";locked_uv:False;uv:0;cc:3;chan:"RGB";mip:-1;mipprop:False;ssuv_vert:False;ssuv_obj:False;uv_type:Texcoord;uv_chan:"XZ";uv_shaderproperty:__NULL__;prop:"_SpecularColor1";md:"";gbv:False;custom:False;refs:"";guid:"13ec485e-9487-4269-b824-cfe13bd51995";op:Multiply;lbl:"Specular Color Texture";gpu_inst:False;locked:False;impl_index:-1)];layers:list[];unlocked:list[];clones:dict[];isClone:False)];customTextures:list[];codeInjection:codeInjection(injectedFiles:list[];mark:False);matLayers:list[ml(uid:"5bafc8";name:"Material Layer";src:sp(name:"layer_5bafc8";imps:list[imp_mp_texture(uto:False;tov:"";tov_lbl:"";gto:False;sbt:False;scr:False;scv:"";scv_lbl:"";gsc:False;roff:False;goff:False;sin_anm:False;sin_anmv:"";sin_anmv_lbl:"";gsin:False;notile:False;triplanar_local:False;def:"white";locked_uv:False;uv:0;cc:1;chan:"R";mip:-1;mipprop:False;ssuv_vert:False;ssuv_obj:False;uv_type:Texcoord;uv_chan:"XZ";uv_shaderproperty:__NULL__;prop:"_layer_5bafc8";md:"";gbv:False;custom:False;refs:"";guid:"87db4f0f-d6a5-447d-918a-7ef8457e88e4";op:Multiply;lbl:"Source Texture";gpu_inst:False;locked:False;impl_index:-1)];layers:list[];unlocked:list[];clones:dict[];isClone:False);use_contrast:False;ctrst:__NULL__;use_noise:False;noise:__NULL__)]) */
-/* TCP_HASH 2dee9d95ecb2c00583142907ea07c6b7 */
+/* TCP_DATA u config(unity:"2020.3.12f1";ver:"2.7.4";tmplt:"SG2_Template_Default";features:list["UNITY_5_4","UNITY_5_5","UNITY_5_6","UNITY_2017_1","UNITY_2018_1","UNITY_2018_2","UNITY_2018_3","UNITY_2019_1","UNITY_2019_2","UNITY_2019_3","UNITY_2020_1","WRAPPED_LIGHTING_CUSTOM","SPECULAR_SHADER_FEATURE","RIM","DIRAMBIENT","RAMP_BANDS","WRAPPED_LIGHTING_MAIN_LIGHT","SHADOW_HSV"];flags:list["noforwardadd","interpolateview","halfasview","noshadow"];flags_extra:dict[pragma_gpu_instancing=list[]];keywords:dict[RENDER_TYPE="Opaque",RampTextureDrawer="[TCP2Gradient]",RampTextureLabel="Ramp Texture",SHADER_TARGET="2.5",RIM_LABEL="Rim Lighting"];shaderProperties:list[sp(name:"Albedo";imps:list[imp_mp_texture(uto:False;tov:"";tov_lbl:"";gto:False;sbt:False;scr:False;scv:"";scv_lbl:"";gsc:False;roff:False;goff:False;sin_anm:False;sin_anmv:"";sin_anmv_lbl:"";gsin:False;notile:False;triplanar_local:False;def:"white";locked_uv:False;uv:0;cc:4;chan:"RGBA";mip:-1;mipprop:False;ssuv_vert:False;ssuv_obj:False;uv_type:Texcoord;uv_chan:"XZ";uv_shaderproperty:__NULL__;prop:"_Albedo";md:"";gbv:False;custom:False;refs:"";guid:"971ced18-2182-4590-93fa-3248b5624a62";op:Multiply;lbl:"Albedo";gpu_inst:False;locked:False;impl_index:-1)];layers:list[];unlocked:list[];clones:dict[];isClone:False),,,,,,,,,,,,,,,,,,,sp(name:"Emission";imps:list[imp_mp_texture(uto:False;tov:"";tov_lbl:"";gto:False;sbt:False;scr:False;scv:"";scv_lbl:"";gsc:False;roff:False;goff:False;sin_anm:False;sin_anmv:"";sin_anmv_lbl:"";gsin:False;notile:False;triplanar_local:False;def:"white";locked_uv:False;uv:0;cc:3;chan:"RGB";mip:-1;mipprop:False;ssuv_vert:False;ssuv_obj:False;uv_type:Texcoord;uv_chan:"XZ";uv_shaderproperty:__NULL__;prop:"_EmissionMask";md:"";gbv:False;custom:False;refs:"";guid:"0ab33566-7063-482c-87c1-4f5076b414e0";op:Multiply;lbl:"Emission Mask";gpu_inst:False;locked:False;impl_index:-1)];layers:list[];unlocked:list[];clones:dict[];isClone:False),,,,,,,,,,,,,sp(name:"Depth Test";imps:list[imp_enum(value_type:0;value:5;enum_type:"ToonyColorsPro.ShaderGenerator.CompareFunction";guid:"aa9709dc-cc23-4f91-959d-56806bff9ece";op:Multiply;lbl:"Depth Test";gpu_inst:False;locked:False;impl_index:0)];layers:list[];unlocked:list[];clones:dict[];isClone:False),sp(name:"Depth Write";imps:list[imp_enum(value_type:0;value:1;enum_type:"ToonyColorsPro.ShaderGenerator.DepthWrite";guid:"f881c80a-b537-4fa5-984f-6ec3c387b79e";op:Multiply;lbl:"Depth Write";gpu_inst:False;locked:False;impl_index:0)];layers:list[];unlocked:list[];clones:dict[];isClone:False),sp(name:"Specular Color";imps:list[imp_mp_color(def:RGBA(0.5, 0.5, 0.5, 1);hdr:False;cc:3;chan:"RGB";prop:"_SpecularColor";md:"";gbv:False;custom:False;refs:"";guid:"93dde9a9-305f-490e-876c-22fc86e8962c";op:Multiply;lbl:"Specular Color";gpu_inst:False;locked:False;impl_index:0),imp_mp_texture(uto:False;tov:"";tov_lbl:"";gto:False;sbt:False;scr:False;scv:"";scv_lbl:"";gsc:False;roff:False;goff:False;sin_anm:False;sin_anmv:"";sin_anmv_lbl:"";gsin:False;notile:False;triplanar_local:False;def:"white";locked_uv:False;uv:0;cc:3;chan:"RGB";mip:-1;mipprop:False;ssuv_vert:False;ssuv_obj:False;uv_type:Texcoord;uv_chan:"XZ";uv_shaderproperty:__NULL__;prop:"_SpecularColor1";md:"";gbv:False;custom:False;refs:"";guid:"13ec485e-9487-4269-b824-cfe13bd51995";op:Multiply;lbl:"Specular Color Texture";gpu_inst:False;locked:False;impl_index:-1)];layers:list[];unlocked:list[];clones:dict[];isClone:False)];customTextures:list[];codeInjection:codeInjection(injectedFiles:list[];mark:False);matLayers:list[ml(uid:"5bafc8";name:"Material Layer";src:sp(name:"layer_5bafc8";imps:list[imp_mp_texture(uto:False;tov:"";tov_lbl:"";gto:False;sbt:False;scr:False;scv:"";scv_lbl:"";gsc:False;roff:False;goff:False;sin_anm:False;sin_anmv:"";sin_anmv_lbl:"";gsin:False;notile:False;triplanar_local:False;def:"white";locked_uv:False;uv:0;cc:1;chan:"R";mip:-1;mipprop:False;ssuv_vert:False;ssuv_obj:False;uv_type:Texcoord;uv_chan:"XZ";uv_shaderproperty:__NULL__;prop:"_layer_5bafc8";md:"";gbv:False;custom:False;refs:"";guid:"87db4f0f-d6a5-447d-918a-7ef8457e88e4";op:Multiply;lbl:"Source Texture";gpu_inst:False;locked:False;impl_index:-1)];layers:list[];unlocked:list[];clones:dict[];isClone:False);use_contrast:False;ctrst:__NULL__;use_noise:False;noise:__NULL__)]) */
+/* TCP_HASH f447be1cb7f747a4ee312c416d33fd9b */

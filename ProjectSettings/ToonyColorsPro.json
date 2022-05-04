@@ -12,7 +12,8 @@
         "THIRD PARTY PLUGINS",
         "LIGHTING",
         "SURFACE",
-        "TRANSPARENCY/BLENDING"
+        "TRANSPARENCY/BLENDING",
+        "STYLIZATION"
     ],
     "UseCustomFont": true,
     "CustomFont": {

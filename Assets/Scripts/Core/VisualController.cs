@@ -41,17 +41,15 @@ namespace Core
         
         public Material GetSegmentMaterial(SegmentType _segmentType)
         {
-            return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].segmentMaterial;
-            /*switch (_segmentType)
+            switch (_segmentType)
             {
                 case SegmentType.Ground:
-                    return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index]
-                        .groundSegmentMaterial;
+                    return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].segmentMaterial;
                 case SegmentType.Let:
-                    return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].letSegmentMaterial;
+                    return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].segmentMaterial;
                 default:
                     return null;
-            }*/
+            }
         }
 
         public Material GetSkyboxMaterial()
@@ -76,7 +74,6 @@ namespace Core
         
         public Mesh[] GetPlatformColors()
         {
-            //return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].platformColors;
             return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].meshes;
         }
 
@@ -89,19 +86,11 @@ namespace Core
         {
             if (segmentType == SegmentType.Ground)
                 return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].segment;
-            
-            return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index]
-                .letSegmentMesh;
-        }
-        
-        public GameObject GetTrail()
-        {
-            return shopData.TrailSkinData[progressController.currentState.trailSkin.index].skin;
-        }
+            if (segmentType == SegmentType.Let)
+                return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index]
+                    .letSegmentMesh;
 
-        public GameObject GetFallingTrail()
-        {
-            return shopData.FallingTrailSkinData[progressController.currentState.fallingTrailSkin.index].skin;
+            return null;
         }
     }
 }
