@@ -88,51 +88,58 @@ namespace Core
             {
                 case SegmentContent.Coin:
                     var coinInstance = segmentContentPool.GetObject(SegmentContent.Coin);
-                    coinInstance.transform.position = spawnPoint.position;
-                    coinInstance.transform.rotation = Quaternion.identity;
-                    coinInstance.transform.SetParent(spawnPoint);
+                    var coTransform = coinInstance.transform;
+                    coTransform.position = spawnPoint.position;
+                    coTransform.rotation = Quaternion.identity;
+                    coTransform.SetParent(spawnPoint);
                     coinInstance.GetComponent<Coin>().Construct(segmentContentPool);
                     break;
                 case SegmentContent.Crystal:
                     var crystalInstance = segmentContentPool.GetObject(SegmentContent.Crystal);
-                    crystalInstance.transform.position = spawnPoint.position;
-                    crystalInstance.transform.rotation = Quaternion.identity;
-                    crystalInstance.transform.SetParent(spawnPoint);
+                    var crTransform = crystalInstance.transform;
+                    crTransform.position = spawnPoint.position;
+                    crTransform.rotation = Quaternion.identity;
+                    crTransform.SetParent(spawnPoint);
                     crystalInstance.GetComponent<Crystal>().Construct(segmentContentPool);
                     break;
                 case SegmentContent.Acceleration:
                     var accelerationInstance = segmentContentPool.GetObject(SegmentContent.Acceleration);
-                    accelerationInstance.transform.position = spawnPoint.position;
-                    accelerationInstance.transform.rotation = Quaternion.identity;
-                    accelerationInstance.transform.SetParent(spawnPoint);
+                    var acTransform = accelerationInstance.transform;
+                    acTransform.position = spawnPoint.position;
+                    acTransform.rotation = Quaternion.identity;
+                    acTransform.SetParent(spawnPoint);
                     accelerationInstance.GetComponent<Acceleration>().Construct(bonusController, segmentContentPool);
                     break;
                 case SegmentContent.Multiplier:
                     var multiplierInstance = segmentContentPool.GetObject(SegmentContent.Multiplier);
-                    multiplierInstance.transform.position = spawnPoint.position;
-                    multiplierInstance.transform.rotation = Quaternion.identity;
-                    multiplierInstance.transform.SetParent(spawnPoint);
+                    var muTransform = multiplierInstance.transform;
+                    muTransform.position = spawnPoint.position;
+                    muTransform.rotation = Quaternion.identity;
+                    muTransform.SetParent(spawnPoint);
                     multiplierInstance.GetComponent<Multiplier>().Construct(bonusController, segmentContentPool);
                     break;
                 case SegmentContent.Shield:
                     var shieldInstance = segmentContentPool.GetObject(SegmentContent.Shield);
-                    shieldInstance.transform.position = spawnPoint.position;
-                    shieldInstance.transform.rotation = Quaternion.identity;
-                    shieldInstance.transform.SetParent(spawnPoint);
+                    var shTransform = shieldInstance.transform;
+                    shTransform.position = spawnPoint.position;
+                    shTransform.rotation = Quaternion.identity;
+                    shTransform.SetParent(spawnPoint);
                     shieldInstance.GetComponent<Shield>().Construct(bonusController, segmentContentPool);
                     break;
                 case SegmentContent.Magnet:
                     var magnetInstance = segmentContentPool.GetObject(SegmentContent.Magnet);
-                    magnetInstance.transform.position = spawnPoint.position;
-                    magnetInstance.transform.rotation = Quaternion.identity;
-                    magnetInstance.transform.SetParent(spawnPoint);
+                    var maTransform = magnetInstance.transform;
+                    maTransform.position = spawnPoint.position;
+                    maTransform.rotation = Quaternion.identity;
+                    maTransform.SetParent(spawnPoint);
                     magnetInstance.GetComponent<Magnet>().Construct(bonusController, segmentContentPool);
                     break;
                 case SegmentContent.Key:
                     var keyInstance = segmentContentPool.GetObject(SegmentContent.Key);
-                    keyInstance.transform.position = spawnPoint.position;
-                    keyInstance.transform.rotation = Quaternion.identity;
-                    keyInstance.transform.SetParent(spawnPoint);
+                    var keTransform = keyInstance.transform;
+                    keTransform.position = spawnPoint.position;
+                    keTransform.rotation = Quaternion.identity;
+                    keTransform.SetParent(spawnPoint);
                     keyInstance.GetComponent<Key>().Construct(bonusController, segmentContentPool);
                     break;
             }

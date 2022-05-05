@@ -336,21 +336,22 @@ namespace Core
             platformsIsInitialized = true;
         }
 
-        private void CreateNewPlatform(int _platformIndex, PatternData patternData, bool hide)
+        private void CreateNewPlatform(int platformIndex, PatternData patternData, bool hide)
         {
             var platform = platformPool.GetPlatform();
-            platform.transform.position = localPositionsOfPlatforms[_platformIndex];
-            platform.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles);
-            platform.transform.SetParent(transform);
-                //Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.Euler(transform.rotation.eulerAngles), transform);
-                if (patternData != null)
-                {
-                    platform.Initialize(patternData);
-                    patternData.ReturnToPool();
-                }
-            //AlignRotation(platformInstance);
-            platforms[_platformIndex] = platform;
-            if (hide) platforms[_platformIndex].gameObject.SetActive(false);
+            var pTransform = platform.transform;
+            pTransform.position = localPositionsOfPlatforms[platformIndex];
+            pTransform.rotation = Quaternion.Euler(transform.rotation.eulerAngles);
+            pTransform.SetParent(transform);
+                
+            if (patternData != null)
+            {
+                platform.Initialize(patternData);
+                patternData.ReturnToPool();
+            }
+    
+            platforms[platformIndex] = platform;
+            if (hide) platforms[platformIndex].gameObject.SetActive(false);
         }
 
         public void LevelStep()

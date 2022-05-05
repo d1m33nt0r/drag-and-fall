@@ -96,9 +96,10 @@ namespace Core
                 tubeParts[i - 1] = tubeParts[i];
 
             var tubePartInstance = tubePool.GetTubePart();
-            tubePartInstance.transform.position = localPositionsOfTubeParts[localPositionsOfTubeParts.Length - 1];
-            tubePartInstance.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles);
-            tubePartInstance.transform.SetParent(transform);
+            var tTransform = tubePartInstance.transform;
+            tTransform.position = localPositionsOfTubeParts[localPositionsOfTubeParts.Length - 1];
+            tTransform.rotation = Quaternion.Euler(transform.rotation.eulerAngles);
+            tTransform.SetParent(transform);
             
             tubeParts[countTubeParts - 1] = tubePartInstance.GetComponent<TubePart>();
         }
