@@ -21,6 +21,9 @@ namespace Core
         private int setPointer;
         private int patternPointer;
 
+        private AvailablePositions availablePositions = new AvailablePositions();
+  
+
         public void ResetPointers()
         {
             setPointer = 0;
@@ -33,6 +36,7 @@ namespace Core
         {
             if (infinityData.patternSets[setPointer].isRandom)
             {
+                availablePositions.Initialize();
                 if (!randIsInitialized)
                 {
                     randPlatformsAmount = Random.Range(infinityData.patternSets[setPointer].minPlatformsCount,
@@ -55,8 +59,8 @@ namespace Core
                     patternData1.maxHoleAmount = infinityData.patternSets[setPointer].maxHoleAmount;
                     patternData1.minLetAmount = infinityData.patternSets[setPointer].minLetAmount;
                     patternData1.maxLetAmount = infinityData.patternSets[setPointer].maxLetAmount;
-                    var availablePositions = PrepareAvailablePositionsForSegments();
-                    PlaceSegments(ref availablePositions, patternData1);
+                   
+                    PlaceSegments(patternData1);
                     TryPlacePowerUps(patternData1);
                     TryPlaceCurrencies(patternData1, infinityData.patternSets[setPointer].currencyRandomSettings);
                     patternPointer++;
@@ -72,8 +76,8 @@ namespace Core
                     patternData2.minLetAmount = infinityData.patternSets[setPointer].minLetAmount;
                     patternData2.maxLetAmount = infinityData.patternSets[setPointer].maxLetAmount;
                     patternData2.isLast = true;
-                    var availablePositions = PrepareAvailablePositionsForSegments();
-                    PlaceSegments(ref availablePositions, patternData2);
+                    
+                    PlaceSegments(patternData2);
                     TryPlacePowerUps(patternData2);
                     TryPlaceCurrencies(patternData2, infinityData.patternSets[setPointer].currencyRandomSettings);
                     randIsInitialized = false;
@@ -90,8 +94,8 @@ namespace Core
                     patternData3.minLetAmount = infinityData.patternSets[setPointer].minLetAmount;
                     patternData3.maxLetAmount = infinityData.patternSets[setPointer].maxLetAmount;
                     patternData3.isLast = true;
-                    var availablePositions2 = PrepareAvailablePositionsForSegments();
-                    PlaceSegments(ref availablePositions2, patternData3);
+                
+                    PlaceSegments(patternData3);
                     TryPlacePowerUps(patternData3);
                     TryPlaceCurrencies(patternData3, infinityData.patternSets[setPointer].currencyRandomSettings);
                     randIsInitialized = false;
@@ -329,16 +333,6 @@ namespace Core
             }
         }
 
-        private List<int> PrepareAvailablePositionsForSegments()
-        {
-            var availablePositions = new List<int>();
-
-            for (var i = 0; i < 12; i++)
-                availablePositions.Add(i);
-
-            return availablePositions;
-        }
-        
         private List<int> PrepareAvailablePositionsForBonuses(SegmentData[] segmentDatas, bool letIsAvailable, bool groundIsAvailable, bool holeIsAvailable)
         {
             var availablePositions = new List<int>();
@@ -375,63 +369,107 @@ namespace Core
             segmentDatas[availablePositions[randPositionIndex]].segmentContent = segmentContent;
         }
 
-        public void PlaceSegments(ref List<int> availablePositions, PatternData patternData)
+        public void PlaceSegments(PatternData patternData)
         {
-            PlaceHoleSegments(ref availablePositions, patternData);
-            PlaceLetSegments(ref availablePositions, patternData);
-            PlaceGroundSegments(ref availablePositions, patternData);
+            PlaceHoleSegments(patternData);
+            PlaceLetSegments(patternData);
+            PlaceGroundSegments(patternData);
         }
         
-        private void PlaceGroundSegments(ref List<int> availablePositions, PatternData patternData)
+        private void PlaceGroundSegments(PatternData patternData)
         {
-            
-            for (var j = 0; j < availablePositions.Count; j++)
+            for (var j = 0; j < availablePositions.GetAvailablePositionCount(); j++)
             {
+                var randomPosition = availablePositions.GetRandomPositionIndex();
                 var segmentData = new SegmentData
                 {
-                    positionIndex = availablePositions[j],
+                    positionIndex = randomPosition,
                     segmentContent = SegmentContent.None,
                     segmentType = SegmentType.Ground
                 };
                 
-                patternData.segmentsData[availablePositions[j]] = segmentData;
+                patternData.segmentsData[randomPosition] = segmentData;
             }
         }
 
-        private void PlaceLetSegments(ref List<int> availablePositions, PatternData patternData)
+        private void PlaceLetSegments(PatternData patternData)
         {
             var randomAmount = Random.Range(patternData.minLetAmount, patternData.maxLetAmount);
 
             for (var j = 0; j < randomAmount; j++)
             {
-                var randomPosition = Random.Range(0, availablePositions.Count);
+                var randomPosition = availablePositions.GetRandomPositionIndex();
                 var segmentData = new SegmentData
                 {
-                    positionIndex = availablePositions[randomPosition],
+                    positionIndex = randomPosition,
                     segmentContent = SegmentContent.None,
                     segmentType = SegmentType.Let
                 };
-                patternData.segmentsData[availablePositions[randomPosition]] = segmentData;
-                availablePositions.Remove(availablePositions[randomPosition]);
+                patternData.segmentsData[randomPosition] = segmentData;
             }
         }
 
-        private void PlaceHoleSegments(ref List<int> availablePositions, PatternData patternData)
+        private void PlaceHoleSegments(PatternData patternData)
         {
             var randomAmount = Random.Range(patternData.minHoleAmount, patternData.maxHoleAmount);
 
             for (var j = 0; j < randomAmount; j++)
             {
-                var randomPosition = Random.Range(0, availablePositions.Count);
+                var randomPosition = availablePositions.GetRandomPositionIndex();
                 var segmentData = new SegmentData
                 {
-                    positionIndex = availablePositions[randomPosition],
+                    positionIndex = randomPosition,
                     segmentContent = SegmentContent.None,
                     segmentType = SegmentType.Hole
                 };
-                patternData.segmentsData[availablePositions[randomPosition]] = segmentData;
-                availablePositions.Remove(availablePositions[randomPosition]);
+                patternData.segmentsData[randomPosition] = segmentData;
             }
+        }
+    }
+
+
+    public class AvailablePositions
+    {
+        private bool[] availablePosition;
+
+        public AvailablePositions()
+        {
+            availablePosition = new bool[12];
+            Initialize();
+        }
+
+        public void Initialize()
+        {
+            for (var i = 0; i < availablePosition.Length; i++)
+                availablePosition[i] = true;
+        }
+
+        public int GetAvailablePositionCount()
+        {
+            var count = 0;
+            
+            for (var i = 0; i < availablePosition.Length; i++)
+                if (availablePosition[i]) count++;
+
+            return count;
+        }
+
+        public int GetRandomPositionIndex()
+        {
+            var randomPositionIndex = Random.Range(0, GetAvailablePositionCount());
+
+            var j = -1;
+            
+            for (var i = 0; i < availablePosition.Length; i++)
+            {
+                if (!availablePosition[i]) continue;
+                j++;
+                if (j != randomPositionIndex) continue;
+                availablePosition[i] = false;
+                return i;
+            }
+
+            return j;
         }
     }
 }
