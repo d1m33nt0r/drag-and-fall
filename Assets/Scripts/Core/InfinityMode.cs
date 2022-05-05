@@ -143,14 +143,15 @@ namespace Core
                             var randomChance = Random.Range(0, 100);
                             if (randomChance > currencyRandomSettings[i].spawnChance) break;
                             
-                            var availablePositionsForCurrencies =
-                                PrepareAvailablePositionsForCurrencies(patternData.segmentsData, currencyRandomSettings[i].spawnOnLet, currencyRandomSettings[i].spawnOnGround, 
-                                    currencyRandomSettings[i].spawnOnHole);
-                            var position = Random.Range(0, availablePositionsForCurrencies.Count);
+                            PrepareAvailablePositionsForCurrencies(patternData.segmentsData,
+                                currencyRandomSettings[i].spawnOnLet, 
+                                currencyRandomSettings[i].spawnOnGround, 
+                                currencyRandomSettings[i].spawnOnHole);
+                            
                             if (currencyRandomSettings[i].currencyType == CurrencyType.Coin) 
-                               patternData.segmentsData[position].segmentContent = SegmentContent.Coin;
+                                patternData.segmentsData[powerUpsAvailablePositions.GetRandomPositionIndex()].segmentContent = SegmentContent.Coin;
                             else 
-                               patternData.segmentsData[position].segmentContent = SegmentContent.Crystal;
+                                patternData.segmentsData[powerUpsAvailablePositions.GetRandomPositionIndex()].segmentContent = SegmentContent.Crystal;
                         }
                         break;
                     case AccuracyLevel.Average:
@@ -162,15 +163,16 @@ namespace Core
                                 var randomChance = Random.Range(0, 100);
                                 if (randomChance > currencyRandomSettings[i].spawnChance) continue;
                                 
-                                var availablePositionsForCurrencies =
-                                    PrepareAvailablePositionsForCurrencies(patternData.segmentsData, currencyRandomSettings[i].spawnOnLet, currencyRandomSettings[i].spawnOnGround, 
-                                        currencyRandomSettings[i].spawnOnHole);
-                                var position = Random.Range(0, availablePositionsForCurrencies.Count);
-                           
+                                
+                                PrepareAvailablePositionsForCurrencies(patternData.segmentsData, 
+                                    currencyRandomSettings[i].spawnOnLet, 
+                                    currencyRandomSettings[i].spawnOnGround, 
+                                    currencyRandomSettings[i].spawnOnHole);
+                                
                                 if (currencyRandomSettings[i].currencyType == CurrencyType.Coin) 
-                                    patternData.segmentsData[position].segmentContent = SegmentContent.Coin;
+                                    patternData.segmentsData[powerUpsAvailablePositions.GetRandomPositionIndex()].segmentContent = SegmentContent.Coin;
                                 else 
-                                    patternData.segmentsData[position].segmentContent = SegmentContent.Crystal;
+                                    patternData.segmentsData[powerUpsAvailablePositions.GetRandomPositionIndex()].segmentContent = SegmentContent.Crystal;
                             }
                         }
                         break;
@@ -183,15 +185,16 @@ namespace Core
                                 var randomChance = Random.Range(0, 100);
                                 if (randomChance > currencyRandomSettings[i].spawnChance) continue;
                                 
-                                var availablePositionsForCurrencies =
-                                    PrepareAvailablePositionsForCurrencies(patternData.segmentsData, currencyRandomSettings[i].spawnOnLet, currencyRandomSettings[i].spawnOnGround, 
-                                        currencyRandomSettings[i].spawnOnHole);
-                                var position = Random.Range(0, availablePositionsForCurrencies.Count);
-                           
+                               
+                                PrepareAvailablePositionsForCurrencies(patternData.segmentsData, 
+                                    currencyRandomSettings[i].spawnOnLet, 
+                                    currencyRandomSettings[i].spawnOnGround, 
+                                    currencyRandomSettings[i].spawnOnHole);
+                                
                                 if (currencyRandomSettings[i].currencyType == CurrencyType.Coin) 
-                                    patternData.segmentsData[position].segmentContent = SegmentContent.Coin;
+                                    patternData.segmentsData[powerUpsAvailablePositions.GetRandomPositionIndex()].segmentContent = SegmentContent.Coin;
                                 else 
-                                    patternData.segmentsData[position].segmentContent = SegmentContent.Crystal;
+                                    patternData.segmentsData[powerUpsAvailablePositions.GetRandomPositionIndex()].segmentContent = SegmentContent.Crystal;
                             }
                         }
                         break;
@@ -205,15 +208,16 @@ namespace Core
                                 var randomChance = Random.Range(0, 100);
                                 if (randomChance > currencyRandomSettings[i].spawnChance) continue;
                                 
-                                var availablePositionsForCurrencies =
-                                    PrepareAvailablePositionsForCurrencies(patternData.segmentsData, currencyRandomSettings[i].spawnOnLet, currencyRandomSettings[i].spawnOnGround, 
-                                        currencyRandomSettings[i].spawnOnHole);
-                                var position = Random.Range(0, availablePositionsForCurrencies.Count);
-                           
+                                
+                                PrepareAvailablePositionsForCurrencies(patternData.segmentsData, 
+                                    currencyRandomSettings[i].spawnOnLet, 
+                                    currencyRandomSettings[i].spawnOnGround, 
+                                    currencyRandomSettings[i].spawnOnHole);
+                                
                                 if (currencyRandomSettings[i].currencyType == CurrencyType.Coin) 
-                                    patternData.segmentsData[position].segmentContent = SegmentContent.Coin;
+                                    patternData.segmentsData[powerUpsAvailablePositions.GetRandomPositionIndex()].segmentContent = SegmentContent.Coin;
                                 else 
-                                    patternData.segmentsData[position].segmentContent = SegmentContent.Crystal;
+                                    patternData.segmentsData[powerUpsAvailablePositions.GetRandomPositionIndex()].segmentContent = SegmentContent.Crystal;
                             }
                         }
                         break;
@@ -221,33 +225,32 @@ namespace Core
             }
         }
 
-        private List<int> PrepareAvailablePositionsForCurrencies(SegmentData[] segmentDatas, bool spawnOnLet, bool spawnOnGround, bool spawnOnHole)
+        private void PrepareAvailablePositionsForCurrencies(SegmentData[] segmentDatas, bool spawnOnLet, bool spawnOnGround, bool spawnOnHole)
         {
-            var availablePositions = new List<int>();
-
             for (var i = 0; i < 12; i++)
             {
                 if (segmentDatas[i].segmentContent != SegmentContent.None) continue;
                 
                 if (segmentDatas[i].segmentType == SegmentType.Ground && spawnOnGround)
                 {
-                    availablePositions.Add(segmentDatas[i].positionIndex);
-                    continue;
+                    currenciesAvailablePositions[segmentDatas[i].positionIndex] = true;
                 }
                 
-                if (segmentDatas[i].segmentType == SegmentType.Hole && spawnOnHole)
+                else if (segmentDatas[i].segmentType == SegmentType.Hole && spawnOnHole)
                 {
-                    availablePositions.Add(segmentDatas[i].positionIndex);
-                    continue;
+                    currenciesAvailablePositions[segmentDatas[i].positionIndex] = true;
                 }
                 
-                if (segmentDatas[i].segmentType == SegmentType.Let && spawnOnLet)
+                else if (segmentDatas[i].segmentType == SegmentType.Let && spawnOnLet)
                 {
-                    availablePositions.Add(segmentDatas[i].positionIndex);
+                    currenciesAvailablePositions[segmentDatas[i].positionIndex] = true;
+                }
+                
+                else
+                {
+                    currenciesAvailablePositions[segmentDatas[i].positionIndex] = false;
                 }
             }
-
-            return availablePositions;
         }
         
         private void TryPlacePowerUps(PatternData patternData1)

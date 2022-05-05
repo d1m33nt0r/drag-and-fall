@@ -1,4 +1,5 @@
-﻿using Core.Bonuses;
+﻿using System;
+using Core.Bonuses;
 using Core.Effects;
 using Data.Core.Segments;
 using Data.Core.Segments.Content;
@@ -16,6 +17,15 @@ namespace Core
         private Platform platform;
         private BonusController bonusController;
         private SegmentContentPool segmentContentPool;
+        private MeshFilter meshFilter;
+        private MeshRenderer meshRenderer;
+        public MeshCollider MeshCollider { get; private set; }
+        private void Awake()
+        {
+            MeshCollider = GetComponent<MeshCollider>();
+            meshFilter = GetComponent<MeshFilter>();
+            meshRenderer = GetComponent<MeshRenderer>();
+        }
 
         public void Construct(PlatformMover platformMover, Platform platform, 
             BonusController bonusController, SegmentContentPool segmentContentPool)
@@ -35,16 +45,16 @@ namespace Core
 
         public void ChangeTheme()
         {
-            transform.GetComponent<MeshRenderer>().enabled = true;
+            meshRenderer.enabled = true;
             
             if (segmentData.segmentType == SegmentType.Hole)
             {
-                transform.GetComponent<MeshRenderer>().enabled = false;
+                meshRenderer.enabled = false;
             }
             else
             {
-                transform.GetComponent<MeshRenderer>().material = platformMover.visualController.GetSegmentMaterial(segmentData.segmentType);
-                transform.GetComponent<MeshFilter>().mesh = platformMover.visualController.GetSegmentMesh(segmentData.segmentType);
+                meshRenderer.material = platformMover.visualController.GetSegmentMaterial(segmentData.segmentType);
+                meshFilter.mesh = platformMover.visualController.GetSegmentMesh(segmentData.segmentType);
             }
         }
 
@@ -53,22 +63,22 @@ namespace Core
             if (segmentData.segmentType == SegmentType.Hole) return;
             if (segmentData.segmentType == SegmentType.Let && countTouches <= 2) return;
             //transform.GetComponent<MeshRenderer>().material.color = platformMover.visualController.GetPlatformColors()[countTouches];
-            transform.GetComponent<MeshFilter>().mesh =
+            meshFilter.mesh =
                 platformMover.visualController.GetPlatformColors()[countTouches - 1];
         }
         
         public void TryOnTheme(EnvironmentSkinData _environmentSkinData)
         {
             if (segmentData.segmentType == SegmentType.Hole)
-                transform.GetComponent<MeshRenderer>().enabled = false;
+                meshRenderer.enabled = false;
             else
             {
                 if (segmentData.segmentType == SegmentType.Ground)
-                    transform.GetComponent<MeshRenderer>().material = _environmentSkinData.groundSegmentMaterial;
+                    meshRenderer.material = _environmentSkinData.groundSegmentMaterial;
                 else
-                    transform.GetComponent<MeshRenderer>().material = _environmentSkinData.letSegmentMaterial;
+                    meshRenderer.material = _environmentSkinData.letSegmentMaterial;
                 
-                transform.GetComponent<MeshFilter>().mesh = _environmentSkinData.segment;
+                meshFilter.mesh = _environmentSkinData.segment;
             }
         }
 

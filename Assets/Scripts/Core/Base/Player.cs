@@ -266,7 +266,7 @@ namespace Core
 
             if (Physics.Raycast(centerRay, out var centerHit, 0.105f))
             {
-                if (!centerHit.transform.CompareTag(SEGMENT)) return;
+                if (!centerHit.collider.CompareTag(SEGMENT)) return;
 
                 var segment = centerHit.collider.GetComponent<Segment>();
 

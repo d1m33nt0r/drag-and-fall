@@ -10,6 +10,7 @@ namespace Core
 {
     public class Platform : MonoBehaviour
     {
+        private int breakAnimationID = Animator.StringToHash("Break");
         private bool destroy;
         public int countTouches = 0;
         private TutorialUI tutorialUI;
@@ -24,12 +25,14 @@ namespace Core
         private TubeMover tubeMover;
         private PlatformSound audioSource;
         private PlatformPool platformPool;
+        private Animator animator;
         
         public void Construct(PlatformPool platformPool, PlatformMover platformMover,
             Player player, BonusController bonusController, GainScore gainScore,
             SegmentContentPool segmentContentPool,
             TubeMover tubeMover, TutorialUI tutorialUI, PlatformSound audioSource)
         {
+            
             this.platformPool = platformPool;
             this.segmentContentPool = segmentContentPool;
             this.platformMover = platformMover;
@@ -38,7 +41,7 @@ namespace Core
             this.tutorialUI = tutorialUI;
             this.audioSource = audioSource;
             this.player = player;
-            
+            this.animator = GetComponent<Animator>();
             for (var i = 1; i <= patternData.segmentsData.Length; i++)
             {
                 segments[i - 1].Construct(platformMover, 
@@ -52,10 +55,12 @@ namespace Core
             
             for (var i = 1; i <= patternData.segmentsData.Length; i++)
                 segments[i - 1].Initialize(patternData.segmentsData[i - 1]);
-            
-            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 
-                transform.rotation.eulerAngles.y + patternData.segmentRotationBias, 
-                transform.rotation.eulerAngles.z);
+
+            var rotation = transform.rotation;
+            rotation = Quaternion.Euler(rotation.eulerAngles.x, 
+                rotation.eulerAngles.y + patternData.segmentRotationBias, 
+                rotation.eulerAngles.z);
+            transform.rotation = rotation;
         }
 
         public void IncreaseTouchCounter()
@@ -65,13 +70,13 @@ namespace Core
             if (countTouches == 1)
             {
                 for (var i = 0; i < 12; i++)
-                    segments[i].GetComponent<Segment>().ChangeColor(1);
+                    segments[i].ChangeColor(1);
             }
 
             if (countTouches == 2)
             {
                 for (var i = 0; i < 12; i++)
-                    segments[i].GetComponent<Segment>().ChangeColor(2);
+                    segments[i].ChangeColor(2);
             }
             
             if (countTouches == 2) platformMover.ResetConcentration();
@@ -102,13 +107,11 @@ namespace Core
 
             if (platformMover.isLevelMode && patternData.isLast)
             {
-                Debug.Log("Finish");
                 platformMover.FinishLevel(platformMover.gameManager.gameMode.levelMode.level);
             }
 
             for (var i = 0; i < segments.Length; i++)
             {
-                //segments[i].ReturnTouchEffectToPool();
                 segments[i].ReturnSegmentContentToPool();
             }
             
@@ -129,16 +132,14 @@ namespace Core
             transform.position = platformPool.transform.position;
 
             platformPool.ReturnToPool(this);
-            
-            //Destroy(gameObject);
         }
 
         private void BreakDownPlatform()
         {
             for (var i = 0; i < segments.Length; i++)
-                segments[i].gameObject.GetComponent<MeshCollider>().enabled = false;
+                segments[i].MeshCollider.enabled = false;
             
-            GetComponent<Animator>().Play("Break");
+            animator.Play(breakAnimationID);
         }
     }
 }
