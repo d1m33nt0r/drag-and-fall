@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: 0d51ef40d57ffa043a69bd6e5c3afc7d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 949d4e6c0c895cf4982c819a9a3f3e3a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emission:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 40f1f222a78210b4f9040cf09c2ab717, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -48,7 +48,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMask:
-        m_Texture: {fileID: 2800000, guid: 2bb6910895b5f1c469db953c7da7c567, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -97,11 +97,11 @@ Material:
     - _RampSmoothingOtherLights: 0.5
     - _RampThreshold: 0.504
     - _RampThresholdOtherLights: 0.5
-    - _RimMax: 1
+    - _RimMax: 1.26
     - _RimMin: 0.66
-    - _Shadow_HSV_H: 0
-    - _Shadow_HSV_S: 0.33
-    - _Shadow_HSV_V: 1
+    - _Shadow_HSV_H: 37
+    - _Shadow_HSV_S: 0.22
+    - _Shadow_HSV_V: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SpecularRoughnessPBR: 0.134
@@ -122,11 +122,12 @@ Material:
     m_Colors:
     - _Color: {r: 0.7311321, g: 0.86830956, b: 1, a: 1}
     - _DiffuseTint: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
-    - _Emission: {r: 0, g: 0.12321901, b: 1, a: 1}
+    - _Emission: {r: 1, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 1, b: 0.8769696, a: 1}
     - _EmissionMask_SC: {r: 1, g: 1, b: 0, a: 0}
+    - _Emission_SC: {r: 0, g: 0.25, b: 0, a: 0}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 0.5}
+    - _RimColor: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 0.5}
     - _RimDir: {r: 0, g: 0, b: 1, a: 1}
     - _SColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}

@@ -31917,6 +31917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ad7510f9f94d5a9cb91166d64cdb85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dragController: {fileID: 1864669949}
   bonusSoundManager: {fileID: 924091987}
   coinSound: {fileID: 1212064507}
   crystalSound: {fileID: 2001544068}

@@ -7,8 +7,7 @@ namespace Common
         [SerializeField, Range(-1, 1)] private int direction;
         [SerializeField] private float speed;
         [SerializeField] private Axis axis;
-        [SerializeField] private bool bonusRotation;
-        
+
         private void Update()
         {
             switch (axis)

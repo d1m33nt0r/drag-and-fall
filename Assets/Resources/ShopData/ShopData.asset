@@ -39,19 +39,19 @@ MonoBehaviour:
     tubeMaterial: {fileID: 2100000, guid: a5d0426a309b51e478765fd744d7e672, type: 2}
     letSegmentMaterial: {fileID: 2100000, guid: a5d0426a309b51e478765fd744d7e672, type: 2}
     groundSegmentMaterial: {fileID: 2100000, guid: a5d0426a309b51e478765fd744d7e672, type: 2}
-    segment: {fileID: -2432090755550338912, guid: e20251ce7f90f2740bdd33f410721695, type: 3}
-    tube: {fileID: -2432090755550338912, guid: a2cd2a0aa8709574aaa9a76ef8964063, type: 3}
+    segment: {fileID: -2498168843837105131, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
+    tube: {fileID: -2432090755550338912, guid: b508772bf622b6d4f99b4229ecb6da2b, type: 3}
     platformColors:
     - {r: 1, g: 1, b: 1, a: 0}
     - {r: 0.256675, g: 0.4979256, b: 0.5283019, a: 1}
     - {r: 0.36378607, g: 0.6682602, b: 0.7075472, a: 1}
     - {r: 0.5093005, g: 0.9355642, b: 0.990566, a: 1}
-    letSegmentMesh: {fileID: -2432090755550338912, guid: 2cee53d1663954542ab56ea8250c00bb, type: 3}
+    letSegmentMesh: {fileID: 13183689020191964, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
     segmentMaterial: {fileID: 2100000, guid: a5d0426a309b51e478765fd744d7e672, type: 2}
     meshes:
-    - {fileID: -2432090755550338912, guid: c4b599a2c88c3454a93a9aecd5f5eed2, type: 3}
-    - {fileID: -2432090755550338912, guid: 9b5898ba13e514943ae17d05096bde0f, type: 3}
-    - {fileID: -2432090755550338912, guid: 12a79af67988f554c88e6afb9dab7e40, type: 3}
+    - {fileID: 5643087555890222503, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
+    - {fileID: 3713934850428853943, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
+    - {fileID: -3408895284609863541, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
     backgroundParticleSystem: {fileID: 2996258675310267987, guid: 11e2fc4bb6f3ec7498f868f265422e87, type: 3}
     particleSystemPosition: {x: 3.7, y: 101.3, z: 84.1}
   - isBought: 1
@@ -96,7 +96,7 @@ MonoBehaviour:
   - isBought: 1
     priceCoins: 0
     priceCrystals: 0
-    mesh: {fileID: -2432090755550338912, guid: 2cee53d1663954542ab56ea8250c00bb, type: 3}
+    mesh: {fileID: 4711208715938537054, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
     material: {fileID: 2100000, guid: a5d0426a309b51e478765fd744d7e672, type: 2}
   - isBought: 0
     priceCoins: 1

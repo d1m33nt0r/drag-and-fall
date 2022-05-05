@@ -69,7 +69,7 @@ namespace Core
 
         private void Awake()
         {
-            DragController.SwipeEvent += RotateTube;
+            dragController.SwipeEvent += RotateTube;
             Initialize();
             startEulerAngles = transform.rotation.eulerAngles;
             journeyLength = Vector3.Distance(localPositionsOfPlatforms[0], localPositionsOfPlatforms[1]);

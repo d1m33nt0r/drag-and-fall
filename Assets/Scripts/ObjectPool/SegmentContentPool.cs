@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Common;
 using Core;
 using Core.Bonuses;
 using Data.Core.Segments.Content;
@@ -9,6 +10,7 @@ namespace ObjectPool
 {
     public class SegmentContentPool : MonoBehaviour
     {
+        [SerializeField] private DragController dragController;
         [SerializeField] private BonusSoundManager bonusSoundManager;
         [SerializeField] private CoinSound coinSound;
         [SerializeField] private CrystalSound crystalSound;
@@ -57,6 +59,7 @@ namespace ObjectPool
                 instance.GetComponent<Key>().BindAudio(keySound);
                 pool[SegmentContent.Key].Enqueue(instance);
                 instance.gameObject.SetActive(false);
+                dragController.SwipeEvent += instance.GetComponent<PowerUpRotationAligner>().RotateTransform;
             }
         }
         private void InitializeMagnetPool()
@@ -68,6 +71,7 @@ namespace ObjectPool
                 instance.GetComponent<Magnet>().BindAudio(bonusSoundManager);
                 pool[SegmentContent.Magnet].Enqueue(instance);
                 instance.gameObject.SetActive(false);
+                dragController.SwipeEvent += instance.GetComponent<PowerUpRotationAligner>().RotateTransform;
             }
         }
         private void InitializeAccelerationPool()
@@ -79,6 +83,7 @@ namespace ObjectPool
                 instance.GetComponent<Acceleration>().BindAudio(bonusSoundManager);
                 pool[SegmentContent.Acceleration].Enqueue(instance);
                 instance.gameObject.SetActive(false);
+                dragController.SwipeEvent += instance.GetComponent<PowerUpRotationAligner>().RotateTransform;
             }
         }
         private void InitializeShieldPool()
@@ -90,6 +95,7 @@ namespace ObjectPool
                 instance.GetComponent<Shield>().BindAudio(bonusSoundManager);
                 pool[SegmentContent.Shield].Enqueue(instance);
                 instance.gameObject.SetActive(false);
+                dragController.SwipeEvent += instance.GetComponent<PowerUpRotationAligner>().RotateTransform;
             }
         }
         private void InitializeMultiplierPool()
@@ -101,6 +107,7 @@ namespace ObjectPool
                 instance.GetComponent<Multiplier>().BindAudio(bonusSoundManager);
                 pool[SegmentContent.Multiplier].Enqueue(instance);
                 instance.gameObject.SetActive(false);
+                dragController.SwipeEvent += instance.GetComponent<PowerUpRotationAligner>().RotateTransform;
             }
         }
         private void InitializeCrystalPool()
@@ -112,6 +119,7 @@ namespace ObjectPool
                 instance.GetComponent<Crystal>().BindAudio(crystalSound);
                 pool[SegmentContent.Crystal].Enqueue(instance);
                 instance.gameObject.SetActive(false);
+                dragController.SwipeEvent += instance.GetComponent<PowerUpRotationAligner>().RotateTransform;
             }
         }
         private void InitializeCoinPool()
@@ -123,6 +131,7 @@ namespace ObjectPool
                 instance.GetComponent<Coin>().BindAudio(coinSound);
                 pool[SegmentContent.Coin].Enqueue(instance);
                 instance.gameObject.SetActive(false);
+                dragController.SwipeEvent += instance.GetComponent<PowerUpRotationAligner>().RotateTransform;
             }
         }
 
@@ -147,29 +156,36 @@ namespace ObjectPool
                 case SegmentContent.Acceleration:
                     var instance4 = Instantiate(acceleration, Vector3.zero, Quaternion.identity, transform);
                     pool[segmentContent].Enqueue(instance4);
+                    dragController.SwipeEvent += instance4.GetComponent<PowerUpRotationAligner>().RotateTransform;
                     return pool[segmentContent].Dequeue();
                 case SegmentContent.Shield:
                     var instance3 = Instantiate(shield, Vector3.zero, Quaternion.identity, transform);
+                    dragController.SwipeEvent += instance3.GetComponent<PowerUpRotationAligner>().RotateTransform;
                     pool[segmentContent].Enqueue(instance3);
                     return pool[segmentContent].Dequeue();
                 case SegmentContent.Crystal:
                     var instance2 = Instantiate(crystalPrefab, Vector3.zero, Quaternion.identity, transform);
+                    dragController.SwipeEvent += instance2.GetComponent<PowerUpRotationAligner>().RotateTransform;
                     pool[segmentContent].Enqueue(instance2);
                     return pool[segmentContent].Dequeue();
                 case SegmentContent.Coin:
                     var instance = Instantiate(coinPrefab, Vector3.zero, Quaternion.identity, transform);
+                    dragController.SwipeEvent += instance.GetComponent<PowerUpRotationAligner>().RotateTransform;
                     pool[segmentContent].Enqueue(instance);
                     return pool[segmentContent].Dequeue();
                 case SegmentContent.Key:
                     var instance5 = Instantiate(key, Vector3.zero, Quaternion.identity, transform);
+                    dragController.SwipeEvent += instance5.GetComponent<PowerUpRotationAligner>().RotateTransform;
                     pool[segmentContent].Enqueue(instance5);
                     return pool[segmentContent].Dequeue();
                 case SegmentContent.Magnet:
                     var instance6 = Instantiate(magnet, Vector3.zero, Quaternion.identity, transform);
+                    dragController.SwipeEvent += instance6.GetComponent<PowerUpRotationAligner>().RotateTransform;
                     pool[segmentContent].Enqueue(instance6);
                     return pool[segmentContent].Dequeue();
                 case SegmentContent.Multiplier:
                     var instance7 = Instantiate(multiplier, Vector3.zero, Quaternion.identity, transform);
+                    dragController.SwipeEvent += instance7.GetComponent<PowerUpRotationAligner>().RotateTransform;
                     pool[segmentContent].Enqueue(instance7);
                     return pool[segmentContent].Dequeue();
                 default:

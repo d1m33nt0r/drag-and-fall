@@ -8,7 +8,7 @@ namespace Common
     {
         private void Start()
         {
-            DragController.SwipeEvent += CheckSwipe;
+          
         }
 
         private void CheckSwipe(DragController.SwipeType type, float delta)
