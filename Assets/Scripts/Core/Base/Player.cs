@@ -18,8 +18,8 @@ namespace Core
     public class Player : MonoBehaviour
     {
         private const string SEGMENT = "Segment";
-        private const string IDLE = "Idle";
-        private const string BOUNCE = "Bounce";
+        private int IDLE = Animator.StringToHash("Idle");
+        private int BOUNCE = Animator.StringToHash("Bounce");
         private const string BOUNCE_TRIGGER = "BounceTrigger";
 
         private bool isRotation;

@@ -67,7 +67,7 @@ namespace Core
         private bool destroyTubeNeeded = true;
 
 
-        private void Awake()
+        private void Start()
         {
             dragController.SwipeEvent += RotateTube;
             Initialize();
@@ -199,7 +199,6 @@ namespace Core
                     CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
                 else if (isLevelMode && currentPatternData == null)
                 {
-                    currentPatternData = new PatternData(12);
                     CreateNewPlatform(countPlatforms - 1, currentPatternData, true);
                 }
                 else
@@ -220,7 +219,7 @@ namespace Core
                     if (isLevelMode && currentPatternData != null)
                         CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
                     else if (isLevelMode && currentPatternData == null)
-                        CreateNewPlatform(countPlatforms - 1, new PatternData(12), true);
+                        CreateNewPlatform(countPlatforms - 1, currentPatternData, true);
                 }
             }
         }
@@ -277,7 +276,7 @@ namespace Core
             {
                 if (i == 0)
                 {
-                    currentPatternData = new PatternData(12);
+                    //currentPatternData = new PatternData(12);
                 }
                 else
                 {
@@ -292,7 +291,7 @@ namespace Core
 
         private void GenerateStartTutorialPlatform()
         {
-            currentPatternData = new PatternData(12);
+            //currentPatternData = new PatternData(12);
             currentPatternData.segmentsData = new[]
             {
                 new SegmentData {positionIndex = 0, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
@@ -318,7 +317,7 @@ namespace Core
                 {
                     if (isFirstPlatform)
                     {
-                        currentPatternData = new PatternData(12);
+                        currentPatternData = gameManager.gameMode.infinityMode.GetFirstPlatform();
                         isFirstPlatform = false;
                     }
                     else
@@ -344,11 +343,13 @@ namespace Core
             platform.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles);
             platform.transform.SetParent(transform);
                 //Instantiate(platformPrefab, localPositionsOfPlatforms[_platformIndex], Quaternion.Euler(transform.rotation.eulerAngles), transform);
-            platform.Initialize(patternData);
-            
+                if (patternData != null)
+                {
+                    platform.Initialize(patternData);
+                    patternData.ReturnToPool();
+                }
             //AlignRotation(platformInstance);
             platforms[_platformIndex] = platform;
-            
             if (hide) platforms[_platformIndex].gameObject.SetActive(false);
         }
 

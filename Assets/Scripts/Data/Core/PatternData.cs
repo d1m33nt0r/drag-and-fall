@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Data.Core.Segments;
 using Data.Core.Segments.Content;
 
@@ -15,19 +16,31 @@ namespace Data.Core
         public bool isLast;
         public float segmentRotationBias;
         public SegmentData[] segmentsData;
+        private Queue<PatternData> patternDataPool;
         
-        public PatternData(int _segmentsAmount)
+        public PatternData(int _segmentsAmount, Queue<PatternData> patternDataPool)
         {
             segmentsData = new SegmentData[_segmentsAmount];
+            this.patternDataPool = patternDataPool;
+        }
+
+        public void ReturnToPool()
+        {
+            isLast = default;
+            isRandom = default;
+            maxHoleAmount = default;
+            maxLetAmount = default;
+            minHoleAmount = default;
+            minLetAmount = default;
+            segmentRotationBias = default;
             
-            for (var i = 0; i < _segmentsAmount; i++)
+            for (var i = 0; i < segmentsData.Length; i++)
             {
-                segmentsData[i] = new SegmentData
-                {
-                    segmentContent = SegmentContent.None,
-                    segmentType = SegmentType.Ground
-                };
+                segmentsData[i].segmentContent = SegmentContent.None;
+                segmentsData[i].segmentType = SegmentType.Ground;
             }
+            
+            patternDataPool.Enqueue(this);
         }
     }
 }

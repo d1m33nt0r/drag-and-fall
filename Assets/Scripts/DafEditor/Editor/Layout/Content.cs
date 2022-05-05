@@ -98,14 +98,14 @@ namespace DafEditor.Editor.Layout
 
             GUILayout.Label(name, EditorStyles.HeaderOfBlockInLeftSideBar());
 
-            if (GUILayout.Button("Add new pattern"))
+            /*if (GUILayout.Button("Add new pattern"))
             {
                 PatternDatas.Add(new PatternData(12));
                 if (PatternDatas.Count > 1) PatternDatas[PatternDatas.Count - 2].isLast = false;
                 PatternDatas[PatternDatas.Count - 1].isLast = true;
                 SetPatterns(PatternDatas, name);
                 EditorUtility.SetDirty(gameEditorWindow.currentLevelData);
-            }
+            }*/
 
             GUILayout.EndArea();
         }

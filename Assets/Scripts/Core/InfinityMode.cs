@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Data;
 using Data.Core;
 using Data.Core.Segments;
 using Data.Core.Segments.Content;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Core
 {
@@ -11,6 +13,8 @@ namespace Core
     {
         public InfinityData infinityData;
 
+        public Queue<PatternData> patternDataPool = new Queue<PatternData>();
+        
         private int randPlatformsAmount;
         private bool randIsInitialized;
         private int[] shieldPositions;
@@ -25,6 +29,19 @@ namespace Core
         private AvailablePositions powerUpsAvailablePositions = new AvailablePositions();
         private AvailablePositions currenciesAvailablePositions = new AvailablePositions();
 
+        private void Awake()
+        {
+            for (var i = 0; i < 15; i++)
+            {
+                patternDataPool.Enqueue(new PatternData(12, patternDataPool));
+            }
+        }
+
+        public PatternData GetFirstPlatform()
+        {
+            return new PatternData(12, patternDataPool);
+        }
+        
         public void ResetPointers()
         {
             setPointer = 0;
@@ -55,7 +72,7 @@ namespace Core
                 
                 if (randPlatformsAmount > patternPointer + 1)
                 {
-                    var patternData1 = new PatternData(12);
+                    var patternData1 = patternDataPool.Dequeue();
                     patternData1.isRandom = true;
                     patternData1.minHoleAmount = infinityData.patternSets[setPointer].minHoleAmount;
                     patternData1.maxHoleAmount = infinityData.patternSets[setPointer].maxHoleAmount;
@@ -71,7 +88,7 @@ namespace Core
 
                 if (infinityData.patternSets.Count > setPointer + 1)
                 {
-                    var patternData2 = new PatternData(12);
+                    var patternData2 = patternDataPool.Dequeue();
                     patternData2.isRandom = true;
                     patternData2.minHoleAmount = infinityData.patternSets[setPointer].minHoleAmount;
                     patternData2.maxHoleAmount = infinityData.patternSets[setPointer].maxHoleAmount;
@@ -89,7 +106,7 @@ namespace Core
                 }
                 else
                 {
-                    var patternData3 = new PatternData(12);
+                    var patternData3 = patternDataPool.Dequeue();
                     patternData3.isRandom = true;
                     patternData3.minHoleAmount = infinityData.patternSets[setPointer].minHoleAmount;
                     patternData3.maxHoleAmount = infinityData.patternSets[setPointer].maxHoleAmount;
@@ -353,14 +370,7 @@ namespace Core
             for (var j = 0; j < availablePositions.GetAvailablePositionCount(); j++)
             {
                 var randomPosition = availablePositions.GetRandomPositionIndex();
-                var segmentData = new SegmentData
-                {
-                    positionIndex = randomPosition,
-                    segmentContent = SegmentContent.None,
-                    segmentType = SegmentType.Ground
-                };
-                
-                patternData.segmentsData[randomPosition] = segmentData;
+                patternData.segmentsData[randomPosition].segmentType = SegmentType.Ground;
             }
         }
 
@@ -371,13 +381,7 @@ namespace Core
             for (var j = 0; j < randomAmount; j++)
             {
                 var randomPosition = availablePositions.GetRandomPositionIndex();
-                var segmentData = new SegmentData
-                {
-                    positionIndex = randomPosition,
-                    segmentContent = SegmentContent.None,
-                    segmentType = SegmentType.Let
-                };
-                patternData.segmentsData[randomPosition] = segmentData;
+                patternData.segmentsData[randomPosition].segmentType = SegmentType.Let;
             }
         }
 
@@ -388,13 +392,7 @@ namespace Core
             for (var j = 0; j < randomAmount; j++)
             {
                 var randomPosition = availablePositions.GetRandomPositionIndex();
-                var segmentData = new SegmentData
-                {
-                    positionIndex = randomPosition,
-                    segmentContent = SegmentContent.None,
-                    segmentType = SegmentType.Hole
-                };
-                patternData.segmentsData[randomPosition] = segmentData;
+                patternData.segmentsData[randomPosition].segmentType = SegmentType.Hole;
             }
         }
     }
