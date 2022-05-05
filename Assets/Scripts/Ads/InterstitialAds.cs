@@ -8,24 +8,21 @@ namespace Ads
     {
         private const string adUnitID = "ca-app-pub-3940256099942544/1033173712";
         private InterstitialAd interstitial;
+        private AdRequest request;
 
-        public void RequestInterstitial()
+        private void Awake()
         {
-            if (interstitial != null)
-            {
-                interstitial.Destroy();
-            }
-            
             interstitial = new InterstitialAd(adUnitID);
-            
+            request = new AdRequest.Builder().Build();
             interstitial.OnAdLoaded += HandleOnAdLoaded;
             interstitial.OnAdFailedToLoad += HandleOnAdFailedToLoad;
             interstitial.OnAdOpening += HandleOnAdOpened;
             interstitial.OnAdClosed += HandleOnAdClosed;
+        }
 
-            var request = new AdRequest.Builder().Build();
+        public void RequestInterstitial()
+        {
             interstitial.LoadAd(request);
-            
         }
 
         public void HandleOnAdLoaded(object sender, EventArgs args)
@@ -45,7 +42,6 @@ namespace Ads
 
         public void HandleOnAdClosed(object sender, EventArgs args)
         {
-            interstitial.Destroy();
             RequestInterstitial();
         }
         

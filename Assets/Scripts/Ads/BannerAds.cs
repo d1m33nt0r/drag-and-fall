@@ -9,17 +9,21 @@ namespace Ads
         private const string AD_UNIT_ID = "ca-app-pub-3940256099942544/6300978111";
         
         private BannerView bannerView;
-
-        public void RequestBanner()
+        private AdRequest request;
+        
+        private void Awake()
         {
             bannerView = new BannerView(AD_UNIT_ID, AdSize.Banner, AdPosition.Bottom);
-            var request = new AdRequest.Builder().Build();
-            bannerView.LoadAd(request);
-            
+            request = new AdRequest.Builder().Build();
             bannerView.OnAdLoaded += HandleOnAdLoaded;
             bannerView.OnAdFailedToLoad += HandleOnAdFailedToLoad;
             bannerView.OnAdOpening += HandleOnAdOpened;
             bannerView.OnAdClosed += HandleOnAdClosed;
+        }
+
+        public void RequestBanner()
+        {
+            bannerView.LoadAd(request);
         }
         
         public void HandleOnAdLoaded(object sender, EventArgs args)
