@@ -1,4 +1,5 @@
-﻿using Core.Bonuses;
+﻿using System;
+using Core.Bonuses;
 using UnityEngine;
 
 namespace Core
@@ -6,6 +7,12 @@ namespace Core
     public class MagnetPlayer : MonoBehaviour
     {
         private const string SEGMENT_CONTENT = "SegmentContent";
+        private Transform mtransform;
+
+        private void Start()
+        {
+            mtransform = GetComponent<Transform>();
+        }
 
         public void OnTriggerEnter(Collider other)
         {
@@ -13,44 +20,43 @@ namespace Core
 
             if (other.TryGetComponent<Coin>(out var coin))
             {
-                coin.transform.SetParent(null);
-                coin.MoveToTargetTransform(transform);
+                coin.MoveToTargetTransform(mtransform);
+                return;
             }
 
             if (other.TryGetComponent<Crystal>(out var crystal))
             {
-                crystal.transform.SetParent(null);
-                crystal.MoveToTargetTransform(transform);
+                crystal.MoveToTargetTransform(mtransform);
+                return;
             }
 
             if (other.TryGetComponent<Acceleration>(out var acceleration))
             {
-                acceleration.transform.SetParent(null);
-                acceleration.MoveToTargetTransform(transform);
+                acceleration.MoveToTargetTransform(mtransform);
+                return;
             }
             
             if (other.TryGetComponent<Key>(out var key))
             {
-                key.transform.SetParent(null);
-                key.MoveToTargetTransform(transform);
+                key.MoveToTargetTransform(mtransform);
+                return;
             }
             
             if (other.TryGetComponent<Magnet>(out var magnet))
             {
-                magnet.transform.SetParent(null);
-                magnet.MoveToTargetTransform(transform);
+                magnet.MoveToTargetTransform(mtransform);
+                return;
             }
             
             if (other.TryGetComponent<Multiplier>(out var multiplier))
             {
-                multiplier.transform.SetParent(null);
-                multiplier.MoveToTargetTransform(transform);
+                multiplier.MoveToTargetTransform(mtransform);
+                return;
             }
             
             if (other.TryGetComponent<Shield>(out var shield))
             {
-                shield.transform.SetParent(null);
-                shield.MoveToTargetTransform(transform);
+                shield.MoveToTargetTransform(mtransform);
             }
         }
     }

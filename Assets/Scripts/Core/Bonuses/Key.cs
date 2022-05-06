@@ -55,7 +55,9 @@ namespace Core.Bonuses
         
         public void MoveToTargetTransform(Transform _transform)
         {
-            startMarker = transform;
+            Transform transform1;
+            (transform1 = transform).SetParent(null);
+            startMarker = transform1;
             endMarker = _transform;
             startTime = Time.time;
             journeyLength = Vector3.Distance(startMarker.position, endMarker.position);

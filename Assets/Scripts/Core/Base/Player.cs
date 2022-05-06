@@ -55,6 +55,7 @@ namespace Core
         
         private bool triggerStay;
 
+        private Transform playerTransform;
         private MeshFilter meshFilter;
         private MeshRenderer meshRenderer;
 
@@ -101,7 +102,7 @@ namespace Core
             if (!isRotation) return;
             //var distCovered = (Time.time - startTime) * 30;
             //var fractionOfJourney = distCovered / journeyLength;
-            transform.rotation = Quaternion.Lerp(transform.rotation, target, timeCount * speedRotation);
+            playerTransform.rotation = Quaternion.Lerp(playerTransform.rotation, target, timeCount * speedRotation);
             timeCount = timeCount + Time.deltaTime;
             //if (fractionOfJourney >= 1) isRotation = false;
         }
@@ -109,32 +110,36 @@ namespace Core
         public void SpawnBonusCollectingEffect()
         {
             var effect = effectsPool.GetBonusCollectingEffect();
-            effect.transform.SetParent(null);
-            effect.transform.position = transform.position;
+            var effectTransform = effect.transform;
+            effectTransform.SetParent(platformMover.transform);
+            effectTransform.position = playerTransform.position;
             effect.GetComponent<ParticleSystem>().Play();
         }
         
         public void SpawnCoinCollectingEffect()
         {
             var effect = effectsPool.GetCoinCollectingEffect();
-            effect.transform.SetParent(null);
-            effect.transform.position = transform.position;
+            var effectTransform = effect.transform;
+            effectTransform.SetParent(platformMover.transform);
+            effectTransform.position = playerTransform.position;
             effect.GetComponent<ParticleSystem>().Play();
         }
         
         public void SpawnCrystalCollectingEffect()
         {
             var effect = effectsPool.GetCrystalCollectingEffect();
-            effect.transform.SetParent(null);
-            effect.transform.position = transform.position;
+            var effectTransform = effect.transform;
+            effectTransform.SetParent(platformMover.transform);
+            effectTransform.position = playerTransform.position;
             effect.GetComponent<ParticleSystem>().Play();
         }
         
         public void SpawnKeyCollectingEffect()
         {
             var effect = effectsPool.GetKeyCollectingEffect();
-            effect.transform.SetParent(null);
-            effect.transform.position = transform.position;
+            var effectTransform = effect.transform;
+            effectTransform.SetParent(platformMover.transform);
+            effectTransform.position = playerTransform.position;
             effect.GetComponent<ParticleSystem>().Play();
         }
 
@@ -178,6 +183,7 @@ namespace Core
 
         private void Awake()
         {
+            playerTransform = GetComponent<Transform>();
             meshFilter = GetComponent<MeshFilter>();
             meshRenderer = GetComponent<MeshRenderer>();
         }
@@ -209,14 +215,14 @@ namespace Core
         public void TryOnTrailSkin(GameObject _trail)
         {
             Destroy(trail);
-            trail = Instantiate(_trail, transform.position, Quaternion.identity, transform);
+            trail = Instantiate(_trail, playerTransform.position, Quaternion.identity, playerTransform);
         }
 
         public void TryOnFallingTrailSkin(GameObject _fallingTrail)
         {
             Destroy(fallingTrail);
             fallingTrail = Instantiate(_fallingTrail, new Vector3(0, 0.15f, -0.7f), Quaternion.identity,
-                transform);
+                playerTransform);
         }
         
         public void PlayIdleAnim()
@@ -261,7 +267,7 @@ namespace Core
         {
             if (triggerStay) return;
 
-            var position = transform.position;
+            var position = playerTransform.position;
             var centerRay = new Ray(position, Vector3.down);
 
             if (Physics.Raycast(centerRay, out var centerHit, 0.105f))
@@ -297,20 +303,20 @@ namespace Core
                             SetDefaultState();
                             if (gameManager.gameStarted) segment.IncreasePlatformTouchCounter();
                             freeSpeedIncrease.ResetSpeed();
-                            var instance = effectsPool.GetTouchEffect();
                             var parent = centerHit.collider.transform.parent;
-                            parent.GetComponent<Platform>().touchEffect = instance;
-                            instance.transform.position =
-                                new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z);
-                            instance.transform.rotation = Quaternion.Euler(-90, 0, 0);
-                            instance.transform.SetParent(segment.transform);
+                            var platform = parent.GetComponent<Platform>();
+                            var instance = effectsPool.GetTouchEffect();
+                            platform.touchEffect = instance;
+                            var instanceTransform = instance.transform;
+                            instanceTransform.position = new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z);
+                            instanceTransform.rotation = Quaternion.Euler(-90, 0, 0);
+                            instanceTransform.SetParent(segment.transform);
                             playerSounds.PlayTouchSound();
 
                             var particleSystems = effectsPool.GetPlayerParticles();
-                            parent.GetComponent<Platform>().playerParticles = particleSystems;
+                            platform.playerParticles = particleSystems;
                             var transform1 = particleSystems.transform;
-                            transform1.position = new Vector3(centerHit.point.x,
-                                centerHit.point.y + 0.01f, centerHit.point.z);
+                            transform1.position = new Vector3(centerHit.point.x, centerHit.point.y + 0.01f, centerHit.point.z);
                             transform1.rotation = Quaternion.identity;
                             particleSystems.transform.SetParent(segment.transform);
                             platformSound.ResetPitch();
@@ -364,6 +370,7 @@ namespace Core
 
         private void OnTriggerEnter(Collider other)
         {
+            if (!triggerStay) return;
             if (other.CompareTag(BOUNCE_TRIGGER)) SetTriggerStay(false);
         }
 

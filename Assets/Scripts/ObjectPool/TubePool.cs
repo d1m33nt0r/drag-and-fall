@@ -11,12 +11,12 @@ namespace ObjectPool
         [SerializeField] private int poolSize;
         [SerializeField] private TubeMover tubeMover;
         
-        private Queue<GameObject> tubePool = new Queue<GameObject>();
+        private Queue<Transform> tubePool = new Queue<Transform>();
         
         public void Start()
         {
             for (var i = 0; i < poolSize; i++)
-                tubePool.Enqueue(InstantiateNewPrefab());
+                tubePool.Enqueue(InstantiateNewPrefab().transform);
         }
 
         private GameObject InstantiateNewPrefab()
@@ -27,7 +27,7 @@ namespace ObjectPool
             return instance;
         }
 
-        public GameObject GetTubePart()
+        public Transform GetTubePart()
         {
             if (tubePool.Count > 0)
             {
@@ -38,7 +38,7 @@ namespace ObjectPool
 
             var instance2 = InstantiateNewPrefab();
             instance2.SetActive(true);
-            return instance2;
+            return instance2.transform;
         }
 
         public void ChangeTheme()
@@ -49,11 +49,11 @@ namespace ObjectPool
             }
         }
 
-        public void ReturnToPool(GameObject obj)
+        public void ReturnToPool(Transform obj)
         {
             tubePool.Enqueue(obj);
             obj.transform.SetParent(transform);
-            obj.SetActive(false);
+            obj.gameObject.SetActive(false);
         }
     }
 }

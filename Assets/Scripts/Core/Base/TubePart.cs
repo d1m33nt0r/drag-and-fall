@@ -8,9 +8,19 @@ namespace Core
     {
         private TubeMover tubeMover;
         private TubePool tubePool;
-        
+        private Transform mtransform;
+        private MeshRenderer meshRenderer;
+        private MeshFilter meshFilter;
+
+        private void Awake()
+        {
+            meshFilter = GetComponent<MeshFilter>();
+            meshRenderer = GetComponent<MeshRenderer>();
+        }
+
         public void Initialize(TubeMover _tubeMover, TubePool tubePool)
         {
+            mtransform = GetComponent<Transform>();
             tubeMover = _tubeMover;
             this.tubePool = tubePool;
             ChangeTheme();
@@ -19,20 +29,20 @@ namespace Core
         public void TryOnSkin(EnvironmentSkinData _environmentSkinData)
         {
             RenderSettings.skybox = _environmentSkinData.skybox;
-            GetComponent<MeshRenderer>().material = _environmentSkinData.tubeMaterial;
-            GetComponent<MeshFilter>().mesh = _environmentSkinData.tube;
+            meshRenderer.material = _environmentSkinData.tubeMaterial;
+            meshFilter.mesh = _environmentSkinData.tube;
         }
         
         public void ChangeTheme()
         {
             RenderSettings.skybox = tubeMover.platformMover.visualController.GetSkyboxMaterial();
-            GetComponent<MeshRenderer>().material = tubeMover.platformMover.visualController.GetTubeMaterial();
-            GetComponent<MeshFilter>().mesh = tubeMover.platformMover.visualController.GetTubeMesh();
+            meshRenderer.material = tubeMover.platformMover.visualController.GetTubeMaterial();
+            meshFilter.mesh = tubeMover.platformMover.visualController.GetTubeMesh();
         }
 
         public void ReturnToPool()
         {
-            tubePool.ReturnToPool(gameObject);
+            tubePool.ReturnToPool(mtransform);
         }
     }
 }

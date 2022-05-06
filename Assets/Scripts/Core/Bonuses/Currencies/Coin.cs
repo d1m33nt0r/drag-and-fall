@@ -43,8 +43,9 @@ namespace Core
         {
             if (other.CompareTag(Constants.Tags.PLAYER))
             {
-                other.GetComponent<Player>().SpawnCoinCollectingEffect();
-                other.GetComponent<Player>().CollectCoin(count);
+                var player = other.GetComponent<Player>();
+                player.SpawnCoinCollectingEffect();
+                player.CollectCoin(count);
                 coinSound.Play();
                 SetMovingFalse();
                 segmentContentPool.ReturnObjectToPool(SegmentContent.Coin, gameObject);
@@ -53,7 +54,9 @@ namespace Core
         
         public void MoveToTargetTransform(Transform _transform)
         {
-            startMarker = transform;
+            Transform transform1;
+            (transform1 = transform).SetParent(_transform);
+            startMarker = transform1;
             endMarker = _transform;
             startTime = Time.time;
             journeyLength = Vector3.Distance(startMarker.position, endMarker.position);

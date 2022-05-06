@@ -81,5 +81,40 @@
                 }
             }
         }
+        
+        public class MultiplierLevel
+        {
+            private static readonly string[] values = 
+            {
+                "x2",
+                "x4",
+                "x8",
+                "x16",
+                "x32",
+                "x64",
+                "x128",
+                "x256",
+                "x512",
+                "x1024",
+            };
+
+            public static string GetString(int value)
+            {
+                switch (value)
+                {
+                    case 2: return values[0];
+                    case 4: return values[1];
+                    case 8: return values[2];
+                    case 16: return values[3];
+                    case 32: return values[4];
+                    case 64: return values[5];
+                    case 128: return values[6];
+                    case 256: return values[7];
+                    case 512: return values[8];
+                    case 1024: return values[9];
+                    default: return values[0];
+                }
+            }
+        }
     }
 }
