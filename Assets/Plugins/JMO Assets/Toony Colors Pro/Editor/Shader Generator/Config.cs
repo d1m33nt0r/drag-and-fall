@@ -1,5 +1,5 @@
 // Toony Colors Pro+Mobile 2
-// (c) 2014-2021 Jean Moreno
+// (c) 2014-2022 Jean Moreno
 
 #define WRITE_UNCOMPRESSED_SERIALIZED_DATA
 
@@ -65,7 +65,7 @@ namespace ToonyColorsPro
 		internal class Config
 		{
 #pragma warning disable 414
-			[Serialization.SerializeAs("ver")] string tcp2version = ShaderGenerator2.TCP2_VERSION;
+			[Serialization.SerializeAs("ver")] string tcp2version { get { return ShaderGenerator2.TCP2_VERSION; } }
 			[Serialization.SerializeAs("unity")] string unityVersion { get { return Application.unityVersion; } }
 #pragma warning restore 414
 
@@ -85,6 +85,10 @@ namespace ToonyColorsPro
 			[Serialization.SerializeAs("flags_extra")] internal Dictionary<string, List<string>> FlagsExtra = new Dictionary<string, List<string>>();
 			[Serialization.SerializeAs("keywords")] internal Dictionary<string, string> Keywords = new Dictionary<string, string>();
 			internal bool isModifiedExternally = false;
+			internal bool isTerrainShader
+			{
+				get { return this.Features.Contains("TERRAIN_SHADER"); }
+			}
 
 			// UI list of Shader Properties
 			struct ShaderPropertyGroup
@@ -1502,6 +1506,9 @@ namespace ToonyColorsPro
 #endif
 #if UNITY_2019_3_OR_NEWER
 				Utils.AddIfMissing(this.Features, "UNITY_2019_3");
+#endif
+#if UNITY_2019_4_OR_NEWER
+				Utils.AddIfMissing(this.Features, "UNITY_2019_4");
 #endif
 #if UNITY_2020_1_OR_NEWER
 				Utils.AddIfMissing(this.Features, "UNITY_2020_1");

@@ -1,5 +1,5 @@
 ﻿// Toony Colors Pro 2
-// (c) 2014-2021 Jean Moreno
+// (c) 2014-2022 Jean Moreno
 
 using System;
 using System.Collections.Generic;
@@ -26,6 +26,7 @@ namespace ToonyColorsPro
 				public const string worldPosUVLabel = "World Position";
 				public const string triplanarUVLabel = "Triplanar";
 				public const string shaderPropertyUVLabel = "Other Shader Property";
+				public const string customMaterialPropertyUVLabel = "Custom Material Property";
 
 				public static readonly string[] DefaultTextureValues =
 				{
@@ -44,7 +45,8 @@ namespace ToonyColorsPro
 					screenSpaceUVLabel,
 					worldPosUVLabel,
 					triplanarUVLabel,
-					shaderPropertyUVLabel
+					shaderPropertyUVLabel,
+					customMaterialPropertyUVLabel
 				};
 
 				public static readonly string[] UvChannelOptionsVertex =
@@ -55,7 +57,8 @@ namespace ToonyColorsPro
 					"texcoord3",
 					worldPosUVLabel,
 					triplanarUVLabel,
-					shaderPropertyUVLabel
+					shaderPropertyUVLabel,
+					customMaterialPropertyUVLabel
 				};
 
 				public static string[] LockedUvChannelOptions =
@@ -106,7 +109,7 @@ namespace ToonyColorsPro
 					}
 				}
 
-				internal static Color OrangeColor { get { return EditorGUIUtility.isProSkin ? new Color32(250, 130, 0, 255) : new Color32(220, 100, 0, 255); } }
+				internal static Color OrangeColor { get { return EditorGUIUtility.isProSkin ? new Color32(250, 130, 0, 255) : new Color32(200, 100, 20, 255); } }
 
 				static GUIStyle _OrangeBoldLabel;
 				internal static GUIStyle OrangeBoldLabel
@@ -893,7 +896,12 @@ namespace ToonyColorsPro
 
 			public static bool ButtonPopup(string label)
 			{
-				return GUILayout.Button(label, Styles.ShurikenPopup, GUILayout.MinWidth(248), GUILayout.MinHeight(Styles.shurikenLineHeight));
+				return ButtonPopup(TCP2_GUI.TempContent(label));
+			}
+			
+			public static bool ButtonPopup(GUIContent content)
+			{
+				return GUILayout.Button(content, Styles.ShurikenPopup, GUILayout.MinWidth(248), GUILayout.MinHeight(Styles.shurikenLineHeight));
 			}
 			public static int IntField(int value)
 			{

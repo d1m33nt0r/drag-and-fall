@@ -180,6 +180,7 @@ namespace ToonyColorsPro
 			{
 				VertexColors,
 				NoTile_Sampling,
+				NoTile_Sampling_Vertex,
 				Triplanar_Sampling,
 				Triplanar_Sampling_Vertex,
 				Triplanar_Sampling_Global,
@@ -349,7 +350,7 @@ namespace ToonyColorsPro
 			public VariableType Type { get; private set; }
 			public ProgramType Program = ProgramType.Undefined;
 			public bool IsUsedInLightingFunction = false;   //TODO same process for IsUsedInVertexFunction for vert/frag shaders and automatic float4 texcoordN packing
-			public List<int> usedImplementationsForCustomCode = new List<int>();
+			readonly List<int> usedImplementationsForCustomCode = new List<int>();
 
 			// Material Layers
 			[Serialization.SerializeAs("isClone")] internal bool isLayerClone = false;
@@ -361,7 +362,7 @@ namespace ToonyColorsPro
 			int passBitmask;    //bitmask that determines in which passes the shader property is used
 			Implementation[] defaultImplementations;
 			public bool expanded;
-			public List<int> implementationsExpandedStates = new List<int>();
+			readonly List<int> implementationsExpandedStates = new List<int>();
 			string helpMessage;
 			string displayName = null;
 			public string DisplayName
@@ -420,6 +421,7 @@ namespace ToonyColorsPro
 				clone.isLayerClone = true;
 				clone.Name = this.Name + "_" + materialLayer.uid;
 				clone.Type = this.Type;
+				clone.passBitmask = this.passBitmask;
 				clone.implementations = new List<Implementation>();
 				clone.SetDefaultImplementations(this.defaultImplementations);
 				clone.implementations.Clear();
@@ -477,6 +479,14 @@ namespace ToonyColorsPro
 					if (imp_ct != null && imp_ct.LinkedCustomMaterialProperty == ct)
 					{
 						imp_ct.LinkedCustomMaterialProperty = null;
+					}
+
+					var imp_mp_tex = imp as Imp_MaterialProperty_Texture;
+					if (imp_mp_tex != null
+					    && imp_mp_tex.UvSource == ShaderProperty.Imp_MaterialProperty_Texture.UvSourceType.CustomMaterialProperty
+					    && imp_mp_tex.LinkedCustomMaterialProperty == ct)
+					{
+						imp_mp_tex.LinkedCustomMaterialProperty = null;
 					}
 				}
 
@@ -733,7 +743,7 @@ namespace ToonyColorsPro
 			public string PrintVariableDeclareOutsideCBuffer(string indent)
 			{
 				string output = PrintVariableDeclareOutsideCBuffer_Internal(indent);
-				output += CallMethodWithCloneSuffixForEachLayer((sp) => string.Format("\n{0}{1}", indent, sp.PrintVariableDeclareOutsideCBuffer_Internal(indent)));
+				output += CallMethodWithCloneSuffixForEachLayer((sp) => string.Format("\n{0}", sp.PrintVariableDeclareOutsideCBuffer_Internal(indent)));
 				return output;
 			}
 			
@@ -905,6 +915,14 @@ namespace ToonyColorsPro
 					features.AddRange(imp.NeededFeaturesExtra());
 				}
 
+				if (clonedShaderProperties.Count > 0)
+				{
+					foreach (ShaderProperty clonedShaderProperty in clonedShaderProperties.Values)
+					{
+						features.AddRange(clonedShaderProperty.NeededFeatures());
+					}
+				}
+
 				return features.ToArray();
 			}
 
@@ -949,6 +967,7 @@ namespace ToonyColorsPro
 					}
 
 					case OptionFeatures.NoTile_Sampling: return new[] { "NOTILE_SAMPLING" };
+					case OptionFeatures.NoTile_Sampling_Vertex: return new[] { "NOTILE_SAMPLING_VERTEX" };
 					case OptionFeatures.Triplanar_Sampling: return new[] { "TRIPLANAR_SAMPLING" };
 					case OptionFeatures.Triplanar_Sampling_Global: return new[] { "TRIPLANAR_SAMPLING_GLOBAL" };
 					case OptionFeatures.Triplanar_Sampling_Local: return new[] { "TRIPLANAR_SAMPLING_LOCAL" };
@@ -978,6 +997,7 @@ namespace ToonyColorsPro
 					"USE_VERTEX_COLORS_FRAG",
 					"USE_VERTEX_COLORS_VERT",
 					"NOTILE_SAMPLING",
+					"NOTILE_SAMPLING_VERTEX",
 					"USE_HSV_FULL",
 					"USE_HSV_GRAYSCALE",
 					"USE_HSV_COLORIZE",
@@ -1592,9 +1612,16 @@ namespace ToonyColorsPro
 					}
 
 					var impMpTex = imp as Imp_MaterialProperty_Texture;
-					if (impMpTex != null && impMpTex.UvSource == Imp_MaterialProperty_Texture.UvSourceType.OtherShaderProperty)
+					if (impMpTex != null)
 					{
-						impMpTex.TryToFindLinkedShaderProperty();
+						if (impMpTex.UvSource == Imp_MaterialProperty_Texture.UvSourceType.OtherShaderProperty)
+						{
+							impMpTex.TryToFindLinkedShaderProperty();
+						}
+						else if (impMpTex.UvSource == Imp_MaterialProperty_Texture.UvSourceType.CustomMaterialProperty)
+						{
+							impMpTex.TryToFindLinkedCustomMaterialProperty();
+						}
 					}
 
 					var impCC = imp as Imp_CustomCode;
@@ -2238,6 +2265,7 @@ namespace ToonyColorsPro
 							UvChannel = GetAssociatedDataInt(associatedData, "uv_channel", 0),
 							UseTilingOffset = GetAssociatedDataBool(associatedData, "tiling_offset", false),
 							GlobalTilingOffset = GetAssociatedDataBool(associatedData, "global", false),
+							ScaleByTexelSize = GetAssociatedDataBool(associatedData, "scale_texel", false),
 							UseScrolling = GetAssociatedDataBool(associatedData, "scrolling", false),
 							GlobalScrolling = GetAssociatedDataBool(associatedData, "global_scrolling", false),
 							RandomOffset = GetAssociatedDataBool(associatedData, "random_offset", false),
@@ -2245,7 +2273,11 @@ namespace ToonyColorsPro
 							MaterialDrawers = GetAssociatedDataString(associatedData, "drawer", ""),
 							IsUvLocked = GetAssociatedDataBool(associatedData, "locked_uv", false),
 							ChannelsCount = VariableTypeToChannelsCount(shaderProperty.Type),
-							TilingOffsetVariable = GetAssociatedDataString(associatedData, "tiling_offset_var", "")
+							TilingOffsetVariable = GetAssociatedDataString(associatedData, "tiling_offset_var", ""),
+							UVTriplanarScale = GetAssociatedDataFloat(associatedData, "triplanar_scale", 1.0f)
+#if UNITY_2019_4_OR_NEWER
+							, SeparateSamplerName = GetAssociatedDataString(associatedData, "sampler", null)
+#endif
 						};
 
 						var channels = GetAssociatedDataString(associatedData, "channels", null);
@@ -2523,11 +2555,23 @@ namespace ToonyColorsPro
 
 					// - specific to some implementations
 					var imp_mp_texture = imp as Imp_MaterialProperty_Texture;
-					if (imp_mp_texture != null && imp_mp_texture.IsUvLocked)
+					if (imp_mp_texture != null)
 					{
-						// UVs are calculated in the shader, meaning that the property should be sampled when it is used rather than at the beginning of the vert or frag function
-						shaderProperty.deferredSampling = true;
-						shaderProperty.preventReference = "(sampled elsewhere in code)";
+						if (imp_mp_texture.IsUvLocked)
+						{
+							// UVs are calculated in the shader, meaning that the property should be sampled when it is used rather than at the beginning of the vert or frag function
+							shaderProperty.deferredSampling = true;
+							shaderProperty.preventReference = "(sampled elsewhere in code)";
+						}
+						
+						if (!string.IsNullOrEmpty(imp_mp_texture.TilingOffsetVariable))
+						{
+							imp_mp_texture.TilingOffsetVariableLabel = imp_mp_texture.TilingOffsetVariable;
+						}
+
+#if UNITY_2019_4_OR_NEWER
+						imp_mp_texture.SamplerGroup = GetAssociatedDataInt(associatedData, "sampler_group", 0);
+#endif
 					}
 
 					var imp_mp = imp as Imp_MaterialProperty;
@@ -2539,6 +2583,8 @@ namespace ToonyColorsPro
 						{
 							(imp as Imp_MaterialProperty).PropertyName = propertyName;
 						}
+						
+						(imp as Imp_MaterialProperty).PropertyNameLocked = GetAssociatedDataBool(associatedData, "variable_locked", false);
 					}
 				}
 
