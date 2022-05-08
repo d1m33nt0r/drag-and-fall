@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ namespace Core
         [SerializeField] private Image x2Image;
         [SerializeField] private Color inactiveColor;
         [SerializeField] private Color activeColor;
-        [SerializeField] private Text text;
+        [SerializeField] private TextMeshProUGUI text;
         [SerializeField] private Concentration concentration;
         
         public void Start()

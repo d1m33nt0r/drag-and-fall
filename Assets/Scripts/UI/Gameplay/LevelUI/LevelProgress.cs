@@ -1,5 +1,6 @@
 ﻿using Core;
 using Data.Core;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ namespace UI
     {
         [SerializeField] private Slider slider;
         [SerializeField] private PlatformMover platformMover;
-        [SerializeField] private Text level;
+        [SerializeField] private TextMeshProUGUI level;
         
         public void Initialize(LevelData levelData)
         {

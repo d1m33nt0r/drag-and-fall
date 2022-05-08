@@ -4,6 +4,7 @@ using Common;
 using Core;
 using Core.Bonuses;
 using ObjectPool;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ namespace UI
 {
     public class GainScore : MonoBehaviour
     {
-        private Text text;
+        private TextMeshProUGUI text;
         private RectTransform rectTransform;
         public BonusController bonusController;
         public Concentration concentration;
@@ -21,7 +22,7 @@ namespace UI
         private void Start()
         {
             rectTransform = GetComponent<RectTransform>();
-            text = GetComponent<Text>();
+            text = GetComponent<TextMeshProUGUI>();
         }
 
         public void SetText(int countPoints)

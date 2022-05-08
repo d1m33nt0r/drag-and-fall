@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,9 +7,9 @@ namespace Core
 {
     public class ScorePanel : MonoBehaviour
     {
-        [SerializeField] private Text counter;
+        [SerializeField] private TextMeshProUGUI counter;
         [SerializeField] private GameObject counterPanel;
-        [SerializeField] private Text score;
+        [SerializeField] private TextMeshProUGUI score;
         
         private void Start()
         {

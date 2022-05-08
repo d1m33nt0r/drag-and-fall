@@ -1,9 +1,8 @@
-﻿using System;
-using Common;
+﻿using Common;
 using Core;
 using Core.Bonuses;
-using Cysharp.Threading.Tasks;
 using Sound;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,14 +17,14 @@ namespace UI.Bonuses
         public bool isActive { get; private set; }
         public BonusType bonusType;
         private float defaultTimerValue;
-        [SerializeField] private Text multiplierText;
+        [SerializeField] private TextMeshProUGUI multiplierText;
         [SerializeField] private GameObject shieldPlayerEffect;
 
         public RectTransform bonusIconPanel;
         public RectTransform bonusIcon;
         public Slider timer;
         public RectTransform fillArea;
-        public Text timerText;
+        public TextMeshProUGUI timerText;
         
         public void Construct()
         {

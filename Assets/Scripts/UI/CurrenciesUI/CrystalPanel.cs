@@ -1,5 +1,6 @@
 ﻿using System;
 using Progress;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ namespace Core
 {
     public class CrystalPanel : MonoBehaviour
     {
-        public Text crystals;
+        public TextMeshProUGUI crystals;
         public ProgressController progressController;
         
         public void AddCrystals(int count)

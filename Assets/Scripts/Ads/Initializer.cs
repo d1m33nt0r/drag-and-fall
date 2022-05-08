@@ -5,7 +5,6 @@ namespace Ads
 {
     public class Initializer : MonoBehaviour
     {
-        [SerializeField] private BannerAds bannerAds;
         [SerializeField] private RewardAds rewardAds;
         [SerializeField] private InterstitialAds interstitialAds;
         
@@ -16,7 +15,6 @@ namespace Ads
 
         private void Start()
         {
-            bannerAds.RequestBanner();
             rewardAds.RequestReward();
             interstitialAds.RequestInterstitial();
         }

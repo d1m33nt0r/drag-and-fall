@@ -1,5 +1,6 @@
 ﻿using System;
 using Progress;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ namespace Core
 {
     public class KeyPanel : MonoBehaviour
     {
-        public Text keys;
+        public TextMeshProUGUI keys;
         public ProgressController progressController;
 
         public void AddKeys(int count)

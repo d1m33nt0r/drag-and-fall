@@ -1,5 +1,6 @@
 ﻿using System;
 using Progress;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ namespace Core
 {
     public class CoinPanel : MonoBehaviour
     {
-        public Text coins;
+        public TextMeshProUGUI coins;
         public ProgressController progressController;
         
         public void AddCoins(int count)
