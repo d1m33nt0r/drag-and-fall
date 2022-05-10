@@ -1,5 +1,6 @@
 ﻿using Core.MainMenuUI;
 using Progress;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ namespace UI.InfinityUI
     public class BestScoreUI : MonoBehaviour
     {
         [SerializeField] private FailedInfinityUI failedInfinityUI;
-        [SerializeField] private Text bestScoreText;
+        [SerializeField] private TextMeshProUGUI bestScoreText;
         [SerializeField] private ProgressController progressController;
         [SerializeField] private BestScoreMainText bestScoreMainText;
 

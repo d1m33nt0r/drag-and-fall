@@ -20,6 +20,13 @@ namespace Core
         
         private void Awake()
         {
+            if (Screen.width >= 1080)
+            {
+                var scrWidth = Screen.width / 2;
+                var scrHeight = Screen.height / 2;
+                Screen.SetResolution(scrWidth, scrHeight, true, 60);
+            }
+            
             camera = GetComponent<Camera>();
         }
 

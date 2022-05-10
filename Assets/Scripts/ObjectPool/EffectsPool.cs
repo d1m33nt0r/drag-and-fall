@@ -110,11 +110,13 @@ namespace ObjectPool
                 var effect = keyEffectPool.Dequeue();
                 effect.gameObject.SetActive(true);
                 effect.transform.SetParent(null);
+                //effect.SetRotation();
                 return effect;
             }
             
             var instance = Instantiate(keyCollectingEffect, transform);
             instance.GetComponent<KeyCollectingEffect>().Construct(this);
+            //instance.SetRotation();
             instance.gameObject.SetActive(true);
             return instance;
         }
@@ -133,12 +135,14 @@ namespace ObjectPool
                 var effect = bonusEffectPool.Dequeue();
                 effect.gameObject.SetActive(true);
                 effect.transform.SetParent(null);
+                //effect.SetRotation();
                 return effect;
             }
             
             var instance = Instantiate(bonusCollectingEffect, transform);
             instance.GetComponent<BonusCollectingEffect>().Construct(this);
             instance.gameObject.SetActive(true);
+            //instance.SetRotation();
             return instance;
         }
         
@@ -156,12 +160,14 @@ namespace ObjectPool
                 var effect = coinEffectPool.Dequeue();
                 effect.gameObject.SetActive(true);
                 effect.transform.SetParent(null);
+                //effect.SetRotation();
                 return effect;
             }
             
             var instance = Instantiate(coinCollectingEffect, transform);
             instance.GetComponent<CoinCollectingEffect>().Construct(this);
             instance.gameObject.SetActive(true);
+            //instance.SetRotation();
             return instance;
         }
         
@@ -179,12 +185,14 @@ namespace ObjectPool
                 var effect = crystalEffectPool.Dequeue();
                 effect.gameObject.SetActive(true);
                 effect.transform.SetParent(null);
+                //effect.SetRotation();
                 return effect;
             }
             
             var instance = Instantiate(crystalCollectingEffect, transform);
             instance.GetComponent<CrystalCollectingEffect>().Construct(this);
             instance.gameObject.SetActive(true);
+            //instance.SetRotation();
             return instance;
         }
         

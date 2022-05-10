@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Core;
 using Progress;
+using TMPro;
 using UI.InfinityUI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,13 +11,13 @@ namespace UI
     public class ContinueTimer : MonoBehaviour
     {
         [SerializeField] private Image timer;
-        [SerializeField] private Text timerText;
+        [SerializeField] private TextMeshProUGUI timerText;
         [SerializeField] private int timerValue;
         [SerializeField] private FailedInfinityUI failedInfinityUI;
         [SerializeField] private ScorePanel scorePanel;
         [SerializeField] private ProgressController progressController;
         [SerializeField] private KeySpender keySpender;
-        [SerializeField] private Text buttonKeysText;
+        [SerializeField] private TextMeshProUGUI buttonKeysText;
 
         private Coroutine timerCoroutine;
         private Coroutine numberCoroutine;

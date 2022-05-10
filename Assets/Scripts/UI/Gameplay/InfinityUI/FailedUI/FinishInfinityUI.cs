@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,10 +7,10 @@ namespace UI.GameplayUI.InfinityUI.FailedUI
 {
     public class FinishInfinityUI : MonoBehaviour
     {
-        [SerializeField] private Text crystalText;
-        [SerializeField] private Text coinText;
-        [SerializeField] private Text keyText;
-        [SerializeField] private Text scoreText;
+        [SerializeField] private TextMeshProUGUI crystalText;
+        [SerializeField] private TextMeshProUGUI coinText;
+        [SerializeField] private TextMeshProUGUI keyText;
+        [SerializeField] private TextMeshProUGUI scoreText;
 
         public float minimum = -1.0F;
         public float maximum =  1.0F;

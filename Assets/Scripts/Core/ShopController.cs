@@ -1,6 +1,7 @@
 ﻿using System;
 using Data;
 using Progress;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,11 +9,11 @@ namespace Core
 {
     public class ShopController : MonoBehaviour
     {
-        [SerializeField] private Text unlockedText;
+        [SerializeField] private TextMeshProUGUI unlockedText;
         [SerializeField] private GameObject coinPricePanel;
-        [SerializeField] private Text priceCoins;
+        [SerializeField] private TextMeshProUGUI priceCoins;
         [SerializeField] private GameObject crystalPricePanel;
-        [SerializeField] private Text priceCrystals;
+        [SerializeField] private TextMeshProUGUI priceCrystals;
         [SerializeField] private GameObject price;
         
         [SerializeField] private Player player;
@@ -22,7 +23,6 @@ namespace Core
         [SerializeField] private Button unlockButton;
         [SerializeField] private Button selectButton;
         [SerializeField] private GameManager gameManager;
-        [SerializeField] private Text shopStateText;
         [SerializeField] private ShopData shopData;
         [SerializeField] private ProgressController progressController;
 
@@ -74,7 +74,6 @@ namespace Core
             }
             else
             {
-                //price.text = "Unlocked!";
                 coinPricePanel.SetActive(false);
                 crystalPricePanel.SetActive(false);
                 price.SetActive(false);
@@ -159,29 +158,6 @@ namespace Core
                     coinPanel.MinusCoins(Convert.ToInt32(shopData.TrailSkinData[currentTrailSkinIndex].priceCoins));
                     crystalPanel.MinusCrystals(Convert.ToInt32(shopData.TrailSkinData[currentTrailSkinIndex].priceCrystals));
                     break;
-                case ShopState.FallingTrailSkin:
-                    if (shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].priceCoins > progressController.currentState.currenciesProgress.coins) return;
-                    if (shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].priceCrystals > progressController.currentState.currenciesProgress.crystals) return;
-                    
-                    progressController.currentState.currenciesProgress.coins -=
-                        Convert.ToInt16(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].priceCoins);
-                    progressController.currentState.currenciesProgress.crystals -=
-                        Convert.ToInt16(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].priceCrystals);
-                    
-                    progressController.shopProgress.fallingTrailSkins[currentFallingTrailSkinIndex].isBought = true;
-                    progressController.currentState.fallingTrailSkin = new ShopItem
-                    {
-                        index = currentFallingTrailSkinIndex, 
-                        isBought = true
-                    };
-                    progressController.SaveShopData(progressController.shopProgress);
-                    progressController.SaveCurrentState(progressController.currentState);
-                    shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].isBought = true;
-                    SetPriceText(true, shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].priceCoins, 
-                        shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].priceCrystals);
-                    coinPanel.MinusCoins(Convert.ToInt32(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].priceCoins));
-                    crystalPanel.MinusCrystals(Convert.ToInt32(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].priceCrystals));
-                    break;
             }
         }
 
@@ -224,15 +200,6 @@ namespace Core
             }
         }
 
-        public void SetFallingTrailSkinState()
-        {
-            shopState = ShopState.FallingTrailSkin;
-            SetPriceText(progressController.shopProgress.fallingTrailSkins[currentFallingTrailSkinIndex].isBought, 
-                shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].priceCoins, 
-                shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].priceCrystals);
-            gameManager.ChangeShopState(shopState);
-        }
-
         public void SetPlayerSkinState()
         {
             shopState = ShopState.PlayerSkin;
@@ -242,6 +209,15 @@ namespace Core
             gameManager.ChangeShopState(shopState);
         }
 
+        public void SetTrailSkinState()
+        {
+            shopState = ShopState.TrailSkin;
+            SetPriceText(progressController.shopProgress.trailSkins[currentTrailSkinIndex].isBought, 
+                shopData.TrailSkinData[currentTrailSkinIndex].priceCoins,
+                shopData.TrailSkinData[currentTrailSkinIndex].priceCrystals);
+            gameManager.ChangeShopState(shopState);
+        }
+        
         public void SetEnvironmentSkinState()
         {
             shopState = ShopState.EnvironmentSkin;
@@ -288,17 +264,6 @@ namespace Core
                         shopData.TrailSkinData[currentTrailSkinIndex].priceCrystals);
                     player.TryOnTrailSkin(shopData.TrailSkinData[currentTrailSkinIndex].skin);
                     break;
-                case ShopState.FallingTrailSkin:
-                    if (currentFallingTrailSkinIndex == shopData.FallingTrailSkinData.Count - 1)
-                        currentFallingTrailSkinIndex = 0;
-                    else
-                        currentFallingTrailSkinIndex++;
-
-                    SetPriceText(progressController.shopProgress.fallingTrailSkins[currentFallingTrailSkinIndex].isBought, 
-                        shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].priceCoins, 
-                        shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].priceCrystals);
-                    player.TryOnFallingTrailSkin(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].skin);
-                    break;
             }
         }
 
@@ -338,17 +303,6 @@ namespace Core
                         shopData.TrailSkinData[currentTrailSkinIndex].priceCoins, 
                         shopData.TrailSkinData[currentTrailSkinIndex].priceCrystals);
                     player.TryOnTrailSkin(shopData.TrailSkinData[currentTrailSkinIndex].skin);
-                    break;
-                case ShopState.FallingTrailSkin:
-                    if (currentFallingTrailSkinIndex == 0)
-                        currentFallingTrailSkinIndex = shopData.FallingTrailSkinData.Count - 1;
-                    else
-                        currentFallingTrailSkinIndex--;
-                    
-                    SetPriceText(progressController.shopProgress.fallingTrailSkins[currentFallingTrailSkinIndex].isBought, 
-                        shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].priceCoins, 
-                        shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].priceCrystals);
-                    player.TryOnFallingTrailSkin(shopData.FallingTrailSkinData[currentFallingTrailSkinIndex].skin);
                     break;
             }
         }

@@ -13,6 +13,5 @@ namespace Data
         public List<EnvironmentSkinData> EnvironmentSkinData;
         public List<PlayerSkinData> PlayerSkinData;
         public List<TrailSkinData> TrailSkinData;
-        public List<FallingTrailSkinData> FallingTrailSkinData;
     }
 }

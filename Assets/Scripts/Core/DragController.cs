@@ -60,12 +60,12 @@ namespace Core
 
                 if (swipeDelta.x < 0 && swipeDelta != prevSwipeDelta)
                 {
-                    SwipeEvent?.Invoke(SwipeType.LEFT, Mathf.Abs(swipeDelta.x) / 1.75f);
+                    SwipeEvent?.Invoke(SwipeType.LEFT, Mathf.Abs(swipeDelta.x));
                 }
 
                 if (swipeDelta.x > 0 && swipeDelta != prevSwipeDelta)
                 {
-                    SwipeEvent?.Invoke(SwipeType.RIGHT, Mathf.Abs(swipeDelta.x) / 1.75f);
+                    SwipeEvent?.Invoke(SwipeType.RIGHT, Mathf.Abs(swipeDelta.x));
                 }
 
                 prevMousePosition = curMousePosition;

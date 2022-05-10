@@ -82,6 +82,11 @@ namespace Core
             return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].tube;
         }
         
+        public GameObject GetTrail()
+        {
+            return shopData.TrailSkinData[progressController.currentState.trailSkin.index].skin;
+        }
+        
         public Mesh GetSegmentMesh(SegmentType segmentType)
         {
             if (segmentType == SegmentType.Ground)

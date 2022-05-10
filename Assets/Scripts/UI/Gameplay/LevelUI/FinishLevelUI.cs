@@ -4,6 +4,7 @@ using Data.Core;
 using Progress;
 using Sound;
 using Sound.UI;
+using TMPro;
 using UI.FinishLevel;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,7 +24,7 @@ namespace UI
         [SerializeField] private UIManager uIManager;
         [SerializeField] private Text score;
         [SerializeField] private Slider scoreSlider;
-        [SerializeField] private Text level;
+        [SerializeField] private TextMeshProUGUI level;
         [SerializeField] private Animator animator;
 
         [SerializeField] private Animator firstStarAnimator;

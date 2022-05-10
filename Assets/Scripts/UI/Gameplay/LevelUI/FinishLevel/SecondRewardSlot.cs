@@ -1,6 +1,7 @@
 ﻿using Core;
 using Data.Core;
 using Progress;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,9 +9,9 @@ namespace UI.FinishLevel
 {
     public class SecondRewardSlot : MonoBehaviour
     {
-        [SerializeField] private Text rewardText;
+        [SerializeField] private TextMeshProUGUI rewardText;
         [SerializeField] private Image rewardImage;
-        [SerializeField] private Text rewardSizeText;
+        [SerializeField] private TextMeshProUGUI rewardSizeText;
         [SerializeField] private ProgressController progressController;
         [SerializeField] private GameObject starsEffect;
         [SerializeField] private CrystalPanel crystalPanel;

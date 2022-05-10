@@ -1,6 +1,7 @@
 ﻿using Core;
 using Core.Bonuses;
 using Progress;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ namespace UI.Upgrades
         [SerializeField] private ProgressController progressController;
         [SerializeField] private BonusType bonusType;
         [SerializeField] private Concentration concentration;
-        [SerializeField] private Text firstLevelText;
+        [SerializeField] private TextMeshProUGUI firstLevelText;
         [SerializeField] private CoinPanel coinPanel;
         [SerializeField] private CrystalPanel crystalPanel;
         public Image[] levels;

@@ -18,6 +18,11 @@ namespace Core.Effects
             effectsPool.ReturnBonusCollectingEffectToPool(this);
         }
         
+        public void SetRotation()
+        {
+            transform.rotation = Quaternion.identity;
+        }
+        
         void OnParticleSystemStopped()
         {
             ReturnToPool();

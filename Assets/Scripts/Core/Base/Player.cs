@@ -88,7 +88,6 @@ namespace Core
             target = Quaternion.Euler(new Vector3(randomX, randomY, randomZ));
             startTime = Time.time;
             timeCount = 0;
-            //transform.DORotate(new Vector3(randomX, randomY, randomZ), 0.5f);
         }
 
         private void Update()
@@ -100,18 +99,14 @@ namespace Core
         private void Rotation()
         {
             if (!isRotation) return;
-            //var distCovered = (Time.time - startTime) * 30;
-            //var fractionOfJourney = distCovered / journeyLength;
             playerTransform.rotation = Quaternion.Lerp(playerTransform.rotation, target, timeCount * speedRotation);
             timeCount = timeCount + Time.deltaTime;
-            //if (fractionOfJourney >= 1) isRotation = false;
         }
         
         public void SpawnBonusCollectingEffect()
         {
             var effect = effectsPool.GetBonusCollectingEffect();
             var effectTransform = effect.transform;
-            effectTransform.SetParent(platformMover.transform);
             effectTransform.position = playerTransform.position;
             effect.GetComponent<ParticleSystem>().Play();
         }
@@ -120,7 +115,6 @@ namespace Core
         {
             var effect = effectsPool.GetCoinCollectingEffect();
             var effectTransform = effect.transform;
-            effectTransform.SetParent(platformMover.transform);
             effectTransform.position = playerTransform.position;
             effect.GetComponent<ParticleSystem>().Play();
         }
@@ -129,7 +123,6 @@ namespace Core
         {
             var effect = effectsPool.GetCrystalCollectingEffect();
             var effectTransform = effect.transform;
-            effectTransform.SetParent(platformMover.transform);
             effectTransform.position = playerTransform.position;
             effect.GetComponent<ParticleSystem>().Play();
         }
@@ -138,7 +131,6 @@ namespace Core
         {
             var effect = effectsPool.GetKeyCollectingEffect();
             var effectTransform = effect.transform;
-            effectTransform.SetParent(platformMover.transform);
             effectTransform.position = playerTransform.position;
             effect.GetComponent<ParticleSystem>().Play();
         }
@@ -198,12 +190,9 @@ namespace Core
             meshFilter.mesh = visualController.GetPlayerMesh();
             meshRenderer.material = visualController.GetPlayerMaterial();
             
-            //Destroy(trail);
-           // Destroy(fallingTrail);
-            
-            //trail = Instantiate(visualController.GetTrail(), transform.position, Quaternion.identity, transform);
-           // fallingTrail = Instantiate(visualController.GetFallingTrail(), new Vector3(0, 0.15f, -0.7f), Quaternion.identity,
-             //   transform.parent);
+            Destroy(fireEffect);
+            Transform transform1;
+            fireEffect = Instantiate(visualController.GetTrail(), (transform1 = transform).position, Quaternion.identity, transform1.parent);
         }
 
         public void TryOnPlayerSkin(Mesh _mesh, Material _material)
@@ -214,17 +203,10 @@ namespace Core
 
         public void TryOnTrailSkin(GameObject _trail)
         {
-            Destroy(trail);
-            trail = Instantiate(_trail, playerTransform.position, Quaternion.identity, playerTransform);
+            Destroy(fireEffect);
+            fireEffect = Instantiate(_trail, playerTransform.position, Quaternion.identity, playerTransform.parent);
         }
 
-        public void TryOnFallingTrailSkin(GameObject _fallingTrail)
-        {
-            Destroy(fallingTrail);
-            fallingTrail = Instantiate(_fallingTrail, new Vector3(0, 0.15f, -0.7f), Quaternion.identity,
-                playerTransform);
-        }
-        
         public void PlayIdleAnim()
         {
             animator.Play(IDLE);
@@ -260,9 +242,7 @@ namespace Core
             tubeMover.MoveTube();
             platformMover.MovePlatforms();
         }
-
         
-
         private void ProcessPlatformCollisions()
         {
             if (triggerStay) return;

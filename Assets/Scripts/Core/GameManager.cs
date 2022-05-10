@@ -157,9 +157,6 @@ namespace Core
                     platformMover.SetShopState();
                     break;
                 case ShopState.TrailSkin:
-                    platformMover.SetShopState();
-                    break;
-                case ShopState.FallingTrailSkin:
                     platformMover.SetShopFallingTrail();
                     break;
             }

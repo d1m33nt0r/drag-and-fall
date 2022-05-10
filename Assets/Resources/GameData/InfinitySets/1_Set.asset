@@ -19,52 +19,52 @@ MonoBehaviour:
   minLetAmount: 0
   maxHoleAmount: 8
   minHoleAmount: 5
-  attemptsOfShieldInstantiate: 0
-  shieldPositions: 
+  attemptsOfShieldInstantiate: 5
+  shieldPositions: 0f00000019000000240000003b0000005f000000
   spawnShieldOnLet: 0
   spawnShieldOnGround: 1
   spawnShieldOnHole: 0
-  spawnShieldChance: 0
-  attemptsOfKeyInstantiate: 0
-  keyPositions: 
+  spawnShieldChance: 60
+  attemptsOfKeyInstantiate: 1
+  keyPositions: 11000000
   spawnKeyOnLet: 0
   spawnKeyOnGround: 1
   spawnKeyOnHole: 0
-  spawnKeyChance: 0
-  attemptsOfMagnetInstantiate: 0
-  magnetPositions: 
+  spawnKeyChance: 14
+  attemptsOfMagnetInstantiate: 5
+  magnetPositions: 090000001a000000260000002a00000045000000
   spawnMagnetOnLet: 0
   spawnMagnetOnGround: 1
   spawnMagnetOnHole: 0
-  spawnMagnetChance: 0
-  attemptsOfMultiplierInstantiate: 0
-  multiplierPositions: 
+  spawnMagnetChance: 58
+  attemptsOfMultiplierInstantiate: 5
+  multiplierPositions: 07000000160000001d0000004b00000052000000
   spawnMultiplierOnLet: 0
   spawnMultiplierOnGround: 1
   spawnMultiplierOnHole: 0
-  spawnMultiplierChance: 0
-  attemptsOfAccelerationInstantiate: 0
-  accelerationPositions: 
+  spawnMultiplierChance: 60
+  attemptsOfAccelerationInstantiate: 5
+  accelerationPositions: 0500000019000000220000004200000055000000
   spawnAccelerationOnLet: 0
   spawnAccelerationOnGround: 1
   spawnAccelerationOnHole: 0
-  spawnAccelerationChance: 0
+  spawnAccelerationChance: 60
   currencyRandomSettings:
   - spawnOnLet: 0
     spawnOnGround: 1
     spawnOnHole: 1
-    spawnChance: 0
+    spawnChance: 22
     currencyType: 0
-    rangeStart: 0
-    rangeEnd: 0
+    rangeStart: 11
+    rangeEnd: 92
     accuracyLevel: 1
   - spawnOnLet: 1
     spawnOnGround: 1
     spawnOnHole: 0
-    spawnChance: 0
+    spawnChance: 13
     currencyType: 1
-    rangeStart: 0
-    rangeEnd: 0
+    rangeStart: 17
+    rangeEnd: 62
     accuracyLevel: 1
   patterns:
   - isRandom: 0

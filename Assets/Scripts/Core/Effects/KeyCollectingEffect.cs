@@ -16,6 +16,11 @@ namespace Core.Effects
         {
             effectsPool.ReturnKeyCollectingEffectToPool(this);
         }
+
+        public void SetRotation()
+        {
+            transform.rotation = Quaternion.identity;
+        }
         
         void OnParticleSystemStopped()
         {

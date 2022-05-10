@@ -112,17 +112,8 @@ MonoBehaviour:
   - isBought: 1
     priceCoins: 0
     priceCrystals: 0
-    skin: {fileID: 5428570601236312670, guid: 6be4de8dd13a27845bcd17258a334a77, type: 3}
+    skin: {fileID: 3471079908320733189, guid: db27238b087e89b4eb932f31e226d7e6, type: 3}
   - isBought: 0
     priceCoins: 1
     priceCrystals: 1
-    skin: {fileID: 5428570601236312670, guid: 03b51ba661d6fd14cab604466e188df3, type: 3}
-  FallingTrailSkinData:
-  - isBought: 1
-    priceCoins: 0
-    priceCrystals: 0
-    skin: {fileID: 1060702588532410973, guid: 4694ce9c9592a4d4bba9811fccf9e373, type: 3}
-  - isBought: 0
-    priceCoins: 1
-    priceCrystals: 1
-    skin: {fileID: 1060702588532410973, guid: 4b518eafc1bd98242afd8a24bcdabefd, type: 3}
+    skin: {fileID: 3471079908320733189, guid: db27238b087e89b4eb932f31e226d7e6, type: 3}

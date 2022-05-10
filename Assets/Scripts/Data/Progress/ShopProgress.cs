@@ -9,7 +9,6 @@ namespace Progress
         public List<ShopItem> environmentSkins;
         public List<ShopItem> playerSkins;
         public List<ShopItem> trailSkins;
-        public List<ShopItem> fallingTrailSkins;
     }
 
     [Serializable]
