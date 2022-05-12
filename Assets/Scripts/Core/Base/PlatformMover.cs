@@ -6,6 +6,7 @@ using Data.Core.Segments;
 using Data.Core.Segments.Content;
 using Data.Shop.TubeSkins;
 using ObjectPool;
+using Progress;
 using Sound;
 using UI;
 using UnityEngine;
@@ -21,7 +22,7 @@ namespace Core
         
         
         private bool isMoving;
-        
+        public ProgressController progressController;
         [SerializeField] private TutorialUI tutorialUI;
         [SerializeField] private PlatformSound platformSound;
         [SerializeField] private EffectsPool effectsPool;

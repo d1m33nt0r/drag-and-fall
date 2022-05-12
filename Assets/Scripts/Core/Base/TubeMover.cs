@@ -1,11 +1,14 @@
 ﻿using Data.Shop.TubeSkins;
 using ObjectPool;
+using Progress;
 using UnityEngine;
 
 namespace Core
 {
     public class TubeMover : MonoBehaviour
     {
+        public ProgressController progressController;
+        
         [SerializeField] private GameObject particleSystem;
         [SerializeField] private TubePool tubePool;
         [SerializeField] private GameObject tubePrefab;

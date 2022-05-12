@@ -1,5 +1,4 @@
-﻿using System;
-using Core.Bonuses;
+﻿using Core.Bonuses;
 using Core.Effects;
 using Data.Core.Segments;
 using Data.Core.Segments.Content;
@@ -62,7 +61,7 @@ namespace Core
         {
             if (segmentData.segmentType == SegmentType.Hole) return;
             if (segmentData.segmentType == SegmentType.Let && countTouches <= 2) return;
-            //transform.GetComponent<MeshRenderer>().material.color = platformMover.visualController.GetPlatformColors()[countTouches];
+           
             meshFilter.mesh =
                 platformMover.visualController.GetPlatformColors()[countTouches - 1];
         }
@@ -74,9 +73,13 @@ namespace Core
             else
             {
                 if (segmentData.segmentType == SegmentType.Ground)
-                    meshRenderer.material = _environmentSkinData.groundSegmentMaterial;
+                {
+                    meshRenderer.material = platformMover.visualController.GetSegmentMaterial(SegmentType.Ground);
+                }
                 else
-                    meshRenderer.material = _environmentSkinData.letSegmentMaterial;
+                {
+                    meshRenderer.material = platformMover.visualController.GetSegmentMaterial(SegmentType.Let);
+                }
                 
                 meshFilter.mesh = _environmentSkinData.segment;
             }

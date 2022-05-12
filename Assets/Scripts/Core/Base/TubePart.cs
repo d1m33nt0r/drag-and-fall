@@ -1,5 +1,6 @@
 ﻿using Data.Shop.TubeSkins;
 using ObjectPool;
+using Progress;
 using UnityEngine;
 
 namespace Core
@@ -29,7 +30,9 @@ namespace Core
         public void TryOnSkin(EnvironmentSkinData _environmentSkinData)
         {
             RenderSettings.skybox = _environmentSkinData.skybox;
-            meshRenderer.material = _environmentSkinData.tubeMaterial;
+            var str = _environmentSkinData.index.ToString() +
+                      tubeMover.progressController.currentState.playerSkin.index;
+            meshRenderer.material = tubeMover.platformMover.visualController.mapOfSkins.Skin[str];
             meshFilter.mesh = _environmentSkinData.tube;
         }
         

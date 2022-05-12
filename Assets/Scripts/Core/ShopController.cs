@@ -251,7 +251,7 @@ namespace Core
                     SetPriceText(progressController.shopProgress.playerSkins[currentPlayerSkinIndex].isBought, 
                         shopData.PlayerSkinData[currentPlayerSkinIndex].priceCoins,
                         shopData.PlayerSkinData[currentPlayerSkinIndex].priceCrystals);
-                    player.TryOnPlayerSkin(shopData.PlayerSkinData[currentPlayerSkinIndex].mesh, shopData.PlayerSkinData[currentPlayerSkinIndex].material);
+                    player.TryOnPlayerSkin(shopData.PlayerSkinData[currentPlayerSkinIndex]);
                     break;
                 case ShopState.TrailSkin:
                     if (currentTrailSkinIndex == shopData.TrailSkinData.Count - 1)
@@ -291,7 +291,7 @@ namespace Core
                     SetPriceText(progressController.shopProgress.playerSkins[currentPlayerSkinIndex].isBought, 
                         shopData.PlayerSkinData[currentPlayerSkinIndex].priceCoins, 
                         shopData.PlayerSkinData[currentPlayerSkinIndex].priceCrystals);
-                    player.TryOnPlayerSkin(shopData.PlayerSkinData[currentPlayerSkinIndex].mesh, shopData.PlayerSkinData[currentPlayerSkinIndex].material);
+                    player.TryOnPlayerSkin(shopData.PlayerSkinData[currentPlayerSkinIndex]);
                     break;
                 case ShopState.TrailSkin:
                     if (currentTrailSkinIndex == 0)

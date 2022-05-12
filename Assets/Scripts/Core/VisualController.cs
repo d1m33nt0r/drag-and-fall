@@ -8,6 +8,7 @@ namespace Core
 {
     public class VisualController : MonoBehaviour
     {
+        public MapOfSkins mapOfSkins;
         [SerializeField] private ShopData shopData;
         [SerializeField] private ProgressController progressController;
         
@@ -41,15 +42,10 @@ namespace Core
         
         public Material GetSegmentMaterial(SegmentType _segmentType)
         {
-            switch (_segmentType)
-            {
-                case SegmentType.Ground:
-                    return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].segmentMaterial;
-                case SegmentType.Let:
-                    return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].segmentMaterial;
-                default:
-                    return null;
-            }
+            var str = progressController.currentState.environmentSkin.index.ToString() +
+                      progressController.currentState.playerSkin.index;
+            
+            return mapOfSkins.Skin[str];
         }
 
         public Material GetSkyboxMaterial()
@@ -59,7 +55,10 @@ namespace Core
 
         public Material GetPlayerMaterial()
         {
-            return shopData.PlayerSkinData[progressController.currentState.playerSkin.index].material;
+            var str = progressController.currentState.environmentSkin.index.ToString() +
+                      progressController.currentState.playerSkin.index;
+            
+            return mapOfSkins.Skin[str];
         }
 
         public Mesh GetPlayerMesh()
@@ -69,12 +68,15 @@ namespace Core
         
         public Material GetTubeMaterial()
         {
-            return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].tubeMaterial;
+            var str = progressController.currentState.environmentSkin.index.ToString() +
+                      progressController.currentState.playerSkin.index;
+            
+            return mapOfSkins.Skin[str];
         }
         
         public Mesh[] GetPlatformColors()
         {
-            return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].meshes;
+            return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].groundSegmentMeshes;
         }
 
         public Mesh GetTubeMesh()

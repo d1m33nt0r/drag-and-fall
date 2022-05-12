@@ -11315,7 +11315,7 @@ Canvas:
   m_GameObject: {fileID: 185886997}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 963194227}
   m_PlaneDistance: 0.5
   m_PixelPerfect: 0
@@ -17158,6 +17158,8 @@ MonoBehaviour:
     - index: 1
       isBought: 0
     - index: 2
+      isBought: 0
+    - index: 3
       isBought: 0
     trailSkins:
     - index: 0
@@ -42367,18 +42369,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1776688606}
-        m_TargetAssemblyTypeName: Core.Player, Assembly-CSharp
-        m_MethodName: DisableFallingTrail
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2057673698}
         m_TargetAssemblyTypeName: Sound.UI.ButtonSound, Assembly-CSharp
         m_MethodName: Play
@@ -43557,6 +43547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b14b35379714900a84dbab2958cc779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapOfSkins: {fileID: 11400000, guid: d9544dc99fa5c5c439399e4c3c0de1bd, type: 2}
   shopData: {fileID: 11400000, guid: 721eeccf73432cc469b6e77393ffc035, type: 2}
   progressController: {fileID: 386115021}
   platformMover: {fileID: 1755819904}
@@ -85946,6 +85937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88a4d7a9ff00436ab5d1f18096f7b7d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  progressController: {fileID: 386115021}
   particleSystem: {fileID: 0}
   tubePool: {fileID: 1461066058}
   tubePrefab: {fileID: 6258718019660764072, guid: 74d06b32c97d0044897d396e3131e7df, type: 3}
@@ -85979,6 +85971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24dbc39ba66317b489980409cd07c2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  progressController: {fileID: 386115021}
   tutorialUI: {fileID: 185887002}
   platformSound: {fileID: 62086648}
   effectsPool: {fileID: 2041678699}
@@ -94389,7 +94382,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.51900005, y: 0.13446297}
   m_AnchorMax: {x: 0.87062967, y: 0.19561112}
-  m_AnchoredPosition: {x: 0.12463379, y: 158.49768}
+  m_AnchoredPosition: {x: 0.12463379, y: 158.4977}
   m_SizeDelta: {x: -0.9259949, y: 1.7545929}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2015616862
@@ -94880,7 +94873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.067301646, y: 0.31073508}
   m_AnchorMax: {x: 0.9443809, y: 0.4591304}
-  m_AnchoredPosition: {x: -5.5343018, y: -253.06004}
+  m_AnchoredPosition: {x: -5.5343018, y: -253.06006}
   m_SizeDelta: {x: 116.47, y: 149.61}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2030362053

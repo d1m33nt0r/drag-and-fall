@@ -4,6 +4,7 @@ using System.Text;
 using Core.Bonuses;
 using Data;
 using Data.Core.Segments;
+using Data.Shop.Players;
 using DG.Tweening;
 using ObjectPool;
 using Sound;
@@ -195,10 +196,10 @@ namespace Core
             fireEffect = Instantiate(visualController.GetTrail(), (transform1 = transform).position, Quaternion.identity, transform1.parent);
         }
 
-        public void TryOnPlayerSkin(Mesh _mesh, Material _material)
+        public void TryOnPlayerSkin(PlayerSkinData playerSkinData)
         {
-            meshFilter.mesh = _mesh;
-            meshRenderer.material = _material;
+            meshFilter.mesh = playerSkinData.mesh;
+            meshRenderer.material = visualController.GetPlayerMaterial();
         }
 
         public void TryOnTrailSkin(GameObject _trail)
