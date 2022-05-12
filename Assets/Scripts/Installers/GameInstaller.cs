@@ -6,7 +6,7 @@ namespace Installers
 {
     public class GameInstaller : MonoInstaller
     {
-        private Queue<PatternData> patternDataPool;
+        private Queue<GamePatternData> patternDataPool;
         
         public override void InstallBindings()
         {
@@ -15,16 +15,16 @@ namespace Installers
 
         private void BindPatternDataPool()
         {
-            patternDataPool = new Queue<PatternData>();
+            patternDataPool = new Queue<GamePatternData>();
             
             Container
-                .Bind<Queue<PatternData>>()
+                .Bind<Queue<GamePatternData>>()
                 .FromInstance(patternDataPool)
                 .AsSingle();
             
             for (var i = 0; i < 15; i++)
             {
-                var patternData = new PatternData(12, patternDataPool);
+                var patternData = new GamePatternData(12, patternDataPool);
                 patternDataPool.Enqueue(patternData);
             }
         }

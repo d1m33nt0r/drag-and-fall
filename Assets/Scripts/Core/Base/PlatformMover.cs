@@ -1,16 +1,10 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Common;
 using Core.Bonuses;
-using Cysharp.Threading.Tasks;
 using Data.Core;
 using Data.Core.Segments;
 using Data.Core.Segments.Content;
 using Data.Shop.TubeSkins;
-using DG.Tweening;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
 using ObjectPool;
 using Sound;
 using UI;
@@ -53,7 +47,7 @@ namespace Core
         [SerializeField] private LevelProgress levelProgress;
 
 
-        [Inject] private Queue<PatternData> patternDataPool;
+        [Inject] private Queue<GamePatternData> patternDataPool;
         
         public bool platformsIsInitialized;
         public bool isLevelMode;
@@ -61,7 +55,7 @@ namespace Core
         private float startTime;
         private float journeyLength;
         
-        private PatternData currentPatternData;
+        private GamePatternData currentPatternData;
         public Platform[] platforms;
         
         private Vector3[] localPositionsOfPlatforms;
@@ -277,7 +271,8 @@ namespace Core
             {
                 if (i == 0)
                 {
-                    currentPatternData = new PatternData(12, patternDataPool);
+                    currentPatternData = patternDataPool.Dequeue();
+                    currentPatternData.Configure(new PatternData(12));
                 }
                 else
                 {
@@ -290,9 +285,9 @@ namespace Core
             platformsIsInitialized = true;
         }
 
-        private PatternData GenerateStartTutorialPlatform()
+        private GamePatternData GenerateStartTutorialPlatform()
         {
-            var patternData = new PatternData(12, patternDataPool);
+            var patternData = new PatternData(12);
             patternData.segmentsData = new[]
             {
                 new SegmentData {positionIndex = 0, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
@@ -309,7 +304,9 @@ namespace Core
                 new SegmentData {positionIndex = 11, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
             };
 
-            return patternData;
+            var gamePatternData = patternDataPool.Dequeue();
+            gamePatternData.Configure(patternData);
+            return gamePatternData;
         }
 
         private void StandardInit()
@@ -339,7 +336,7 @@ namespace Core
             platformsIsInitialized = true;
         }
 
-        private void CreateNewPlatform(int platformIndex, PatternData patternData, bool hide)
+        private void CreateNewPlatform(int platformIndex, GamePatternData patternData, bool hide)
         {
             var platform = platformPool.GetPlatform();
             var pTransform = platform.transform;
@@ -350,7 +347,6 @@ namespace Core
             if (patternData != null)
             {
                 platform.Initialize(patternData);
-                patternData.ReturnToPool();
             }
     
             platforms[platformIndex] = platform;

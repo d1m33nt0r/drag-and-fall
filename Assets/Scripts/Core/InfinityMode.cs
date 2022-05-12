@@ -14,7 +14,7 @@ namespace Core
     {
         public InfinityData infinityData;
 
-        [Inject] private Queue<PatternData> patternDataPool;
+        [Inject] private Queue<GamePatternData> patternDataPool;
         
         private int randPlatformsAmount;
         private bool randIsInitialized;
@@ -30,9 +30,11 @@ namespace Core
         private AvailablePositions powerUpsAvailablePositions = new AvailablePositions();
         private AvailablePositions currenciesAvailablePositions = new AvailablePositions();
         
-        public PatternData GetFirstPlatform()
+        public GamePatternData GetFirstPlatform()
         {
-            return new PatternData(12, patternDataPool);
+            var gamePatternData = new GamePatternData(12, patternDataPool);
+            gamePatternData.Configure(new PatternData(12));
+            return gamePatternData;
         }
         
         public void ResetPointers()
@@ -43,7 +45,7 @@ namespace Core
             randIsInitialized = false;
         }
         
-        public PatternData GetPatternData()
+        public GamePatternData GetPatternData()
         {
             if (infinityData.patternSets[setPointer].isRandom)
             {
@@ -120,27 +122,28 @@ namespace Core
             else
             {
                 var patternData = infinityData.patternSets[setPointer].patterns[patternPointer];
-                
+                var gamePatternData = patternDataPool.Dequeue();
+                gamePatternData.Configure(patternData);
                 if (infinityData.patternSets[setPointer].patterns.Count > patternPointer + 1)
                 {
                     patternPointer++;
-                    return patternData;
+                    return gamePatternData;
                 }
 
                 if (infinityData.patternSets.Count > setPointer + 1)
                 {
                     patternPointer = 0;
                     setPointer++;
-                    return patternData;
+                    return gamePatternData;
                 }
 
                 patternPointer = 0;
                 setPointer = 0;
-                return patternData;
+                return gamePatternData;
             }
         }
 
-        private void TryPlaceCurrencies(PatternData patternData, CurrencyRandomSettings[] currencyRandomSettings)
+        private void TryPlaceCurrencies(GamePatternData patternData, CurrencyRandomSettings[] currencyRandomSettings)
         {
             for (var i = 0; i < currencyRandomSettings.Length; i++)
             {
@@ -263,7 +266,7 @@ namespace Core
             }
         }
         
-        private void TryPlacePowerUps(PatternData patternData1)
+        private void TryPlacePowerUps(GamePatternData patternData1)
         {
             powerUpsAvailablePositions.Initialize();
             
@@ -351,14 +354,14 @@ namespace Core
             segmentDatas[powerUpsAvailablePositions.GetRandomPositionIndex()].segmentContent = segmentContent;
         }
 
-        public void PlaceSegments(PatternData patternData)
+        public void PlaceSegments(GamePatternData patternData)
         {
             PlaceHoleSegments(patternData);
             PlaceLetSegments(patternData);
             PlaceGroundSegments(patternData);
         }
         
-        private void PlaceGroundSegments(PatternData patternData)
+        private void PlaceGroundSegments(GamePatternData patternData)
         {
             for (var j = 0; j < availablePositions.GetAvailablePositionCount(); j++)
             {
@@ -367,7 +370,7 @@ namespace Core
             }
         }
 
-        private void PlaceLetSegments(PatternData patternData)
+        private void PlaceLetSegments(GamePatternData patternData)
         {
             var randomAmount = Random.Range(patternData.minLetAmount, patternData.maxLetAmount);
 
@@ -378,7 +381,7 @@ namespace Core
             }
         }
 
-        private void PlaceHoleSegments(PatternData patternData)
+        private void PlaceHoleSegments(GamePatternData patternData)
         {
             var randomAmount = Random.Range(patternData.minHoleAmount, patternData.maxHoleAmount);
 

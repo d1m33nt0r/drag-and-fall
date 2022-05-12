@@ -11,7 +11,7 @@ namespace Core
 
         private int patternPointer;
 
-        [Inject] private Queue<PatternData> patternDataPool;
+        [Inject] private Queue<GamePatternData> patternDataPool;
 
         public void SetLevelData(LevelData _levelData)
         {
@@ -24,22 +24,24 @@ namespace Core
             patternPointer = 0;
         }
 
-        public PatternData GetPatternData()
+        public GamePatternData GetPatternData()
         {
             if (level.patterns.Count > patternPointer + 1)
             {
                 var patternData = level.patterns[patternPointer];
-                patternData.InjectPatternDataPool(patternDataPool);
+                var gamePatternData = patternDataPool.Dequeue();
+                gamePatternData.Configure(patternData);
                 patternPointer++;
-                return patternData;
+                return gamePatternData;
             }
 
             if (level.patterns.Count == patternPointer + 1)
             {
                 var patternData = level.patterns[patternPointer];
-                patternData.InjectPatternDataPool(patternDataPool);
+                var gamePatternData = patternDataPool.Dequeue();
+                gamePatternData.Configure(patternData);
                 patternPointer++;
-                return patternData;
+                return gamePatternData;
             }
 
             //ResetPointer();

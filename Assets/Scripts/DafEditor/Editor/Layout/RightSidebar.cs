@@ -59,7 +59,7 @@ namespace DafEditor.Editor.Layout
                     gameEditorWindow.currentLevelData.patterns = new List<PatternData>();
                     for (var i = 0; i < gameEditorWindow.randomGenerationProfile.countPlatforms; i++)
                     {
-                        var patternData = new PatternData(12, null);
+                        var patternData = new PatternData(12);
                         generator.PlaceSegments(patternData, gameEditorWindow.randomGenerationProfile);
                         if (gameEditorWindow.randomGenerationProfile.countPlatforms - 1 == i) patternData.isLast = true;
                         gameEditorWindow.currentLevelData.patterns.Add(patternData);

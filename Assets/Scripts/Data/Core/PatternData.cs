@@ -18,18 +18,18 @@ namespace Data.Core
         public SegmentData[] segmentsData;
         private Queue<PatternData> patternDataPool;
 
-        public void InjectPatternDataPool(Queue<PatternData> patternDataPool)
+        /*public void InjectPatternDataPool(Queue<PatternData> patternDataPool)
         {
             this.patternDataPool = patternDataPool;
-        }
+        }*/
         
-        public PatternData(int _segmentsAmount, Queue<PatternData> patternDataPool)
+        public PatternData(int _segmentsAmount /*Queue<PatternData> patternDataPool*/)
         {
             segmentsData = new SegmentData[_segmentsAmount];
             this.patternDataPool = patternDataPool;
         }
 
-        public void ReturnToPool()
+        /*public void ReturnToPool()
         {
             isRandom = default;
             maxHoleAmount = default;
@@ -45,6 +45,6 @@ namespace Data.Core
             }
             
             patternDataPool.Enqueue(this);
-        }
+        }*/
     }
 }

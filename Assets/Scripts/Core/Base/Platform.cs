@@ -16,7 +16,7 @@ namespace Core
         private TutorialUI tutorialUI;
         [HideInInspector] public TouchEffect touchEffect;
         [HideInInspector] public PlayerParticles playerParticles;
-        public PatternData patternData;
+        public GamePatternData patternData;
         private Player player;
         private PlatformMover platformMover;
         public Segment[] segments;
@@ -49,7 +49,7 @@ namespace Core
             }
         }
 
-        public void Initialize(PatternData patternData)
+        public void Initialize(GamePatternData patternData)
         {
             this.patternData = patternData;
             
@@ -110,6 +110,8 @@ namespace Core
                 platformMover.FinishLevel(platformMover.gameManager.gameMode.levelMode.level);
             }
 
+            patternData.ReturnToPool();
+            
             for (var i = 0; i < segments.Length; i++)
             {
                 segments[i].ReturnSegmentContentToPool();
