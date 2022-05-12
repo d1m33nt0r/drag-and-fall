@@ -17,19 +17,22 @@ MonoBehaviour:
     priceCoins: 0
     priceCrystals: 0
     skybox: {fileID: 2100000, guid: 3e7499319482c054596e856e2377929c, type: 2}
-    tubeMaterial: {fileID: 2100000, guid: 55c431bb163b7a646a8f0b1a80744a9d, type: 2}
+    tubeMaterial: {fileID: 2100000, guid: a5d0426a309b51e478765fd744d7e672, type: 2}
     letSegmentMaterial: {fileID: 2100000, guid: a5d0426a309b51e478765fd744d7e672, type: 2}
     groundSegmentMaterial: {fileID: 2100000, guid: a5d0426a309b51e478765fd744d7e672, type: 2}
-    segment: {fileID: 7188848276043003615, guid: 0110f3aecfa193240957a29499f44225, type: 3}
-    tube: {fileID: 1308720478661719387, guid: 0110f3aecfa193240957a29499f44225, type: 3}
+    segment: {fileID: -2498168843837105131, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
+    tube: {fileID: -2432090755550338912, guid: b508772bf622b6d4f99b4229ecb6da2b, type: 3}
     platformColors:
     - {r: 1, g: 1, b: 1, a: 0}
     - {r: 0, g: 0.5660378, b: 0.4821804, a: 1}
     - {r: 0, g: 0.7169812, b: 0.61242145, a: 1}
     - {r: 0, g: 0.8679245, b: 0.74135226, a: 1}
-    letSegmentMesh: {fileID: 0}
-    segmentMaterial: {fileID: 0}
-    meshes: []
+    letSegmentMesh: {fileID: 13183689020191964, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
+    segmentMaterial: {fileID: 2100000, guid: a5d0426a309b51e478765fd744d7e672, type: 2}
+    meshes:
+    - {fileID: 5643087555890222503, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
+    - {fileID: 3713934850428853943, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
+    - {fileID: -3408895284609863541, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
     backgroundParticleSystem: {fileID: 1629307970770947860, guid: 1528730e65c90b44ab92d09cbaf17e14, type: 3}
     particleSystemPosition: {x: 3.7, y: 101.3, z: 84.1}
   - isBought: 1
@@ -113,7 +116,75 @@ MonoBehaviour:
     priceCoins: 0
     priceCrystals: 0
     skin: {fileID: 3471079908320733189, guid: db27238b087e89b4eb932f31e226d7e6, type: 3}
-  - isBought: 0
+  - isBought: 1
     priceCoins: 1
     priceCrystals: 1
-    skin: {fileID: 3471079908320733189, guid: db27238b087e89b4eb932f31e226d7e6, type: 3}
+    skin: {fileID: 180922, guid: 31f1a82435965944bb6d0f5989c42f1e, type: 3}
+  - isBought: 1
+    priceCoins: 1
+    priceCrystals: 1
+    skin: {fileID: 136592, guid: bbcaf94b863a5144d861c86a514903af, type: 3}
+  - isBought: 1
+    priceCoins: 1
+    priceCrystals: 1
+    skin: {fileID: 118508, guid: e64800d9053417b418cc8a28605d5b73, type: 3}
+  - isBought: 1
+    priceCoins: 1
+    priceCrystals: 1
+    skin: {fileID: 115116, guid: 402cfc0892ef54047b74d53d5a560238, type: 3}
+  - isBought: 1
+    priceCoins: 1
+    priceCrystals: 1
+    skin: {fileID: 149992, guid: 4e395833a91102b4a93cdeb0213682db, type: 3}
+  - isBought: 1
+    priceCoins: 1
+    priceCrystals: 1
+    skin: {fileID: 1926854741537082, guid: d80c1b420684dac4c8ea0404d979f12f, type: 3}
+  - isBought: 1
+    priceCoins: 1
+    priceCrystals: 1
+    skin: {fileID: 1225342397327756, guid: 6b9390cc164902447be0d4709b534207, type: 3}
+  - isBought: 1
+    priceCoins: 1
+    priceCrystals: 1
+    skin: {fileID: 1570687698780388, guid: bf4a5c2163b913c48a911b08ed9c1496, type: 3}
+  - isBought: 1
+    priceCoins: 1
+    priceCrystals: 1
+    skin: {fileID: 1687850434830208, guid: 0fc50fd3faa65944ea9ebd10b28a67ed, type: 3}
+  - isBought: 1
+    priceCoins: 1
+    priceCrystals: 1
+    skin: {fileID: 123644, guid: 00a301e11327c274eb48187aaa8aa91a, type: 3}
+  - isBought: 1
+    priceCoins: 1
+    priceCrystals: 1
+    skin: {fileID: 186986, guid: ac6820b22324a5a4aaeef57f4aec71de, type: 3}
+  - isBought: 1
+    priceCoins: 1
+    priceCrystals: 1
+    skin: {fileID: 136522, guid: 1676e381cf25b6a4e9e6ae0d12908816, type: 3}
+  - isBought: 1
+    priceCoins: 1
+    priceCrystals: 1
+    skin: {fileID: 149928, guid: 0b5e7793d4d1e854385c5ce9b1e79f47, type: 3}
+  - isBought: 1
+    priceCoins: 1
+    priceCrystals: 1
+    skin: {fileID: 180950, guid: cfa36dde0efb0a442887db2ab4ac49f7, type: 3}
+  - isBought: 1
+    priceCoins: 1
+    priceCrystals: 1
+    skin: {fileID: 170554, guid: 3e7feeaf9019cc14eae4785e09f758ec, type: 3}
+  - isBought: 1
+    priceCoins: 1
+    priceCrystals: 1
+    skin: {fileID: 192732, guid: da7e85de16ef88a40ba28b9cc5dcb743, type: 3}
+  - isBought: 1
+    priceCoins: 1
+    priceCrystals: 1
+    skin: {fileID: 145048, guid: 4e84120dab5fa4342b13417a3ff8964c, type: 3}
+  - isBought: 1
+    priceCoins: 1
+    priceCrystals: 1
+    skin: {fileID: 153628, guid: 58ed8557dea39c14f94fc6fbc306e4d7, type: 3}

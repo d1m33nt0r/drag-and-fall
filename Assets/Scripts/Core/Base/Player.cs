@@ -204,7 +204,7 @@ namespace Core
         public void TryOnTrailSkin(GameObject _trail)
         {
             Destroy(fireEffect);
-            fireEffect = Instantiate(_trail, playerTransform.position, Quaternion.identity, playerTransform.parent);
+            fireEffect = Instantiate(_trail, playerTransform.position, Quaternion.Euler(-180,0,0), playerTransform.parent);
         }
 
         public void PlayIdleAnim()

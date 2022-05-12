@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Common;
 using Core.Bonuses;
 using Cysharp.Threading.Tasks;
@@ -49,9 +50,7 @@ namespace Core
         public LevelsData levelsData;
         [SerializeField] private BonusController bonusController;
         [SerializeField] private LevelProgress levelProgress;
-
-
-        private TweenerCore<Quaternion, Vector3, QuaternionOptions> rotationTweenerCore;
+        
         
         public bool platformsIsInitialized;
         public bool isLevelMode;
@@ -276,7 +275,7 @@ namespace Core
             {
                 if (i == 0)
                 {
-                    //currentPatternData = new PatternData(12);
+                    currentPatternData = new PatternData(12, new Queue<PatternData>());
                 }
                 else
                 {
@@ -291,7 +290,7 @@ namespace Core
 
         private void GenerateStartTutorialPlatform()
         {
-            //currentPatternData = new PatternData(12);
+            currentPatternData = new PatternData(12, new Queue<PatternData>());
             currentPatternData.segmentsData = new[]
             {
                 new SegmentData {positionIndex = 0, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},

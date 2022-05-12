@@ -3,6 +3,7 @@ using Core;
 using Data;
 using Progress;
 using Sound;
+using TMPro;
 using UI.GameplayUI.InfinityUI.FailedUI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +20,7 @@ namespace UI.InfinityUI
         [SerializeField] private GameObject finishUI;
         [SerializeField] private ScorePanel scorePanel;
         [SerializeField] private SessionData sessionData;
-        [SerializeField] private Text bestScoreText;
+        [SerializeField] private TextMeshProUGUI bestScoreText;
         [SerializeField] private ProgressController progressController;
         [SerializeField] private Text mainMenuBestText;
         
