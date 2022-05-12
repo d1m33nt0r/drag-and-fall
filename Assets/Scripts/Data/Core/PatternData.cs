@@ -38,11 +38,11 @@ namespace Data.Core
             minLetAmount = default;
             segmentRotationBias = default;
             
-            /*for (var i = 0; i < segmentsData.Length; i++)
+            for (var i = 0; i < segmentsData.Length; i++)
             {
                 segmentsData[i].segmentContent = SegmentContent.None;
-                segmentsData[i].segmentType = SegmentType.Ground;
-            }*/
+                //segmentsData[i].segmentType = SegmentType.Ground;
+            }
             
             patternDataPool.Enqueue(this);
         }

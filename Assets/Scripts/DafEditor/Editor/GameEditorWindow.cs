@@ -3,6 +3,7 @@ using DafEditor.Editor.Common;
 using DafEditor.Editor.Layout;
 using Data.Core;
 using UnityEditor;
+using UnityEngine;
 
 namespace DafEditor.Editor
 {
@@ -13,7 +14,7 @@ namespace DafEditor.Editor
         public LevelsData levelsData;
         public InfinityData infinityData;
         public LevelData currentLevelData;
-        
+        public RandomGenerationProfile randomGenerationProfile;
         public EditorState state;
         public List<PatternData> currentPatternsData;
         

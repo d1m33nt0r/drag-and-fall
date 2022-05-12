@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using DafEditor.Editor.Common;
 using DafEditor.Editor.Intefraces;
 using Data;
+using Data.Core;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,6 +11,7 @@ namespace DafEditor.Editor.Layout
 {
     public class RightSidebar : LayoutComponent, IDrawer
     {
+        private Generator generator = new Generator();
         private Vector2 scrollPos;
         
         public void Draw()
@@ -41,7 +44,28 @@ namespace DafEditor.Editor.Layout
                     EditorGUILayout.FloatField(gameEditorWindow.currentRandomPatternData.segmentRotationBias);
                 GUILayout.EndHorizontal();
             }
-            
+
+            if (gameEditorWindow.state == EditorState.Levels && gameEditorWindow.currentLevelData != null)
+            {
+                EditorGUILayout.BeginHorizontal();
+                GUILayout.Label("Random Generation Profile");
+                gameEditorWindow.randomGenerationProfile = (RandomGenerationProfile) EditorGUILayout
+                    .ObjectField(gameEditorWindow.randomGenerationProfile, typeof(RandomGenerationProfile), true);
+
+                EditorGUILayout.EndHorizontal();
+                
+                if (GUILayout.Button("Generate Random Level"))
+                {
+                    gameEditorWindow.currentLevelData.patterns = new List<PatternData>();
+                    for (var i = 0; i < gameEditorWindow.randomGenerationProfile.countPlatforms; i++)
+                    {
+                        var patternData = new PatternData(12, null);
+                        generator.PlaceSegments(patternData, gameEditorWindow.randomGenerationProfile);
+                        if (gameEditorWindow.randomGenerationProfile.countPlatforms - 1 == i) patternData.isLast = true;
+                        gameEditorWindow.currentLevelData.patterns.Add(patternData);
+                    }
+                }
+            }
             
             EditorGUILayout.EndScrollView();
             GUILayout.EndArea();
