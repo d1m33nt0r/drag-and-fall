@@ -5,6 +5,7 @@ using Data.Core;
 using Data.Core.Segments;
 using Data.Core.Segments.Content;
 using UnityEngine;
+using Zenject;
 using Random = UnityEngine.Random;
 
 namespace Core
@@ -13,7 +14,7 @@ namespace Core
     {
         public InfinityData infinityData;
 
-        public Queue<PatternData> patternDataPool = new Queue<PatternData>();
+        [Inject] private Queue<PatternData> patternDataPool;
         
         private int randPlatformsAmount;
         private bool randIsInitialized;
@@ -28,15 +29,7 @@ namespace Core
         private AvailablePositions availablePositions = new AvailablePositions();
         private AvailablePositions powerUpsAvailablePositions = new AvailablePositions();
         private AvailablePositions currenciesAvailablePositions = new AvailablePositions();
-
-        private void Awake()
-        {
-            for (var i = 0; i < 15; i++)
-            {
-                patternDataPool.Enqueue(new PatternData(12, patternDataPool));
-            }
-        }
-
+        
         public PatternData GetFirstPlatform()
         {
             return new PatternData(12, patternDataPool);

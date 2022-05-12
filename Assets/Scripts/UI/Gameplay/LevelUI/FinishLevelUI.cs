@@ -22,7 +22,7 @@ namespace UI
         [SerializeField] private GameManager gameManager;
         [SerializeField] private ProgressController progressController;
         [SerializeField] private UIManager uIManager;
-        [SerializeField] private Text score;
+        [SerializeField] private TextMeshProUGUI score;
         [SerializeField] private Slider scoreSlider;
         [SerializeField] private TextMeshProUGUI level;
         [SerializeField] private Animator animator;

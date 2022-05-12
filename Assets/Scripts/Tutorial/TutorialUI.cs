@@ -70,8 +70,6 @@ public class TutorialUI : MonoBehaviour
         secondStep.SetActive(false);
         thirdStep.SetActive(false);
         fourthStep.SetActive(false);
-        firstStepComplete = true;
-        tutorialProgress.tutorialSteps[0] = true;
     }
 
     public void ShowSecondStep()
@@ -81,9 +79,9 @@ public class TutorialUI : MonoBehaviour
         secondStep.SetActive(true);
         fourthStep.SetActive(false);
         thirdStep.SetActive(false);
+        firstStepComplete = true;
         secondStepComplete = true;
         gameManager.gameStarted = false;
-        tutorialProgress.tutorialSteps[1] = true;
     }
 
     public void ShowThirdStep()
@@ -95,7 +93,6 @@ public class TutorialUI : MonoBehaviour
         fourthStep.SetActive(false);
         thirdStepComplete = true;
         gameManager.gameStarted = false;
-        tutorialProgress.tutorialSteps[2] = true;
     }
 
     public void ShowFourthStep()
@@ -105,7 +102,13 @@ public class TutorialUI : MonoBehaviour
         secondStep.SetActive(false);
         thirdStep.SetActive(false);
         fourthStep.SetActive(true);
+        firstStepComplete = true;
+        secondStepComplete = true;
+        thirdStepComplete = true;
         fourthStepComplete = true;
+        tutorialProgress.tutorialSteps[0] = true;
+        tutorialProgress.tutorialSteps[1] = true;
+        tutorialProgress.tutorialSteps[2] = true;
         tutorialProgress.tutorialSteps[3] = true;
         RewriteTutorialProgressData();
         Firebase.Analytics.FirebaseAnalytics.LogEvent("Finished 1 stage of tutorial");

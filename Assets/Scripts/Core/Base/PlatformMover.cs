@@ -15,6 +15,7 @@ using ObjectPool;
 using Sound;
 using UI;
 using UnityEngine;
+using Zenject;
 
 namespace Core
 {
@@ -50,7 +51,9 @@ namespace Core
         public LevelsData levelsData;
         [SerializeField] private BonusController bonusController;
         [SerializeField] private LevelProgress levelProgress;
-        
+
+
+        [Inject] private Queue<PatternData> patternDataPool;
         
         public bool platformsIsInitialized;
         public bool isLevelMode;
@@ -155,7 +158,6 @@ namespace Core
         {
             gameManager.gameMode.levelMode.SetLevelData(_levelData);
             levelProgress.Initialize(_levelData);
-            InitializePlatforms();
         }
 
         public void SetLevelMode(bool value)
@@ -207,7 +209,7 @@ namespace Core
             {
                 if (!concentration.isActive)
                 {
-                    GenerateStartTutorialPlatform();
+                    currentPatternData = GenerateStartTutorialPlatform();
                     CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
                 }
                 else
@@ -275,11 +277,11 @@ namespace Core
             {
                 if (i == 0)
                 {
-                    currentPatternData = new PatternData(12, new Queue<PatternData>());
+                    currentPatternData = new PatternData(12, patternDataPool);
                 }
                 else
                 {
-                    GenerateStartTutorialPlatform();
+                    currentPatternData = GenerateStartTutorialPlatform();
                 }
                     
                 CreateNewPlatform(i, currentPatternData, false);
@@ -288,10 +290,10 @@ namespace Core
             platformsIsInitialized = true;
         }
 
-        private void GenerateStartTutorialPlatform()
+        private PatternData GenerateStartTutorialPlatform()
         {
-            currentPatternData = new PatternData(12, new Queue<PatternData>());
-            currentPatternData.segmentsData = new[]
+            var patternData = new PatternData(12, patternDataPool);
+            patternData.segmentsData = new[]
             {
                 new SegmentData {positionIndex = 0, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
                 new SegmentData {positionIndex = 1, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
@@ -306,6 +308,8 @@ namespace Core
                 new SegmentData {positionIndex = 10, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
                 new SegmentData {positionIndex = 11, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
             };
+
+            return patternData;
         }
 
         private void StandardInit()

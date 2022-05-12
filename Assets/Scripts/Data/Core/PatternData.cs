@@ -17,6 +17,11 @@ namespace Data.Core
         public float segmentRotationBias;
         public SegmentData[] segmentsData;
         private Queue<PatternData> patternDataPool;
+
+        public void InjectPatternDataPool(Queue<PatternData> patternDataPool)
+        {
+            this.patternDataPool = patternDataPool;
+        }
         
         public PatternData(int _segmentsAmount, Queue<PatternData> patternDataPool)
         {
@@ -26,7 +31,6 @@ namespace Data.Core
 
         public void ReturnToPool()
         {
-            isLast = default;
             isRandom = default;
             maxHoleAmount = default;
             maxLetAmount = default;
@@ -34,11 +38,11 @@ namespace Data.Core
             minLetAmount = default;
             segmentRotationBias = default;
             
-            for (var i = 0; i < segmentsData.Length; i++)
+            /*for (var i = 0; i < segmentsData.Length; i++)
             {
                 segmentsData[i].segmentContent = SegmentContent.None;
                 segmentsData[i].segmentType = SegmentType.Ground;
-            }
+            }*/
             
             patternDataPool.Enqueue(this);
         }

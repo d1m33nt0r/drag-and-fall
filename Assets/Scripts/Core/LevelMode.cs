@@ -1,5 +1,7 @@
-﻿using Data.Core;
+﻿using System.Collections.Generic;
+using Data.Core;
 using UnityEngine;
+using Zenject;
 
 namespace Core
 {
@@ -8,7 +10,9 @@ namespace Core
         public LevelData level;
 
         private int patternPointer;
-        
+
+        [Inject] private Queue<PatternData> patternDataPool;
+
         public void SetLevelData(LevelData _levelData)
         {
             level = _levelData;
@@ -19,23 +23,25 @@ namespace Core
         {
             patternPointer = 0;
         }
-        
+
         public PatternData GetPatternData()
         {
             if (level.patterns.Count > patternPointer + 1)
             {
                 var patternData = level.patterns[patternPointer];
+                patternData.InjectPatternDataPool(patternDataPool);
                 patternPointer++;
                 return patternData;
             }
-            
+
             if (level.patterns.Count == patternPointer + 1)
             {
                 var patternData = level.patterns[patternPointer];
+                patternData.InjectPatternDataPool(patternDataPool);
                 patternPointer++;
                 return patternData;
             }
-            
+
             //ResetPointer();
             return null;
         }
