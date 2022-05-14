@@ -1368,7 +1368,7 @@ ParticleSystem:
     frameOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.15625
+      scalar: 0.203125
       minScalar: 0.9999
       maxCurve:
         serializedVersion: 2

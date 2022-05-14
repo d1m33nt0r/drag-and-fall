@@ -50,6 +50,17 @@ namespace ObjectPool
             InitializeKeyPool();
         }
 
+        public void ChangeTheme(Material material)
+        {
+            foreach (var keyValue in pool)
+            {
+                foreach (var obj in keyValue.Value)
+                {
+                    obj.GetComponent<MeshRenderer>().material = material;
+                }
+            }
+        }
+        
         private void InitializeKeyPool()
         {
             pool.Add(SegmentContent.Key, new Queue<GameObject>());

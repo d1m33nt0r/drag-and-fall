@@ -74,14 +74,14 @@ namespace Core
             {
                 if (segmentData.segmentType == SegmentType.Ground)
                 {
-                    meshRenderer.material = platformMover.visualController.GetSegmentMaterial(SegmentType.Ground);
+                    meshRenderer.material = platformMover.visualController.TryOnSegmentMaterial(_environmentSkinData);
                 }
                 else
                 {
-                    meshRenderer.material = platformMover.visualController.GetSegmentMaterial(SegmentType.Let);
+                    meshRenderer.material = platformMover.visualController.TryOnSegmentMaterial(_environmentSkinData);
                 }
                 
-                meshFilter.mesh = _environmentSkinData.segment;
+                meshFilter.mesh = platformMover.visualController.GetSegmentMesh(segmentData.segmentType);
             }
         }
 

@@ -284,7 +284,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 200
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1367,8 +1367,8 @@ ParticleSystem:
     fps: 30
     frameOverTime:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 0.234375
+      minMaxState: 0
+      scalar: 0.109375
       minScalar: 0.21875
       maxCurve:
         serializedVersion: 2

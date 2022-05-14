@@ -53,6 +53,8 @@ namespace Core
         [SerializeField] private GameObject fireEffect;
         [SerializeField] private GameObject sled;
         [SerializeField] private GameObject fireBacklight;
+
+        [SerializeField] private MeshRenderer[] shields;
         
         private bool triggerStay;
 
@@ -190,10 +192,14 @@ namespace Core
         {
             meshFilter.mesh = visualController.GetPlayerMesh();
             meshRenderer.material = visualController.GetPlayerMaterial();
+
+            for (var i = 0; i < shields.Length; i++)
+            {
+                shields[i].material = visualController.GetPlayerMaterial();
+            }
             
             Destroy(fireEffect);
-            Transform transform1;
-            fireEffect = Instantiate(visualController.GetTrail(), (transform1 = transform).position, Quaternion.identity, transform1.parent);
+            fireEffect = Instantiate(visualController.GetTrail(), new Vector3(0, 0.15f, -0.7f), Quaternion.identity, transform.parent);
         }
 
         public void TryOnPlayerSkin(PlayerSkinData playerSkinData)

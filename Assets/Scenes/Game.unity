@@ -43552,6 +43552,7 @@ MonoBehaviour:
   progressController: {fileID: 386115021}
   platformMover: {fileID: 1755819904}
   player: {fileID: 1776688606}
+  segmentContentPool: {fileID: 578498416}
 --- !u!4 &876524755
 Transform:
   m_ObjectHideFlags: 0
@@ -46408,7 +46409,7 @@ Camera:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -49314,11 +49315,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4081180972776190544, guid: 485945dec190d1549a208633a1d7b054, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0
+      value: 0.6745283
       objectReference: {fileID: 0}
     - target: {fileID: 4081180972776190544, guid: 485945dec190d1549a208633a1d7b054, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.5415317
+      value: 0.8506659
       objectReference: {fileID: 0}
     - target: {fileID: 4081180972776190544, guid: 485945dec190d1549a208633a1d7b054, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
@@ -82684,7 +82685,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.098242015, y: 0.24151534}
   m_AnchorMax: {x: 0.29081532, y: 0.7614065}
-  m_AnchoredPosition: {x: -0.32965088, y: -0.13196182}
+  m_AnchoredPosition: {x: -0.32965088, y: -0.13196373}
   m_SizeDelta: {x: 2.684578, y: -1.2223892}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1644771207
@@ -87012,6 +87013,11 @@ MonoBehaviour:
   fireEffect: {fileID: 106817234}
   sled: {fileID: 5288686625605980999, guid: 6e5257dcf4407a5498de1613dfbb9fde, type: 3}
   fireBacklight: {fileID: 2121700904}
+  shields:
+  - {fileID: 1523174672}
+  - {fileID: 1894116567}
+  - {fileID: 121827723}
+  - {fileID: 1025929964}
 --- !u!95 &1776688607
 Animator:
   serializedVersion: 3
@@ -103434,10 +103440,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 405592843}
     m_Modifications:
-    - target: {fileID: 3471079908320733186, guid: db27238b087e89b4eb932f31e226d7e6, type: 3}
-      propertyPath: UVModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3471079908320733188, guid: db27238b087e89b4eb932f31e226d7e6, type: 3}
       propertyPath: m_RootOrder
       value: 0

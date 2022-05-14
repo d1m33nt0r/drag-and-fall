@@ -53,7 +53,7 @@ MonoBehaviour:
     - {fileID: 5643087555890222503, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
     - {fileID: 3713934850428853943, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
     - {fileID: -3408895284609863541, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
-    backgroundParticleSystem: {fileID: 258380641518628445, guid: 20d2a9f2bc1a66a4f8d089f82076d077, type: 3}
+    backgroundParticleSystem: {fileID: 1629307970770947860, guid: b26e9f029d430684fa93d67da97ed83d, type: 3}
     particleSystemPosition: {x: 3.7, y: 101.3, z: 84.1}
   - index: 3
     isBought: 1
@@ -78,17 +78,17 @@ MonoBehaviour:
   - isBought: 0
     priceCoins: 1
     priceCrystals: 0
-    mesh: {fileID: 6840333135571099348, guid: 1b19154ba0e913d44bf62ea327207638, type: 3}
+    mesh: {fileID: 4711208715938537054, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
     material: {fileID: 2100000, guid: 82c92c4c2a35f254e9a7a53439dcda88, type: 2}
   - isBought: 1
     priceCoins: 1
     priceCrystals: 1
-    mesh: {fileID: 5592276042613824943, guid: e579588297b2df14cbbc8fbe0f0662f4, type: 3}
+    mesh: {fileID: 4711208715938537054, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
     material: {fileID: 2100000, guid: 4e11d53eb1edb5148bd7c3974357f2ab, type: 2}
   - isBought: 1
     priceCoins: 1
     priceCrystals: 1
-    mesh: {fileID: 5592276042613824943, guid: e579588297b2df14cbbc8fbe0f0662f4, type: 3}
+    mesh: {fileID: 4711208715938537054, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
     material: {fileID: 2100000, guid: 4e11d53eb1edb5148bd7c3974357f2ab, type: 2}
   TrailSkinData:
   - isBought: 1

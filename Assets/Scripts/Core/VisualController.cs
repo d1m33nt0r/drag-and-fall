@@ -1,6 +1,8 @@
 ﻿using Common;
 using Data;
 using Data.Core.Segments;
+using Data.Shop.TubeSkins;
+using ObjectPool;
 using Progress;
 using UnityEngine;
 
@@ -15,6 +17,8 @@ namespace Core
         [SerializeField] private PlatformMover platformMover;
         [SerializeField] private Player player;
 
+        [SerializeField] private SegmentContentPool segmentContentPool;
+        
         private void Start()
         {
             SetNeededThemes();
@@ -30,6 +34,8 @@ namespace Core
                 for (var i = 0; i < Constants.Platform.COUNT_SEGMENTS; i++)
                     platform.transform.GetChild(i).GetComponent<Segment>().ChangeTheme();
             }
+
+            segmentContentPool.ChangeTheme(platformMover.visualController.GetTubeMaterial());
         }
 
         public GameObject GetBackgroundParticleSystem()
@@ -44,6 +50,13 @@ namespace Core
         {
             var str = progressController.currentState.environmentSkin.index.ToString() +
                       progressController.currentState.playerSkin.index;
+            
+            return mapOfSkins.Skin[str];
+        }
+        
+        public Material TryOnSegmentMaterial(EnvironmentSkinData environmentSkinData)
+        {
+            var str = environmentSkinData.index.ToString() + progressController.currentState.playerSkin.index;
             
             return mapOfSkins.Skin[str];
         }
