@@ -1,7 +1,6 @@
 ﻿using Common;
 using Data;
 using Data.Core.Segments;
-using Data.Shop.TubeSkins;
 using ObjectPool;
 using Progress;
 using UnityEngine;
@@ -10,6 +9,8 @@ namespace Core
 {
     public class VisualController : MonoBehaviour
     {
+        [SerializeField] private GameObject fireEffect;
+        [SerializeField] private PlatformPool platformPool;
         public MapOfSkins mapOfSkins;
         [SerializeField] private ShopData shopData;
         [SerializeField] private ProgressController progressController;
@@ -26,52 +27,35 @@ namespace Core
 
         public void SetNeededThemes()
         {
-            platformMover.ChangeTheme();
-            player.ChangeTheme();
+            var themeIdentifier = progressController.currentState.environmentSkin.index.ToString() 
+                                  + progressController.currentState.playerSkin.index;
+            
+            platformMover.ChangeTheme(themeIdentifier, progressController.currentState.environmentSkin.index);
+            player.ChangeTheme(themeIdentifier);
             
             foreach (var platform in platformMover.platforms)
             {
                 for (var i = 0; i < Constants.Platform.COUNT_SEGMENTS; i++)
-                    platform.transform.GetChild(i).GetComponent<Segment>().ChangeTheme();
+                    platform.transform.GetChild(i).GetComponent<Segment>().ChangeTheme(themeIdentifier);
             }
-
-            segmentContentPool.ChangeTheme(platformMover.visualController.GetTubeMaterial());
+            platformPool.ChangeTheme(themeIdentifier);
+            /*Destroy(fireEffect);
+            fireEffect = Instantiate(GetTrail(), new Vector3(0, 0.15f, -0.7f), Quaternion.identity, transform.parent);
+            fireEffect.SetActive(false);*/
+            segmentContentPool.ChangeTheme(platformMover.visualController.GetMaterial(themeIdentifier));
         }
 
-        public GameObject GetBackgroundParticleSystem()
+        public GameObject GetBackgroundParticleSystem(int environmentThemeIndex)
         {
-            var particles = Instantiate(shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index]
+            var particles = Instantiate(shopData.EnvironmentSkinData[environmentThemeIndex]
                 .backgroundParticleSystem);
             
             return particles;
         }
-        
-        public Material GetSegmentMaterial(SegmentType _segmentType)
-        {
-            var str = progressController.currentState.environmentSkin.index.ToString() +
-                      progressController.currentState.playerSkin.index;
-            
-            return mapOfSkins.Skin[str];
-        }
-        
-        public Material TryOnSegmentMaterial(EnvironmentSkinData environmentSkinData)
-        {
-            var str = environmentSkinData.index.ToString() + progressController.currentState.playerSkin.index;
-            
-            return mapOfSkins.Skin[str];
-        }
 
-        public Material GetSkyboxMaterial()
+        public Material GetSkyboxMaterial(int environmentThemeIndex)
         {
-            return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].skybox;
-        }
-
-        public Material GetPlayerMaterial()
-        {
-            var str = progressController.currentState.environmentSkin.index.ToString() +
-                      progressController.currentState.playerSkin.index;
-            
-            return mapOfSkins.Skin[str];
+            return shopData.EnvironmentSkinData[environmentThemeIndex].skybox;
         }
 
         public Mesh GetPlayerMesh()
@@ -79,12 +63,9 @@ namespace Core
             return shopData.PlayerSkinData[progressController.currentState.playerSkin.index].mesh;
         }
         
-        public Material GetTubeMaterial()
+        public Material GetMaterial(string identifier)
         {
-            var str = progressController.currentState.environmentSkin.index.ToString() +
-                      progressController.currentState.playerSkin.index;
-            
-            return mapOfSkins.Skin[str];
+            return mapOfSkins.Skin[identifier];
         }
         
         public Mesh[] GetPlatformColors()
@@ -97,20 +78,23 @@ namespace Core
             return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].tube;
         }
         
+        public Mesh GetSegmentMesh(SegmentType segmentType)
+        {
+            switch (segmentType)
+            {
+                case SegmentType.Ground:
+                    return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].segment;
+                case SegmentType.Let:
+                    return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].letSegmentMesh;
+                default:
+                    return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].segment;
+            }
+            
+        }
+        
         public GameObject GetTrail()
         {
             return shopData.TrailSkinData[progressController.currentState.trailSkin.index].skin;
-        }
-        
-        public Mesh GetSegmentMesh(SegmentType segmentType)
-        {
-            if (segmentType == SegmentType.Ground)
-                return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index].segment;
-            if (segmentType == SegmentType.Let)
-                return shopData.EnvironmentSkinData[progressController.currentState.environmentSkin.index]
-                    .letSegmentMesh;
-
-            return null;
         }
     }
 }

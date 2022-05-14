@@ -143,5 +143,12 @@ namespace Core
             
             animator.Play(breakAnimationID);
         }
+
+        public void ChangeTheme(string themeIdentifier)
+        {
+            for (var i = 0; i < segments.Length; i++)
+                segments[i].GetComponent<MeshRenderer>().material =
+                    platformMover.visualController.GetMaterial(themeIdentifier);
+        }
     }
 }

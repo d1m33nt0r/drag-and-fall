@@ -34,6 +34,14 @@ namespace ObjectPool
             }
         }
 
+        public void ChangeTheme(string themeIdentifier)
+        {
+            foreach (var platform in platformPool)
+            {
+                platform.ChangeTheme(themeIdentifier);
+            }
+        }
+
         public Platform GetPlatform()
         {
             if (platformPool.Count > 0)

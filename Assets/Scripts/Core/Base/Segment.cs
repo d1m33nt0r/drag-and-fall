@@ -39,10 +39,9 @@ namespace Core
         {
             segmentData = _segmentData;
             SpawnContent();
-            ChangeTheme();
         }
-
-        public void ChangeTheme()
+        
+        public void ChangeTheme(string themeIdentifier)
         {
             meshRenderer.enabled = true;
             
@@ -52,7 +51,7 @@ namespace Core
             }
             else
             {
-                meshRenderer.material = platformMover.visualController.GetSegmentMaterial(segmentData.segmentType);
+                meshRenderer.material = platformMover.visualController.GetMaterial(themeIdentifier);
                 meshFilter.mesh = platformMover.visualController.GetSegmentMesh(segmentData.segmentType);
             }
         }
@@ -64,25 +63,6 @@ namespace Core
            
             meshFilter.mesh =
                 platformMover.visualController.GetPlatformColors()[countTouches - 1];
-        }
-        
-        public void TryOnTheme(EnvironmentSkinData _environmentSkinData)
-        {
-            if (segmentData.segmentType == SegmentType.Hole)
-                meshRenderer.enabled = false;
-            else
-            {
-                if (segmentData.segmentType == SegmentType.Ground)
-                {
-                    meshRenderer.material = platformMover.visualController.TryOnSegmentMaterial(_environmentSkinData);
-                }
-                else
-                {
-                    meshRenderer.material = platformMover.visualController.TryOnSegmentMaterial(_environmentSkinData);
-                }
-                
-                meshFilter.mesh = platformMover.visualController.GetSegmentMesh(segmentData.segmentType);
-            }
         }
 
         public void SpawnContent()

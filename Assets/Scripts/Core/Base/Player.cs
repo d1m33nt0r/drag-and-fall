@@ -188,26 +188,17 @@ namespace Core
             magnetPlayer.gameObject.SetActive(value);
         }
 
-        public void ChangeTheme()
+        public void ChangeTheme(string themeIdentifier)
         {
             meshFilter.mesh = visualController.GetPlayerMesh();
-            meshRenderer.material = visualController.GetPlayerMaterial();
+            meshRenderer.material = visualController.GetMaterial(themeIdentifier);
 
             for (var i = 0; i < shields.Length; i++)
             {
-                shields[i].material = visualController.GetPlayerMaterial();
+                shields[i].material = visualController.GetMaterial(themeIdentifier);
             }
-            
-            Destroy(fireEffect);
-            fireEffect = Instantiate(visualController.GetTrail(), new Vector3(0, 0.15f, -0.7f), Quaternion.identity, transform.parent);
         }
-
-        public void TryOnPlayerSkin(PlayerSkinData playerSkinData)
-        {
-            meshFilter.mesh = playerSkinData.mesh;
-            meshRenderer.material = visualController.GetPlayerMaterial();
-        }
-
+        
         public void TryOnTrailSkin(GameObject _trail)
         {
             Destroy(fireEffect);

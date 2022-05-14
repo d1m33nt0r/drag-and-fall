@@ -126,26 +126,20 @@ namespace Core
         {
             InitializePlatformPoints();
             InitializePlatforms();
-            ChangeTheme();
+            
+            var themeIdentifier = progressController.currentState.environmentSkin.index.ToString() 
+                                              + progressController.currentState.playerSkin.index;
+            
+            ChangeTheme(themeIdentifier, progressController.currentState.environmentSkin.index);
         }
 
-        public void TryOnSkin(EnvironmentSkinData _environmentSkinData)
+        public void ChangeTheme(string themeIdentifier, int environmentThemeIndex)
         {
-            tubeMover.TryOnSkin(_environmentSkinData);
+            tubeMover.ChangeTheme(themeIdentifier, environmentThemeIndex);
             foreach (var platform in platforms)
             {
                 for (var i = 0; i < Constants.Platform.COUNT_SEGMENTS; i++)
-                    platform.transform.GetChild(i).GetComponent<Segment>().TryOnTheme(_environmentSkinData);
-            }
-        }
-        
-        public void ChangeTheme()
-        {
-            tubeMover.ChangeTheme();
-            foreach (var platform in platforms)
-            {
-                for (var i = 0; i < Constants.Platform.COUNT_SEGMENTS; i++)
-                    platform.transform.GetChild(i).GetComponent<Segment>().ChangeTheme();
+                    platform.transform.GetChild(i).GetComponent<Segment>().ChangeTheme(themeIdentifier);
             }
         }
 

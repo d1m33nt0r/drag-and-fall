@@ -1,6 +1,4 @@
-﻿using Data.Shop.TubeSkins;
-using ObjectPool;
-using Progress;
+﻿using ObjectPool;
 using UnityEngine;
 
 namespace Core
@@ -24,22 +22,12 @@ namespace Core
             mtransform = GetComponent<Transform>();
             tubeMover = _tubeMover;
             this.tubePool = tubePool;
-            ChangeTheme();
-        }
-
-        public void TryOnSkin(EnvironmentSkinData _environmentSkinData)
-        {
-            RenderSettings.skybox = _environmentSkinData.skybox;
-            var str = _environmentSkinData.index.ToString() +
-                      tubeMover.progressController.currentState.playerSkin.index;
-            meshRenderer.material = tubeMover.platformMover.visualController.mapOfSkins.Skin[str];
-            meshFilter.mesh = _environmentSkinData.tube;
         }
         
-        public void ChangeTheme()
+        
+        public void ChangeTheme(string themeIdentifier)
         {
-            RenderSettings.skybox = tubeMover.platformMover.visualController.GetSkyboxMaterial();
-            meshRenderer.material = tubeMover.platformMover.visualController.GetTubeMaterial();
+            meshRenderer.material = tubeMover.platformMover.visualController.GetMaterial(themeIdentifier);
             meshFilter.mesh = tubeMover.platformMover.visualController.GetTubeMesh();
         }
 

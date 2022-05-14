@@ -1,4 +1,5 @@
-﻿using Data.Shop.TubeSkins;
+﻿using System;
+using Data.Shop.TubeSkins;
 using ObjectPool;
 using Progress;
 using UnityEngine;
@@ -30,8 +31,6 @@ namespace Core
 
         private void Initialize()
         {
-            if (particleSystem != null) Destroy(particleSystem);
-            particleSystem = platformMover.visualController.GetBackgroundParticleSystem();
             InitializeTubePoints();
             InitializeTube();
         }
@@ -72,23 +71,16 @@ namespace Core
             tubeIsInitialized = true;
         }
 
-        public void TryOnSkin(EnvironmentSkinData _environmentSkinData)
+        public void ChangeTheme(string themeIdentifier, int environmentThemeIndex)
         {
             if (particleSystem != null) Destroy(particleSystem);
-            particleSystem = Instantiate(_environmentSkinData.backgroundParticleSystem);
-            foreach (var tubePart in tubeParts) tubePart.TryOnSkin(_environmentSkinData);
-        }
-
-        public void ChangeTheme()
-        {
-            if (particleSystem != null) Destroy(particleSystem);
-            
-            particleSystem = platformMover.visualController.GetBackgroundParticleSystem();
+            RenderSettings.skybox = platformMover.visualController.GetSkyboxMaterial(environmentThemeIndex);
+            particleSystem = platformMover.visualController.GetBackgroundParticleSystem(environmentThemeIndex);
             
             foreach (var tubePart in tubeParts)
-                tubePart.ChangeTheme();
+                tubePart.ChangeTheme(themeIdentifier);
 
-            tubePool.ChangeTheme();
+            tubePool.ChangeTheme(themeIdentifier);
         }
 
         public void CreateNewTubePart()

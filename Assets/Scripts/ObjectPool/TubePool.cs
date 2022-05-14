@@ -41,11 +41,11 @@ namespace ObjectPool
             return instance2.transform;
         }
 
-        public void ChangeTheme()
+        public void ChangeTheme(string themeIdentifier)
         {
             foreach (var obj in tubePool)
             {
-                obj.GetComponent<TubePart>().ChangeTheme();
+                obj.GetComponent<TubePart>().ChangeTheme(themeIdentifier);
             }
         }
 
