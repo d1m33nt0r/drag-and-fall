@@ -64,7 +64,7 @@ namespace Core
 
         public void SetActiveFireEffect(bool value)
         {
-            fireEffect.SetActive(value);
+            fireEffect?.SetActive(value);
             fireBacklight.SetActive(value);
             if (!value) playerSounds.StopFireSound();
         }
@@ -197,12 +197,21 @@ namespace Core
             {
                 shields[i].material = visualController.GetMaterial(themeIdentifier);
             }
+
+            ChangeTrail(visualController.GetTrail());
+            fireEffect.SetActive(false);
         }
-        
-        public void TryOnTrailSkin(GameObject _trail)
+
+        private void ChangeTrail(GameObject trail)
         {
             Destroy(fireEffect);
-            fireEffect = Instantiate(_trail, playerTransform.position, Quaternion.Euler(-180,0,0), playerTransform.parent);
+            fireEffect = Instantiate(trail, new Vector3(0, 0.15f, -0.7f), Quaternion.identity, playerTransform.parent);
+        }
+        
+        public void TryOnTrail(GameObject _trail)
+        {
+            Destroy(fireEffect);
+            fireEffect = Instantiate(_trail, new Vector3(0, 0.15f, -0.7f), Quaternion.Euler(-180,0,0), playerTransform.parent);
         }
 
         public void PlayIdleAnim()

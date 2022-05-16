@@ -256,7 +256,7 @@ namespace Core
                     SetPriceText(progressController.shopProgress.trailSkins[currentTrailSkinIndex].isBought, 
                         shopData.TrailSkinData[currentTrailSkinIndex].priceCoins,
                         shopData.TrailSkinData[currentTrailSkinIndex].priceCrystals);
-                    player.TryOnTrailSkin(shopData.TrailSkinData[currentTrailSkinIndex].skin);
+                    player.TryOnTrail(shopData.TrailSkinData[currentTrailSkinIndex].skin);
                     break;
             }
         }
@@ -300,7 +300,7 @@ namespace Core
                     SetPriceText(progressController.shopProgress.trailSkins[currentTrailSkinIndex].isBought, 
                         shopData.TrailSkinData[currentTrailSkinIndex].priceCoins, 
                         shopData.TrailSkinData[currentTrailSkinIndex].priceCrystals);
-                    player.TryOnTrailSkin(shopData.TrailSkinData[currentTrailSkinIndex].skin);
+                    player.TryOnTrail(shopData.TrailSkinData[currentTrailSkinIndex].skin);
                     break;
             }
         }

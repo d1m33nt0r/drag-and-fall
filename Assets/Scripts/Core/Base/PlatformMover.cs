@@ -77,24 +77,15 @@ namespace Core
             platformMovementSpeed = speed;
             cameraController.ChangeFieldView(speed);
             
-            if (platformMovementSpeed == 6)
+            
+            if (platformMovementSpeed == 3)
+            {
+                player.SetActiveFireEffect(false);
+            }
+            else
             {
                 player.SetActiveFireEffect(true);
                 player.IncreaseFireEffect6();
-            }
-            else if (platformMovementSpeed == 5)
-            {
-                player.SetActiveFireEffect(true);
-                player.IncreaseFireEffect5();
-            }
-            else if (platformMovementSpeed == 4)
-            {
-                player.SetActiveFireEffect(true);
-                player.IncreaseFireEffect4();
-            }
-            else if (platformMovementSpeed == 3)
-            {
-                player.SetActiveFireEffect(false);
             }
         }
         

@@ -38,22 +38,25 @@ namespace Core
         public void Initialize(SegmentData _segmentData)
         {
             segmentData = _segmentData;
-            SpawnContent();
-        }
-        
-        public void ChangeTheme(string themeIdentifier)
-        {
-            meshRenderer.enabled = true;
-            
             if (segmentData.segmentType == SegmentType.Hole)
             {
                 meshRenderer.enabled = false;
             }
             else
             {
-                meshRenderer.material = platformMover.visualController.GetMaterial(themeIdentifier);
+                meshRenderer.enabled = true;
                 meshFilter.mesh = platformMover.visualController.GetSegmentMesh(segmentData.segmentType);
             }
+            SpawnContent();
+        }
+        
+        public void ChangeTheme(string themeIdentifier)
+        {
+            meshRenderer.enabled = true;
+            meshRenderer.material = platformMover.visualController.GetMaterial(themeIdentifier);
+            
+            if (segmentData.segmentType == SegmentType.Hole)
+                meshRenderer.enabled = false;
         }
 
         public void ChangeColor(int countTouches)

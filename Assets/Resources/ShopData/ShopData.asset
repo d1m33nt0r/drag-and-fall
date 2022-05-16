@@ -91,7 +91,7 @@ MonoBehaviour:
     mesh: {fileID: 4711208715938537054, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
     material: {fileID: 2100000, guid: 4e11d53eb1edb5148bd7c3974357f2ab, type: 2}
   TrailSkinData:
-  - isBought: 0
+  - isBought: 1
     priceCoins: 0
     priceCrystals: 0
     skin: {fileID: 3471079908320733189, guid: db27238b087e89b4eb932f31e226d7e6, type: 3}
@@ -107,7 +107,7 @@ MonoBehaviour:
     priceCoins: 1
     priceCrystals: 1
     skin: {fileID: 118508, guid: e64800d9053417b418cc8a28605d5b73, type: 3}
-  - isBought: 0
+  - isBought: 1
     priceCoins: 1
     priceCrystals: 1
     skin: {fileID: 115116, guid: 402cfc0892ef54047b74d53d5a560238, type: 3}
@@ -115,7 +115,7 @@ MonoBehaviour:
     priceCoins: 1
     priceCrystals: 1
     skin: {fileID: 149992, guid: 4e395833a91102b4a93cdeb0213682db, type: 3}
-  - isBought: 0
+  - isBought: 1
     priceCoins: 1
     priceCrystals: 1
     skin: {fileID: 1926854741537082, guid: d80c1b420684dac4c8ea0404d979f12f, type: 3}

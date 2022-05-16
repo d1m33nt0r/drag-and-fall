@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: de9462a98f64fb34f96fb00dca85efd8, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -43547,6 +43547,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b14b35379714900a84dbab2958cc779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireEffect: {fileID: 106817234}
+  platformPool: {fileID: 381136001}
   mapOfSkins: {fileID: 11400000, guid: d9544dc99fa5c5c439399e4c3c0de1bd, type: 2}
   shopData: {fileID: 11400000, guid: 721eeccf73432cc469b6e77393ffc035, type: 2}
   progressController: {fileID: 386115021}
@@ -82685,7 +82687,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.098242015, y: 0.24151534}
   m_AnchorMax: {x: 0.29081532, y: 0.7614065}
-  m_AnchoredPosition: {x: -0.32965088, y: -0.13196373}
+  m_AnchoredPosition: {x: -0.32965088, y: -0.13196278}
   m_SizeDelta: {x: 2.684578, y: -1.2223892}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1644771207
@@ -94388,7 +94390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.51900005, y: 0.13446297}
   m_AnchorMax: {x: 0.87062967, y: 0.19561112}
-  m_AnchoredPosition: {x: 0.12463379, y: 158.4977}
+  m_AnchoredPosition: {x: 0.12463379, y: 158.49763}
   m_SizeDelta: {x: -0.9259949, y: 1.7545929}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2015616862
