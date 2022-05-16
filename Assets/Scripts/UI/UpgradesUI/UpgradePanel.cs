@@ -4,11 +4,13 @@ using Progress;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace UI.Upgrades
 {
     public class UpgradePanel : MonoBehaviour
     {
+        [Inject] private SoundOfBuying soundOfBuying;       
         [SerializeField] private ProgressController progressController;
         [SerializeField] private BonusType bonusType;
         [SerializeField] private Concentration concentration;
@@ -54,7 +56,8 @@ namespace UI.Upgrades
         {
             if (progressController.currentState.currenciesProgress.coins < 1000 
                 || progressController.currentState.currenciesProgress.crystals < 15) return;
-
+            
+            soundOfBuying.PlayBuyingSound();
             coinPanel.MinusCoins(1000);
             crystalPanel.MinusCrystals(15);
             

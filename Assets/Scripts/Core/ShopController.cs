@@ -4,11 +4,14 @@ using Progress;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Core
 {
     public class ShopController : MonoBehaviour
     {
+        [Inject] private SoundOfBuying soundOfBuying;
+        
         [SerializeField] private TextMeshProUGUI unlockedText;
         [SerializeField] private GameObject coinPricePanel;
         [SerializeField] private TextMeshProUGUI priceCoins;
@@ -90,7 +93,7 @@ namespace Core
                 case ShopState.EnvironmentSkin:
                     if (shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].priceCoins > progressController.currentState.currenciesProgress.coins) return;
                     if (shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].priceCrystals > progressController.currentState.currenciesProgress.crystals) return;
-                    
+                    soundOfBuying.PlayBuyingSound();
                     progressController.currentState.currenciesProgress.coins -=
                         Convert.ToInt16(shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].priceCoins);
                     progressController.currentState.currenciesProgress.crystals -=
@@ -113,7 +116,7 @@ namespace Core
                 case ShopState.PlayerSkin:
                     if (shopData.PlayerSkinData[currentPlayerSkinIndex].priceCoins > progressController.currentState.currenciesProgress.coins) return;
                     if (shopData.PlayerSkinData[currentPlayerSkinIndex].priceCrystals > progressController.currentState.currenciesProgress.crystals) return;
-                    
+                    soundOfBuying.PlayBuyingSound();
                     progressController.currentState.currenciesProgress.coins -=
                         Convert.ToInt16(shopData.PlayerSkinData[currentPlayerSkinIndex].priceCoins);
                     progressController.currentState.currenciesProgress.crystals -=
@@ -136,7 +139,7 @@ namespace Core
                 case ShopState.TrailSkin:
                     if (shopData.TrailSkinData[currentTrailSkinIndex].priceCoins > progressController.currentState.currenciesProgress.coins) return;
                     if (shopData.TrailSkinData[currentTrailSkinIndex].priceCrystals > progressController.currentState.currenciesProgress.crystals) return;
-                    
+                    soundOfBuying.PlayBuyingSound();
                     progressController.currentState.currenciesProgress.coins -=
                         Convert.ToInt16(shopData.TrailSkinData[currentTrailSkinIndex].priceCoins);
                     progressController.currentState.currenciesProgress.crystals -=
