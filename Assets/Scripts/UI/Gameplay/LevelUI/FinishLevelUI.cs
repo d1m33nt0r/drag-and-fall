@@ -82,7 +82,8 @@ namespace UI
             else
             {
                 tutorialUI.transform.GetChild(3).gameObject.SetActive(false);
-                animator.Play("TutorialHide");
+                gameManager.ShowMainMenu();
+                gameManager.platformMover.InitializePlatforms();
                 tutorialUI.SetFiveStepComplete();
             }
         }

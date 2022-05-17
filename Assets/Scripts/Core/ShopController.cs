@@ -35,6 +35,11 @@ namespace Core
 
         public ShopState shopState;
 
+        private void Start()
+        {
+            ResetCurrent();
+        }
+
         public void ResetCurrent()
         {
             currentEnvironmentSkinIndex = progressController.currentState.environmentSkin.index;
@@ -199,6 +204,9 @@ namespace Core
             SetPriceText(progressController.shopProgress.playerSkins[currentPlayerSkinIndex].isBought, 
                 shopData.PlayerSkinData[currentPlayerSkinIndex].priceCoins,
                 shopData.PlayerSkinData[currentPlayerSkinIndex].priceCrystals);
+            /*var themeIdentifier3 = progressController.currentState.environmentSkin.index.ToString() + progressController.currentState.environmentSkin.index;
+            platformMover.ChangeTheme(themeIdentifier3, progressController.currentState.environmentSkin.index);
+            player.ChangeTheme(themeIdentifier3);*/
             gameManager.ChangeShopState(shopState);
         }
 
@@ -208,6 +216,10 @@ namespace Core
             SetPriceText(progressController.shopProgress.trailSkins[currentTrailSkinIndex].isBought, 
                 shopData.TrailSkinData[currentTrailSkinIndex].priceCoins,
                 shopData.TrailSkinData[currentTrailSkinIndex].priceCrystals);
+            /*var themeIdentifier3 = progressController.currentState.environmentSkin.index.ToString() + progressController.currentState.playerSkin.index;
+            platformMover.ChangeTheme(themeIdentifier3, progressController.currentState.environmentSkin.index);
+            player.ChangeTheme(themeIdentifier3);*/
+            player.TryOnTrail(shopData.TrailSkinData[currentTrailSkinIndex].skin);
             gameManager.ChangeShopState(shopState);
         }
         
@@ -217,6 +229,11 @@ namespace Core
             SetPriceText(progressController.shopProgress.environmentSkins[currentEnvironmentSkinIndex].isBought, 
                 shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].priceCoins,
                 shopData.EnvironmentSkinData[currentEnvironmentSkinIndex].priceCrystals);
+            
+            /*var themeIdentifier = progressController.currentState.environmentSkin.index.ToString() + progressController.currentState.playerSkin.index;
+            platformMover.ChangeTheme(themeIdentifier, progressController.currentState.environmentSkin.index);
+            player.ChangeTheme(themeIdentifier);*/
+            
             gameManager.ChangeShopState(shopState);
         }
 
@@ -255,6 +272,10 @@ namespace Core
                         currentTrailSkinIndex = 0;
                     else
                         currentTrailSkinIndex++;
+                    
+                    var themeIdentifier3 = currentEnvironmentSkinIndex.ToString() + currentPlayerSkinIndex;
+                    platformMover.ChangeTheme(themeIdentifier3, currentEnvironmentSkinIndex);
+                    player.ChangeTheme(themeIdentifier3);
                     
                     SetPriceText(progressController.shopProgress.trailSkins[currentTrailSkinIndex].isBought, 
                         shopData.TrailSkinData[currentTrailSkinIndex].priceCoins,
@@ -299,6 +320,10 @@ namespace Core
                         currentTrailSkinIndex = shopData.TrailSkinData.Count - 1;
                     else
                         currentTrailSkinIndex--;
+                    
+                    var themeIdentifier3 = currentEnvironmentSkinIndex.ToString() + currentPlayerSkinIndex;
+                    platformMover.ChangeTheme(themeIdentifier3, currentEnvironmentSkinIndex);
+                    player.ChangeTheme(themeIdentifier3);
                     
                     SetPriceText(progressController.shopProgress.trailSkins[currentTrailSkinIndex].isBought, 
                         shopData.TrailSkinData[currentTrailSkinIndex].priceCoins, 

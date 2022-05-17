@@ -91,10 +91,6 @@ MonoBehaviour:
     mesh: {fileID: 4711208715938537054, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}
     material: {fileID: 2100000, guid: 4e11d53eb1edb5148bd7c3974357f2ab, type: 2}
   TrailSkinData:
-  - isBought: 1
-    priceCoins: 0
-    priceCrystals: 0
-    skin: {fileID: 3471079908320733189, guid: db27238b087e89b4eb932f31e226d7e6, type: 3}
   - isBought: 0
     priceCoins: 1
     priceCrystals: 1

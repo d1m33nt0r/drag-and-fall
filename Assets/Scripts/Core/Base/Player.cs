@@ -58,8 +58,8 @@ namespace Core
 
         public void SetActiveFireEffect(bool value)
         {
-            fireEffect?.SetActive(value);
-            fireBacklight.SetActive(value);
+            fireEffect.SetActive(value);
+            //fireBacklight.SetActive(value);
             if (!value)
             {
                 playerSounds.StopFireSound();
@@ -72,7 +72,6 @@ namespace Core
                     playerSounds.PlayFireSound();
                     fireSoundIsActive = true;
                 }
-                
             }
         }
 
@@ -83,10 +82,10 @@ namespace Core
             var main = fireParticle.main;
             main.startColor = new ParticleSystem.MinMaxGradient(new Color(1, 1, 1, 1f), new Color(1, 1, 1, 0.5f));
             main.startSpeed = -3;
-            var backlightParticle = fireBacklight.GetComponent<ParticleSystem>();
+            /*var backlightParticle = fireBacklight.GetComponent<ParticleSystem>();
             var backlightMain = backlightParticle.main;
             backlightMain.startColor = new ParticleSystem.MinMaxGradient(new Color(backlightMain.startColor.color.r,
-                backlightMain.startColor.color.g, backlightMain.startColor.color.b, 0.25f));
+                backlightMain.startColor.color.g, backlightMain.startColor.color.b, 0.25f));*/
         }
         
         public void RandomRotate()
@@ -152,10 +151,10 @@ namespace Core
             var main = fireParticle.main;
             main.startColor = new ParticleSystem.MinMaxGradient(new Color(1, 1, 1, 1f), new Color(1, 1, 1, 0.5f));
             main.startSpeed = -3;
-            var backlightParticle = fireBacklight.GetComponent<ParticleSystem>();
-            var backlightMain = backlightParticle.main;
-            backlightMain.startColor = new ParticleSystem.MinMaxGradient(new Color(backlightMain.startColor.color.r,
-                backlightMain.startColor.color.g, backlightMain.startColor.color.b, 0.25f));
+            //var backlightParticle = fireBacklight.GetComponent<ParticleSystem>();
+            //var backlightMain = backlightParticle.main;
+            //backlightMain.startColor = new ParticleSystem.MinMaxGradient(new Color(backlightMain.startColor.color.r,
+                //backlightMain.startColor.color.g, backlightMain.startColor.color.b, 0.25f));
 
         }
 
