@@ -46,7 +46,7 @@ namespace UI
         private bool firstStarIsActive;
         private bool secondStarIsActive;
         private bool thirdStarIsActive;
-      
+        
         
         public void SetText(int score, int level)
         {
@@ -75,16 +75,16 @@ namespace UI
         
         public void PlayHideAnimation()
         {
-            if (tutorialUI.firstGeneralStepComplete)
+            if (tutorialUI.firstGeneralStepComplete && tutorialUI.fiveStepComplete)
+            {
                 animator.Play("Hide");
+            }
             else
             {
                 tutorialUI.transform.GetChild(3).gameObject.SetActive(false);
                 animator.Play("TutorialHide");
+                tutorialUI.SetFiveStepComplete();
             }
-
-            //tutorialUI.firstGeneralStepComplete = true;
-            
         }
 
         public void ShowLevels()

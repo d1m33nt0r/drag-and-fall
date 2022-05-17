@@ -8,6 +8,8 @@ namespace Ads
     {
         private const string AD_UNIT_ID = "ca-app-pub-3940256099942544/6300978111";
         
+        [SerializeField] private GameObject adsBackground;
+        
         private BannerView bannerView;
         private AdRequest request;
         
@@ -19,6 +21,7 @@ namespace Ads
             bannerView.OnAdFailedToLoad += HandleOnAdFailedToLoad;
             bannerView.OnAdOpening += HandleOnAdOpened;
             bannerView.OnAdClosed += HandleOnAdClosed;
+            RequestBanner();
         }
 
         public void RequestBanner()
@@ -28,7 +31,7 @@ namespace Ads
         
         public void HandleOnAdLoaded(object sender, EventArgs args)
         {
-            
+            adsBackground.SetActive(true);
         }
 
         public void HandleOnAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)

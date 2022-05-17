@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections;
-using System.Text;
 using Core.Bonuses;
 using Data;
 using Data.Core.Segments;
-using Data.Shop.Players;
-using DG.Tweening;
 using ObjectPool;
 using Sound;
-using TMPro;
 using UI.InfinityUI;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Core
@@ -57,7 +51,7 @@ namespace Core
         [SerializeField] private MeshRenderer[] shields;
         
         private bool triggerStay;
-
+        private bool fireSoundIsActive;
         private Transform playerTransform;
         private MeshFilter meshFilter;
         private MeshRenderer meshRenderer;
@@ -66,7 +60,20 @@ namespace Core
         {
             fireEffect?.SetActive(value);
             fireBacklight.SetActive(value);
-            if (!value) playerSounds.StopFireSound();
+            if (!value)
+            {
+                playerSounds.StopFireSound();
+                fireSoundIsActive = false;
+            }
+            else 
+            {
+                if (!fireSoundIsActive)
+                {
+                    playerSounds.PlayFireSound();
+                    fireSoundIsActive = true;
+                }
+                
+            }
         }
 
         public void MaximumFire()
@@ -140,7 +147,7 @@ namespace Core
 
         public void IncreaseFireEffect6()
         {
-            playerSounds.PlayFireSound();
+            
             var fireParticle = fireEffect.GetComponent<ParticleSystem>();
             var main = fireParticle.main;
             main.startColor = new ParticleSystem.MinMaxGradient(new Color(1, 1, 1, 1f), new Color(1, 1, 1, 0.5f));

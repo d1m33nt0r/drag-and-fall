@@ -20,13 +20,14 @@ public class TutorialUI : MonoBehaviour
     public bool secondStepComplete;
     public bool thirdStepComplete;
     public bool fourthStepComplete;
+    public bool fiveStepComplete;
     
     private int currentStep;
 
     private void Awake()
     {
         tutorialProgress = new TutorialProgress();
-        tutorialProgress.tutorialSteps = new bool[4];
+        tutorialProgress.tutorialSteps = new bool[5];
         
         var json= JsonUtility.ToJson(tutorialProgress);
 #if UNITY_EDITOR
@@ -40,6 +41,7 @@ public class TutorialUI : MonoBehaviour
         secondStepComplete = tutorialProgress.tutorialSteps[1];
         thirdStepComplete = tutorialProgress.tutorialSteps[2];
         fourthStepComplete = tutorialProgress.tutorialSteps[3];
+        fiveStepComplete = tutorialProgress.tutorialSteps[4];
         
         if (!firstStepComplete)
         {
@@ -112,6 +114,24 @@ public class TutorialUI : MonoBehaviour
         tutorialProgress.tutorialSteps[3] = true;
         RewriteTutorialProgressData();
         Firebase.Analytics.FirebaseAnalytics.LogEvent("Finished 1 stage of tutorial");
+    }
+    
+    public void SetFiveStepComplete()
+    {
+     
+        firstStepComplete = true;
+        secondStepComplete = true;
+        thirdStepComplete = true;
+        fourthStepComplete = true;
+        fiveStepComplete = true;
+        
+        tutorialProgress.tutorialSteps[0] = true;
+        tutorialProgress.tutorialSteps[1] = true;
+        tutorialProgress.tutorialSteps[2] = true;
+        tutorialProgress.tutorialSteps[3] = true;
+        tutorialProgress.tutorialSteps[4] = true;
+        
+        RewriteTutorialProgressData();
     }
 
     public void RewriteTutorialProgressData()
