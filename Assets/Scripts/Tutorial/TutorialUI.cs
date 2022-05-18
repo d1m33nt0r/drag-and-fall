@@ -112,7 +112,7 @@ public class TutorialUI : MonoBehaviour
         tutorialProgress.tutorialSteps[1] = true;
         tutorialProgress.tutorialSteps[2] = true;
         tutorialProgress.tutorialSteps[3] = true;
-        
+ 
         concentration.UpdateLevel();
         RewriteTutorialProgressData();
         Firebase.Analytics.FirebaseAnalytics.LogEvent("Finished 1 stage of tutorial");
@@ -120,7 +120,6 @@ public class TutorialUI : MonoBehaviour
     
     public void SetFiveStepComplete()
     {
-     
         firstStepComplete = true;
         secondStepComplete = true;
         thirdStepComplete = true;

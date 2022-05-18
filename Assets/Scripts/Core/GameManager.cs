@@ -319,6 +319,7 @@ namespace Core
 
         public void StartedLevel()
         {
+            finishLevelUI.ResetDefaultState();
             gameplayUI.EnableLevelMode();
             mainThemeAudioSource.Play();
             uiManager.SetActiveTutorialUI(false);

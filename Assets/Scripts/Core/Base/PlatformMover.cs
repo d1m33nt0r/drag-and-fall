@@ -410,6 +410,7 @@ namespace Core
         private void CreateNewPlatform(int platformIndex, GamePatternData patternData, bool hide)
         {
             var platform = platformPool.GetPlatform();
+            platform.gameObject.SetActive(true);
             var pTransform = platform.transform;
             pTransform.position = localPositionsOfPlatforms[platformIndex];
             pTransform.rotation = Quaternion.Euler(transform.rotation.eulerAngles);
