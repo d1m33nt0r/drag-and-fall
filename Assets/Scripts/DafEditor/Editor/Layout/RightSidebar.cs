@@ -64,6 +64,8 @@ namespace DafEditor.Editor.Layout
                         if (gameEditorWindow.randomGenerationProfile.countPlatforms - 1 == i) patternData.isLast = true;
                         gameEditorWindow.currentLevelData.patterns.Add(patternData);
                     }
+                    
+                    EditorUtility.SetDirty(gameEditorWindow.currentLevelData);
                 }
             }
             

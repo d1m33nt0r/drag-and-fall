@@ -233,21 +233,7 @@ namespace Core
         public void ContinueGameAds()
         {
             rewardAds.TryShowRewardedAd();
-            if (platformMover.isLevelMode)
-            {
-                gameplayUI.EnableLevelMode();
-            }
-            else
-            {
-                gameplayUI.EnableInfinityMode();
-            }
             
-            uiManager.SetActiveFailedInfinityPanel(false);
-            uiManager.SetActiveFailedLevelPanel(false);
-            
-            platformMover.DestroyPlatform(true);
-            player.ContinueGame();
-            gameStarted = true;
         }
         
         public void ContinueGameKeys()
@@ -319,7 +305,6 @@ namespace Core
             gameplayUI.DisableGameplayMode();
             uiManager.SetActiveTutorialUI(false);
             platformMover.transform.rotation = Quaternion.Euler(0, 0, 0);
-            interstitialAds.TryShowInterstitialAd();
             gameStarted = false;
             platformMover.SetDefaultState();
             uiManager.SetActiveUpgradeMenu(false);
@@ -329,6 +314,7 @@ namespace Core
             uiManager.SetActiveFailedInfinityPanel(false);
             uiManager.SetActiveFailedLevelPanel(true);
             uiManager.SetActiveLevelsMenu(false);
+            interstitialAds.TryShowInterstitialAd();
         }
 
         public void StartedLevel()

@@ -18,7 +18,7 @@ namespace UI
         public Concentration concentration;
         [SerializeField] private ScorePanel scorePanel;
         [SerializeField] private PlatformMover platformMover;
-        
+        private string plus = "+";
         private void Start()
         {
             rectTransform = GetComponent<RectTransform>();
@@ -32,7 +32,7 @@ namespace UI
                 var concentrationMultiplier = concentration.isActive ? concentration.currentConcentrationMultiplier : 1;
                 var bonusMultiplier = bonusController.multiplierIsActive ? bonusController.multiplier : 1;
                 var upgradedPoint = (countPoints * bonusMultiplier) * concentrationMultiplier;
-                text.text = Constants.GainScoreValues.GetString(upgradedPoint);
+                text.text = plus + upgradedPoint;
                 scorePanel.AddPoints(upgradedPoint);
             }
             else
@@ -40,7 +40,7 @@ namespace UI
                 var concentrationMultiplier = concentration.isActive ? 2 : 1;
                 var bonusMultiplier = bonusController.multiplierIsActive ? bonusController.multiplier : 1;
                 var upgradedPoint = (countPoints * bonusMultiplier) * concentrationMultiplier;
-                text.text = Constants.GainScoreValues.GetString(upgradedPoint);
+                text.text = plus + upgradedPoint;//Constants.GainScoreValues.GetString(upgradedPoint);
                 scorePanel.AddPoints(upgradedPoint);
             }
         }

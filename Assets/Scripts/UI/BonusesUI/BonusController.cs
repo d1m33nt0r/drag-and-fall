@@ -119,10 +119,9 @@ namespace Core.Bonuses
         {
             for (var i = 0; i < progressController.upgradeProgress.progressAcceleration.Length; i++)
             {
-                if (!progressController.upgradeProgress.progressAcceleration[i])
+                if (progressController.upgradeProgress.progressAcceleration[i])
                 {
                     currentAccelerationLevel = i;
-                    return;
                 }
             }
         }
@@ -131,10 +130,9 @@ namespace Core.Bonuses
         {
             for (var i = 0; i < progressController.upgradeProgress.progressShield.Length; i++)
             {
-                if (!progressController.upgradeProgress.progressShield[i])
+                if (progressController.upgradeProgress.progressShield[i])
                 {
                     currentShieldLevel = i;
-                    return;
                 }
             }
         }
@@ -143,10 +141,9 @@ namespace Core.Bonuses
         {
             for (var i = 0; i < progressController.upgradeProgress.progressMagnet.Length; i++)
             {
-                if (!progressController.upgradeProgress.progressMagnet[i])
+                if (progressController.upgradeProgress.progressMagnet[i])
                 {
                     currentMagnetLevel = i;
-                    return;
                 }
             }
         }
@@ -155,10 +152,9 @@ namespace Core.Bonuses
         {
             for (var i = 0; i < progressController.upgradeProgress.progressMultiplier.Length; i++)
             {
-                if (!progressController.upgradeProgress.progressMultiplier[i])
+                if (progressController.upgradeProgress.progressMultiplier[i])
                 {
                     currentMultiplierLevel = i;
-                    return;
                 }
             }
         }

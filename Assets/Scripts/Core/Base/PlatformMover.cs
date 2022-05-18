@@ -4,7 +4,6 @@ using Core.Bonuses;
 using Data.Core;
 using Data.Core.Segments;
 using Data.Core.Segments.Content;
-using Data.Shop.TubeSkins;
 using ObjectPool;
 using Progress;
 using Sound;
@@ -19,8 +18,8 @@ namespace Core
         private float speed;
         private float fractionOfJourney;
         private float distCovered;
-        
-        
+        private bool tutorialConcentrationComplete;
+        private int tutorialPlatformCounter;
         private bool isMoving;
         public ProgressController progressController;
         [SerializeField] private TutorialUI tutorialUI;
@@ -187,13 +186,14 @@ namespace Core
             }
             else
             {
-                if (!concentration.isActive)
+                if (!concentration.isActive && !tutorialConcentrationComplete)
                 {
                     currentPatternData = GenerateStartTutorialPlatform();
                     CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
                 }
                 else
                 {
+                    tutorialConcentrationComplete = true;
                     isLevelMode = true;
                     gameManager.gameMode.levelMode.level = levelsData.leves[0];
                     currentPatternData = gameManager.gameMode.levelMode.GetPatternData();
@@ -273,26 +273,113 @@ namespace Core
 
         private GamePatternData GenerateStartTutorialPlatform()
         {
-            var patternData = new PatternData(12);
-            patternData.segmentsData = new[]
-            {
-                new SegmentData {positionIndex = 0, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
-                new SegmentData {positionIndex = 1, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
-                new SegmentData {positionIndex = 2, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
-                new SegmentData {positionIndex = 3, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
-                new SegmentData {positionIndex = 4, segmentContent = SegmentContent.None, segmentType = SegmentType.Hole},
-                new SegmentData {positionIndex = 5, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
-                new SegmentData {positionIndex = 6, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
-                new SegmentData {positionIndex = 7, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
-                new SegmentData {positionIndex = 8, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
-                new SegmentData {positionIndex = 9, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
-                new SegmentData {positionIndex = 10, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
-                new SegmentData {positionIndex = 11, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
-            };
-
+            var patternData = GetTutorialPatternData();
             var gamePatternData = patternDataPool.Dequeue();
             gamePatternData.Configure(patternData);
             return gamePatternData;
+        }
+
+        private PatternData GetTutorialPatternData()
+        {
+            var patternData = new PatternData(12);
+            
+            if (tutorialPlatformCounter == 0)
+            {
+                patternData.segmentsData = new[]
+                {
+                    new SegmentData {positionIndex = 0, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 1, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 2, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 3, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 4, segmentContent = SegmentContent.None, segmentType = SegmentType.Hole},
+                    new SegmentData {positionIndex = 5, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 6, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 7, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 8, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 9, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 10, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 11, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground}
+                };
+                tutorialPlatformCounter++;
+            }
+            else if (tutorialPlatformCounter == 1)
+            {
+                patternData.segmentsData = new[]
+                {
+                    new SegmentData {positionIndex = 0, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 1, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 2, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 3, segmentContent = SegmentContent.None, segmentType = SegmentType.Hole},
+                    new SegmentData {positionIndex = 4, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 5, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 6, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 7, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 8, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 9, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 10, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 11, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground}
+                };
+                tutorialPlatformCounter++;
+            }
+            else if (tutorialPlatformCounter == 2)
+            {
+                patternData.segmentsData = new[]
+                {
+                    new SegmentData {positionIndex = 0, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 1, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 2, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 3, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 4, segmentContent = SegmentContent.None, segmentType = SegmentType.Hole},
+                    new SegmentData {positionIndex = 5, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 6, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 7, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 8, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 9, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 10, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 11, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground}
+                };
+                tutorialPlatformCounter++;
+            }
+            else if (tutorialPlatformCounter == 3)
+            {
+                patternData.segmentsData = new[]
+                {
+                    new SegmentData {positionIndex = 0, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 1, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 2, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 3, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 4, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 5, segmentContent = SegmentContent.None, segmentType = SegmentType.Hole},
+                    new SegmentData {positionIndex = 6, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 7, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 8, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 9, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 10, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 11, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground}
+                };
+                tutorialPlatformCounter++;
+            }
+            else if (tutorialPlatformCounter == 4)
+            {
+                patternData.segmentsData = new[]
+                {
+                    new SegmentData {positionIndex = 0, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 1, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 2, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 3, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 4, segmentContent = SegmentContent.None, segmentType = SegmentType.Hole},
+                    new SegmentData {positionIndex = 5, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 6, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 7, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 8, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 9, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 10, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground},
+                    new SegmentData {positionIndex = 11, segmentContent = SegmentContent.None, segmentType = SegmentType.Ground}
+                };
+                tutorialPlatformCounter = 0;
+            }
+            
+            return patternData;
         }
 
         private void StandardInit()

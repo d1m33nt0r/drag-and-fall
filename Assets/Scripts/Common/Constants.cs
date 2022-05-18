@@ -59,7 +59,27 @@
                 "+128",
                 "+256",
                 "+512",
-                "+1024"
+                "+1024",
+                "+3",
+                "+5",
+                "+6",
+                "+12",
+                "+24",
+                "+48",
+                "+96",
+                "+192",
+                "+384",
+                "+768",
+                "+1536",
+                "+10",
+                "+20",
+                "+40",
+                "+80",
+                "+160",
+                "+320",
+                "+640",
+                "+1280",
+                "+2560"
             };
 
             public static string GetString(int value)
@@ -68,7 +88,9 @@
                 {
                     case 1: return values[0];
                     case 2: return values[1];
+                    case 3: return values[11];
                     case 4: return values[2];
+                    case 5: return values[12];
                     case 8: return values[3];
                     case 16: return values[4];
                     case 32: return values[5];
