@@ -300,6 +300,7 @@ namespace Core
             gameplayUI.DisableGameplayMode();
             uiManager.SetActiveTutorialUI(false);
             platformMover.transform.rotation = Quaternion.Euler(0, 0, 0);
+            gameStarted = false;
             platformMover.SetDefaultState();
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveMainMenu(false);
