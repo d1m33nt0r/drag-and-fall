@@ -43527,7 +43527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.29411766, g: 0.83137256, b: 0.38039216, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -48887,6 +48887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundOfBuying: {fileID: 1216312932}
+  gameManager: {fileID: 1157630038}
 --- !u!114 &1014055505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65164,7 +65165,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.11109816}
   m_AnchorMax: {x: 0.2967522, y: 0.15135837}
-  m_AnchoredPosition: {x: 72.92227, y: 36.62342}
+  m_AnchoredPosition: {x: 72.922264, y: 36.62342}
   m_SizeDelta: {x: 106.91687, y: 43.437126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1357384039
@@ -66613,7 +66614,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1392299771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: cb1a9e1190fe00b4982641c7f1970ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -66647,19 +66648,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1392299774}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1157630038}
-        m_TargetAssemblyTypeName: Core.GameManager, Assembly-CSharp
-        m_MethodName: StartGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1392299774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80793,7 +80782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -81284,12 +81273,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0423 \u0442\u0435\u0431\u044F \u043E\u0442\u043B\u0438\u0447\u043D\u043E
-    \u043F\u043E\u043B\u0443\u0447\u0430\u0435\u0442\u0441\u044F! \u041F\u043E\u043A\u0430
-    \u0448\u043A\u0430\u043B\u0430 \u0437\u0430\u043F\u043E\u043B\u043D\u0435\u043D\u0430
-    \u043F\u043E\u043B\u043D\u043E\u0441\u0442\u044C\u044E - \u0442\u044B \u043F\u043E\u043B\u0443\u0447\u0430\u0435\u0448\u044C
-    \u0432 \u0434\u0432\u043E\u0435 \u0431\u043E\u043B\u044C\u0448\u0435 \u043E\u0447\u043A\u043E\u0432
-    \u0437\u0430 \u0440\u0430\u0437\u0431\u0438\u0442\u044B\u0435 \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u044B."
+  m_Text: You're doing great! While the gauge is full, you get twice as many points
+    for broken platforms.
 --- !u!222 &1587071542
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -82142,7 +82127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.92156863, g: 1, b: 0.9019608, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -86371,17 +86356,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0422\u0435\u043F\u0435\u0440\u044C \u043F\u043E\u043F\u0440\u043E\u0431\u0443\u0439
-    \u0434\u043E\u0439\u0442\u0438 \u0434\u043E \u043A\u043E\u043D\u0446\u0430 \u0443\u0440\u043E\u0432\u043D\u044F
-    \u0443\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u044F \u0443\u0440\u043E\u0432\u0435\u043D\u044C
-    \u043A\u043E\u043D\u0446\u0435\u043D\u0442\u0440\u0430\u0446\u0438\u0438 \u043D\u0430
-    \u043C\u0430\u043A\u0441\u0438\u043C\u0443\u043C\u0435, \u0442\u0430\u043A \u0442\u044B
-    \u0441\u043C\u043E\u0436\u0435\u0448\u044C \u043D\u0430\u0431\u0440\u0430\u0442\u044C
-    \u0431\u043E\u043B\u044C\u0448\u0435 \u043E\u0447\u043A\u043E\u0432 \u0438 \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C
-    \u0431\u043E\u043B\u044C\u0448\u0435 \u043D\u0430\u0433\u0440\u0430\u0434. \u0410
-    \u0442\u0435\u043F\u0435\u0440\u044C \u0432\u043F\u0435\u0440\u0435\u0434, \u0438
-    \u043F\u043E\u043C\u043D\u0438, - \"\u0433\u043B\u0430\u0432\u043D\u043E\u0435
-    \u043A\u043E\u043D\u0446\u0435\u043D\u0442\u0440\u0430\u0446\u0438\u044F\""
+  m_Text: Now try to get to the end of the level while keeping your focus level at
+    the maximum so you can score more points and get more rewards.
 --- !u!222 &1742358601
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -92476,14 +92452,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0415\u0441\u043B\u0438 \u0445\u043E\u0447\u0435\u0448\u044C \u043D\u0430\u0431\u0440\u0430\u0442\u044C
-    \u0431\u043E\u043B\u044C\u0448\u0435 \u043E\u0447\u043A\u043E\u0432 - \u0441\u0442\u0430\u0440\u0430\u0439\u0441\u044F
-    \u043D\u0435 \u0442\u0435\u0440\u044F\u0442\u044C \u043A\u043E\u043D\u0446\u0435\u043D\u0442\u0440\u0430\u0446\u0438\u044E. 
-    \u041A\u043E\u043D\u0446\u0435\u043D\u0442\u0440\u0430\u0446\u0438\u044F \u0442\u0435\u0440\u044F\u0435\u0442\u0441\u044F
-    \u043F\u043E\u0441\u043B\u0435 \u0434\u0432\u0443\u0445 \u043A\u0430\u0441\u0430\u043D\u0438\u0439
-    \u043E\u0434\u043D\u043E\u0439 \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u044B.
-    \u041F\u043E\u043F\u0440\u043E\u0431\u0443\u0439 \u043F\u043E\u043B\u043D\u043E\u0441\u0442\u044C\u044E
-    \u0437\u0430\u043F\u043E\u043B\u043D\u0438\u0442\u044C \u044D\u0442\u0443 \u0448\u043A\u0430\u043B\u0443!"
+  m_Text: If you want to score more points - try not to lose concentration. Concentration
+    is lost after two touches of the same platform. Try to completely fill this scale!
 --- !u!222 &1930265657
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -95134,13 +95104,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u042D\u0442\u043E \u0448\u043A\u0430\u043B\u0430 \u043A\u043E\u043D\u0446\u0435\u043D\u0442\u0440\u0430\u0446\u0438\u0438.
-    \u041A\u043E\u0433\u0434\u0430 \u043E\u043D\u0430 \u043F\u043E\u043B\u043D\u043E\u0441\u0442\u044C\u044E
-    \u0437\u0430\u043F\u043E\u043B\u043D\u0435\u043D\u0430 \u0442\u0432\u043E\u0438
-    \u043E\u0447\u043A\u0438 \u0443\u0434\u0432\u0430\u0438\u0432\u0430\u044E\u0442\u0441\u044F!
-    \u0423\u0440\u043E\u0432\u0435\u043D\u044C \u043A\u043E\u043D\u0446\u0435\u043D\u0442\u0440\u0430\u0446\u0438\u0438
-    \u0440\u0430\u0441\u0442\u0435\u0442 \u0441 \u043A\u0430\u0436\u0434\u043E\u0439
-    \u0440\u0430\u0437\u0431\u0438\u0442\u043E\u0439 \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u043E\u0439."
+  m_Text: This is the scale of concentration. When it's full, your points are doubled!
+    The level of concentration increases with each broken platform.
 --- !u!222 &2005935353
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -95414,7 +95379,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.51900005, y: 0.13446297}
   m_AnchorMax: {x: 0.87062967, y: 0.19561112}
-  m_AnchoredPosition: {x: 0.12463379, y: 158.49544}
+  m_AnchoredPosition: {x: 0.12463379, y: 158.49509}
   m_SizeDelta: {x: -0.9259949, y: 1.7545929}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2015616862
@@ -95905,7 +95870,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.067301646, y: 0.31073508}
   m_AnchorMax: {x: 0.9443809, y: 0.4591304}
-  m_AnchoredPosition: {x: -5.5343018, y: -253.06004}
+  m_AnchoredPosition: {x: -5.5343018, y: -253.06003}
   m_SizeDelta: {x: 116.47, y: 149.61}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2030362053

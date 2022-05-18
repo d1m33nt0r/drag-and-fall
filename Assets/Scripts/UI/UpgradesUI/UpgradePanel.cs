@@ -45,8 +45,8 @@ namespace UI.Upgrades
                     case BonusType.None:
                         levels[i].enabled = progressController.upgradeProgress.progressConcentration[i];
                         if (!progressController.upgradeProgress.progressConcentration[i]) break;
-                        if (concentration.currentConcentrationLevel % 2 != 0) firstLevelText.text = "-1 платформа к активации концентрации";
-                        else firstLevelText.text = "+1 к множителю концентрации";
+                        if (concentration.currentConcentrationLevel % 2 != 0) firstLevelText.text = "It takes 1 less broken platform to replenish the concentration";
+                        else firstLevelText.text = "+1 extra point when active concentration";
                         break;
                 }
             }

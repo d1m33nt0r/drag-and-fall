@@ -10,11 +10,21 @@ namespace Installers
     {
         private Queue<GamePatternData> patternDataPool;
         [SerializeField] private SoundOfBuying soundOfBuying;
+        [SerializeField] private GameManager gameManager;
         
         public override void InstallBindings()
         {
             BindPatternDataPool();
             BindSoundOfBuying();
+            BindGameManager();
+        }
+
+        private void BindGameManager()
+        {
+            Container
+                .Bind<GameManager>()
+                .FromInstance(gameManager)
+                .AsSingle();
         }
 
         private void BindSoundOfBuying()
