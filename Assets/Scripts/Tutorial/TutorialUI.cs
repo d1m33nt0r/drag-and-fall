@@ -12,7 +12,7 @@ public class TutorialUI : MonoBehaviour
     [SerializeField] private GameObject secondStep;
     [SerializeField] private GameObject thirdStep;
     [SerializeField] private GameObject fourthStep;
-    
+    [SerializeField] private Concentration concentration;
     public bool tutorialIsFinished => firstStepComplete && secondStepComplete && thirdStepComplete;
 
     public bool firstGeneralStepComplete => fourthStepComplete;
@@ -112,6 +112,8 @@ public class TutorialUI : MonoBehaviour
         tutorialProgress.tutorialSteps[1] = true;
         tutorialProgress.tutorialSteps[2] = true;
         tutorialProgress.tutorialSteps[3] = true;
+        
+        concentration.UpdateLevel();
         RewriteTutorialProgressData();
         Firebase.Analytics.FirebaseAnalytics.LogEvent("Finished 1 stage of tutorial");
     }

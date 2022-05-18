@@ -186,14 +186,13 @@ namespace Core
             }
             else
             {
-                if (!concentration.isActive && !tutorialConcentrationComplete)
+                if (!concentration.isActive && !concentration.tutorialConcentrationComplete)
                 {
                     currentPatternData = GenerateStartTutorialPlatform();
                     CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
                 }
                 else
                 {
-                    tutorialConcentrationComplete = true;
                     isLevelMode = true;
                     gameManager.gameMode.levelMode.level = levelsData.leves[0];
                     currentPatternData = gameManager.gameMode.levelMode.GetPatternData();
@@ -248,7 +247,6 @@ namespace Core
                 StandardInit();
             else
                 TutorialInit();
-            
         }
 
         private void TutorialInit()

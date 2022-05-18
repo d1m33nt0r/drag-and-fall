@@ -85,7 +85,7 @@ namespace Core
         
         public void DestroyPlatform(bool platformsIsMoving)
         {
-            if (!tutorialUI.secondStepComplete && platformMover.concentration.slider.value >= 4) 
+            if (!tutorialUI.secondStepComplete && platformMover.concentration.slider.value >= 1) 
                 tutorialUI.ShowSecondStep();
 
             /*for (var i = 0; i < 12; i++)

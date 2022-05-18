@@ -9,7 +9,7 @@ namespace Core
         [SerializeField] private ProgressController progressController;
         [SerializeField] private ConcentrationViewController concentrationViewController;
         [SerializeField] private TutorialUI tutorialUI;
-        
+        public bool tutorialConcentrationComplete;
         public int currentConcentrationLevel = 1;
         public int currentConcentrationMultiplier
         {
@@ -60,26 +60,40 @@ namespace Core
                     currentConcentrationLevel = i + 1;
             }
 
-            slider.maxValue = 16 - currentConcentrationPlatformsUpgrade;
+            if (tutorialUI.tutorialIsFinished)
+                slider.maxValue = 16 - currentConcentrationPlatformsUpgrade;
+            else
+                slider.maxValue = 6;
+            
             concentrationViewController.UpdateMultiplierText(currentConcentrationMultiplier);
         }
 
-        public bool isActive => platformCounter > 16 - currentConcentrationPlatformsUpgrade;
+        public bool isActive
+        {
+            get
+            {
+                if (slider.value == 6) tutorialConcentrationComplete = true;
+                if (tutorialUI.tutorialIsFinished)
+                    return platformCounter > 16 - currentConcentrationPlatformsUpgrade;
+                else
+                    return slider.value == 6;
+            }
+        }
+
         public Slider slider;
         public int platformCounter { get; private set; }
 
         public void IncreaseConcentration()
         {
             platformCounter++;
+            slider.value = platformCounter;
             if (isActive)
             {
                 if (!tutorialUI.thirdStepComplete)
                 {
                     tutorialUI.ShowThirdStep();
                 }
-                return;
             }
-            slider.value = platformCounter;
         }
 
         public void Reset()
