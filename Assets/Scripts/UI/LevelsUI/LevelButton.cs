@@ -24,6 +24,7 @@ namespace Core
 
         public override void OnPointerDown(PointerEventData pointerEventData)
         {
+            if (!GetComponent<Button>().interactable) return;
             platformMover.EnableLevelMode(transform.parent.parent.GetComponent<LevelUIController>().levelsData.leves[levelIndex]);
             platformMover.SetLevelMode(true);
             platformMover.gameManager.StartedLevel();
