@@ -60,11 +60,6 @@ namespace Core
             }
         }
 
-        public void SetActiveGame()
-        {
-            gameStarted = true;
-        }
-        
         private void ShowTutorialUI()
         {
             uiManager.SetActiveUpgradeMenu(false);
@@ -305,7 +300,6 @@ namespace Core
             gameplayUI.DisableGameplayMode();
             uiManager.SetActiveTutorialUI(false);
             platformMover.transform.rotation = Quaternion.Euler(0, 0, 0);
-            gameStarted = false;
             platformMover.SetDefaultState();
             uiManager.SetActiveUpgradeMenu(false);
             uiManager.SetActiveMainMenu(false);
@@ -329,7 +323,7 @@ namespace Core
             sessionData.ResetData();
             uiManager.SetActiveScorePanel(true);
             uiManager.scorePanel.GetComponent<ScorePanel>().ResetCounter();
-            gameStarted = true;
+            
             platformMover.SetDefaultState();
             
             uiManager.SetActiveUpgradeMenu(false);
@@ -342,6 +336,7 @@ namespace Core
             uiManager.SetActiveFailedInfinityPanel(false);
             uiManager.SetActiveFailedLevelPanel(false);
             uiManager.SetActiveLevelsMenu(false);
+            gameStarted = true;
         }
 
         public void ShowUpgradeMenu()
