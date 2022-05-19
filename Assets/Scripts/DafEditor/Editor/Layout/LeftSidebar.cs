@@ -158,6 +158,16 @@ namespace DafEditor.Editor.Layout
                     GameEditorWindow.instance.content.SetPatterns(GameEditorWindow.instance.currentPatternsData, infinityData.patternSets[i].name);
                 }
 
+                if (GUILayout.Button("D", EditorStyles.RedButtonStyle(22), GUILayout.Width(25)))
+                {
+                    var setData = Object.Instantiate(infinityData.patternSets[i]);
+                    setData.patterns = new List<PatternData>();
+                    var count = infinityData.patternSets.Count + 1;
+                    AssetDatabase.CreateAsset(setData, INFINITY_DATA_PATH + count + "_Set.asset");
+                    infinityData.patternSets.Add(setData);
+                    EditorUtility.SetDirty(infinityData);
+                }
+                
                 if (GUILayout.Button("X", EditorStyles.RedButtonStyle(22), GUILayout.Width(25)))
                 {
                     AssetDatabase.DeleteAsset(INFINITY_DATA_PATH + infinityData.patternSets[i].name + ".asset");

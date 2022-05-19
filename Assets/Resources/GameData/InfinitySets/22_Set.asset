@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f09d77c3811e4596942c73ed357f4c40, type: 3}
+  m_Name: 22_Set
+  m_EditorClassIdentifier: 
+  isRandom: 1
+  minPlatformsCount: 100
+  maxPlatformsCount: 100
+  maxLetAmount: 4
+  minLetAmount: 2
+  maxHoleAmount: 4
+  minHoleAmount: 2
+  attemptsOfShieldInstantiate: 3
+  shieldPositions: 0f0000003700000062000000
+  spawnShieldOnLet: 0
+  spawnShieldOnGround: 1
+  spawnShieldOnHole: 0
+  spawnShieldChance: 60
+  attemptsOfKeyInstantiate: 1
+  keyPositions: 32000000
+  spawnKeyOnLet: 0
+  spawnKeyOnGround: 1
+  spawnKeyOnHole: 0
+  spawnKeyChance: 10
+  attemptsOfMagnetInstantiate: 3
+  magnetPositions: 140000002900000056000000
+  spawnMagnetOnLet: 0
+  spawnMagnetOnGround: 1
+  spawnMagnetOnHole: 0
+  spawnMagnetChance: 58
+  attemptsOfMultiplierInstantiate: 3
+  multiplierPositions: 16000000270000004e000000
+  spawnMultiplierOnLet: 0
+  spawnMultiplierOnGround: 1
+  spawnMultiplierOnHole: 0
+  spawnMultiplierChance: 60
+  attemptsOfAccelerationInstantiate: 3
+  accelerationPositions: 120000002400000045000000
+  spawnAccelerationOnLet: 0
+  spawnAccelerationOnGround: 1
+  spawnAccelerationOnHole: 0
+  spawnAccelerationChance: 60
+  currencyRandomSettings:
+  - spawnOnLet: 0
+    spawnOnGround: 1
+    spawnOnHole: 1
+    spawnChance: 22
+    currencyType: 0
+    rangeStart: 11
+    rangeEnd: 92
+    accuracyLevel: 1
+  - spawnOnLet: 1
+    spawnOnGround: 1
+    spawnOnHole: 0
+    spawnChance: 11
+    currencyType: 1
+    rangeStart: 17
+    rangeEnd: 62
+    accuracyLevel: 1
+  patterns: []
