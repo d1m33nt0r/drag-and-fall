@@ -217,7 +217,7 @@ MonoBehaviour:
       segmentType: 2
       segmentContent: 0
     - positionIndex: 0
-      segmentType: 0
+      segmentType: 1
       segmentContent: 0
     - positionIndex: 0
       segmentType: 0
@@ -522,7 +522,7 @@ MonoBehaviour:
       segmentType: 0
       segmentContent: 0
     - positionIndex: 0
-      segmentType: 2
+      segmentType: 1
       segmentContent: 0
     - positionIndex: 0
       segmentType: 2
@@ -660,7 +660,7 @@ MonoBehaviour:
       segmentType: 2
       segmentContent: 0
     - positionIndex: 0
-      segmentType: 0
+      segmentType: 1
       segmentContent: 0
     - positionIndex: 0
       segmentType: 0
@@ -871,7 +871,7 @@ MonoBehaviour:
       segmentType: 2
       segmentContent: 0
     - positionIndex: 0
-      segmentType: 0
+      segmentType: 1
       segmentContent: 0
     - positionIndex: 0
       segmentType: 2
@@ -1114,6 +1114,6 @@ MonoBehaviour:
     - positionIndex: 0
       segmentType: 0
       segmentContent: 0
-  bestScore: 44
-  middleScore: 37
-  bottomScore: 30
+  bestScore: 34
+  middleScore: 30
+  bottomScore: 25

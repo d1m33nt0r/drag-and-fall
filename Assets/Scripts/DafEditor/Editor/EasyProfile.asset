@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35fb96ddc19c4cb49546f95d3598078c, type: 3}
   m_Name: EasyProfile
   m_EditorClassIdentifier: 
-  countPlatforms: 25
-  maxLetAmount: 0
+  countPlatforms: 49
+  maxLetAmount: 3
   minLetAmount: 0
-  maxHoleAmount: 6
+  maxHoleAmount: 5
   minHoleAmount: 4

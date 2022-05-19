@@ -20,7 +20,7 @@ MonoBehaviour:
   maxHoleAmount: 8
   minHoleAmount: 5
   attemptsOfShieldInstantiate: 5
-  shieldPositions: 0f00000019000000240000003b0000005f000000
+  shieldPositions: 0f0000001f00000038000000520000005f000000
   spawnShieldOnLet: 0
   spawnShieldOnGround: 1
   spawnShieldOnHole: 0
@@ -30,21 +30,21 @@ MonoBehaviour:
   spawnKeyOnLet: 0
   spawnKeyOnGround: 1
   spawnKeyOnHole: 0
-  spawnKeyChance: 14
+  spawnKeyChance: 10
   attemptsOfMagnetInstantiate: 5
-  magnetPositions: 090000001a000000260000002a00000045000000
+  magnetPositions: 1400000029000000430000004f00000062000000
   spawnMagnetOnLet: 0
   spawnMagnetOnGround: 1
   spawnMagnetOnHole: 0
   spawnMagnetChance: 58
   attemptsOfMultiplierInstantiate: 5
-  multiplierPositions: 07000000160000001d0000004b00000052000000
+  multiplierPositions: 1600000027000000340000004b00000056000000
   spawnMultiplierOnLet: 0
   spawnMultiplierOnGround: 1
   spawnMultiplierOnHole: 0
   spawnMultiplierChance: 60
   attemptsOfAccelerationInstantiate: 5
-  accelerationPositions: 0500000019000000220000004200000055000000
+  accelerationPositions: 1200000024000000300000004200000059000000
   spawnAccelerationOnLet: 0
   spawnAccelerationOnGround: 1
   spawnAccelerationOnHole: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
   - spawnOnLet: 1
     spawnOnGround: 1
     spawnOnHole: 0
-    spawnChance: 13
+    spawnChance: 11
     currencyType: 1
     rangeStart: 17
     rangeEnd: 62

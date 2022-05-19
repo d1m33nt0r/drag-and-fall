@@ -75,15 +75,24 @@ namespace DafEditor.Editor.Layout
                 {
                     case SegmentType.Ground:
                         if (GUILayout.Button("G", EditorStyles.GroundButtonStyle()))
+                        {
                             patternData.segmentsData[i].segmentType = SegmentType.Hole;
+                            EditorUtility.SetDirty(GameEditorWindow.instance.currentLevelData);
+                        }
                         break;
                     case SegmentType.Hole:
                         if (GUILayout.Button("H", EditorStyles.HoleButtonStyle()))
+                        {
                             patternData.segmentsData[i].segmentType = SegmentType.Let;
+                            EditorUtility.SetDirty(GameEditorWindow.instance.currentLevelData);
+                        }
                         break;
                     case SegmentType.Let:
                         if (GUILayout.Button("L", EditorStyles.LetButtonStyle()))
+                        {
                             patternData.segmentsData[i].segmentType = SegmentType.Ground;
+                            EditorUtility.SetDirty(GameEditorWindow.instance.currentLevelData);
+                        }
                         break;
                 }
             }
