@@ -14975,9 +14975,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '250
-
-'
+  m_text: 15
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d37bbb0d2d6bce2418b0d74f783fd77a, type: 2}
   m_sharedMaterial: {fileID: -4931614014051398260, guid: d37bbb0d2d6bce2418b0d74f783fd77a, type: 2}
@@ -43425,7 +43423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &862803330
 RectTransform:
   m_ObjectHideFlags: 0
@@ -92451,8 +92449,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: If you want to score more points - try not to lose concentration. Concentration
-    is lost after two touches of the same platform. Try to completely fill this scale!
+  m_Text: To fill the concentration bar completely, you must not touch the platform
+    more than once. Now try to reach the maximum level of concentration.
 --- !u!222 &1930265657
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -95104,7 +95102,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: This is the scale of concentration. When it's full, your points are doubled!
-    The level of concentration increases with each broken platform.
+    The concentration level increases when the platform breaks.
 --- !u!222 &2005935353
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -104617,7 +104615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
+  m_Color: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

@@ -60,7 +60,7 @@ namespace Core
                     currentConcentrationLevel = i + 1;
             }
 
-            if (tutorialUI.tutorialIsFinished)
+            if (tutorialUI.tutorialIsFinished || tutorialConcentrationComplete)
                 slider.maxValue = 16 - currentConcentrationPlatformsUpgrade;
             else
                 slider.maxValue = 6;
@@ -72,8 +72,7 @@ namespace Core
         {
             get
             {
-                if (slider.value == 6) tutorialConcentrationComplete = true;
-                if (tutorialUI.tutorialIsFinished)
+                if (tutorialUI.tutorialIsFinished || tutorialConcentrationComplete)
                     return platformCounter > 16 - currentConcentrationPlatformsUpgrade;
                 else
                     return slider.value == 6;
@@ -92,6 +91,9 @@ namespace Core
                 if (!tutorialUI.thirdStepComplete)
                 {
                     tutorialUI.ShowThirdStep();
+                    tutorialConcentrationComplete = true;
+                    UpdateLevel();
+                    tutorialUI.SetFiveStepComplete();
                 }
             }
         }

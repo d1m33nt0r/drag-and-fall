@@ -120,8 +120,8 @@ namespace UI.Upgrades
                             progressController.SaveUpgradeProgress(progressController.upgradeProgress);
                             Initialize();
                             concentration.UpdateLevel();
-                            if (concentration.currentConcentrationLevel % 2 != 0) firstLevelText.text = "-1 платформа к активации концентрации";
-                            else firstLevelText.text = "+1 к множителю концентрации";
+                            if (concentration.currentConcentrationLevel % 2 != 0) firstLevelText.text = "It takes 1 less broken platform to replenish the concentration";
+                            else firstLevelText.text = "+1 extra point when active concentration";
                             return;
                         }
                     }

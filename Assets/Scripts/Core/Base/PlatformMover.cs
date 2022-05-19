@@ -193,13 +193,17 @@ namespace Core
                 }
                 else
                 {
-                    isLevelMode = true;
-                    gameManager.gameMode.levelMode.level = levelsData.leves[0];
-                    currentPatternData = gameManager.gameMode.levelMode.GetPatternData();
+                    isLevelMode = false;
+                    
+                    currentPatternData = gameManager.gameMode.infinityMode.GetPatternData();
                     if (isLevelMode && currentPatternData != null)
                         CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
                     else if (isLevelMode && currentPatternData == null)
+                    {
                         CreateNewPlatform(countPlatforms - 1, currentPatternData, true);
+                    }
+                    else
+                        CreateNewPlatform(countPlatforms - 1, currentPatternData, false);
                 }
             }
         }
