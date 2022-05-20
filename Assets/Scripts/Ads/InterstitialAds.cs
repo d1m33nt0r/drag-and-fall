@@ -6,7 +6,7 @@ namespace Ads
 {
     public class InterstitialAds : MonoBehaviour
     {
-        private const string adUnitID = "ca-app-pub-3940256099942544/1033173712";
+        private const string adUnitID = "ca-app-pub-8482915708082945/1452512422";//"ca-app-pub-3940256099942544/1033173712";
         private InterstitialAd interstitial;
         private AdRequest request;
 

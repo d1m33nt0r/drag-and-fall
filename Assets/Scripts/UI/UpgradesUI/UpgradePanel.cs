@@ -10,6 +10,7 @@ namespace UI.Upgrades
 {
     public class UpgradePanel : MonoBehaviour
     {
+        [SerializeField] private BonusController bonusController;
         [Inject] private SoundOfBuying soundOfBuying;       
         [SerializeField] private ProgressController progressController;
         [SerializeField] private BonusType bonusType;
@@ -54,11 +55,11 @@ namespace UI.Upgrades
 
         public void UpgradeBonus()
         {
-            if (progressController.currentState.currenciesProgress.coins < 1000 
+            if (progressController.currentState.currenciesProgress.coins < 500 
                 || progressController.currentState.currenciesProgress.crystals < 15) return;
             
             soundOfBuying.PlayBuyingSound();
-            coinPanel.MinusCoins(1000);
+            coinPanel.MinusCoins(500);
             crystalPanel.MinusCrystals(15);
             
             switch (bonusType)
@@ -71,6 +72,7 @@ namespace UI.Upgrades
                             progressController.upgradeProgress.progressAcceleration[i] = true;
                             progressController.SaveUpgradeProgress(progressController.upgradeProgress);
                             Initialize();
+                            bonusController.UpdateBonusLevels();
                             return;
                         }
                     }
@@ -83,6 +85,7 @@ namespace UI.Upgrades
                             progressController.upgradeProgress.progressMagnet[i] = true;
                             progressController.SaveUpgradeProgress(progressController.upgradeProgress);
                             Initialize();
+                            bonusController.UpdateBonusLevels();
                             return;
                         }
                     }
@@ -95,6 +98,7 @@ namespace UI.Upgrades
                             progressController.upgradeProgress.progressMultiplier[i] = true;
                             progressController.SaveUpgradeProgress(progressController.upgradeProgress);
                             Initialize();
+                            bonusController.UpdateBonusLevels();
                             return;
                         }
                     }
@@ -107,6 +111,7 @@ namespace UI.Upgrades
                             progressController.upgradeProgress.progressShield[i] = true;
                             progressController.SaveUpgradeProgress(progressController.upgradeProgress);
                             Initialize();
+                            bonusController.UpdateBonusLevels();
                             return;
                         }
                     }

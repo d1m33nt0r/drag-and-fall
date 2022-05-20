@@ -13,8 +13,8 @@ namespace Ads
     {
         private RewardedAd rewardedAd;
         private RewardedAd doublingAd;
-        private const string AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917";
-        
+        private const string AD_UNIT_ID = "ca-app-pub-8482915708082945/2776152632";//"ca-app-pub-3940256099942544/5224354917";
+        private const string DOUBLING_AD_UNIT_ID = "ca-app-pub-8482915708082945/6621341957";
         private AdRequest request;
         [SerializeField] private GameplayUI gameplayUI;
         [SerializeField] private PlatformMover platformMover;
@@ -33,7 +33,7 @@ namespace Ads
         private void Awake()
         {
             rewardedAd = new RewardedAd(AD_UNIT_ID);
-            doublingAd = new RewardedAd(AD_UNIT_ID);
+            doublingAd = new RewardedAd(DOUBLING_AD_UNIT_ID);
             request = new AdRequest.Builder().Build();
             rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
             rewardedAd.OnAdFailedToLoad += HandleRewardedAdFailedToLoad;

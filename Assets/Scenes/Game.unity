@@ -24946,7 +24946,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1000
+  m_text: 500
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d37bbb0d2d6bce2418b0d74f783fd77a, type: 2}
   m_sharedMaterial: {fileID: -4931614014051398260, guid: d37bbb0d2d6bce2418b0d74f783fd77a, type: 2}
@@ -26271,6 +26271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e9b554506cc45f09f8b31de7b1c3298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bonusController: {fileID: 268358379}
   progressController: {fileID: 386115021}
   bonusType: 1
   concentration: {fileID: 0}
@@ -27272,6 +27273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e9b554506cc45f09f8b31de7b1c3298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bonusController: {fileID: 268358379}
   progressController: {fileID: 386115021}
   bonusType: 2
   concentration: {fileID: 0}
@@ -39709,6 +39711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e9b554506cc45f09f8b31de7b1c3298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bonusController: {fileID: 268358379}
   progressController: {fileID: 386115021}
   bonusType: 0
   concentration: {fileID: 6048968299860380404}
@@ -50019,7 +50022,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1000
+  m_text: 500
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d37bbb0d2d6bce2418b0d74f783fd77a, type: 2}
   m_sharedMaterial: {fileID: -4931614014051398260, guid: d37bbb0d2d6bce2418b0d74f783fd77a, type: 2}
@@ -51221,6 +51224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e9b554506cc45f09f8b31de7b1c3298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bonusController: {fileID: 268358379}
   progressController: {fileID: 386115021}
   bonusType: 4
   concentration: {fileID: 0}
@@ -66861,7 +66865,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1000
+  m_text: 500
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d37bbb0d2d6bce2418b0d74f783fd77a, type: 2}
   m_sharedMaterial: {fileID: -4931614014051398260, guid: d37bbb0d2d6bce2418b0d74f783fd77a, type: 2}
@@ -86353,8 +86357,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Now try to get to the end of the level while keeping your focus level at
-    the maximum so you can score more points and get more rewards.
+  m_Text: Now try to set your first record.
 --- !u!222 &1742358601
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -90748,7 +90751,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1000
+  m_text: 500
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d37bbb0d2d6bce2418b0d74f783fd77a, type: 2}
   m_sharedMaterial: {fileID: -4931614014051398260, guid: d37bbb0d2d6bce2418b0d74f783fd77a, type: 2}
@@ -92861,6 +92864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e9b554506cc45f09f8b31de7b1c3298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bonusController: {fileID: 268358379}
   progressController: {fileID: 386115021}
   bonusType: 3
   concentration: {fileID: 0}
@@ -99086,7 +99090,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1000
+  m_text: 500
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d37bbb0d2d6bce2418b0d74f783fd77a, type: 2}
   m_sharedMaterial: {fileID: -4931614014051398260, guid: d37bbb0d2d6bce2418b0d74f783fd77a, type: 2}

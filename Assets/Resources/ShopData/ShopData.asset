@@ -57,7 +57,7 @@ MonoBehaviour:
     particleSystemPosition: {x: 3.7, y: 101.3, z: 84.1}
   - index: 3
     isBought: 0
-    priceCoins: 1500
+    priceCoins: 2000
     priceCrystals: 300
     skybox: {fileID: 2100000, guid: 456566f5776b74145bb9e42b56caf6f2, type: 2}
     segment: {fileID: -2498168843837105131, guid: c1ba6802ba3ddf248a2b62564a20dfae, type: 3}

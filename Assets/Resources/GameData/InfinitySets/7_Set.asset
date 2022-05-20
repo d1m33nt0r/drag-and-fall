@@ -53,7 +53,7 @@ MonoBehaviour:
   - spawnOnLet: 0
     spawnOnGround: 1
     spawnOnHole: 1
-    spawnChance: 22
+    spawnChance: 35
     currencyType: 0
     rangeStart: 11
     rangeEnd: 92
@@ -61,7 +61,7 @@ MonoBehaviour:
   - spawnOnLet: 1
     spawnOnGround: 1
     spawnOnHole: 0
-    spawnChance: 11
+    spawnChance: 18
     currencyType: 1
     rangeStart: 17
     rangeEnd: 62

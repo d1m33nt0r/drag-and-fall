@@ -6,9 +6,8 @@ namespace Ads
 {
     public class BannerAds : MonoBehaviour
     {
-        private const string AD_UNIT_ID = "ca-app-pub-3940256099942544/6300978111";
-        
-        
+        private const string AD_UNIT_ID = "ca-app-pub-8482915708082945/8631292157";//"ca-app-pub-3940256099942544/6300978111";
+
         private BannerView bannerView;
         private AdRequest request;
         
